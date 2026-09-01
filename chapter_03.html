@@ -1,0 +1,4203 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        บทที่ 3 | ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                "Tahoma",
+                "Noto Sans Thai",
+                sans-serif;
+
+            background: #eef7ff;
+            color: #1f2937;
+            line-height: 1.8;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81,
+                    #1976d2,
+                    #42a5f5
+                );
+
+            color: white;
+            padding: 38px 20px;
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 17px;
+            opacity: .95;
+        }
+
+
+        /* ==============================
+           NAVIGATION
+        ============================== */
+
+        /* =========================
+   TOP CHAPTER NAVIGATION
+========================= */
+
+.chapter-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0 34px;
+
+    height: 70px;
+
+    background: transparent;
+
+    pointer-events: none;
+}
+
+/* ปุ่มทั้งหมด */
+.chapter-nav a {
+    pointer-events: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 130px;
+    height: 58px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 0 0 12px 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.10);
+
+    transition:
+        0.2s ease;
+}
+
+/* ปุ่มกลาง */
+.chapter-nav a:nth-child(2) {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 215px;
+
+    border-radius: 0 0 12px 12px;
+}
+
+/* Hover */
+.chapter-nav a:hover {
+    color: #0f4c81;
+
+    background: #f8fcff;
+
+    transform:
+        translateY(2px);
+}
+
+/* Hover ปุ่มกลาง */
+.chapter-nav a:nth-child(2):hover {
+    transform:
+        translateX(-50%)
+        translateY(2px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .chapter-nav {
+        height: auto;
+
+        padding: 0 10px;
+
+        gap: 8px;
+    }
+
+    .chapter-nav a {
+        min-width: 0;
+
+        flex: 1;
+
+        height: 52px;
+
+        padding: 0 8px;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        border-radius: 0 0 10px 10px;
+    }
+
+    .chapter-nav a:nth-child(2) {
+        position: static;
+
+        transform: none;
+
+        min-width: 0;
+    }
+
+    .chapter-nav a:hover {
+        transform: translateY(2px);
+    }
+
+    .chapter-nav a:nth-child(2):hover {
+        transform: translateY(2px);
+    }
+
+}
+        /* ==============================
+           MAIN
+        ============================== */
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 30px;
+        }
+
+        .chapter {
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 4px 18px rgba(0,0,0,.07);
+
+            border: 1px solid #dbeafe;
+        }
+
+
+        /* ==============================
+           CHAPTER HEAD
+        ============================== */
+
+        .chapter-head {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            border-bottom:
+                2px solid #e0f2fe;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 28px;
+        }
+
+        .chapter-head span {
+            background: #1769aa;
+
+            color: white;
+
+            padding: 7px 16px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+        .chapter-head h2 {
+            margin: 0;
+
+            color: #0f4c81;
+
+            font-size: 28px;
+        }
+
+
+        /* ==============================
+           CONTENT
+        ============================== */
+
+        .chapter h3 {
+            color: #0369a1;
+
+            margin-top: 32px;
+            margin-bottom: 10px;
+
+            font-size: 22px;
+        }
+
+        .chapter h4 {
+            color: #0f4c81;
+
+            margin-top: 20px;
+            margin-bottom: 6px;
+        }
+
+        .chapter p {
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        .chapter ul,
+        .chapter ol {
+            padding-left: 28px;
+        }
+
+        .chapter li {
+            margin-bottom: 7px;
+        }
+
+
+        /* ==============================
+           INFO BOX
+        ============================== */
+
+        .info-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fbff
+                );
+
+            border-left:
+                5px solid #1976d2;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+        .warning-box {
+            background: #fff7ed;
+
+            border-left:
+                5px solid #f97316;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+        .success-box {
+            background: #f0fdf4;
+
+            border-left:
+                5px solid #22c55e;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+        .learning-goal {
+            background: #ecfeff;
+
+            border-left:
+                5px solid #06b6d4;
+
+            padding: 18px 22px;
+
+            border-radius: 9px;
+
+            margin: 22px 0;
+        }
+
+        .tip {
+            background: #f0f9ff;
+
+            border-left:
+                5px solid #0ea5e9;
+
+            padding: 14px 18px;
+
+            border-radius: 8px;
+
+            margin: 15px 0;
+        }
+
+
+        /* ==============================
+           STEP CARDS
+        ============================== */
+
+        .step-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin: 25px 0;
+        }
+
+        .step-card {
+            background: #f8fbff;
+
+            border:
+                1px solid #bfdbfe;
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,.05);
+        }
+
+        .step-number {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            background: #1769aa;
+
+            color: white;
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .step-card h4 {
+            margin: 5px 0 8px;
+
+            font-size: 18px;
+        }
+
+        .step-card p {
+            margin: 0;
+
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           FLOW
+        ============================== */
+
+        .flow {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin: 25px 0;
+        }
+
+        .flow-box {
+            background: #eff6ff;
+
+            border:
+                2px solid #60a5fa;
+
+            border-radius: 12px;
+
+            padding: 14px 18px;
+
+            text-align: center;
+
+            min-width: 155px;
+
+            font-weight: bold;
+
+            color: #0f4c81;
+        }
+
+        .flow-box small {
+            display: block;
+
+            font-weight: normal;
+
+            margin-top: 4px;
+        }
+
+        .flow-arrow {
+            font-size: 25px;
+
+            color: #1976d2;
+
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           CODE
+        ============================== */
+
+        .code-wrap {
+            position: relative;
+
+            background: #0f172a;
+
+            border-radius: 12px;
+
+            overflow: auto;
+
+            margin: 18px 0;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,.12);
+        }
+
+        pre {
+            margin: 0;
+
+            padding: 24px;
+
+            padding-top: 52px;
+
+            color: #e2e8f0;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            white-space: pre;
+        }
+
+        .copy {
+            position: absolute;
+
+            right: 10px;
+            top: 10px;
+
+            border: 0;
+
+            background: #334155;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            z-index: 2;
+        }
+
+        .copy:hover {
+            background: #475569;
+        }
+
+
+        /* ==============================
+           IMAGE / SCREENSHOT
+        ============================== */
+
+       /* ==============================
+   IMAGE / SCREENSHOT
+============================== */
+
+.image-section {
+    margin: 30px 0;
+}
+
+.image-step-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #eff6ff;
+    border-left: 5px solid #1976d2;
+
+    padding: 12px 16px;
+    border-radius: 10px 10px 0 0;
+
+    color: #0f4c81;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.image-box {
+    margin: 0;
+    background: #f8fbff;
+
+    border: 1px solid #dbeafe;
+    border-top: 0;
+
+    border-radius: 0 0 14px 14px;
+
+    padding: 20px;
+    text-align: center;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.06);
+}
+
+/* รูปภาพหัวข้อ 3.1 */
+.image-box img {
+    display: block;
+
+    width: 100%;
+    max-width: 600px;
+
+    height: auto;
+
+    margin: 20px auto;
+
+    border-radius: 8px;
+
+    border: 1px solid #cbd5e1;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.08);
+}
+
+/* รูปผลการรันหัวข้อ 3.2 */
+.image-box-large img {
+    display: block;
+    width: 100%;
+  max-width: 1200px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+
+.image-caption {
+    margin-top: 14px;
+
+    font-size: 15px;
+
+    color: #475569;
+
+    font-weight: bold;
+}
+
+.image-description {
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.image-error {
+    display: none;
+
+    background: #fff7ed;
+
+    border:
+        1px solid #fed7aa;
+
+    color: #c2410c;
+
+    border-radius: 8px;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    text-align: left;
+
+    font-size: 14px;
+}
+
+        /* ==============================
+           TABLE
+        ============================== */
+
+        .table-wrap {
+            overflow-x: auto;
+
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+        }
+
+        th {
+            background: #1769aa;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+        td {
+            border:
+                1px solid #dbeafe;
+
+            padding: 12px;
+
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fbff;
+        }
+
+
+        /* ==============================
+           FILE CARDS
+        ============================== */
+
+        .file-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin: 20px 0;
+        }
+
+        .file-card {
+            background: #f8fbff;
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 12px;
+
+            padding: 18px;
+        }
+
+        .file-card h4 {
+            margin-top: 0;
+
+            color: #0369a1;
+        }
+
+        .file-name {
+            display: inline-block;
+
+            background: #e0f2fe;
+
+            color: #0f4c81;
+
+            padding: 4px 10px;
+
+            border-radius: 6px;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           EXERCISE
+        ============================== */
+
+        .exercise {
+            background: #fefce8;
+
+            border:
+                1px solid #fde68a;
+
+            border-left:
+                5px solid #eab308;
+
+            border-radius: 10px;
+
+            padding: 18px 22px;
+
+            margin: 15px 0;
+        }
+
+
+        /* ==============================
+           SUMMARY
+        ============================== */
+
+        .summary {
+            background: #f0f9ff;
+
+            border-left:
+                5px solid #0ea5e9;
+
+            padding: 17px 20px;
+
+            border-radius: 8px;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            text-align: center;
+
+            padding: 32px;
+
+            background: #0f4c81;
+
+            color: white;
+
+            margin-top: 20px;
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media(max-width:900px) {
+
+            .step-grid,
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-box img {
+                max-width: 100%;
+                max-height: none;
+            }
+
+        }
+
+
+        @media(max-width:700px) {
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            header p {
+                font-size: 15px;
+            }
+
+            .chapter {
+                padding: 20px;
+            }
+
+            .chapter-head {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .chapter-head h2 {
+                font-size: 22px;
+            }
+
+            .chapter-nav {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .chapter-nav a {
+                font-size: 14px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <h1>
+        📘 JAVA LEARNING GUIDE
+    </h1>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+        บทที่ 3 :
+        ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+    </p>
+
+</header>
+
+
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_02.html">
+        ← บทที่ 2
+    </a>
+
+    <a href="chapters.html">
+        📚 บทเรียนทั้งหมด
+    </a>
+
+    <a href="chapter_04.html">
+        บทที่ 4 →
+    </a>
+
+</nav>
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main>
+
+<section class="chapter">
+
+
+<!-- ==================================================
+     TITLE
+================================================== -->
+
+<div class="chapter-head">
+
+    <span>
+        บทที่ 3
+    </span>
+
+    <h2>
+        ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+    </h2>
+
+</div>
+
+
+<!-- ==================================================
+     1
+================================================== -->
+<!-- ==================================================
+     1. ลำดับขั้นตอนการพัฒนาโปรแกรม
+================================================== -->
+<!-- ==================================================
+     1. ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+================================================== -->
+<h3>
+    1. ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+</h3>
+
+<h4>
+    1.1 ภาพรวมกระบวนการพัฒนาโปรแกรม
+</h4>
+
+<p>
+    การพัฒนาโปรแกรมด้วยภาษา Java
+    เป็นกระบวนการที่ประกอบด้วยขั้นตอนต่าง ๆ
+    ตั้งแต่การวิเคราะห์ปัญหา การออกแบบแนวทางการทำงาน
+    การเขียนคำสั่ง การบันทึก Source Code
+    การตรวจสอบและ Compile โปรแกรม
+    ไปจนถึงการ Run โปรแกรม
+    เพื่อแสดงผลลัพธ์ที่ผู้เขียนต้องการ
+</p>
+
+<p>
+    ในการพัฒนาโปรแกรม ผู้เขียนควรเริ่มจากการทำความเข้าใจ
+    วัตถุประสงค์ของโปรแกรมก่อนว่าโปรแกรมต้องการแก้ปัญหาอะไร
+    ต้องรับข้อมูลอะไรจากผู้ใช้
+    ต้องประมวลผลข้อมูลอย่างไร
+    และต้องแสดงผลลัพธ์ในรูปแบบใด
+    การวางแผนก่อนเขียนโปรแกรมจะช่วยลดความผิดพลาด
+    และทำให้สามารถเขียนคำสั่งได้อย่างเป็นระบบมากขึ้น
+</p>
+
+<p>
+    Java มีรูปแบบการทำงานที่แตกต่างจากภาษาบางประเภท
+    เนื่องจาก Source Code ที่เขียนขึ้น
+    จะถูก Compile โดย Java Compiler
+    ให้กลายเป็น <b>Bytecode</b>
+    ซึ่งถูกจัดเก็บไว้ในไฟล์นามสกุล
+    <b>.class</b>
+    จากนั้น Bytecode จะถูกนำไปทำงานผ่าน
+    <b>JVM (Java Virtual Machine)</b>
+</p>
+
+<p>
+    Bytecode ถือเป็นรูปแบบคำสั่งที่อยู่ระหว่าง
+    Source Code กับการทำงานจริงของโปรแกรม
+    โปรแกรมเมอร์สามารถเขียน Source Code
+    ให้อยู่ในรูปแบบที่มนุษย์สามารถอ่านและแก้ไขได้
+    จากนั้น Java Compiler จะตรวจสอบคำสั่ง
+    และสร้าง Bytecode สำหรับ JVM
+    ทำให้ขั้นตอนการพัฒนาและขั้นตอนการประมวลผล
+    สามารถแยกออกจากกันได้อย่างชัดเจน
+</p>
+
+<p>
+    กระบวนการดังกล่าวช่วยให้โปรแกรม Java
+    สามารถทำงานบนระบบปฏิบัติการที่แตกต่างกันได้
+    หากระบบนั้นมี JVM ที่รองรับ
+    จึงเป็นหนึ่งในแนวคิดสำคัญของภาษา Java
+    ที่มักอธิบายด้วยแนวคิด
+    <b>Write Once, Run Anywhere</b>
+</p>
+
+<p>
+    แนวคิดนี้หมายถึง โปรแกรมเมอร์สามารถเขียน
+    และ Compile โปรแกรม Java
+    แล้วนำ Bytecode ที่ได้ไปทำงานบนสภาพแวดล้อมอื่น
+    ที่มี JVM รองรับได้ โดยไม่จำเป็นต้องเขียน Source Code
+    ใหม่ทั้งหมดสำหรับระบบปฏิบัติการแต่ละประเภท
+    อย่างไรก็ตาม ความสามารถในการทำงานข้ามระบบ
+    ยังขึ้นอยู่กับสภาพแวดล้อม ไลบรารี และการตั้งค่าของระบบ
+    ที่โปรแกรมใช้งานด้วย
+</p>
+
+<p>
+    ในระหว่างการพัฒนาโปรแกรม
+    หากพบข้อผิดพลาดในการเขียน Source Code
+    หรือพบข้อผิดพลาดขณะ Compile
+    ผู้พัฒนาจะต้องกลับไปตรวจสอบและแก้ไขคำสั่ง
+    จากนั้นจึง Compile โปรแกรมอีกครั้ง
+    และเมื่อ Compile สำเร็จ
+    จึงสามารถ Run โปรแกรมเพื่อทดสอบผลลัพธ์ได้
+</p>
+
+<p>
+    การพัฒนาโปรแกรมจึงเป็นกระบวนการที่สามารถทำซ้ำได้หลายครั้ง
+    ไม่จำเป็นต้องเขียนโปรแกรมให้สมบูรณ์ตั้งแต่ครั้งแรก
+    ผู้พัฒนาสามารถเขียนคำสั่ง ทดลอง Compile
+    ตรวจสอบ Error ทดสอบการทำงาน
+    และปรับปรุงโปรแกรมอย่างต่อเนื่อง
+    กระบวนการนี้ช่วยให้สามารถค้นหาและแก้ไขปัญหา
+    ได้ตั้งแต่ระยะเริ่มต้นของการพัฒนา
+</p>
+
+<p>
+    นอกจากนี้ การแยกขั้นตอนระหว่างการเขียน
+    การ Compile และการ Run
+    ยังช่วยให้ผู้เรียนเข้าใจว่า
+    โปรแกรมที่เราเขียนไม่ได้ถูกนำไปทำงานโดยตรงทันที
+    แต่ต้องผ่านกระบวนการตรวจสอบและแปลง
+    ก่อนที่จะถูกนำไปประมวลผลโดย JVM
+</p>
+
+<div class="info-box">
+
+    <b>💡 แนวคิดสำคัญ</b>
+
+    <br><br>
+
+    การพัฒนาโปรแกรม Java
+    ไม่ได้จบเพียงการเขียนโค้ดเท่านั้น
+    แต่ต้องมีการ Compile
+    ตรวจสอบข้อผิดพลาด
+    และ Run โปรแกรม
+    เพื่อทดสอบว่าการทำงานเป็นไปตามที่ออกแบบไว้หรือไม่
+
+    <br><br>
+
+    ผู้พัฒนาควรมองกระบวนการทั้งหมดเป็นวงจร
+    ได้แก่ การเขียนโค้ด การ Compile
+    การตรวจสอบข้อผิดพลาด การ Run
+    การทดสอบผลลัพธ์ และการปรับปรุงโปรแกรม
+    ซึ่งสามารถทำซ้ำได้จนกว่าโปรแกรม
+    จะทำงานได้ตามวัตถุประสงค์
+</div>
+
+
+<h4>
+    1.2 สามขั้นตอนหลักของการพัฒนาโปรแกรม
+</h4>
+
+<p>
+    กระบวนการพื้นฐานในการพัฒนาโปรแกรม Java
+    สามารถแบ่งออกเป็น
+    <b>3 ขั้นตอนหลัก</b>
+    ได้แก่
+</p>
+
+<ul>
+
+    <li>
+        การสร้าง Source Code
+    </li>
+
+    <li>
+        การ Compile Source Code
+    </li>
+
+    <li>
+        การ Run โปรแกรม
+    </li>
+
+</ul>
+
+<p>
+    ทั้งสามขั้นตอนมีความสัมพันธ์กัน
+    และไม่สามารถมองแยกออกจากกันโดยสิ้นเชิง
+    เพราะ Source Code เป็นข้อมูลเริ่มต้น
+    สำหรับการ Compile
+    ส่วนผลลัพธ์จากการ Compile
+    จะถูกนำไปใช้ในขั้นตอนการ Run
+    หากขั้นตอนใดเกิดข้อผิดพลาด
+    ก็อาจส่งผลให้ขั้นตอนถัดไปไม่สามารถทำงานได้
+</p>
+
+<div class="step-grid">
+
+    <div class="step-card">
+
+        <div class="step-number">
+            1
+        </div>
+
+        <h4>
+            สร้าง Source Code
+        </h4>
+
+        <p>
+            เขียนคำสั่ง Java
+            และบันทึกเป็นไฟล์
+            <b>.java</b>
+        </p>
+
+        <p>
+            เป็นขั้นตอนที่ผู้พัฒนา
+            กำหนดคำสั่งและรูปแบบการทำงาน
+            ของโปรแกรม
+        </p>
+
+        <p>
+            Source Code เป็นส่วนที่ผู้พัฒนาสามารถอ่าน
+            ทำความเข้าใจ แก้ไข และปรับปรุงได้
+            เช่น การประกาศตัวแปร
+            การสร้าง Method
+            การรับข้อมูล
+            การคำนวณ
+            การใช้เงื่อนไข
+            และการแสดงผล
+        </p>
+
+    </div>
+
+
+    <div class="step-card">
+
+        <div class="step-number">
+            2
+        </div>
+
+        <h4>
+            Compile
+        </h4>
+
+        <p>
+            ใช้คำสั่ง
+            <b>javac</b>
+            เพื่อ Compile Source Code
+            ให้เป็น Bytecode
+        </p>
+
+        <p>
+            ผลลัพธ์จะได้ไฟล์
+            <b>.class</b>
+        </p>
+
+        <p>
+            ในขั้นตอนนี้ Compiler
+            จะตรวจสอบโครงสร้างและไวยากรณ์ของ Source Code
+            หากพบข้อผิดพลาด โปรแกรมจะไม่สามารถ
+            Compile ได้สำเร็จจนกว่าจะมีการแก้ไข
+        </p>
+
+    </div>
+
+
+    <div class="step-card">
+
+        <div class="step-number">
+            3
+        </div>
+
+        <h4>
+            Run
+        </h4>
+
+        <p>
+            ใช้คำสั่ง
+            <b>java</b>
+            เพื่อเรียกใช้งานโปรแกรม
+            และแสดงผลลัพธ์
+        </p>
+
+        <p>
+            Bytecode จะถูกประมวลผลผ่าน
+            <b>JVM</b>
+        </p>
+
+        <p>
+            ในระหว่างการ Run
+            โปรแกรมจะดำเนินการตามคำสั่ง
+            และข้อมูลที่ผู้พัฒนาเขียนไว้
+            จากนั้นจะแสดง Output
+            หรือผลลัพธ์ให้ผู้ใช้เห็น
+        </p>
+
+    </div>
+
+</div>
+
+
+<h4>
+    1.3 แผนผังการทำงานของโปรแกรม Java
+</h4>
+
+<p>
+    การทำงานตั้งแต่ Source Code
+    จนถึงผลลัพธ์ของโปรแกรม
+    สามารถมองเห็นเป็นลำดับขั้นตอนได้ดังนี้
+</p>
+
+<p>
+    จุดสำคัญของแผนผังนี้คือ
+    Source Code ไม่ได้ถูกนำไป Run โดยตรง
+    แต่ต้องผ่าน Java Compiler ก่อน
+    เพื่อสร้าง Bytecode
+    หลังจากนั้น JVM จึงสามารถโหลด
+    และประมวลผล Bytecode
+    เพื่อให้โปรแกรมทำงานได้
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+
+        Source Code
+
+        <small>
+            TestJava.java
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Compile
+
+        <small>
+            javac TestJava.java
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Bytecode
+
+        <small>
+            TestJava.class
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Run
+
+        <small>
+            java TestJava
+        </small>
+
+    </div>
+
+</div>
+
+<p>
+    จากแผนผังจะเห็นได้ว่าไฟล์
+    <b>TestJava.java</b>
+    เป็นไฟล์ต้นฉบับ
+    เมื่อใช้คำสั่ง
+    <b>javac TestJava.java</b>
+    ระบบจะสร้าง
+    <b>TestJava.class</b>
+    ซึ่งเป็น Bytecode
+    และเมื่อใช้คำสั่ง
+    <b>java TestJava</b>
+    JVM จะนำ Class ดังกล่าวไปประมวลผล
+    เพื่อให้เกิด Output ของโปรแกรม
+</p>
+
+<div class="info-box">
+
+    <b>💡 จำง่าย ๆ</b>
+
+    <br><br>
+
+    <b>.java</b>
+    → ไฟล์ Source Code
+
+    <br>
+
+    <b>javac</b>
+    → คำสั่ง Compile
+
+    <br>
+
+    <b>.class</b>
+    → ไฟล์ Bytecode
+
+    <br>
+
+    <b>java</b>
+    → คำสั่ง Run
+
+    <br>
+
+    <b>JVM</b>
+    → ประมวลผล Bytecode
+
+</div>
+
+
+<h4>
+    1.4 บทบาทของ JVM ในการทำงานของ Java
+</h4>
+
+<p>
+    <b>JVM (Java Virtual Machine)</b>
+    เป็นส่วนสำคัญที่ใช้ในการประมวลผล
+    Bytecode ของโปรแกรม Java
+    โดย JVM จะทำหน้าที่จัดการการทำงาน
+    ของโปรแกรมในระหว่างที่โปรแกรมกำลัง Run
+</p>
+
+<p>
+    JVM ทำหน้าที่เป็นสภาพแวดล้อมเสมือน
+    สำหรับการประมวลผลโปรแกรม Java
+    โดยรับ Bytecode ที่ได้จากการ Compile
+    แล้วดำเนินการตามคำสั่งที่อยู่ภายใน
+    ทำให้โปรแกรมสามารถทำงานได้บนระบบ
+    ที่มี JVM ที่เหมาะสม
+</p>
+
+<p>
+    เมื่อผู้ใช้สั่ง Run โปรแกรม
+    JVM จะโหลด Class ที่จำเป็น
+    ตรวจสอบข้อมูลของ Class
+    และเตรียมส่วนต่าง ๆ ที่จำเป็น
+    สำหรับการทำงานของโปรแกรม
+    จากนั้นจึงดำเนินการตามคำสั่ง
+    ที่อยู่ใน Bytecode
+</p>
+
+<p>
+    JVM ยังมีหน้าที่เกี่ยวข้องกับการจัดการหน่วยความจำ
+    และทรัพยากรที่ใช้ระหว่างการทำงานของโปรแกรม
+    เช่น การจัดการพื้นที่สำหรับ Object
+    และการจัดการหน่วยความจำที่ไม่ถูกใช้งานแล้ว
+    ซึ่งช่วยลดภาระบางส่วนที่ผู้เขียนโปรแกรม
+    ต้องจัดการด้วยตนเอง
+</p>
+
+<p>
+    แนวคิดของ JVM ยังเป็นปัจจัยสำคัญ
+    ที่ทำให้ภาษา Java สามารถนำ Bytecode
+    ไปทำงานบนระบบปฏิบัติการหลายประเภทได้
+    เพราะแต่ละระบบจะมี JVM
+    ที่ทำหน้าที่เป็นตัวกลางระหว่าง
+    Bytecode กับสภาพแวดล้อมของระบบนั้น
+</p>
+
+<div class="tip">
+
+    <b>💡 ข้อควรรู้</b>
+
+    <br><br>
+
+    ผู้เขียนโปรแกรมไม่จำเป็นต้องเขียน
+    Bytecode ด้วยตนเอง
+    เพราะ Bytecode จะถูกสร้างขึ้น
+    โดย Java Compiler
+    หลังจากทำการ Compile Source Code
+
+    <br><br>
+
+    ผู้พัฒนาจึงทำงานกับ Source Code
+    เป็นหลัก ส่วน Bytecode
+    จะถูกสร้างขึ้นเป็นผลลัพธ์จากกระบวนการ Compile
+    และถูกนำไปใช้โดย JVM ในขั้นตอนการ Run
+
+</div>
+
+
+<!-- ==================================================
+     2. ขั้นตอนที่ 1 : Source Code
+================================================== -->
+
+<h3>
+    2. ขั้นตอนที่ 1 : การสร้าง Source Code
+</h3>
+
+
+<h4>
+    2.1 ความหมายของ Source Code
+</h4>
+
+<p>
+    ขั้นตอนแรกของการพัฒนาโปรแกรม Java
+    คือการสร้างโปรแกรมหรือ
+    <b>ซอร์สโค้ด (Source Code)</b>
+    โดยการพิมพ์คำสั่งต่าง ๆ
+    ตามหลักไวยากรณ์ของภาษา Java
+</p>
+
+<p>
+    Source Code เป็นคำสั่งต้นฉบับ
+    ที่โปรแกรมเมอร์เขียนขึ้น
+    เพื่อกำหนดรูปแบบและลำดับการทำงาน
+    ของโปรแกรม เช่น
+    การประกาศตัวแปร
+    การรับข้อมูลจากผู้ใช้
+    การคำนวณ
+    การใช้เงื่อนไข
+    การทำงานแบบวนซ้ำ
+    และการแสดงผลลัพธ์
+</p>
+
+<p>
+    Source Code ยังสามารถมองได้ว่าเป็น
+    รูปแบบการสื่อสารระหว่างผู้พัฒนา
+    กับคอมพิวเตอร์
+    โดยผู้พัฒนาใช้ไวยากรณ์ของภาษา Java
+    เพื่ออธิบายว่าต้องการให้โปรแกรมทำงานอย่างไร
+    จากนั้น Compiler จึงนำคำสั่งเหล่านี้
+    ไปตรวจสอบและแปลงเป็น Bytecode
+</p>
+
+<p>
+    Source Code ของภาษา Java
+    จะถูกจัดเก็บไว้ในไฟล์
+    ที่มีนามสกุล
+    <b>.java</b>
+    เช่น
+    <b>TestJava.java</b>
+</p>
+
+<p>
+    ภายใน Source Code
+    สามารถมีคำสั่งจำนวนมากได้
+    และโปรแกรมหนึ่งโปรแกรม
+    อาจประกอบด้วยหลาย Class
+    หลาย Method และหลายไฟล์
+    ดังนั้นการจัดโครงสร้าง Source Code
+    ให้เป็นระเบียบ
+    และตั้งชื่อไฟล์ให้สื่อความหมาย
+    จึงมีความสำคัญต่อการดูแลโปรแกรม
+</p>
+
+
+<div class="tip">
+
+    <b>💡 ข้อควรรู้</b>
+
+    <br><br>
+
+    Source Code คือคำสั่งต้นฉบับ
+    ที่โปรแกรมเมอร์เขียนขึ้น
+    ส่วนไฟล์
+    <b>.java</b>
+    คือไฟล์ที่ใช้จัดเก็บ Source Code
+    ของโปรแกรม Java
+
+</div>
+
+
+<h4>
+    2.2 โปรแกรมที่ใช้เขียน Source Code
+</h4>
+
+<p>
+    ในการเขียน Source Code
+    สามารถใช้โปรแกรมประเภท
+    <b>Editor</b>
+    หรือ
+    <b>Text Editor</b>
+    รวมถึงโปรแกรมประเภท
+    <b>IDE (Integrated Development Environment)</b>
+    ซึ่งช่วยอำนวยความสะดวก
+    ในการเขียนและพัฒนาโปรแกรม
+</p>
+
+<p>
+    โปรแกรมสำหรับเขียน Source Code
+    มีหน้าที่ช่วยให้ผู้พัฒนาสามารถ
+    สร้างไฟล์ พิมพ์คำสั่ง
+    แก้ไข Source Code
+    และบันทึกไฟล์ได้สะดวก
+    โดยบางโปรแกรมยังสามารถช่วย
+    ตรวจสอบรูปแบบคำสั่ง
+    แนะนำคำสั่ง
+    และแสดงตำแหน่งของข้อผิดพลาด
+    ได้อีกด้วย
+</p>
+
+<p>
+    ตัวอย่างโปรแกรมที่สามารถใช้
+    สำหรับเขียน Source Code ได้แก่
+</p>
+
+<ul>
+
+    <li>
+        <b>Notepad</b>
+        โปรแกรมแก้ไขข้อความพื้นฐาน
+        ที่สามารถใช้เขียนไฟล์ Java ได้
+    </li>
+
+    <li>
+        <b>EditPlus</b>
+        โปรแกรมแก้ไขข้อความ
+        ที่สามารถใช้สำหรับเขียน Source Code
+    </li>
+
+    <li>
+        <b>Visual Studio Code (VS Code)</b>
+        โปรแกรมแก้ไขโค้ดที่รองรับ
+        การพัฒนาโปรแกรมหลายภาษา
+    </li>
+
+    <li>
+        <b>IDE</b>
+        เช่น โปรแกรมที่ออกแบบมา
+        สำหรับช่วยเขียน Compile
+        และทดสอบโปรแกรม
+    </li>
+
+</ul>
+
+<p>
+    สำหรับผู้เริ่มต้น การใช้ Text Editor
+    ช่วยให้เข้าใจกระบวนการของ Java
+    ได้อย่างชัดเจน เพราะผู้เรียนจะเห็น
+    ขั้นตอนการสร้างไฟล์
+    การ Compile ด้วยคำสั่ง
+    และการ Run โปรแกรมด้วยตนเอง
+    ส่วน IDE จะช่วยลดขั้นตอนทางเทคนิค
+    และเพิ่มความสะดวกเมื่อพัฒนาโปรแกรม
+    ที่มีขนาดใหญ่ขึ้น
+</p>
+
+
+<div class="tip">
+
+    <b>💡 ข้อควรรู้</b>
+
+    <br><br>
+
+    โปรแกรมสำหรับเขียน Source Code
+    มีหน้าที่ช่วยให้ผู้เขียนสามารถ
+    พิมพ์ แก้ไข และจัดการไฟล์โปรแกรม
+    ได้สะดวกขึ้น
+    แต่สิ่งสำคัญคือ
+    เครื่องคอมพิวเตอร์ต้องมีเครื่องมือ
+    สำหรับ Compile และ Run โปรแกรม Java
+    เช่น JDK
+
+</div>
+
+
+<h4>
+    2.3 ส่วนประกอบพื้นฐานของ Source Code
+</h4>
+
+<p>
+    Source Code ของโปรแกรม Java
+    มักประกอบด้วยส่วนสำคัญหลายส่วน
+    เช่น ชื่อ Class
+    เมธอด
+    และคำสั่งที่ใช้ในการทำงาน
+    โดยโปรแกรม Java
+    ที่สามารถเริ่มทำงานได้
+    มักจะมีเมธอด
+    <b>main()</b>
+    เป็นจุดเริ่มต้นของโปรแกรม
+</p>
+
+<p>
+    Class เป็นโครงสร้างสำคัญของภาษา Java
+    ซึ่งใช้สำหรับรวมข้อมูลและพฤติกรรม
+    ที่เกี่ยวข้องกันไว้ด้วยกัน
+    ส่วน Method ใช้สำหรับกำหนดการทำงาน
+    ของโปรแกรมในแต่ละส่วน
+    ทำให้สามารถแบ่งโปรแกรมขนาดใหญ่
+    ออกเป็นส่วนย่อยที่จัดการได้ง่ายขึ้น
+</p>
+
+<p>
+    ตัวอย่างองค์ประกอบที่พบในโปรแกรม Java
+    ได้แก่
+</p>
+
+<ul>
+
+    <li>
+        ชื่อ Class
+    </li>
+
+    <li>
+        เมธอด main()
+    </li>
+
+    <li>
+        คำสั่งการทำงาน
+    </li>
+
+    <li>
+        คำสั่งแสดงผล
+    </li>
+
+    <li>
+        ตัวแปรและข้อมูล
+    </li>
+
+</ul>
+
+<p>
+    ในการเขียน Source Code
+    ผู้พัฒนาควรจัดรูปแบบคำสั่ง
+    ให้มีระเบียบและอ่านง่าย
+    เช่น การย่อหน้า การตั้งชื่อ Class
+    การตั้งชื่อตัวแปร
+    และการแยกคำสั่งออกเป็นส่วน ๆ
+    เพราะเมื่อโปรแกรมมีขนาดใหญ่ขึ้น
+    ความเป็นระเบียบของ Source Code
+    จะช่วยให้สามารถแก้ไขและบำรุงรักษา
+    โปรแกรมได้ง่ายขึ้น
+</p>
+
+
+<h4>
+    2.4 ตัวอย่าง Source Code
+</h4>
+
+<p>
+    ตัวอย่างโปรแกรม Java อย่างง่าย
+    สำหรับแสดงข้อความ
+    <b>Hello Java</b>
+    บนหน้าจอ
+</p>
+
+<p>
+    ตัวอย่างนี้ช่วยให้ผู้เรียนเห็นความสัมพันธ์
+    ระหว่าง Class และ Method
+    โดย Class จะเป็นส่วนที่ใช้กำหนดโครงสร้าง
+    ของโปรแกรม และเมธอด
+    <b>main()</b>
+    เป็นจุดเริ่มต้นของการทำงาน
+    สำหรับโปรแกรมที่ถูกเรียกใช้งานในลักษณะนี้
+</p>
+
+<p>
+    เมื่อ Source Code ถูกบันทึกแล้ว
+    ไฟล์ดังกล่าวจะสามารถนำไป Compile
+    ด้วยคำสั่ง <b>javac</b>
+    เพื่อสร้างไฟล์ Bytecode
+    ก่อนนำไป Run ผ่าน JVM
+</p>
+
+
+<!-- ==================================================
+     SOURCE CODE IMAGE
+================================================== -->
+
+<div class="image-section">
+
+    <div class="image-step-title">
+
+        STEP 1 :
+        ภาพตัวอย่าง Source Code
+
+    </div>
+
+    <div class="image-box">
+
+        <img
+            src="images/chapter3/testjava-source-code.png"
+            alt="ภาพตัวอย่าง Source Code TestJava"
+            onerror="imageError(this)"
+        >
+
+        <div class="image-caption">
+
+            ภาพตัวอย่างการสร้าง Source Code
+            และเขียนโปรแกรม TestJava.java
+
+        </div>
+
+        <div class="image-description">
+
+            จากภาพ นักเรียนสามารถสังเกตการสร้างไฟล์
+            <b>TestJava.java</b>
+            และการเขียนคำสั่ง Java
+            ภายในโปรแกรมแก้ไขโค้ด
+
+        </div>
+
+        <div class="image-error">
+
+            ⚠️ ไม่พบรูปภาพนี้
+
+            <br><br>
+
+            ตรวจสอบว่าไฟล์มีชื่อว่า
+
+            <b>testjava-source-code.png</b>
+
+            <br>
+
+            และอยู่ในโฟลเดอร์
+
+            <b>images/chapter3/</b>
+
+            <br><br>
+
+            โครงสร้างที่ถูกต้อง:
+
+            <br>
+
+            <code>
+                chapter_03.html
+                <br>
+                └── images
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;└── chapter3
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── testjava-source-code.png
+            </code>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<h4>
+    2.5 การบันทึก Source Code
+</h4>
+
+<p>
+    หลังจากเขียนโปรแกรมเสร็จเรียบร้อยแล้ว
+    ต้องทำการบันทึกไฟล์
+    โดยใช้นามสกุล
+    <b>.java</b>
+    เพื่อให้ระบบสามารถระบุได้ว่า
+    ไฟล์ดังกล่าวเป็น Source Code
+    ของภาษา Java
+</p>
+
+<p>
+    การบันทึกไฟล์ให้ถูกต้องมีความสำคัญ
+    เพราะ Compiler ต้องสามารถค้นหาไฟล์
+    และอ่าน Source Code
+    ได้ตามตำแหน่งที่ระบุ
+    หากชื่อไฟล์ผิด
+    นามสกุลผิด
+    หรือไฟล์ไม่ได้อยู่ใน Directory
+    ที่กำลังทำงาน
+    อาจทำให้เกิดปัญหา
+    ในขั้นตอน Compile ได้
+</p>
+
+<p>
+    ตัวอย่างเช่น
+    หาก Class มีชื่อว่า
+    <b>TestJava</b>
+    สามารถบันทึกไฟล์เป็น
+</p>
+
+<div class="code-wrap">
+
+<pre><code>TestJava.java</code></pre>
+
+</div>
+
+<p>
+    ควรตรวจสอบชื่อไฟล์หลังจากบันทึกทุกครั้ง
+    โดยเฉพาะในระบบปฏิบัติการที่อาจซ่อน
+    นามสกุลของไฟล์
+    เพราะบางกรณีผู้ใช้สามารถบันทึกผิดเป็น
+    <b>TestJava.java.txt</b>
+    โดยไม่รู้ตัว
+    ซึ่งจะไม่ใช่ชื่อไฟล์ Java
+    ที่ต้องการ
+</p>
+
+
+<h4>
+    2.6 ความสัมพันธ์ระหว่างชื่อ Class และชื่อไฟล์
+</h4>
+
+<p>
+    หากมีการประกาศ Class เป็น
+    <b>public class</b>
+    ชื่อไฟล์ Java
+    จะต้องตรงกับชื่อของ public class
+    โดยต้องคำนึงถึงตัวพิมพ์เล็ก
+    และตัวพิมพ์ใหญ่ด้วย
+</p>
+
+<p>
+    ตัวอย่างเช่น
+    หากเขียนว่า
+    <b>public class TestJava</b>
+    ไฟล์จะต้องมีชื่อว่า
+    <b>TestJava.java</b>
+</p>
+
+<p>
+    หลักการนี้มีความสำคัญในขั้นตอน Compile
+    เพราะ Java Compiler จะตรวจสอบความสอดคล้อง
+    ระหว่างชื่อของ public class
+    และชื่อไฟล์ Source Code
+    หากชื่อไม่ตรงกัน
+    โปรแกรมอาจไม่สามารถ Compile ได้
+</p>
+
+<p>
+    นอกจากนี้ Java ยังเป็นภาษา
+    ที่แยกตัวพิมพ์เล็กและตัวพิมพ์ใหญ่
+    ดังนั้นชื่อ
+    <b>TestJava</b>
+    <b>testjava</b>
+    และ
+    <b>TESTJAVA</b>
+    จึงถือว่าเป็นชื่อที่แตกต่างกัน
+</p>
+
+
+<!-- ==================================================
+     PUBLIC CLASS IMAGE
+================================================== -->
+
+<div class="image-section">
+
+    <div class="image-step-title">
+
+        STEP 2 :
+        ภาพตัวอย่าง
+
+    </div>
+
+
+    <div class="image-box">
+
+        <img
+            src="images/chapter3/public-class-filename.png"
+            alt="ตัวอย่าง public class และชื่อไฟล์"
+            onerror="imageError(this)"
+        >
+
+        <div class="image-error">
+
+            ⚠️ ไม่พบรูปภาพนี้
+
+            <br><br>
+
+            ตรวจสอบว่าไฟล์มีชื่อว่า
+
+            <b>public-class-filename.png</b>
+
+            <br>
+
+            และอยู่ในโฟลเดอร์
+
+            <b>images/chapter3/</b>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="image-section">
+
+    <div class="image-box">
+
+        <img
+            src="images/chapter3/public-class-filename.png"
+            alt="ตัวอย่างการบันทึกไฟล์ TestJava.java"
+            onerror="imageError(this)"
+        >
+
+        <div class="image-caption">
+
+            ตัวอย่างการบันทึกไฟล์ Source Code
+
+        </div>
+
+        <div class="image-description">
+
+            เมื่อประกาศ
+            <b>public class TestJava</b>
+            ชื่อไฟล์ต้องตรงกับชื่อ Class
+            และบันทึกไฟล์เป็น
+            <b>TestJava.java</b>
+
+        </div>
+
+        <div class="image-error">
+
+            ⚠️ ไม่พบรูปภาพ
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<h4>
+    2.7 หลักการตั้งชื่อ Class และไฟล์
+</h4>
+
+<p>
+    การตั้งชื่อ Class และไฟล์
+    ควรตั้งชื่อให้สื่อความหมาย
+    และอ่านเข้าใจได้ง่าย
+    เพื่อช่วยให้การจัดการโปรแกรม
+    ทำได้สะดวกเมื่อโปรแกรมมีขนาดใหญ่ขึ้น
+</p>
+
+<p>
+    การตั้งชื่อที่ดีช่วยให้ผู้พัฒนา
+    สามารถเข้าใจหน้าที่ของ Class
+    และค้นหาไฟล์ที่ต้องการได้ง่าย
+    โดยเฉพาะเมื่อโปรแกรมประกอบด้วย
+    Class จำนวนมาก
+    การตั้งชื่อที่ไม่สื่อความหมาย
+    อาจทำให้เกิดความสับสน
+    และเพิ่มเวลาในการดูแลโปรแกรม
+</p>
+
+<ul>
+
+    <li>
+        ชื่อ Class ควรสื่อความหมาย
+    </li>
+
+    <li>
+        ชื่อไฟล์ควรตรงกับ public class
+    </li>
+
+    <li>
+        ต้องระวังตัวพิมพ์เล็กและตัวพิมพ์ใหญ่
+    </li>
+
+    <li>
+        ไม่ควรใช้ชื่อที่ทำให้เกิดความสับสน
+    </li>
+
+</ul>
+
+
+<h4>
+    2.8 ข้อควรระวังในการตั้งชื่อไฟล์
+</h4>
+
+<div class="warning-box">
+
+    <b>⚠️ ข้อควรระวัง</b>
+
+    <br><br>
+
+    ชื่อไฟล์และชื่อ Class
+    ต้องสอดคล้องกัน
+    โดยเฉพาะกรณีที่ Class
+    ถูกประกาศเป็น
+    <b>public class</b>
+
+    <br><br>
+
+    Java เป็นภาษาที่
+    <b>แยกตัวพิมพ์เล็กและตัวพิมพ์ใหญ่</b>
+    ดังนั้น
+    <b>TestJava</b>
+    และ
+    <b>testjava</b>
+    ถือว่าเป็นชื่อที่แตกต่างกัน
+
+    <br><br>
+
+    ควรตรวจสอบนามสกุลของไฟล์
+    ให้แน่ใจว่าเป็น
+    <b>.java</b>
+    และไม่ควรมีนามสกุลอื่นต่อท้าย
+    เช่น
+    <b>.txt</b>
+    โดยไม่ตั้งใจ
+
+</div>
+
+
+<!-- ==================================================
+     3. ขั้นตอนที่ 2 : Compile
+================================================== -->
+
+<h3>
+    3. ขั้นตอนที่ 2 : การ Compile โปรแกรม
+</h3>
+
+
+<h4>
+    3.1 ความหมายของการ Compile
+</h4>
+
+<p>
+    หลังจากสร้าง Source Code
+    และบันทึกเป็นไฟล์
+    <b>.java</b>
+    แล้ว ขั้นตอนต่อไปคือ
+    การคอมไพล์โปรแกรม
+    หรือ
+    <b>Compile</b>
+</p>
+
+<p>
+    การ Compile คือกระบวนการ
+    ที่นำ Source Code
+    ซึ่งเขียนด้วยภาษา Java
+    ไปตรวจสอบและแปลงให้อยู่ในรูปแบบ
+    <b>Bytecode</b>
+    เพื่อให้สามารถนำไปประมวลผล
+    ผ่าน JVM ได้
+</p>
+
+<p>
+    ในระหว่างการ Compile
+    Java Compiler จะตรวจสอบ Source Code
+    ว่ามีรูปแบบคำสั่งและไวยากรณ์
+    ที่ถูกต้องตามกฎของภาษา Java หรือไม่
+    หากพบข้อผิดพลาด
+    Compiler จะรายงานข้อมูลเกี่ยวกับปัญหา
+    เพื่อให้ผู้พัฒนาสามารถกลับไปแก้ไข
+    Source Code ได้
+</p>
+
+<p>
+    การ Compile จึงไม่ได้มีหน้าที่เพียง
+    สร้างไฟล์ <b>.class</b> เท่านั้น
+    แต่ยังเป็นขั้นตอนสำคัญ
+    สำหรับตรวจสอบความถูกต้องของ Source Code
+    ก่อนนำโปรแกรมไป Run
+</p>
+
+
+<h4>
+    3.2 เครื่องมือสำหรับ Compile
+</h4>
+
+<p>
+    การ Compile Source Code
+    สามารถใช้คำสั่ง
+    <b>javac</b>
+    ซึ่งเป็นเครื่องมือของ
+    <b>JDK (Java Development Kit)</b>
+</p>
+
+<p>
+    คำสั่ง
+    <b>javac</b>
+    จะทำหน้าที่เรียก Java Compiler
+    เพื่ออ่าน Source Code
+    ตรวจสอบไวยากรณ์
+    และสร้างไฟล์ Bytecode
+    หากไม่พบข้อผิดพลาด
+    จะได้ไฟล์
+    <b>.class</b>
+</p>
+
+<p>
+    JDK เป็นชุดเครื่องมือที่ใช้สำหรับ
+    การพัฒนาโปรแกรม Java
+    โดยมีเครื่องมือที่จำเป็น
+    สำหรับการ Compile
+    และเครื่องมืออื่น ๆ
+    ที่เกี่ยวข้องกับการพัฒนาโปรแกรม
+    ดังนั้น หากต้องการ Compile
+    โปรแกรม Java ผ่าน Command Prompt
+    จะต้องติดตั้ง JDK
+    และสามารถเรียกใช้คำสั่ง
+    <b>javac</b>
+    ได้อย่างถูกต้อง
+</p>
+
+
+<div class="info-box">
+
+    <b>💡 จำง่าย ๆ</b>
+
+    <br><br>
+
+    <b>javac</b>
+    = Java Compiler
+
+    <br><br>
+
+    หน้าที่คือ
+
+    <br>
+
+    Source Code
+    → Compile
+    → Bytecode
+
+</div>
+
+
+<h4>
+    3.3 รูปแบบคำสั่ง javac
+</h4>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>javac FileName.java</code></pre>
+
+</div>
+
+
+<p>
+    โดย
+    <b>FileName.java</b>
+    คือชื่อไฟล์ Source Code
+    ที่ต้องการ Compile
+</p>
+
+<p>
+    คำสั่งนี้จะถูกใช้ใน Command Prompt
+    หรือ Terminal
+    โดยผู้ใช้ควรอยู่ใน Directory
+    ที่สามารถเข้าถึงไฟล์ Source Code
+    ที่ต้องการ Compile ได้
+    หากไฟล์อยู่ใน Directory อื่น
+    จะต้องระบุตำแหน่งของไฟล์
+    ให้ถูกต้อง
+</p>
+
+
+<!-- รูปตัวอย่าง 3.1 -->
+
+<div class="image-box">
+
+    <img
+        src="images/chapter3/step3_1_javac.png"
+        alt="ตัวอย่างรูปแบบคำสั่ง javac"
+        onerror="imageError(this)"
+    >
+
+    <div class="image-caption">
+
+        ตัวอย่างรูปแบบคำสั่ง javac
+
+    </div>
+
+    <div class="image-description">
+
+        คำสั่ง
+        javac FileName.java
+        ใช้สำหรับ Compile Source Code
+
+    </div>
+
+</div>
+
+
+<h4>
+    3.4 ตัวอย่างการ Compile
+</h4>
+
+<p>
+    หากมีไฟล์ชื่อ
+    <b>TestJava.java</b>
+    สามารถใช้คำสั่งต่อไปนี้
+    เพื่อ Compile โปรแกรม
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>javac TestJava.java</code></pre>
+
+</div>
+
+
+<p>
+    หาก Source Code
+    ไม่มีข้อผิดพลาด
+    Compiler จะสร้างไฟล์
+    <b>TestJava.class</b>
+    ขึ้นมาในโฟลเดอร์เดียวกัน
+    โดยทั่วไป
+</p>
+
+<p>
+    ไฟล์ <b>TestJava.class</b>
+    ที่สร้างขึ้นเป็น Bytecode
+    ซึ่งไม่ได้มีรูปแบบเดียวกับ Source Code
+    ที่ผู้พัฒนาเขียน
+    แต่เป็นข้อมูลที่ JVM
+    สามารถนำไปใช้ในการประมวลผล
+    ในขั้นตอนการ Run โปรแกรม
+</p>
+
+<p>
+    หาก Compile ไม่สำเร็จ
+    จะไม่มีผลลัพธ์ Bytecode
+    ที่สามารถนำไปใช้ได้อย่างสมบูรณ์
+    ดังนั้นผู้พัฒนาจึงต้องแก้ไข
+    Source Code ตามข้อความ Error
+    แล้วสั่ง Compile ใหม่
+</p>
+
+
+<!-- รูปผลลัพธ์การ Compile -->
+
+<div class="image-box image-box-large">
+
+    <img
+        src="images/chapter3/step3_2_javac.png"
+        alt="ผลลัพธ์การรันโปรแกรม Java"
+        onerror="imageError(this)"
+    >
+
+    <div class="image-caption">
+
+        ตัวอย่างผลลัพธ์การ Compile และ Run โปรแกรม
+
+    </div>
+
+    <div class="image-description">
+
+        เมื่อ Compile สำเร็จและรันโปรแกรม
+        จะแสดงผลลัพธ์บน Terminal
+
+    </div>
+
+</div>
+
+
+<h4>
+    3.5 การตรวจสอบข้อผิดพลาดระหว่าง Compile
+</h4>
+
+<p>
+    หาก Source Code
+    มีข้อผิดพลาดทางไวยากรณ์
+    หรือมีการเขียนคำสั่งไม่ถูกต้อง
+    Java Compiler จะแสดงข้อความแจ้งเตือน
+    หรือข้อความแสดงข้อผิดพลาด
+    เพื่อช่วยให้ผู้พัฒนาทราบว่า
+    โปรแกรมมีปัญหาบริเวณใด
+</p>
+
+<p>
+    ข้อความ Error จาก Compiler
+    มักมีข้อมูลที่ช่วยในการค้นหาปัญหา
+    เช่น ชื่อไฟล์
+    หมายเลขบรรทัด
+    ตำแหน่งของคำสั่ง
+    และลักษณะของข้อผิดพลาด
+    ผู้เรียนจึงควรฝึกอ่านข้อความ Error
+    แทนการแก้ไขแบบสุ่ม
+</p>
+
+<p>
+    ตัวอย่างปัญหาที่อาจพบได้
+    ได้แก่ การลืมเครื่องหมาย
+    <b>;</b>
+    การสะกดชื่อ Class ผิด
+    การใช้ตัวแปรที่ยังไม่ได้ประกาศ
+    การใช้ชนิดข้อมูลไม่ตรงกัน
+    หรือการเขียนโครงสร้างของคำสั่ง
+    ไม่ถูกต้อง
+</p>
+
+<p>
+    เมื่อพบข้อผิดพลาด
+    ควรอ่านข้อความจาก Compiler
+    ตรวจสอบบรรทัดที่ระบุ
+    แก้ไข Source Code
+    แล้วจึง Compile ใหม่อีกครั้ง
+</p>
+
+
+<div class="warning-box">
+
+    <b>⚠️ หาก Compile ไม่สำเร็จ</b>
+
+    <br><br>
+
+    1. อ่านข้อความ Error
+
+    <br>
+
+    2. ตรวจสอบบรรทัดที่เกิดปัญหา
+
+    <br>
+
+    3. แก้ไข Source Code
+
+    <br>
+
+    4. บันทึกไฟล์
+
+    <br>
+
+    5. Compile ใหม่อีกครั้ง
+
+</div>
+
+
+<h4>
+    3.6 ไฟล์ Bytecode
+</h4>
+
+<p>
+    หาก Source Code
+    ไม่มีข้อผิดพลาดในการ Compile
+    Java Compiler จะสร้างไฟล์
+    Bytecode ที่มีนามสกุล
+    <b>.class</b>
+</p>
+
+<p>
+    Bytecode ไม่ใช่ Source Code
+    ที่โปรแกรมเมอร์เขียนโดยตรง
+    แต่เป็นผลลัพธ์จากกระบวนการ Compile
+    ซึ่งจะถูกนำไปประมวลผลผ่าน JVM
+    ในขั้นตอนการ Run โปรแกรม
+</p>
+
+<p>
+    ข้อดีของ Bytecode คือ
+    ทำให้ Java สามารถแยก Source Code
+    ออกจากสภาพแวดล้อมที่ใช้ประมวลผล
+    โดย JVM ของแต่ละระบบ
+    จะทำหน้าที่จัดการ Bytecode
+    ให้สามารถทำงานภายในระบบนั้นได้
+</p>
+
+<p>
+    ดังนั้นเมื่อผู้พัฒนาเปลี่ยนเครื่อง
+    หรือเปลี่ยนระบบปฏิบัติการ
+    Bytecode เดิมสามารถนำไปใช้ได้
+    หากระบบปลายทางมี JVM
+    ที่รองรับสภาพแวดล้อมนั้น
+</p>
+
+
+<div class="flow">
+
+    <div class="flow-box">
+
+        TestJava.java
+
+        <small>
+            Source Code
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        javac
+
+        <small>
+            Java Compiler
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        TestJava.class
+
+        <small>
+            Bytecode
+        </small>
+
+    </div>
+
+</div>
+
+
+<h4>
+    3.7 ข้อควรระวังในการ Compile
+</h4>
+
+<ul>
+
+    <li>
+        ต้องพิมพ์ชื่อไฟล์พร้อมนามสกุล
+        <b>.java</b>
+    </li>
+
+    <li>
+        ต้องสะกดชื่อไฟล์ให้ถูกต้อง
+    </li>
+
+    <li>
+        ต้องระวังตัวพิมพ์เล็กและตัวพิมพ์ใหญ่
+    </li>
+
+    <li>
+        ต้องอยู่ในโฟลเดอร์ที่มีไฟล์ Source Code
+    </li>
+
+    <li>
+        เครื่องคอมพิวเตอร์ต้องติดตั้ง JDK
+    </li>
+
+    <li>
+        ต้องตรวจสอบข้อความ Error
+        หาก Compile ไม่สำเร็จ
+    </li>
+
+</ul>
+
+<p>
+    นอกจากนี้ควรตรวจสอบว่า
+    คำสั่ง <b>javac</b>
+    สามารถเรียกใช้งานได้จาก Command Prompt
+    หรือ Terminal
+    หากระบบไม่รู้จักคำสั่ง
+    อาจเกิดจากการติดตั้ง JDK
+    หรือการกำหนดค่า Environment
+    ที่ยังไม่ถูกต้อง
+</p>
+
+
+<!-- ==================================================
+     4. ขั้นตอนที่ 3 : Run
+================================================== -->
+
+<h3>
+    4. ขั้นตอนที่ 3 : การ Run โปรแกรม
+</h3>
+
+
+<h4>
+    4.1 ความหมายของการ Run
+</h4>
+
+<p>
+    เมื่อ Compile สำเร็จแล้ว
+    จะได้ไฟล์
+    <b>.class</b>
+    จากนั้นจึงสามารถ
+    <b>Run</b>
+    โปรแกรมเพื่อดูผลลัพธ์ได้
+</p>
+
+<p>
+    การ Run เป็นขั้นตอนที่ทำให้โปรแกรม
+    เริ่มทำงานตามคำสั่งที่ผู้พัฒนาเขียนไว้
+    โดย Bytecode จะถูกโหลดและประมวลผล
+    ผ่าน
+    <b>JVM (Java Virtual Machine)</b>
+</p>
+
+<p>
+    การ Run จึงเป็นขั้นตอนที่ผู้พัฒนา
+    สามารถตรวจสอบการทำงานจริงของโปรแกรม
+    ได้ เช่น ตรวจสอบว่าการคำนวณถูกต้องหรือไม่
+    เงื่อนไขทำงานตามที่ออกแบบหรือไม่
+    และผลลัพธ์ที่แสดงออกมาตรงกับ
+    ความต้องการของโปรแกรมหรือไม่
+</p>
+
+
+<h4>
+    4.2 รูปแบบคำสั่ง Run
+</h4>
+
+<div class="code-wrap">
+
+<button
+    class="copy"
+    onclick="copyCode(this)"
+>
+
+    คัดลอก
+
+</button>
+
+<pre><code>java FileName</code></pre>
+
+</div>
+
+
+<p>
+    ในการ Run โปรแกรม
+    ไม่ต้องพิมพ์นามสกุล
+    <b>.class</b>
+    ต่อท้ายชื่อ Class
+</p>
+
+<p>
+    คำสั่ง <b>java</b>
+    จะใช้ชื่อของ Class
+    ที่ต้องการเรียกใช้งาน
+    จากนั้น Java Runtime Environment
+    จะเริ่มกระบวนการทำงานของ Class
+    และ JVM จะเข้ามาประมวลผล Bytecode
+    ที่เกี่ยวข้อง
+</p>
+
+
+<div class="tip">
+
+    <b>💡 จำง่าย ๆ</b>
+
+    <br><br>
+
+    Compile:
+
+    <br>
+
+    <b>javac TestJava.java</b>
+
+    <br><br>
+
+    Run:
+
+    <br>
+
+    <b>java TestJava</b>
+
+    <br><br>
+
+    คำสั่ง Run
+    ไม่ต้องเขียน
+    <b>.class</b>
+
+</div>
+
+
+<h4>
+    4.3 ตัวอย่างการ Run โปรแกรม
+</h4>
+
+<div class="code-wrap">
+
+<button
+    class="copy"
+    onclick="copyCode(this)"
+>
+
+    คัดลอก
+
+</button>
+
+<pre><code>java TestJava</code></pre>
+
+</div>
+
+
+<p>
+    คำสั่งดังกล่าวจะสั่งให้ Java
+    ค้นหา Class
+    <b>TestJava</b>
+    และเริ่มการทำงานของโปรแกรม
+    จากเมธอด
+    <b>main()</b>
+</p>
+
+<p>
+    การเรียกใช้ Class
+    ต้องระบุชื่อให้ถูกต้อง
+    รวมถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่
+    เนื่องจาก Java แยกความแตกต่าง
+    ของตัวอักษรทั้งสองรูปแบบ
+</p>
+
+
+<h4>
+    4.4 การทำงานของ JVM
+</h4>
+
+<p>
+    หลังจากสั่ง Run โปรแกรม
+    Bytecode ในไฟล์
+    <b>.class</b>
+    จะถูกนำไปประมวลผลโดย
+    <b>JVM (Java Virtual Machine)</b>
+    เพื่อให้โปรแกรมสามารถทำงาน
+    และแสดงผลลัพธ์ได้
+</p>
+
+<p>
+    JVM ทำหน้าที่เป็นสภาพแวดล้อม
+    สำหรับการทำงานของ Bytecode
+    และช่วยให้โปรแกรม Java
+    สามารถทำงานบนระบบปฏิบัติการ
+    ที่มี JVM รองรับได้
+</p>
+
+<p>
+    ในการทำงานจริง JVM
+    จะจัดการองค์ประกอบหลายส่วน
+    ที่จำเป็นต่อการรันโปรแกรม
+    เช่น การโหลด Class
+    การตรวจสอบ Bytecode
+    การจัดการหน่วยความจำ
+    และการประมวลผลคำสั่ง
+    เพื่อให้โปรแกรมสามารถทำงานต่อไปได้
+</p>
+
+<p>
+    JVM จึงเปรียบเสมือนตัวกลาง
+    ระหว่าง Bytecode ของ Java
+    กับสภาพแวดล้อมของเครื่องคอมพิวเตอร์
+    ทำให้ผู้พัฒนาไม่จำเป็นต้องเขียนโปรแกรม
+    แยกเป็นคนละชุดสำหรับระบบปฏิบัติการ
+    ทุกประเภท
+</p>
+
+
+<h4>
+    4.5 จุดเริ่มต้นของโปรแกรม
+</h4>
+
+<p>
+    สำหรับโปรแกรม Java
+    ที่มีเมธอด
+    <b>main()</b>
+    การทำงานของโปรแกรม
+    จะเริ่มต้นจากเมธอดดังกล่าว
+    เมื่อมีการเรียกใช้ Class
+    เพื่อ Run โปรแกรม
+</p>
+
+<p>
+    เมธอด main()
+    จึงถือเป็นจุดเริ่มต้นที่สำคัญ
+    ของโปรแกรม Java แบบทั่วไป
+    โดยคำสั่งที่อยู่ภายในเมธอด
+    จะถูกดำเนินการตามลำดับ
+    จากนั้นจึงสามารถเรียกใช้
+    Method หรือ Class อื่น ๆ
+    ตามโครงสร้างของโปรแกรม
+</p>
+
+
+<h4>
+    4.6 ตัวอย่างกระบวนการทั้งหมด
+</h4>
+
+<div class="success-box">
+
+    <b>✅ ตัวอย่างกระบวนการทั้งหมด</b>
+
+    <br><br>
+
+    <b>ขั้นตอนที่ 1</b>
+
+    <br>
+
+    สร้างไฟล์
+    <b>TestJava.java</b>
+
+    <br><br>
+
+    <b>ขั้นตอนที่ 2</b>
+
+    <br>
+
+    Compile ด้วยคำสั่ง
+
+    <b>javac TestJava.java</b>
+
+    <br><br>
+
+    ได้ไฟล์
+
+    <b>TestJava.class</b>
+
+    <br><br>
+
+    <b>ขั้นตอนที่ 3</b>
+
+    <br>
+
+    Run ด้วยคำสั่ง
+
+    <b>java TestJava</b>
+
+    <br><br>
+
+    จากนั้น JVM
+    จะประมวลผลโปรแกรม
+    และแสดงผลลัพธ์
+
+</div>
+
+
+<h4>
+    4.7 ตัวอย่างผลลัพธ์ของโปรแกรม
+</h4>
+
+<p>
+    หากโปรแกรมถูกเขียนอย่างถูกต้อง
+    และ Compile สำเร็จ
+    เมื่อใช้คำสั่ง
+    <b>java TestJava</b>
+    ระบบจะเริ่มทำงาน
+    และแสดงข้อความผลลัพธ์
+    ที่โปรแกรมกำหนดไว้
+</p>
+
+<p>
+    การตรวจสอบ Output
+    เป็นส่วนสำคัญของการพัฒนาโปรแกรม
+    เพราะการ Compile สำเร็จ
+    ไม่ได้หมายความว่าโปรแกรม
+    จะทำงานถูกต้องตามวัตถุประสงค์เสมอไป
+    โปรแกรมอาจไม่มี Syntax Error
+    แต่ยังสามารถมีปัญหาด้านตรรกะ
+    หรือ Logic ของโปรแกรมได้
+</p>
+
+
+<!-- ==================================================
+     RUN IMAGE
+================================================== -->
+
+<div class="image-section">
+
+    <div class="image-step-title">
+
+        STEP 3 :
+        ภาพตัวอย่างผลลัพธ์
+
+    </div>
+
+    <div class="image-box">
+
+        <img
+            src="images/chapter3/testjava-run.png"
+            alt="ผลลัพธ์การ Run โปรแกรม TestJava"
+            onerror="imageError(this)"
+        >
+
+        <div class="image-caption">
+
+            ภาพตัวอย่างผลลัพธ์หลังจาก Run โปรแกรม
+
+        </div>
+
+        <div class="image-description">
+
+            หลังจากใช้คำสั่ง
+            <b>java TestJava</b>
+            ระบบจะแสดงข้อความ
+            <b>Hello Java</b>
+            ใน Terminal
+
+        </div>
+
+        <div class="image-error">
+
+            ⚠️ ไม่พบรูปภาพนี้
+
+            <br><br>
+
+            ตรวจสอบว่าไฟล์มีชื่อว่า
+
+            <b>testjava-run.png</b>
+
+            <br>
+
+            และอยู่ในโฟลเดอร์
+
+            <b>images/chapter3/</b>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="success-box">
+
+    <b>ผลลัพธ์ที่ได้</b>
+
+    <br><br>
+
+    เมื่อรันคำสั่ง
+
+    <b>java TestJava</b>
+
+    ระบบจะแสดง
+
+    <br><br>
+
+    <b>Hello Java</b>
+
+</div>
+
+
+<!-- ==================================================
+     5. สรุปลำดับการทำงาน
+================================================== -->
+
+<h3>
+    5. สรุปลำดับการทำงานของโปรแกรม Java
+</h3>
+
+
+<h4>
+    5.1 ขั้นตอนการทำงานตั้งแต่ต้นจนจบ
+</h4>
+
+<div class="flow">
+
+    <div class="flow-box">
+
+        เขียนโค้ด
+
+        <small>
+            TestJava.java
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Compile
+
+        <small>
+            javac TestJava.java
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Bytecode
+
+        <small>
+            TestJava.class
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Run
+
+        <small>
+            java TestJava
+        </small>
+
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+
+        Output
+
+        <small>
+            Hello Java
+        </small>
+
+    </div>
+
+</div>
+
+<p>
+    ลำดับดังกล่าวแสดงให้เห็นว่า
+    การทำงานของโปรแกรม Java
+    เป็นกระบวนการต่อเนื่อง
+    โดยเริ่มจาก Source Code
+    ซึ่งเป็นสิ่งที่ผู้พัฒนาเขียน
+    จากนั้น Compiler จะสร้าง Bytecode
+    และ JVM จะนำ Bytecode
+    ไปประมวลผลเพื่อให้เกิด Output
+</p>
+
+
+<h4>
+    5.2 การทำงานของแต่ละขั้นตอน
+</h4>
+
+<p>
+    ขั้นตอนแรกคือการเขียน
+    <b>Source Code</b>
+    และบันทึกเป็นไฟล์
+    <b>.java</b>
+    ในขั้นตอนนี้ผู้พัฒนาเป็นผู้กำหนด
+    รูปแบบการทำงานของโปรแกรม
+    เช่น การประกาศตัวแปร
+    การรับข้อมูล
+    การคำนวณ
+    การตรวจสอบเงื่อนไข
+    การวนซ้ำ
+    และการแสดงผล
+</p>
+
+<p>
+    Source Code ถือเป็นต้นฉบับของโปรแกรม
+    เพราะเป็นส่วนที่ผู้พัฒนาสามารถอ่าน
+    ทำความเข้าใจ และแก้ไขได้
+    หากต้องการเปลี่ยนแปลงการทำงาน
+    ของโปรแกรม ผู้พัฒนาจะต้องกลับมาแก้ไข
+    Source Code ในส่วนที่เกี่ยวข้อง
+</p>
+
+<p>
+    ขั้นตอนที่สองคือการ
+    <b>Compile</b>
+    โดยใช้คำสั่ง
+    <b>javac</b>
+    เพื่อให้ Java Compiler
+    อ่านและตรวจสอบ Source Code
+    จากนั้นจึงสร้าง Bytecode
+    ซึ่งจัดเก็บอยู่ในไฟล์
+    <b>.class</b>
+</p>
+
+<p>
+    การ Compile มีความสำคัญ
+    เพราะเป็นขั้นตอนที่ช่วยตรวจสอบ
+    ความถูกต้องของโครงสร้างคำสั่ง
+    หาก Source Code มีข้อผิดพลาด
+    Compiler จะแจ้งข้อมูล
+    เพื่อให้ผู้พัฒนาสามารถแก้ไขปัญหา
+    ก่อนที่จะนำโปรแกรมไป Run
+</p>
+
+<p>
+    ขั้นตอนที่สามคือการ
+    <b>Run</b>
+    โดยใช้คำสั่ง
+    <b>java</b>
+    เพื่อเรียกใช้งาน Class
+    จากนั้น JVM จะโหลด
+    และประมวลผล Bytecode
+    ตามคำสั่งที่ถูกสร้างขึ้นจาก Source Code
+</p>
+
+<p>
+    ขั้นตอนสุดท้ายคือ
+    <b>การตรวจสอบ Output</b>
+    ว่าผลลัพธ์ที่ได้ตรงกับวัตถุประสงค์
+    ของโปรแกรมหรือไม่
+    หากผลลัพธ์ไม่ถูกต้อง
+    ผู้พัฒนาต้องวิเคราะห์ว่า
+    ปัญหาเกิดจากส่วนใดของโปรแกรม
+    แล้วกลับไปแก้ไข Source Code
+    ก่อน Compile และ Run ใหม่อีกครั้ง
+</p>
+
+<p>
+    ดังนั้น กระบวนการพัฒนาโปรแกรม
+    ไม่ได้สิ้นสุดลงทันทีเมื่อ Compile สำเร็จ
+    แต่ยังต้องมีการ Run และทดสอบ
+    เพื่อยืนยันว่าโปรแกรมสามารถทำงาน
+    ได้ตามที่ออกแบบไว้
+</p>
+
+<p>
+    การทดสอบผลลัพธ์ยังช่วยให้ผู้พัฒนา
+    พบข้อผิดพลาดด้านตรรกะ
+    ซึ่งบางครั้ง Compiler ไม่สามารถตรวจพบได้
+    เพราะคำสั่งอาจถูกต้องตามไวยากรณ์
+    แต่การคำนวณหรือขั้นตอนการทำงาน
+    อาจไม่ตรงกับความต้องการ
+</p>
+
+
+<h4>
+    5.3 หากโปรแกรมเกิดข้อผิดพลาด
+</h4>
+
+<p>
+    ในกรณีที่ Compile ไม่สำเร็จ
+    ผู้พัฒนาจะต้องกลับไปตรวจสอบ
+    Source Code
+    และแก้ไขข้อผิดพลาด
+    จากนั้นจึง Compile ใหม่
+</p>
+
+<p>
+    ข้อผิดพลาดในขั้นตอน Compile
+    มักเกี่ยวข้องกับรูปแบบคำสั่ง
+    ไวยากรณ์ การประกาศตัวแปร
+    ชนิดข้อมูล ชื่อ Class
+    หรือโครงสร้างของโปรแกรม
+    ผู้พัฒนาควรอ่านข้อความ Error
+    อย่างละเอียดเพื่อหาต้นเหตุของปัญหา
+</p>
+
+<p>
+    หาก Compile สำเร็จ
+    แต่เมื่อ Run แล้ว
+    ผลลัพธ์ไม่เป็นไปตามที่ต้องการ
+    ผู้พัฒนาจะต้องตรวจสอบตรรกะ
+    และคำสั่งภายในโปรแกรม
+    แล้วแก้ไขและทดสอบใหม่
+</p>
+
+<p>
+    การทำงานลักษณะนี้เรียกว่า
+    การ Debug หรือการค้นหาและแก้ไขข้อผิดพลาด
+    ซึ่งเป็นทักษะสำคัญของนักพัฒนาโปรแกรม
+    เพราะโปรแกรมที่มีขนาดใหญ่
+    มักประกอบด้วยคำสั่งจำนวนมาก
+    และอาจเกิดปัญหาได้จากหลายสาเหตุ
+</p>
+
+<div class="info-box">
+
+    <b>🔄 วงจรการพัฒนาโปรแกรม</b>
+
+    <br><br>
+
+    เขียนโค้ด
+    → Compile
+    → ตรวจสอบ
+    → Run
+    → ทดสอบผลลัพธ์
+    → แก้ไข
+    → Compile ใหม่
+
+</div>
+
+
+<!-- ==================================================
+     6. ไฟล์ที่เกี่ยวข้อง
+================================================== -->
+
+<h3>
+    6. ไฟล์ที่เกี่ยวข้องกับการพัฒนาโปรแกรม Java
+</h3>
+
+
+<h4>
+    6.1 ไฟล์ .java
+</h4>
+
+<div class="file-grid">
+
+    <div class="file-card">
+
+        <h4>
+            .java
+        </h4>
+
+        <p>
+
+            ไฟล์ Source Code
+            ที่โปรแกรมเมอร์เขียน
+            ด้วยภาษา Java
+            และนำไป Compile
+
+        </p>
+
+        <p>
+            ไฟล์ประเภทนี้สามารถเปิด
+            และแก้ไขได้ด้วย Text Editor
+            หรือ IDE
+        </p>
+
+        <span class="file-name">
+            TestJava.java
+        </span>
+
+    </div>
+
+
+    <div class="file-card">
+
+        <h4>
+            .class
+        </h4>
+
+        <p>
+
+            ไฟล์ Bytecode
+            ที่เกิดจากการ Compile
+            Source Code
+            และใช้สำหรับการ Run ผ่าน JVM
+
+        </p>
+
+        <p>
+            ไฟล์นี้ไม่ได้ถูกเขียนขึ้น
+            โดยโปรแกรมเมอร์โดยตรง
+            แต่ถูกสร้างโดย Java Compiler
+        </p>
+
+        <span class="file-name">
+            TestJava.class
+        </span>
+
+    </div>
+
+
+    <div class="file-card">
+
+        <h4>
+            .jar
+        </h4>
+
+        <p>
+
+            ไฟล์ Java Archive
+            สำหรับรวบรวม Class
+            และทรัพยากรต่าง ๆ
+            ของโปรแกรม
+
+        </p>
+
+        <p>
+            ช่วยให้สามารถรวมไฟล์
+            ที่เกี่ยวข้องกับโปรแกรม
+            ไว้ในแพ็กเกจเดียว
+            เพื่อสะดวกต่อการแจกจ่าย
+            และนำไปใช้งาน
+        </p>
+
+        <span class="file-name">
+            MyProgram.jar
+        </span>
+
+    </div>
+
+</div>
+
+
+<h4>
+    6.2 ความสัมพันธ์ของไฟล์ Java
+</h4>
+
+<div class="code-wrap">
+
+<pre><code>TestJava.java
+    │
+    │  javac
+    ▼
+TestJava.class
+    │
+    │  java
+    ▼
+JVM
+    │
+    ▼
+ผลลัพธ์ของโปรแกรม</code></pre>
+
+</div>
+
+<p>
+    จากความสัมพันธ์นี้
+    จะเห็นว่าไฟล์ <b>.java</b>
+    เป็นจุดเริ่มต้นของกระบวนการ
+    และไฟล์ <b>.class</b>
+    เป็นผลลัพธ์ที่เกิดจากการ Compile
+    จากนั้นคำสั่ง <b>java</b>
+    จะเรียกใช้ Class
+    เพื่อให้ JVM นำไปประมวลผล
+</p>
+
+
+<h4>
+    6.3 ไฟล์ Source Code และ Bytecode แตกต่างกันอย่างไร
+</h4>
+
+<p>
+    <b>Source Code</b>
+    คือคำสั่งที่มนุษย์สามารถอ่าน
+    และแก้ไขได้ง่าย
+    ส่วน
+    <b>Bytecode</b>
+    เป็นผลลัพธ์ที่ได้จากการ Compile
+    ซึ่งถูกออกแบบมาให้ JVM
+    สามารถนำไปประมวลผลได้
+</p>
+
+<p>
+    Source Code จึงเป็นส่วนที่ผู้พัฒนา
+    ใช้ในการสร้างและแก้ไขโปรแกรม
+    ในขณะที่ Bytecode
+    เป็นรูปแบบที่ถูกสร้างขึ้น
+    เพื่อส่งต่อให้สภาพแวดล้อม
+    ของ Java นำไปใช้งาน
+</p>
+
+<p>
+    หากต้องการเปลี่ยนแปลงการทำงาน
+    ของโปรแกรม ผู้พัฒนาควรแก้ไข
+    Source Code แล้ว Compile ใหม่
+    เพื่อสร้าง Bytecode
+    ที่สอดคล้องกับคำสั่งล่าสุด
+    ไม่ควรแก้ไขไฟล์ Bytecode
+    โดยตรง
+</p>
+
+
+<div class="info-box">
+
+    <b>📌 เปรียบเทียบง่าย ๆ</b>
+
+    <br><br>
+
+    <b>.java</b>
+    → โค้ดต้นฉบับ
+
+    <br>
+
+    <b>.class</b>
+    → Bytecode
+
+    <br>
+
+    <b>JVM</b>
+    → ประมวลผล Bytecode
+
+    <br>
+
+    <b>Output</b>
+    → ผลลัพธ์ที่ผู้ใช้เห็น
+
+</div>
+
+
+<h4>
+    6.4 หมายเหตุเกี่ยวกับไฟล์ JAR
+</h4>
+
+<div class="info-box">
+
+    <b>📌 หมายเหตุเกี่ยวกับ JAR</b>
+
+    <br><br>
+
+    ไฟล์
+    <b>.jar</b>
+    ไม่ใช่สิ่งที่จำเป็นต้องสร้าง
+    ทุกครั้งที่เขียนโปรแกรม Java
+
+    <br><br>
+
+    แต่สามารถใช้สำหรับ
+    จัดแพ็กเกจไฟล์ Class
+    และทรัพยากรต่าง ๆ
+    ของโปรแกรมให้อยู่ในไฟล์เดียว
+
+    <br><br>
+
+    การจัดเก็บในรูปแบบ JAR
+    ช่วยให้สามารถรวบรวมไฟล์ที่เกี่ยวข้อง
+    กับโปรแกรมไว้ด้วยกัน
+    และสะดวกต่อการนำไปใช้งานหรือแจกจ่าย
+
+    <br><br>
+
+    ในโปรแกรมที่มีหลาย Class
+    หรือมีทรัพยากรประกอบ เช่น
+    ไฟล์กำหนดค่า รูปภาพ
+    หรือไฟล์ข้อมูล
+    การรวมทรัพยากรเหล่านี้ไว้ใน JAR
+    สามารถช่วยให้การจัดส่งโปรแกรม
+    เป็นระเบียบมากขึ้น
+
+</div>
+
+
+<!-- ==================================================
+     7. สิ่งที่ต้องคำนึงก่อนเขียน Java
+================================================== -->
+
+<h3>
+    7. สิ่งที่ต้องคำนึงก่อนเขียนโปรแกรมด้วยภาษา Java
+</h3>
+
+
+<p>
+    ก่อนเริ่มเขียนโปรแกรมด้วยภาษา Java
+    ควรตรวจสอบสภาพแวดล้อม
+    และเครื่องมือที่จำเป็น
+    ให้พร้อมก่อนเริ่มพัฒนาโปรแกรม
+    เพื่อช่วยลดปัญหาที่อาจเกิดขึ้น
+    ในขั้นตอน Compile และ Run
+</p>
+
+<p>
+    การเตรียมสภาพแวดล้อมที่เหมาะสม
+    ช่วยให้ผู้เรียนสามารถแยกปัญหา
+    ระหว่างปัญหาจาก Source Code
+    กับปัญหาจากเครื่องมือได้ง่ายขึ้น
+    เช่น หากคำสั่ง <b>javac</b>
+    ไม่สามารถใช้งานได้
+    ปัญหาอาจเกิดจากการติดตั้ง JDK
+    หรือการกำหนดค่า Environment
+    ไม่ใช่ปัญหาจาก Source Code
+</p>
+
+
+<h4>
+    7.1 ตรวจสอบ JDK และโปรแกรมสำหรับเขียน Source Code
+</h4>
+
+<ol>
+
+    <li>
+
+        ต้องตรวจสอบว่าในเครื่องคอมพิวเตอร์มี
+        <b>JDK (Java Development Kit)</b>
+        และโปรแกรมที่ใช้เขียนซอร์สโค้ด
+        <b>(Source Code)</b>
+        เช่น โปรแกรม Notepad หรือโปรแกรม EditPlus
+        หรือไม่
+
+        <br><br>
+
+        หากไม่มีโปรแกรมดังกล่าว
+        ควรติดตั้งให้เรียบร้อย
+        ก่อนเริ่มพัฒนาโปรแกรม Java
+
+        <br><br>
+
+        JDK เป็นส่วนสำคัญสำหรับผู้พัฒนา
+        เพราะมีเครื่องมือที่เกี่ยวข้องกับ
+        การ Compile และการพัฒนาโปรแกรม
+        ในขณะที่ Text Editor
+        ทำหน้าที่เป็นเครื่องมือสำหรับ
+        สร้างและแก้ไข Source Code
+
+    </li>
+
+</ol>
+
+
+<div class="tip">
+
+    <b>💡 ข้อควรรู้</b>
+
+    <br><br>
+
+    JDK เป็นเครื่องมือสำคัญ
+    สำหรับการพัฒนาโปรแกรม Java
+    เนื่องจากมีเครื่องมือที่จำเป็น
+    สำหรับ Compile และพัฒนาโปรแกรม
+
+</div>
+
+
+<h4>
+    7.2 ตรวจสอบ javac.exe และ java.exe
+</h4>
+
+<ol start="2">
+
+    <li>
+
+        ตรวจสอบโฟลเดอร์และไฟล์ของ JDK
+        ที่ใช้ในการคอมไพล์
+        <b>(Compile)</b>
+        คือ <b>javac.exe</b>
+        และรันโปรแกรม
+        <b>(Run)</b>
+        คือ <b>java.exe</b>
+
+        <p>
+            โปรแกรมทั้งสองมีหน้าที่แตกต่างกัน
+            โดย <b>javac</b>
+            ใช้สำหรับการ Compile
+            Source Code
+            ส่วน <b>java</b>
+            ใช้สำหรับเรียกใช้งาน
+            โปรแกรม Java
+            ผ่าน JVM
+        </p>
+
+        <p>
+
+            ตัวอย่างโฟลเดอร์ของไฟล์ Java เช่น
+
+        </p>
+
+        <div class="code-wrap">
+
+            <pre><code>C:\j2sdk1.4.1_03\bin</code></pre>
+
+        </div>
+
+    </li>
+
+</ol>
+
+
+<h4>
+    7.3 การกำหนดค่าเครื่องมือ
+</h4>
+
+<ol start="3">
+
+    <li>
+
+        ทำการติดตั้งและแก้ไขโปรแกรม
+        <b>(Config)</b>
+        เครื่องมือในการเขียนโปรแกรม
+        ด้วยโปรแกรม EditPlus
+        ให้สามารถเรียกใช้คำสั่ง Java
+        ได้อย่างถูกต้อง
+
+        <br><br>
+
+        การกำหนดค่าเครื่องมือ
+        มีความสำคัญเพราะช่วยให้โปรแกรม
+        ที่ใช้เขียน Source Code
+        สามารถเรียกใช้คำสั่ง Compile
+        และ Run ได้อย่างสะดวก
+        โดยไม่จำเป็นต้องพิมพ์คำสั่ง
+        ทุกขั้นตอนด้วยตนเอง
+
+    </li>
+
+</ol>
+
+
+<h4>
+    7.3.1 ไปที่เมนู Tools
+</h4>
+
+<p>
+    เลือก
+    <b>Tools → Preferences</b>
+    หรือเลือก
+    <b>Tools → Configure User Tools...</b>
+</p>
+
+<p>
+    เมนูดังกล่าวใช้สำหรับตั้งค่าการทำงาน
+    ของเครื่องมือที่ใช้พัฒนาโปรแกรม
+    โดยผู้ใช้สามารถกำหนดคำสั่ง
+    ที่ต้องการเรียกใช้งาน
+    และตั้งค่าตำแหน่งของโปรแกรม
+    ที่เกี่ยวข้องกับ Java
+</p>
+
+
+<h4>
+    7.3.2 กำหนด User Toolbar
+</h4>
+
+<p>
+    ไปที่เมนู
+    <b>Tools → User Tool Groups</b>
+    และไปที่
+    <b>View → Toolbars/Views</b>
+    เลือก
+    <b>User Toolbar</b>
+</p>
+
+<p>
+    การตั้งค่า Toolbar
+    ช่วยให้ผู้ใช้สามารถเรียกใช้เครื่องมือ
+    ที่ต้องการได้ง่ายขึ้น
+    และสามารถจัดเตรียมคำสั่ง
+    สำหรับ Compile หรือ Run
+    ให้เหมาะกับรูปแบบการทำงานของตนเอง
+</p>
+
+
+<h4>
+    7.4 สร้างโฟลเดอร์สำหรับ Source Code
+</h4>
+
+<p>
+    ควรสร้างโฟลเดอร์
+    สำหรับจัดเก็บไฟล์ Source Code
+    โดยเฉพาะ เพื่อให้สามารถค้นหา
+    และจัดการไฟล์โปรแกรมได้ง่าย
+</p>
+
+<p>
+    การจัดเก็บไฟล์อย่างเป็นระบบ
+    มีความสำคัญเมื่อโปรแกรมมีหลายไฟล์
+    เพราะช่วยลดปัญหาการสับสน
+    และช่วยให้สามารถระบุตำแหน่ง
+    ของ Source Code ได้อย่างรวดเร็ว
+</p>
+
+<p>
+    ตัวอย่างเช่น
+    <b>D:\work</b>
+</p>
+
+<div class="code-wrap">
+
+    <pre><code>D:\work</code></pre>
+
+</div>
+
+
+<h4>
+    7.5 เลือก Directory
+</h4>
+
+<p>
+    เลือก Directory ในโปรแกรม EditPlus
+    ให้ถูกต้องเพื่อใช้อ้างอิง
+    ตำแหน่งของไฟล์ Source Code
+    ในการ Compile และ Run โปรแกรม
+</p>
+
+<p>
+    หากเลือก Directory ไม่ถูกต้อง
+    โปรแกรมอาจไม่สามารถค้นหาไฟล์
+    Source Code ที่ต้องการได้
+    ดังนั้นผู้พัฒนาควรตรวจสอบ
+    ตำแหน่งไฟล์ก่อนใช้คำสั่ง Compile
+    และ Run ทุกครั้ง
+</p>
+
+
+<h4>
+    7.6 สร้างและกำหนดโฟลเดอร์สำหรับจัดเก็บ Source Code
+</h4>
+
+<p>
+    สร้างและกำหนดโฟลเดอร์สำหรับจัดเก็บไฟล์
+    Source Code ให้เรียบร้อย
+    เพื่อให้สามารถอ้างอิงตำแหน่งไฟล์
+    ในการ Compile และ Run โปรแกรมได้ถูกต้อง
+</p>
+
+<p>
+    การจัดเก็บไฟล์อย่างเป็นระบบ
+    ยังช่วยลดปัญหาการหาไฟล์ไม่พบ
+    และช่วยให้สามารถจัดการ
+    โปรแกรมหลายไฟล์ได้ง่ายขึ้น
+</p>
+
+<p>
+    เมื่อโปรแกรมมีขนาดใหญ่ขึ้น
+    การแยกไฟล์ตามหน้าที่
+    และจัดเก็บไว้ในตำแหน่งที่เหมาะสม
+    จะช่วยให้การพัฒนา
+    การแก้ไข และการสำรองข้อมูล
+    ทำได้สะดวกมากขึ้น
+</p>
+
+
+<h4>
+    7.7 การสร้างโปรแกรม Java
+</h4>
+
+<p>
+    ทดสอบโปรแกรม Java
+    โดยไปที่เมนู
+    <b>File → New → Java</b>
+</p>
+
+<p>
+    หลังจากสร้างไฟล์ใหม่แล้ว
+    ผู้พัฒนาสามารถเริ่มเขียน Source Code
+    ตามโครงสร้างของภาษา Java
+    และบันทึกไฟล์ในรูปแบบ
+    <b>.java</b>
+    เพื่อเตรียมเข้าสู่ขั้นตอน Compile
+</p>
+
+
+<h4>
+    7.7.1 ตั้งชื่อ Class
+</h4>
+
+<p>
+    ตั้งชื่อ Class เช่น
+    <b>TestJava</b>
+</p>
+
+<p>
+    ควรเลือกชื่อที่สื่อความหมาย
+    และต้องคำนึงถึงกฎการตั้งชื่อ
+    ของภาษา Java
+    โดยเฉพาะความสัมพันธ์
+    ระหว่างชื่อ public class
+    กับชื่อไฟล์
+</p>
+
+
+<h4>
+    7.7.2 บันทึกไฟล์
+</h4>
+
+<p>
+    บันทึกไฟล์ชื่อเดียวกับชื่อ Class
+    เช่น
+    <b>TestJava.java</b>
+</p>
+
+<p>
+    หลังจากบันทึกควรตรวจสอบว่า
+    ไฟล์ถูกจัดเก็บใน Directory
+    ที่ต้องการจริง
+    และตรวจสอบนามสกุลไฟล์
+    ว่าเป็น <b>.java</b>
+    อย่างถูกต้อง
+</p>
+
+
+<h4>
+    7.7.3 Compile โปรแกรม
+</h4>
+
+<p>
+    เลือก
+    <b>Tools → Compile</b>
+    เพื่อคอมไพล์โปรแกรม
+</p>
+
+<p>
+    หลังจาก Compile
+    ควรตรวจสอบผลลัพธ์
+    หากไม่มี Error
+    โดยทั่วไปจะได้ไฟล์
+    <b>.class</b>
+    ที่สามารถนำไปใช้ในขั้นตอน Run
+</p>
+
+
+<h4>
+    7.7.4 Run โปรแกรม
+</h4>
+
+<p>
+    เลือก
+    <b>Tools → Run</b>
+    เพื่อรันโปรแกรม
+</p>
+
+<p>
+    เมื่อ Run โปรแกรม
+    JVM จะเข้ามาประมวลผล Bytecode
+    และโปรแกรมจะแสดงผลลัพธ์
+    ตามคำสั่งที่ผู้พัฒนาเขียนไว้
+</p>
+
+
+<h4>
+    7.8 การตรวจสอบโปรแกรมก่อน Run
+</h4>
+
+<p>
+    ก่อน Run โปรแกรม
+    ควรตรวจสอบว่าไฟล์ Source Code
+    ถูกบันทึกเรียบร้อยแล้ว
+    และการ Compile
+    ไม่มีข้อผิดพลาด
+</p>
+
+<ul>
+
+    <li>
+        ตรวจสอบชื่อไฟล์
+    </li>
+
+    <li>
+        ตรวจสอบชื่อ Class
+    </li>
+
+    <li>
+        ตรวจสอบเมธอด main()
+    </li>
+
+    <li>
+        ตรวจสอบข้อความ Error
+        จากการ Compile
+    </li>
+
+    <li>
+        ตรวจสอบตำแหน่งของไฟล์
+    </li>
+
+</ul>
+
+<p>
+    การตรวจสอบก่อน Run
+    ช่วยลดปัญหาที่เกิดจากการตั้งค่า
+    หรือการเตรียมไฟล์ไม่ถูกต้อง
+    และช่วยให้ผู้พัฒนาสามารถแยกปัญหา
+    ระหว่าง Compile Error
+    กับปัญหาที่เกิดขึ้นระหว่างการทำงานจริง
+    ของโปรแกรมได้ง่ายขึ้น
+</p>
+
+
+<!-- ==================================================
+     8. สรุปบทเรียน
+================================================== -->
+
+<h3>
+    8. สรุปบทเรียน
+</h3>
+
+
+<h4>
+    8.1 สรุปกระบวนการพัฒนาโปรแกรม Java
+</h4>
+
+<p>
+    การพัฒนาโปรแกรม Java
+    เริ่มจากการเขียน
+    <b>Source Code</b>
+    และบันทึกเป็นไฟล์
+    <b>.java</b>
+</p>
+
+<p>
+    Source Code เป็นส่วนที่ผู้พัฒนา
+    ใช้สำหรับกำหนดการทำงานของโปรแกรม
+    และเป็นส่วนที่สามารถแก้ไข
+    และปรับปรุงได้โดยตรง
+</p>
+
+<p>
+    จากนั้นใช้คำสั่ง
+    <b>javac</b>
+    เพื่อ Compile Source Code
+    ให้เป็น
+    <b>Bytecode</b>
+    ซึ่งจัดเก็บในไฟล์
+    <b>.class</b>
+</p>
+
+<p>
+    การ Compile ยังเป็นขั้นตอน
+    สำหรับตรวจสอบ Source Code
+    และค้นหาข้อผิดพลาดด้านไวยากรณ์
+    ก่อนนำโปรแกรมไป Run
+</p>
+
+<p>
+    เมื่อ Compile สำเร็จ
+    จึงใช้คำสั่ง
+    <b>java</b>
+    เพื่อ Run โปรแกรม
+    โดย JVM จะทำหน้าที่
+    ประมวลผล Bytecode
+    และแสดงผลลัพธ์ของโปรแกรม
+</p>
+
+<p>
+    หลังจากได้ Output แล้ว
+    ผู้พัฒนาต้องตรวจสอบว่า
+    ผลลัพธ์ตรงกับวัตถุประสงค์หรือไม่
+    หากไม่ตรงตามที่ต้องการ
+    จะต้องกลับไปตรวจสอบ Source Code
+    แก้ไข และทำกระบวนการ Compile
+    และ Run ใหม่อีกครั้ง
+</p>
+
+
+<h4>
+    8.2 คำสั่งสำคัญที่ควรจำ
+</h4>
+
+<div class="success-box">
+
+    <b>✅ คำสั่งสำคัญในการพัฒนา Java</b>
+
+    <br><br>
+
+    <b>1. สร้าง Source Code</b>
+
+    <br>
+
+    TestJava.java
+
+    <br><br>
+
+    <b>2. Compile</b>
+
+    <br>
+
+    <code>javac TestJava.java</code>
+
+    <br><br>
+
+    <b>3. ได้ Bytecode</b>
+
+    <br>
+
+    TestJava.class
+
+    <br><br>
+
+    <b>4. Run</b>
+
+    <br>
+
+    <code>java TestJava</code>
+
+    <br><br>
+
+    <b>5. แสดงผลลัพธ์</b>
+
+    <br>
+
+    Hello Java
+
+</div>
+
+
+<h4>
+    8.3 ตารางสรุปคำศัพท์สำคัญ
+</h4>
+
+<div class="file-grid">
+
+    <div class="file-card">
+
+        <h4>
+            Source Code
+        </h4>
+
+        <p>
+            โค้ดต้นฉบับที่โปรแกรมเมอร์เขียน
+            และสามารถแก้ไขได้
+        </p>
+
+    </div>
+
+
+    <div class="file-card">
+
+        <h4>
+            Compile
+        </h4>
+
+        <p>
+            กระบวนการตรวจสอบและแปลง Source Code
+            ให้เป็น Bytecode
+        </p>
+
+    </div>
+
+
+    <div class="file-card">
+
+        <h4>
+            Bytecode
+        </h4>
+
+        <p>
+            ผลลัพธ์จากการ Compile
+            ที่จัดเก็บในไฟล์ .class
+            และนำไปใช้โดย JVM
+        </p>
+
+    </div>
+
+
+    <div class="file-card">
+
+        <h4>
+            JVM
+        </h4>
+
+        <p>
+            สภาพแวดล้อมสำหรับประมวลผล
+            Bytecode ของ Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<h4>
+    8.4 สรุปแบบจำง่าย
+</h4>
+
+<div class="info-box">
+
+    <b>📚 จำขั้นตอน Java ให้ได้ 5 คำ</b>
+
+    <br><br>
+
+    <b>เขียน</b>
+
+    →
+
+    <b>Compile</b>
+
+    →
+
+    <b>Bytecode</b>
+
+    →
+
+    <b>Run</b>
+
+    →
+
+    <b>Output</b>
+
+    <br><br>
+
+    หรือจำเป็นคำสั่งว่า
+
+    <br><br>
+
+    <b>
+        .java
+        →
+        javac
+        →
+        .class
+        →
+        java
+        →
+        ผลลัพธ์
+    </b>
+
+</div>
+
+
+<h4>
+    8.5 สิ่งที่นักเรียนควรเข้าใจหลังจบบทเรียน
+</h4>
+
+<p>
+    หลังจากศึกษาเนื้อหาในบทนี้
+    นักเรียนควรสามารถอธิบาย
+    ขั้นตอนพื้นฐานของการพัฒนาโปรแกรม Java
+    ได้ตั้งแต่การสร้าง Source Code
+    การ Compile
+    การสร้าง Bytecode
+    และการ Run โปรแกรมผ่าน JVM
+</p>
+
+<p>
+    นอกจากการจำคำสั่งแล้ว
+    นักเรียนควรเข้าใจความสัมพันธ์
+    ระหว่างแต่ละขั้นตอน
+    ว่า Source Code เป็นจุดเริ่มต้น
+    ของการพัฒนา
+    Compiler ทำหน้าที่ตรวจสอบ
+    และสร้าง Bytecode
+    ส่วน JVM ทำหน้าที่นำ Bytecode
+    ไปประมวลผล
+    จนเกิดเป็น Output
+</p>
+
+<ul>
+
+    <li>
+        อธิบายความหมายของ Source Code ได้
+    </li>
+
+    <li>
+        อธิบายหน้าที่ของคำสั่ง
+        <b>javac</b>
+        ได้
+    </li>
+
+    <li>
+        อธิบายความหมายของ Bytecode ได้
+    </li>
+
+    <li>
+        อธิบายหน้าที่ของไฟล์
+        <b>.class</b>
+        ได้
+    </li>
+
+    <li>
+        ใช้คำสั่ง
+        <b>java</b>
+        สำหรับ Run โปรแกรมได้
+    </li>
+
+    <li>
+        อธิบายบทบาทของ JVM
+        ในการทำงานของโปรแกรม Java ได้
+    </li>
+
+    <li>
+        สามารถตรวจสอบปัญหาเบื้องต้น
+        เมื่อ Compile โปรแกรมไม่สำเร็จได้
+    </li>
+
+</ul>
+
+
+<div class="success-box">
+
+    <b>🎯 สรุปท้ายบท</b>
+
+    <br><br>
+
+    การพัฒนาโปรแกรม Java
+    มีขั้นตอนที่สำคัญตั้งแต่
+    การเขียน Source Code
+    การ Compile
+    การสร้าง Bytecode
+    และการ Run ผ่าน JVM
+
+    <br><br>
+
+    Source Code เป็นส่วนที่ผู้พัฒนาเขียน
+    และสามารถแก้ไขได้
+    จากนั้น Java Compiler
+    จะตรวจสอบและแปลง Source Code
+    เป็น Bytecode
+    ซึ่งจัดเก็บในไฟล์
+    <b>.class</b>
+
+    <br><br>
+
+    เมื่อ Run โปรแกรม
+    JVM จะนำ Bytecode
+    ไปประมวลผล
+    และสร้างผลลัพธ์
+    ที่ผู้ใช้สามารถมองเห็นได้
+
+    <br><br>
+
+    หากผลลัพธ์ไม่ถูกต้อง
+    ผู้พัฒนาสามารถกลับไปตรวจสอบ
+    Source Code
+    แก้ไขปัญหา
+    Compile ใหม่
+    และ Run ใหม่
+    กระบวนการนี้สามารถทำซ้ำ
+    จนกว่าโปรแกรมจะทำงาน
+    ได้ตามวัตถุประสงค์
+
+    <br><br>
+
+    หากเข้าใจลำดับ
+
+    <br><br>
+
+    <b>
+        Source Code
+        →
+        Compile
+        →
+        Bytecode
+        →
+        JVM
+        →
+        Output
+    </b>
+
+    <br><br>
+
+    จะสามารถนำความรู้พื้นฐานนี้
+    ไปต่อยอดในการเรียนเรื่อง
+    ตัวแปร ชนิดข้อมูล
+    การรับข้อมูล
+    เงื่อนไข
+    การวนซ้ำ
+    Array
+    Method
+    Class และ Object
+    ในบทถัดไปได้
+
+</div>
+<div class="chapter-nav"
+         style="margin-top:35px;">
+
+        <a href="chapter_02.html">
+            ← บทที่ 2
+        </a>
+
+         <a href="index.html">
+        🏠 กลับหน้าหลัก
+    </a>
+
+        <a href="chapter_04.html">
+            บทที่ 4 →
+        </a>
+
+    </div>
+</section>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <h3>Java Learning Guide</h3>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+       บทที่ 3 : ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+    </p>
+
+    <p>
+        © 2026 Java Learning Guide
+    </p>
+
+</footer>

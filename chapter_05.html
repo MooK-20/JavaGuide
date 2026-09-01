@@ -1,0 +1,2648 @@
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>
+        บทที่ 5 | การสร้างและใช้งาน Methods
+    </title>
+
+<style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family:
+                "Tahoma",
+                "Noto Sans Thai",
+                sans-serif;
+
+            background: #eef7ff;
+
+            color: #1f2937;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81,
+                    #1976d2,
+                    #42a5f5
+                );
+
+            color: white;
+
+            padding: 38px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, .15);
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 36px;
+        }
+
+
+        header p {
+
+            margin: 8px 0 0;
+
+            font-size: 17px;
+
+            opacity: .95;
+        }
+
+
+
+        /* ==================================================
+           NAVIGATION
+        ================================================== */
+
+       /* =========================
+   TOP CHAPTER NAVIGATION
+========================= */
+
+.chapter-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0 34px;
+
+    height: 70px;
+
+    background: transparent;
+
+    pointer-events: none;
+}
+
+/* ปุ่มทั้งหมด */
+.chapter-nav a {
+    pointer-events: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 130px;
+    height: 58px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 0 0 12px 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.10);
+
+    transition:
+        0.2s ease;
+}
+
+/* ปุ่มกลาง */
+.chapter-nav a:nth-child(2) {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 215px;
+
+    border-radius: 0 0 12px 12px;
+}
+
+/* Hover */
+.chapter-nav a:hover {
+    color: #0f4c81;
+
+    background: #f8fcff;
+
+    transform:
+        translateY(2px);
+}
+
+/* Hover ปุ่มกลาง */
+.chapter-nav a:nth-child(2):hover {
+    transform:
+        translateX(-50%)
+        translateY(2px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .chapter-nav {
+        height: auto;
+
+        padding: 0 10px;
+
+        gap: 8px;
+    }
+
+    .chapter-nav a {
+        min-width: 0;
+
+        flex: 1;
+
+        height: 52px;
+
+        padding: 0 8px;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        border-radius: 0 0 10px 10px;
+    }
+
+    .chapter-nav a:nth-child(2) {
+        position: static;
+
+        transform: none;
+
+        min-width: 0;
+    }
+
+    .chapter-nav a:hover {
+        transform: translateY(2px);
+    }
+
+    .chapter-nav a:nth-child(2):hover {
+        transform: translateY(2px);
+    }
+
+}
+
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        main {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 0 20px 30px;
+        }
+
+
+
+        /* ==================================================
+           CHAPTER
+        ================================================== */
+
+        .chapter {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, .07);
+
+            border: 1px solid #dbeafe;
+        }
+
+
+
+        /* ==================================================
+           CHAPTER HEAD
+        ================================================== */
+
+        .chapter-head {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            border-bottom:
+                2px solid #e0f2fe;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .chapter-head span {
+
+            background: #1769aa;
+
+            color: white;
+
+            padding: 7px 16px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        .chapter-head h2 {
+
+            margin: 0;
+
+            color: #0f4c81;
+
+            font-size: 28px;
+        }
+
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .chapter h3 {
+
+            color: #0369a1;
+
+            margin-top: 32px;
+
+            margin-bottom: 10px;
+
+            font-size: 22px;
+        }
+
+
+        .chapter h4 {
+
+            color: #0f4c81;
+
+            margin-top: 20px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .chapter p {
+
+            margin-top: 8px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .chapter ul,
+        .chapter ol {
+
+            padding-left: 28px;
+        }
+
+
+        .chapter li {
+
+            margin-bottom: 7px;
+        }
+
+
+
+        /* ==================================================
+           CONTENT BOX
+        ================================================== */
+
+        .info-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fbff
+                );
+
+            border-left:
+                5px solid #1976d2;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .warning-box {
+
+            background: #fff7ed;
+
+            border-left:
+                5px solid #f97316;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .success-box {
+
+            background: #f0fdf4;
+
+            border-left:
+                5px solid #22c55e;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .summary {
+
+            background: #f0f9ff;
+
+            border-left:
+                5px solid #0ea5e9;
+
+            padding: 17px 20px;
+
+            border-radius: 8px;
+        }
+
+
+
+        /* ==================================================
+           STEP IMAGE
+        ================================================== */
+
+        .step-item {
+
+            margin: 30px auto 35px;
+
+            padding: 20px;
+
+            max-width: 760px;
+
+            background: #f8fbff;
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, .06);
+
+            text-align: center;
+        }
+
+
+        /* รูปเล็กลง */
+
+        .step-item img {
+
+            display: block;
+
+            width: auto;
+
+            max-width: 600px;
+
+            max-height: 350px;
+
+            height: auto;
+
+            margin: 0 auto;
+
+            border-radius: 10px;
+
+            border: 1px solid #cbd5e1;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, .12);
+
+            object-fit: contain;
+
+            background: white;
+        }
+        
+
+
+        /* STEP อยู่ด้านล่างของรูป */
+
+        .step-content {
+
+            margin-top: 18px;
+
+            padding-top: 15px;
+
+            border-top: 2px solid #dbeafe;
+
+            text-align: left;
+        }
+
+
+        .step-number {
+
+            display: inline-block;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1769aa,
+                    #1976d2
+                );
+
+            color: white;
+
+            padding: 5px 14px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .step-title {
+
+            margin: 0 0 7px;
+
+            color: #0f4c81;
+
+            font-size: 19px;
+
+            font-weight: bold;
+        }
+
+
+        .step-description {
+
+            margin: 0;
+
+            color: #475569;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+
+        .table-wrap {
+
+            overflow-x: auto;
+
+            margin: 20px 0;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+        }
+
+
+        th {
+
+            background: #1769aa;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+
+        td {
+
+            border:
+                1px solid #dbeafe;
+
+            padding: 12px;
+
+            vertical-align: top;
+        }
+
+
+        tr:nth-child(even) {
+
+            background: #f8fbff;
+        }
+
+
+
+        /* ==================================================
+           FLOW
+        ================================================== */
+
+        .flow {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin: 25px 0;
+        }
+
+
+        .flow-box {
+
+            background: #eff6ff;
+
+            border:
+                2px solid #60a5fa;
+
+            border-radius: 12px;
+
+            padding: 14px 18px;
+
+            text-align: center;
+
+            min-width: 145px;
+
+            font-weight: bold;
+
+            color: #0f4c81;
+        }
+
+
+        .flow-arrow {
+
+            font-size: 25px;
+
+            color: #1976d2;
+
+            font-weight: bold;
+        }
+
+
+
+        /* ==================================================
+           CODE
+        ================================================== */
+
+        .code-wrap {
+
+            position: relative;
+
+            background: #0f172a;
+
+            border-radius: 12px;
+
+            overflow: auto;
+
+            margin: 18px 0;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .12);
+        }
+
+
+        pre {
+
+            margin: 0;
+
+            padding: 24px;
+
+            padding-top: 52px;
+
+            color: #e2e8f0;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            white-space: pre;
+        }
+
+
+        .copy {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 10px;
+
+            border: 0;
+
+            background: #334155;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            z-index: 2;
+        }
+
+
+        .copy:hover {
+
+            background: #475569;
+        }
+
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 32px;
+
+            background: #0f4c81;
+
+            color: white;
+
+            margin-top: 20px;
+        }
+
+
+        footer h3 {
+
+            margin-top: 0;
+        }
+
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+
+                font-size: 27px;
+            }
+
+
+            header p {
+
+                font-size: 15px;
+            }
+
+
+            .chapter {
+
+                padding: 20px;
+            }
+
+
+            .chapter-head {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .chapter-head h2 {
+
+                font-size: 22px;
+            }
+
+
+            .chapter-nav {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .chapter-nav a {
+
+                font-size: 14px;
+            }
+
+
+            .flow {
+
+                flex-direction: column;
+            }
+
+
+            .flow-arrow {
+
+                transform: rotate(90deg);
+            }
+
+
+            .chapter h3 {
+
+                font-size: 20px;
+            }
+
+
+            pre {
+
+                font-size: 13px;
+
+                padding: 18px;
+
+                padding-top: 52px;
+            }
+
+
+            .table-wrap {
+
+                font-size: 14px;
+            }
+
+
+            /* รูปบนมือถือ */
+
+            .step-item {
+
+                padding: 14px;
+
+                margin-bottom: 25px;
+            }
+
+
+            .step-item img {
+
+                width: 100%;
+
+                max-width: 100%;
+
+                max-height: none;
+            }
+
+
+            .step-title {
+
+                font-size: 17px;
+            }
+
+
+            .step-description {
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <h1>
+        📘 JAVA LEARNING GUIDE
+    </h1>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+        บทที่ 5 : การสร้างและใช้งาน Methods
+    </p>
+
+</header>
+
+
+<!-- =========================================
+     TOP NAVIGATION
+========================================= -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_04.html">
+        ← บทที่ 4
+    </a>
+
+    <a href="chapters.html">
+        📚 บทเรียนทั้งหมด
+    </a>
+
+    <a href="chapter_06.html">
+        บทที่ 6 →
+    </a>
+
+</nav>
+
+
+<main>
+
+<section class="chapter">
+
+
+<!-- =========================================
+     CHAPTER TITLE
+========================================= -->
+<div class="chapter-head">
+
+    <span>
+        บทที่ 5
+    </span>
+
+    <h2>
+        การสร้างและใช้งาน Methods
+    </h2>
+
+</div>
+
+
+<!-- ==================================================
+     1. ความรู้พื้นฐานเกี่ยวกับ Method
+================================================== -->
+
+<h3>
+    1. ความรู้พื้นฐานเกี่ยวกับ Method
+</h3>
+
+
+<h4>
+    1.1 ความหมายของ Method
+</h4>
+
+<p>
+    Method หรือ เมธอด คือกลุ่มคำสั่งที่ถูกรวบรวมไว้ภายใน Class
+    เพื่อทำหน้าที่อย่างใดอย่างหนึ่งโดยเฉพาะ
+    เมธอดช่วยแบ่งโปรแกรมที่มีขนาดใหญ่ให้เป็นส่วนย่อย ๆ
+    ทำให้สามารถอ่าน ทำความเข้าใจ แก้ไข และนำกลับมาใช้งานซ้ำได้ง่ายขึ้น
+</p>
+
+<p>
+    ในภาษา Java เมธอดจะทำงานเมื่อมีการเรียกใช้งาน
+    โดยสามารถรับข้อมูลเข้ามาผ่าน
+    <b>Parameters</b>
+    และสามารถส่งค่ากลับออกไปด้วยคำสั่ง
+    <b>return</b>
+    ได้
+</p>
+
+<p>
+    การใช้ Method เป็นแนวทางสำคัญในการจัดโครงสร้างโปรแกรม
+    เพราะช่วยแยกขั้นตอนการทำงานที่มีความซับซ้อนออกจากกัน
+    เช่น โปรแกรมคำนวณคะแนนอาจแยก Method สำหรับคำนวณคะแนนรวม
+    Method สำหรับคำนวณคะแนนเฉลี่ย และ Method สำหรับแสดงผล
+    แต่ละ Method จะรับผิดชอบหน้าที่ของตนเอง
+    ทำให้โปรแกรมมีความเป็นระเบียบและตรวจสอบการทำงานได้ง่ายขึ้น
+</p>
+
+<p>
+    Method สามารถถูกเรียกใช้งานได้มากกว่าหนึ่งครั้ง
+    และในการเรียกแต่ละครั้งสามารถส่งข้อมูลที่แตกต่างกันเข้าไปได้
+    จึงช่วยลดการเขียนคำสั่งเดิมซ้ำหลายครั้ง
+    ตัวอย่างเช่น Method สำหรับแสดงข้อความต้อนรับ
+    สามารถนำไปใช้กับผู้ใช้งานหลายคน
+    โดยเปลี่ยนข้อมูลที่ส่งผ่าน Parameters
+    แทนการเขียนคำสั่งใหม่สำหรับแต่ละคน
+</p>
+
+
+<h4>
+    1.2 ความสำคัญของ Method
+</h4>
+
+<p>
+    Method เป็นส่วนสำคัญในการออกแบบโปรแกรมภาษา Java
+    เนื่องจากช่วยแบ่งการทำงานของโปรแกรมออกเป็นส่วน ๆ
+    แต่ละ Method สามารถรับผิดชอบงานเฉพาะด้าน
+    ทำให้โครงสร้างของโปรแกรมมีความชัดเจนมากขึ้น
+</p>
+
+<p>
+    เมื่อโปรแกรมมีขนาดใหญ่ขึ้น การเขียนคำสั่งทั้งหมดไว้ภายใน
+    <b>main()</b> เพียงส่วนเดียวจะทำให้โปรแกรมมีความยาวมาก
+    และยากต่อการตรวจสอบหรือแก้ไข
+    การนำ Method มาแบ่งการทำงานจึงช่วยให้ผู้เขียนโปรแกรม
+    สามารถมองเห็นขั้นตอนการทำงานแต่ละส่วนได้อย่างชัดเจน
+</p>
+
+<p>
+    นอกจากนี้ Method ยังช่วยให้การบำรุงรักษาโปรแกรมทำได้สะดวก
+    หากต้องการแก้ไขการทำงานของส่วนใด
+    สามารถแก้ไขคำสั่งภายใน Method ที่เกี่ยวข้อง
+    โดยไม่จำเป็นต้องแก้ไขคำสั่งในทุกจุดที่มีการเรียกใช้งาน
+</p>
+
+
+<div class="info-box">
+
+    <b>💡 แนวคิดสำคัญ</b>
+
+    <br><br>
+
+    Method คือชุดคำสั่งที่สร้างขึ้นเพื่อทำงานเฉพาะอย่าง
+    เช่น คำนวณผลรวม แสดงข้อความ ตรวจสอบข้อมูล
+    หรือคำนวณคะแนน และสามารถเรียกใช้ซ้ำได้หลายครั้ง
+
+</div>
+
+
+<h4>
+    1.3 ประโยชน์ของ Method
+</h4>
+
+<ul>
+
+    <li>
+        ลดการเขียนคำสั่งซ้ำ
+    </li>
+
+    <li>
+        ทำให้โปรแกรมอ่านและทำความเข้าใจง่ายขึ้น
+    </li>
+
+    <li>
+        แบ่งโปรแกรมขนาดใหญ่ออกเป็นส่วนย่อย
+    </li>
+
+    <li>
+        ช่วยให้แก้ไขและบำรุงรักษาโปรแกรมได้ง่าย
+    </li>
+
+    <li>
+        สามารถนำชุดคำสั่งกลับมาใช้งานซ้ำได้
+    </li>
+
+</ul>
+
+<p>
+    การออกแบบ Method ที่ดีควรให้แต่ละ Method มีหน้าที่ที่ชัดเจน
+    และไม่ควรให้ Method หนึ่งทำงานหลายอย่างที่ไม่เกี่ยวข้องกันมากเกินไป
+    เพราะการแบ่งหน้าที่อย่างเหมาะสมจะช่วยให้สามารถนำ Method
+    ไปใช้งานซ้ำและทดสอบการทำงานได้ง่าย
+</p>
+
+<p>
+    การใช้ Method ยังช่วยให้การพัฒนาโปรแกรมเป็นระบบมากขึ้น
+    โดยผู้เขียนโปรแกรมสามารถออกแบบโครงสร้างการทำงานก่อน
+    แล้วจึงสร้าง Method สำหรับแต่ละขั้นตอน
+    วิธีนี้เหมาะกับโปรแกรมที่มีหลายส่วนและมีขั้นตอนการทำงานต่อเนื่องกัน
+</p>
+
+
+<h4>
+    1.4 องค์ประกอบของ Method
+</h4>
+
+<p>
+    Method ในภาษา Java โดยทั่วไปประกอบด้วย
+    ตัวกำหนดการเข้าถึง ชนิดข้อมูลที่ส่งกลับ
+    ชื่อ Method Parameters และชุดคำสั่งภายใน Method
+</p>
+
+<p>
+    ตัวกำหนดการเข้าถึง เช่น <b>public</b> หรือ <b>private</b>
+    ใช้กำหนดขอบเขตในการเข้าถึง Method
+    ส่วน <b>return type</b> ใช้ระบุชนิดข้อมูลที่ Method จะส่งกลับ
+    หาก Method ไม่มีค่าที่ส่งกลับจะใช้คำว่า <b>void</b>
+</p>
+
+<p>
+    ชื่อ Method ควรสื่อความหมายถึงหน้าที่ของ Method
+    เช่น <b>calculateTotal()</b> ใช้สำหรับคำนวณยอดรวม
+    หรือ <b>showMessage()</b> ใช้สำหรับแสดงข้อความ
+    การตั้งชื่อที่สื่อความหมายช่วยให้ผู้ที่อ่านโปรแกรมเข้าใจการทำงาน
+    ได้โดยไม่จำเป็นต้องเปิดดูคำสั่งภายในทุกครั้ง
+</p>
+
+<div class="formula">
+
+    accessModifier returnType methodName(parameters) {<br>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;// คำสั่งภายใน Method<br>
+
+    }
+
+</div>
+
+
+<!-- ==================================================
+     2. การสร้างและเรียกใช้งาน Method
+================================================== -->
+
+<h3>
+    2. การสร้างและเรียกใช้งาน Method
+</h3>
+
+
+<h4>
+    2.1 รูปแบบการสร้าง Method
+</h4>
+
+<p>
+    การสร้าง Method ต้องกำหนดชนิดข้อมูลที่ Method จะส่งกลับ
+    ชื่อของ Method และ Parameters ที่ต้องการรับข้อมูล
+</p>
+
+<p>
+    หาก Method ทำหน้าที่เพียงดำเนินการบางอย่างและไม่ต้องส่งค่ากลับ
+    สามารถกำหนด return type เป็น <b>void</b> ได้
+    แต่หากต้องการนำผลลัพธ์ไปใช้งานต่อ
+    จะต้องกำหนดชนิดข้อมูลที่ต้องการส่งกลับ
+    เช่น <b>int</b>, <b>double</b> หรือ <b>String</b>
+</p>
+
+<p>
+    ภายในเครื่องหมายปีกกา <b>{ }</b>
+    คือส่วนที่ใช้เขียนคำสั่งสำหรับการทำงานของ Method
+    เมื่อ Method ถูกเรียกใช้งาน โปรแกรมจะดำเนินการตามคำสั่ง
+    ภายในส่วนนี้ตามลำดับ
+</p>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public static void sayHello() {
+
+    System.out.println("Hello Java");
+
+}</code></pre>
+
+</div>
+
+
+
+<h4>
+    2.2 การประกาศ Method
+</h4>
+
+<p>
+    การประกาศ Method คือการกำหนดชื่อ Method
+    ชนิดข้อมูลที่ส่งกลับ และชุดคำสั่งที่ต้องการให้ Method ทำงาน
+</p>
+
+<p>
+    ในตัวอย่าง <b>public</b> เป็นตัวกำหนดการเข้าถึง
+    <b>static</b> ระบุว่า Method สามารถใช้งานในรูปแบบ Static Method
+    <b>void</b> หมายถึงไม่มีค่าที่ส่งกลับ
+    และ <b>sayHello</b> คือชื่อของ Method
+</p>
+
+<p>
+    หาก Method มี Parameters จะต้องระบุชนิดข้อมูลและชื่อของ Parameters
+    ภายในวงเล็บหลังชื่อ Method
+    โดย Parameters ทำหน้าที่เป็นข้อมูลที่ Method จะนำไปประมวลผล
+</p>
+
+
+<h4>
+    2.3 การเรียกใช้งาน Method
+</h4>
+
+<p>
+    หลังจากสร้าง Method แล้ว จะต้องเรียกใช้งาน Method
+    จึงจะทำให้คำสั่งภายใน Method ทำงาน
+    การเรียก Method สามารถทำได้โดยเขียนชื่อ Method ตามด้วยวงเล็บ
+</p>
+
+<p>
+    การเรียกใช้งาน Method ถือเป็นการสั่งให้โปรแกรม
+    เข้าไปทำงานตามชุดคำสั่งที่กำหนดไว้ใน Method
+    เมื่อทำงานเสร็จแล้ว โปรแกรมจะกลับมาทำงานต่อ
+    จากตำแหน่งที่เรียก Method
+</p>
+
+<div class="step-item">
+<img src="images/chapter5/Method02.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    static void sayHello() {
+
+        System.out.println("Hello Java");
+
+    }
+
+    public static void main(String[] args) {
+
+        sayHello();
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+
+<div class="success-box">
+
+    <b>ผลลัพธ์</b>
+
+    <br>
+
+    Hello Java
+
+</div>
+
+
+<h4>
+    2.4 ตัวอย่างการสร้างและเรียกใช้งาน Method
+</h4>
+
+<p>
+    จากตัวอย่าง เมื่อโปรแกรมทำงานที่คำสั่ง
+    <b>sayHello();</b>
+    โปรแกรมจะเรียก Method
+    <b>sayHello()</b>
+    และดำเนินการตามคำสั่งที่อยู่ภายใน Method
+</p>
+
+<p>
+    ขั้นตอนการทำงานเริ่มจาก Method <b>main()</b>
+    ซึ่งเป็นจุดเริ่มต้นของโปรแกรม
+    จากนั้นโปรแกรมพบคำสั่ง <b>sayHello();</b>
+    จึงเข้าไปทำงานภายใน Method <b>sayHello()</b>
+    และแสดงข้อความออกทางหน้าจอ
+    เมื่อทำงานเสร็จแล้วจึงกลับมายัง Method <b>main()</b>
+</p>
+
+
+<!-- ==================================================
+     3. Method แบบไม่มีค่าตอบกลับ
+================================================== -->
+
+<h3>
+    3. Method แบบไม่มีค่าตอบกลับ
+</h3>
+
+
+<h4>
+    3.1 ความหมายของ void
+</h4>
+
+<p>
+    คำว่า <b>void</b> ใช้ระบุว่า Method นั้นไม่มีค่าที่ส่งกลับ
+    ไปยังจุดที่เรียกใช้งาน เหมาะสำหรับ Method
+    ที่มีหน้าที่ดำเนินการบางอย่าง เช่น
+    แสดงข้อความ บันทึกข้อมูล หรือเปลี่ยนแปลงค่าบางอย่าง
+</p>
+
+<p>
+    Method แบบ void ยังสามารถรับ Parameters ได้
+    ดังนั้นคำว่า void หมายถึงเฉพาะการไม่มีค่าที่ส่งกลับ
+    ไม่ได้หมายความว่า Method จะไม่สามารถรับข้อมูลได้
+    ตัวอย่างเช่น Method สามารถรับชื่อผู้ใช้งาน
+    แล้วนำชื่อนั้นไปแสดงผลได้
+</p>
+
+
+<h4>
+    3.2 การสร้าง Method แบบ void
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method03.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    static void showMessage() {
+
+        System.out.println("ยินดีต้อนรับสู่ Java");
+
+    }
+
+    public static void main(String[] args) {
+
+        showMessage();
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+<h4>
+    3.3 การเรียกใช้งาน Method แบบ void
+</h4>
+
+<p>
+    Method แบบ void สามารถเรียกใช้งานได้เหมือน Method ทั่วไป
+    แต่ไม่สามารถนำผลลัพธ์ไปเก็บไว้ในตัวแปรเพื่อรับค่ากลับได้
+</p>
+
+<p>
+    การเรียกใช้งาน Method แบบ void เหมาะกับงานที่ต้องการให้โปรแกรม
+    ดำเนินการบางอย่าง เช่น แสดงข้อความ
+    แสดงเมนู บันทึกข้อมูล หรือเปลี่ยนแปลงค่าของ Object
+    โดยไม่ได้ต้องการผลลัพธ์กลับมาในรูปแบบค่าข้อมูล
+</p>
+
+
+<h4>
+    3.4 ตัวอย่างการใช้งาน void
+</h4>
+
+<div class="warning-box">
+
+    <b>ข้อควรจำ</b>
+
+    <br><br>
+
+    Method ที่กำหนดเป็น <b>void</b>
+    จะไม่มีค่าข้อมูลส่งกลับจาก Method
+    แต่สามารถใช้คำสั่ง <b>return;</b>
+    เพื่อหยุดการทำงานของ Method ได้
+
+</div>
+
+<p>
+    หาก Method แบบ void มีคำสั่ง <b>return;</b>
+    โปรแกรมจะหยุดการทำงานของ Method ณ จุดนั้น
+    และกลับไปยังคำสั่งที่เรียก Method
+    โดยคำสั่ง return ในกรณีนี้จะไม่มีข้อมูลต่อท้าย
+</p>
+
+
+<!-- ==================================================
+     4. Parameters และ Arguments
+================================================== -->
+
+<h3>
+    4. Parameters และ Arguments
+</h3>
+
+
+<h4>
+    4.1 ความหมายของ Parameters
+</h4>
+
+<p>
+    Parameters คือ ตัวแปรที่กำหนดไว้ในวงเล็บของ Method
+    เพื่อรับข้อมูลจากผู้เรียกใช้งาน
+    ทำให้ Method สามารถทำงานกับข้อมูลที่แตกต่างกันได้
+    โดยไม่ต้องเขียน Method ใหม่ทุกครั้ง
+</p>
+
+<p>
+    Parameter จะทำหน้าที่เป็นตัวแทนของข้อมูลที่ Method ต้องการ
+    โดยกำหนดชนิดข้อมูลและชื่อของ Parameter ไว้ในตอนสร้าง Method
+    เมื่อมีการเรียกใช้งานจึงส่งค่าที่ต้องการเข้ามา
+    เพื่อให้ Method นำไปประมวลผล
+</p>
+
+
+<div class="formula">
+
+    returnType methodName(dataType parameterName) { ... }
+
+</div>
+
+
+<h4>
+    4.2 ความหมายของ Arguments
+</h4>
+
+<p>
+    Arguments คือค่าที่ส่งเข้าไปใน Method
+    ขณะที่มีการเรียกใช้งาน Method
+    โดยค่าที่ส่งเข้ามาจะถูกนำไปเก็บไว้ใน Parameters
+</p>
+
+<p>
+    Parameters และ Arguments มีหน้าที่เกี่ยวข้องกัน
+    แต่เกิดขึ้นในคนละตำแหน่ง
+    Parameter จะอยู่ในส่วนประกาศ Method
+    ส่วน Argument จะอยู่ในส่วนที่เรียกใช้งาน Method
+    และค่าของ Argument ควรสอดคล้องกับชนิดข้อมูลของ Parameter
+</p>
+
+
+<h4>
+    4.3 การส่งข้อมูลเข้าสู่ Method
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method04.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static void greet(String name) {
+
+    System.out.println("สวัสดี " + name);
+
+}
+
+public static void main(String[] args) {
+
+    greet("Somchai");
+
+    greet("Somsri");
+
+}</code></pre>
+
+</div>
+
+
+<div class="success-box">
+
+    <b>ผลลัพธ์</b>
+
+    <br>
+
+    สวัสดี Somchai
+
+    <br>
+
+    สวัสดี Somsri
+
+</div>
+
+
+<p>
+    ในตัวอย่าง <b>name</b> คือ Parameter
+    ส่วนค่าที่ส่งเข้าไป เช่น
+    <b>"Somchai"</b>
+    และ
+    <b>"Somsri"</b>
+    เรียกว่า Arguments
+</p>
+
+<p>
+    จากตัวอย่างเดียวกันจะเห็นว่า Method <b>greet()</b>
+    สามารถนำกลับมาใช้งานซ้ำได้ โดยไม่ต้องสร้าง Method ใหม่
+    สำหรับแต่ละชื่อ เพียงส่ง Argument ที่แตกต่างกันเข้าไป
+    Method จึงสามารถทำงานกับข้อมูลหลายชุดได้
+</p>
+
+
+<h4>
+    4.4 การใช้หลาย Parameters
+</h4>
+
+<p>
+    Method สามารถรับ Parameters ได้มากกว่าหนึ่งตัว
+    โดยกำหนดชนิดข้อมูลและชื่อตัวแปรแต่ละตัว
+    คั่นด้วยเครื่องหมายจุลภาค
+</p>
+
+<p>
+    Parameters แต่ละตัวสามารถมีชนิดข้อมูลแตกต่างกันได้
+    เช่น Parameter หนึ่งเป็น <b>String</b>
+    และอีก Parameter เป็น <b>int</b>
+    การเรียกใช้งานจะต้องส่งข้อมูลให้ตรงตามลำดับ
+    และชนิดข้อมูลที่ Method กำหนดไว้
+</p>
+
+<div class="step-item">
+<img src="images/chapter5/Method05.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static void studentInfo(String name, int age) {
+
+    System.out.println("ชื่อ: " + name);
+
+    System.out.println("อายุ: " + age);
+
+}
+
+public static void main(String[] args) {
+
+    studentInfo("Somchai", 20);
+
+}</code></pre>
+
+</div>
+
+
+<h4>
+    4.5 ตัวอย่างการใช้ Parameters
+</h4>
+
+<p>
+    การใช้ Parameters หลายตัวช่วยให้ Method
+    สามารถรับข้อมูลที่เกี่ยวข้องกัน
+    และนำข้อมูลเหล่านั้นไปประมวลผลภายใน Method ได้
+</p>
+
+<p>
+    การส่งข้อมูลเข้าสู่ Method ยังช่วยให้ Method มีความยืดหยุ่น
+    เนื่องจาก Method เดียวสามารถทำงานกับข้อมูลหลายรูปแบบ
+    โดยเปลี่ยนเฉพาะ Arguments ที่ส่งเข้ามา
+    ทำให้ไม่จำเป็นต้องสร้าง Method หลายตัว
+    สำหรับงานที่มีลักษณะเหมือนกัน
+</p>
+
+
+<!-- ==================================================
+     5. Method ที่มีค่าตอบกลับ
+================================================== -->
+
+<h3>
+    5. Method ที่มีค่าตอบกลับ
+</h3>
+
+
+<h4>
+    5.1 ความหมายของค่าตอบกลับ
+</h4>
+
+<p>
+    Method ไม่จำเป็นต้องเป็น <b>void</b> เสมอไป
+    หากต้องการให้ Method ส่งค่ากลับ
+    สามารถกำหนดชนิดข้อมูล เช่น
+    <b>int</b>, <b>double</b>
+    หรือ
+    <b>String</b>
+    และใช้คำสั่ง <b>return</b>
+    เพื่อส่งค่ากลับ
+</p>
+
+<p>
+    ค่าที่ส่งกลับสามารถนำไปเก็บไว้ในตัวแปร
+    นำไปคำนวณต่อ หรือใช้เป็นส่วนหนึ่งของเงื่อนไข
+    ในโปรแกรมได้ จึงเหมาะกับ Method ที่มีหน้าที่ประมวลผลข้อมูล
+    และต้องการนำผลลัพธ์ไปใช้งานในส่วนอื่นของโปรแกรม
+</p>
+
+
+<h4>
+    5.2 การใช้ return
+</h4>
+
+<p>
+    คำสั่ง <b>return</b>
+    ใช้สำหรับส่งค่าจาก Method กลับไปยังส่วนที่เรียกใช้งาน
+    โดยชนิดข้อมูลที่ส่งกลับต้องสอดคล้องกับ
+    return type ของ Method
+</p>
+
+<p>
+    เมื่อโปรแกรมทำงานถึงคำสั่ง <b>return</b>
+    Method จะหยุดการทำงานและส่งค่ากลับไปยังตำแหน่ง
+    ที่มีการเรียกใช้งาน Method
+    ดังนั้นคำสั่งที่อยู่หลัง return ภายใน Method เดียวกัน
+    จะไม่ถูกทำงานในเส้นทางการทำงานนั้น
+</p>
+
+
+<h4>
+    5.3 Method ที่ส่งค่า int กลับ
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method06.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static int add(int a, int b) {
+
+    return a + b;
+
+}
+
+public static void main(String[] args) {
+
+    int result = add(10, 20);
+
+    System.out.println(result);
+
+}</code></pre>
+
+</div>
+
+
+<div class="success-box">
+
+    <b>ผลลัพธ์</b>
+
+    <br>
+
+    30
+
+</div>
+
+
+<p>
+    Method <b>add()</b>
+    รับตัวเลขสองค่า แล้วนำมาบวกกัน
+    จากนั้นใช้ <b>return</b>
+    ส่งผลลัพธ์กลับมาเก็บไว้ในตัวแปร
+    <b>result</b>
+</p>
+
+<p>
+    ในตัวอย่าง Method กำหนด return type เป็น <b>int</b>
+    ดังนั้นค่าที่ส่งกลับด้วยคำสั่ง <b>return</b>
+    ต้องเป็นข้อมูลที่สามารถใช้เป็นชนิด <b>int</b> ได้
+    โปรแกรมจึงสามารถนำค่าที่ได้ไปเก็บไว้ในตัวแปร
+    และนำไปใช้งานต่อได้
+</p>
+
+
+<h4>
+    5.4 Method ที่ส่งค่า double กลับ
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method07.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static double calculate(double price, double tax) {
+
+    return price + tax;
+
+}
+
+public static void main(String[] args) {
+
+    double total = calculate(100, 7);
+
+    System.out.println(total);
+
+}</code></pre>
+
+</div>
+
+<p>
+    Method <b>calculate()</b> รับข้อมูลประเภท <b>double</b>
+    จำนวนสองค่า และส่งผลลัพธ์ประเภท <b>double</b> กลับมา
+    ผู้เรียกใช้งานสามารถนำค่าที่ได้รับไปเก็บไว้ในตัวแปร
+    หรือใช้ในการคำนวณขั้นตอนอื่นต่อไปได้
+</p>
+
+
+<h4>
+    5.5 Method ที่ส่งค่า String กลับ
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method08.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static String getName() {
+
+    return "Java Learning Guide";
+
+}
+
+public static void main(String[] args) {
+
+    String name = getName();
+
+    System.out.println(name);
+
+}</code></pre>
+
+</div>
+
+
+<div class="success-box">
+
+    <b>ผลลัพธ์</b>
+
+    <br>
+
+    Java Learning Guide
+
+</div>
+
+<p>
+    Method สามารถส่งข้อมูลประเภทข้อความกลับได้เช่นเดียวกับข้อมูลตัวเลข
+    โดยกำหนด return type เป็น <b>String</b>
+    และใช้คำสั่ง <b>return</b> ส่งข้อความกลับ
+    ทำให้สามารถนำค่าที่ได้ไปเก็บในตัวแปร String
+    และนำไปแสดงผลหรือใช้งานในส่วนอื่นของโปรแกรมได้
+</p>
+
+
+<!-- ==================================================
+     6. Method Overloading
+================================================== -->
+
+<h3>
+    6. Method Overloading
+</h3>
+
+
+<h4>
+    6.1 ความหมายของ Method Overloading
+</h4>
+
+<p>
+    Method Overloading คือการสร้าง Method
+    ที่มีชื่อเดียวกัน แต่มี Parameters แตกต่างกัน
+    เช่น จำนวน Parameters แตกต่างกัน
+    หรือชนิดข้อมูลของ Parameters แตกต่างกัน
+</p>
+
+<p>
+    แนวคิดของ Method Overloading คือการใช้ชื่อ Method เดียวกัน
+    สำหรับการทำงานที่มีลักษณะใกล้เคียงกัน
+    แต่สามารถรับข้อมูลในรูปแบบที่แตกต่างกันได้
+    ทำให้ชื่อ Method มีความสอดคล้องกับหน้าที่
+    และช่วยให้เรียกใช้งานได้สะดวก
+</p>
+
+
+<h4>
+    6.2 หลักการทำงานของ Method Overloading
+</h4>
+
+<p>
+    Java จะพิจารณาจากจำนวนและชนิดข้อมูลของ Arguments
+    ที่ส่งเข้าไป เพื่อเลือก Method ที่มีรูปแบบ Parameters
+    ตรงกับการเรียกใช้งาน
+</p>
+
+<p>
+    สิ่งสำคัญคือ Method ที่มีชื่อเหมือนกัน
+    จะต้องมีรายการ Parameters แตกต่างกัน
+    การเปลี่ยนเฉพาะชนิดข้อมูลที่ส่งกลับ
+    ไม่ถือว่าเป็น Method Overloading
+    ดังนั้น Method ที่มีชื่อและ Parameters เหมือนกัน
+    แต่ต่างกันเฉพาะ return type ไม่สามารถใช้เป็น Overloading ได้
+</p>
+
+
+<h4>
+    6.3 Overloading ด้วยจำนวน Parameters
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method09.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static int add(int a, int b) {
+
+    return a + b;
+
+}
+
+static int add(int a, int b, int c) {
+
+    return a + b + c;
+
+}</code></pre>
+
+</div>
+
+
+<h4>
+    6.4 Overloading ด้วยชนิดข้อมูล
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method10.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static int multiply(int a, int b) {
+
+    return a * b;
+
+}
+
+static double multiply(double a, double b) {
+
+    return a * b;
+
+}</code></pre>
+
+</div>
+
+
+<h4>
+    6.5 ตัวอย่าง Method Overloading
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method11.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>static int add(int a, int b) {
+
+    return a + b;
+
+}
+
+static int add(int a, int b, int c) {
+
+    return a + b + c;
+
+}
+
+public static void main(String[] args) {
+
+    System.out.println(add(10, 20));
+
+    System.out.println(add(10, 20, 30));
+
+}</code></pre>
+
+</div>
+
+
+<p>
+    ทั้งสอง Method ใช้ชื่อ <b>add()</b> เหมือนกัน
+    แต่รับ Parameters ไม่เท่ากัน
+    Java จึงสามารถแยกได้ว่าในแต่ละกรณีต้องเรียก Method ใด
+</p>
+
+<p>
+    Method Overloading ช่วยให้โปรแกรมมีความยืดหยุ่นมากขึ้น
+    เพราะผู้เขียนโปรแกรมสามารถเรียกใช้ชื่อ Method เดิม
+    โดยส่งข้อมูลในจำนวนหรือชนิดที่เหมาะสมกับงาน
+    แทนการตั้งชื่อ Method หลายชื่อสำหรับงานประเภทเดียวกัน
+</p>
+
+
+<!-- ==================================================
+     7. Static Method และ Instance Method
+================================================== -->
+
+<h3>
+    7. Static Method และ Instance Method
+</h3>
+
+
+<h4>
+    7.1 ความหมายของ Static Method
+</h4>
+
+<p>
+    Method ที่กำหนดด้วยคำว่า <b>static</b>
+    สามารถเรียกใช้งานได้โดยไม่จำเป็นต้องสร้าง Object
+    ของ Class ก่อน
+</p>
+
+<p>
+    Static Method เป็น Method ที่ผูกกับ Class
+    มากกว่ากับ Object แต่ละตัว
+    จึงเหมาะกับการทำงานทั่วไปที่ไม่จำเป็นต้องใช้ข้อมูล
+    เฉพาะของ Object เช่น การคำนวณทางคณิตศาสตร์
+    หรือการทำงานที่รับข้อมูลผ่าน Parameters แล้วส่งผลลัพธ์กลับ
+</p>
+
+
+<h4>
+    7.2 การเรียกใช้ Static Method
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method13.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Calculator {
+
+    static int square(int number) {
+
+        return number * number;
+
+    }
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        int result =
+            Calculator.square(5);
+
+        System.out.println(result);
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+<h4>
+    7.3 ความหมายของ Instance Method
+</h4>
+
+<p>
+    Instance Method คือ Method ที่ไม่ประกาศด้วย
+    <b>static</b>
+    และโดยทั่วไปจะถูกเรียกใช้งานผ่าน Object
+    ที่สร้างขึ้นจาก Class
+</p>
+
+<p>
+    Instance Method สามารถทำงานร่วมกับข้อมูลของ Object
+    หรือข้อมูลสมาชิกของ Class ในรูปแบบ Instance ได้
+    จึงเหมาะกับการออกแบบโปรแกรมเชิงวัตถุ
+    ที่ Object แต่ละตัวอาจมีข้อมูลแตกต่างกัน
+    และมีพฤติกรรมที่ต้องดำเนินการกับข้อมูลของตัวเอง
+</p>
+
+
+<h4>
+    7.4 การสร้าง Object เพื่อเรียกใช้ Instance Method
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method14.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    void showName() {
+
+        System.out.println("ชื่อ: Somchai");
+
+    }
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Student student =
+            new Student();
+
+        student.showName();
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+<h4>
+    7.5 ความแตกต่างระหว่าง Static Method และ Instance Method
+</h4>
+
+<div class="extra-content">
+
+    <ul>
+
+        <li>
+            <b>Static Method</b>
+            สามารถเรียกผ่านชื่อ Class ได้
+            โดยไม่ต้องสร้าง Object
+        </li>
+
+        <li>
+            <b>Instance Method</b>
+            ต้องสร้าง Object ก่อนจึงสามารถเรียกใช้งานได้
+        </li>
+
+        <li>
+            Static Method เหมาะกับการทำงาน
+            ที่ไม่จำเป็นต้องอาศัยข้อมูลเฉพาะของ Object
+        </li>
+
+        <li>
+            Instance Method เหมาะกับการทำงาน
+            ที่เกี่ยวข้องกับข้อมูลและพฤติกรรมของ Object
+        </li>
+
+    </ul>
+
+</div>
+
+<p>
+    การเลือกใช้ Static Method หรือ Instance Method
+    ควรพิจารณาจากลักษณะของข้อมูลและหน้าที่ของ Method
+    หาก Method ไม่จำเป็นต้องทำงานกับข้อมูลเฉพาะของ Object
+    สามารถพิจารณาใช้ static ได้
+    แต่หาก Method ต้องทำงานกับข้อมูลของ Object
+    การใช้ Instance Method จะเหมาะสมกว่า
+</p>
+
+
+<!-- ==================================================
+     8. การประยุกต์ใช้ Methods
+================================================== -->
+
+<h3>
+    8. การประยุกต์ใช้ Methods
+</h3>
+
+
+<h4>
+    8.1 Method สำหรับคำนวณข้อมูล
+</h4>
+
+<p>
+    Method สามารถนำมาใช้แยกส่วนของการคำนวณ
+    ออกจากส่วนหลักของโปรแกรม
+    ทำให้สามารถนำการคำนวณกลับมาใช้ซ้ำได้
+</p>
+
+<p>
+    ตัวอย่างเช่น โปรแกรมคำนวณราคาสินค้า
+    สามารถสร้าง Method สำหรับคำนวณราคารวม
+    Method สำหรับคำนวณส่วนลด
+    หรือ Method สำหรับคำนวณภาษี
+    จากนั้น Method หลักของโปรแกรมสามารถเรียกใช้
+    แต่ละส่วนตามลำดับที่ต้องการ
+</p>
+
+
+<h4>
+    8.2 Method สำหรับตรวจสอบข้อมูล
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method15.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    static boolean isAdult(int age) {
+
+        return age >= 18;
+
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(
+            isAdult(20)
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+
+<p>
+    ตัวอย่างนี้ Method <b>isAdult()</b>
+    รับอายุผ่าน Parameter และตรวจสอบว่าอายุมีค่ามากกว่าหรือเท่ากับ 18 หรือไม่
+    จากนั้นส่งค่าประเภท <b>boolean</b> กลับมา
+    ซึ่งมีค่าเป็น <b>true</b> หรือ <b>false</b>
+    ผลลัพธ์ที่ได้สามารถนำไปใช้ร่วมกับคำสั่งเงื่อนไข
+    เช่น <b>if</b> เพื่อควบคุมการทำงานของโปรแกรมได้
+</p>
+
+
+<h4>
+    8.3 Method สำหรับแสดงผล
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method16.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    static void showWelcome() {
+
+        System.out.println(
+            "ยินดีต้อนรับสู่ Java"
+        );
+
+    }
+
+    public static void main(String[] args) {
+
+        showWelcome();
+
+    }
+
+}</code></pre>
+
+</div>
+
+<p>
+    Method สำหรับแสดงผลเหมาะกับการรวบรวมคำสั่ง
+    ที่เกี่ยวข้องกับการแสดงข้อความหรือข้อมูล
+    เมื่อมีหลายตำแหน่งในโปรแกรมที่ต้องแสดงข้อมูลในรูปแบบเดียวกัน
+    สามารถเรียกใช้ Method เดิมซ้ำได้
+    ทำให้ไม่จำเป็นต้องเขียนคำสั่งแสดงผลซ้ำในหลายตำแหน่ง
+</p>
+
+
+<h4>
+    8.4 ตัวอย่างโปรแกรมคำนวณคะแนนด้วย Methods
+</h4>
+
+<div class="step-item">
+<img src="images/chapter5/Method17.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<p>
+    ตัวอย่างต่อไปนี้นำ Method มาประยุกต์ใช้กับการคำนวณคะแนน
+    โดยแยกหน้าที่การคำนวณออกมาเป็น Method
+    ทำให้โปรแกรมอ่านง่าย และสามารถนำ Method
+    ไปเรียกใช้งานซ้ำได้
+</p>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    static double calculateAverage(
+            double score1,
+            double score2,
+            double score3) {
+
+        return (score1 + score2 + score3) / 3;
+
+    }
+
+    public static void main(String[] args) {
+
+        double average =
+            calculateAverage(80, 75, 90);
+
+        System.out.println(
+            "คะแนนเฉลี่ย = " + average
+        );
+
+    }
+
+}
+
+</code></pre>
+
+</div>
+
+
+<div class="success-box">
+
+    <b>ผลลัพธ์</b>
+
+    <br>
+
+    คะแนนเฉลี่ย = 81.66666666666667
+
+</div>
+
+
+<p>
+    ตัวอย่างนี้แสดงให้เห็นว่า Method สามารถรับข้อมูลหลายค่า
+    นำไปประมวลผล และส่งผลลัพธ์กลับมาให้โปรแกรมส่วนอื่น
+    นำไปใช้งานต่อได้
+</p>
+
+<p>
+    การแยกการคำนวณคะแนนออกเป็น Method
+    ช่วยให้ส่วนของ <b>main()</b> มีหน้าที่ควบคุมลำดับการทำงาน
+    ในขณะที่ Method <b>calculateAverage()</b>
+    รับผิดชอบเฉพาะการคำนวณคะแนนเฉลี่ย
+    การแบ่งหน้าที่ในลักษณะนี้ทำให้โปรแกรมมีโครงสร้างชัดเจน
+    และสามารถแก้ไขสูตรการคำนวณได้ง่ายขึ้น
+</p>
+
+
+<!-- ==================================================
+     9. สรุปบทเรียน
+================================================== -->
+
+<h3>
+    9. สรุปบทเรียน
+</h3>
+
+
+<h4>
+    9.1 สรุปความรู้เกี่ยวกับ Methods
+</h4>
+
+<p class="summary">
+
+    <b>Method</b>
+    คือกลุ่มคำสั่งที่สร้างขึ้นเพื่อทำงานอย่างใดอย่างหนึ่ง
+    และสามารถเรียกใช้งานซ้ำได้
+
+    <br><br>
+
+    Method สามารถรับข้อมูลผ่าน
+    <b>Parameters</b>
+    และสามารถส่งค่ากลับด้วย
+    <b>return</b>
+
+    <br><br>
+
+    หาก Method ไม่ต้องการส่งค่ากลับ
+    สามารถใช้ <b>void</b>
+
+</p>
+
+<p>
+    การใช้ Method ช่วยให้โปรแกรมมีโครงสร้างที่เป็นระเบียบ
+    โดยสามารถแบ่งการทำงานออกเป็นส่วนต่าง ๆ
+    ตามหน้าที่ของแต่ละ Method
+    นอกจากนี้ยังช่วยลดการเขียนคำสั่งซ้ำ
+    เพิ่มความสามารถในการนำโค้ดกลับมาใช้ใหม่
+    และทำให้การแก้ไขโปรแกรมในภายหลังทำได้สะดวก
+</p>
+
+
+<h4>
+    9.2 แนวคิดสำคัญที่ควรจดจำ
+</h4>
+
+<div class="extra-content">
+
+    <ul>
+
+        <li>
+            Method ช่วยแบ่งโปรแกรมออกเป็นส่วนย่อย
+        </li>
+
+        <li>
+            Method สามารถรับข้อมูลผ่าน Parameters
+        </li>
+
+        <li>
+            Arguments คือค่าที่ส่งเข้า Method
+        </li>
+
+        <li>
+            Method สามารถส่งค่ากลับด้วย return
+        </li>
+
+        <li>
+            void ใช้กับ Method ที่ไม่มีค่าข้อมูลส่งกลับ
+        </li>
+
+        <li>
+            Method Overloading สามารถใช้ชื่อ Method เดียวกัน
+            แต่มี Parameters แตกต่างกัน
+        </li>
+
+        <li>
+            Static Method สามารถเรียกใช้งานโดยไม่ต้องสร้าง Object
+        </li>
+
+        <li>
+            Instance Method โดยทั่วไปเรียกใช้งานผ่าน Object
+        </li>
+
+    </ul>
+
+</div>
+
+
+<h4>
+    9.3 สิ่งที่ควรรู้หลังเรียนจบ
+</h4>
+
+<div class="extra-content">
+
+    <ul>
+
+        <li>
+            อธิบายความหมายของ Method ได้
+        </li>
+
+        <li>
+            สามารถสร้าง Method ในภาษา Java ได้
+        </li>
+
+        <li>
+            สามารถเรียกใช้งาน Method ได้
+        </li>
+
+        <li>
+            เข้าใจการใช้ <b>void</b>
+        </li>
+
+        <li>
+            สามารถส่งข้อมูลผ่าน <b>Parameters</b> ได้
+        </li>
+
+        <li>
+            สามารถใช้ <b>return</b>
+            ส่งค่ากลับจาก Method ได้
+        </li>
+
+        <li>
+            เข้าใจหลักการของ
+            <b>Method Overloading</b>
+        </li>
+
+        <li>
+            เข้าใจความแตกต่างระหว่าง
+            <b>Static Method</b>
+            และ
+            <b>Instance Method</b>
+        </li>
+
+        <li>
+            สามารถนำ Method ไปใช้สร้างโปรแกรมที่เป็นระบบได้
+        </li>
+
+    </ul>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<!-- =========================================
+     BOTTOM NAVIGATION
+========================================= -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_04.html">
+        ← บทที่ 4
+    </a>
+
+    <a href="index.html">
+        🏠 กลับหน้าหลัก
+    </a>
+
+    <a href="chapter_06.html">
+        บทที่ 6 →
+    </a>
+
+</nav>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <h3>
+        ☕ Java Learning Guide
+    </h3>
+
+    <p>
+        สื่อการเรียนการสอน
+        การเขียนโปรแกรมภาษา Java
+    </p>
+
+    <p>
+        บทที่ 5 : การสร้างและใช้งาน Methods
+    </p>
+
+    <p>
+        © 2026 Java Learning Guide
+    </p>
+
+</footer>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+function copyCode(button) {
+
+    const code =
+        button.parentElement
+        .querySelector("code")
+        .innerText;
+
+    navigator.clipboard
+        .writeText(code)
+
+        .then(() => {
+
+            const oldText =
+                button.innerText;
+
+            button.innerText =
+                "คัดลอกแล้ว ✓";
+
+            setTimeout(() => {
+
+                button.innerText =
+                    oldText;
+
+            }, 1200);
+
+        })
+
+        .catch(() => {
+
+            button.innerText =
+                "คัดลอกไม่สำเร็จ";
+
+            setTimeout(() => {
+
+                button.innerText =
+                    "คัดลอก";
+
+            }, 1200);
+
+        });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```

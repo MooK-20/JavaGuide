@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>บทที่ 4 | การสร้างและเรียกใช้งาน Classes</title>
+
+
+   
+<style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family:
+                "Tahoma",
+                "Noto Sans Thai",
+                sans-serif;
+
+            background: #eef7ff;
+
+            color: #1f2937;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81,
+                    #1976d2,
+                    #42a5f5
+                );
+
+            color: white;
+
+            padding: 38px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, .15);
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 36px;
+        }
+
+
+        header p {
+
+            margin: 8px 0 0;
+
+            font-size: 17px;
+
+            opacity: .95;
+        }
+
+
+
+        /* ==================================================
+           NAVIGATION
+        ================================================== */
+
+       /* =========================
+   TOP CHAPTER NAVIGATION
+========================= */
+
+.chapter-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0 34px;
+
+    height: 70px;
+
+    background: transparent;
+
+    pointer-events: none;
+}
+
+/* ปุ่มทั้งหมด */
+.chapter-nav a {
+    pointer-events: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 130px;
+    height: 58px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 0 0 12px 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.10);
+
+    transition:
+        0.2s ease;
+}
+
+/* ปุ่มกลาง */
+.chapter-nav a:nth-child(2) {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 215px;
+
+    border-radius: 0 0 12px 12px;
+}
+
+/* Hover */
+.chapter-nav a:hover {
+    color: #0f4c81;
+
+    background: #f8fcff;
+
+    transform:
+        translateY(2px);
+}
+
+/* Hover ปุ่มกลาง */
+.chapter-nav a:nth-child(2):hover {
+    transform:
+        translateX(-50%)
+        translateY(2px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .chapter-nav {
+        height: auto;
+
+        padding: 0 10px;
+
+        gap: 8px;
+    }
+
+    .chapter-nav a {
+        min-width: 0;
+
+        flex: 1;
+
+        height: 52px;
+
+        padding: 0 8px;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        border-radius: 0 0 10px 10px;
+    }
+
+    .chapter-nav a:nth-child(2) {
+        position: static;
+
+        transform: none;
+
+        min-width: 0;
+    }
+
+    .chapter-nav a:hover {
+        transform: translateY(2px);
+    }
+
+    .chapter-nav a:nth-child(2):hover {
+        transform: translateY(2px);
+    }
+
+}
+
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        main {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 0 20px 30px;
+        }
+
+
+
+        /* ==================================================
+           CHAPTER
+        ================================================== */
+
+        .chapter {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, .07);
+
+            border: 1px solid #dbeafe;
+        }
+
+
+
+        /* ==================================================
+           CHAPTER HEAD
+        ================================================== */
+
+        .chapter-head {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            border-bottom:
+                2px solid #e0f2fe;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .chapter-head span {
+
+            background: #1769aa;
+
+            color: white;
+
+            padding: 7px 16px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        .chapter-head h2 {
+
+            margin: 0;
+
+            color: #0f4c81;
+
+            font-size: 28px;
+        }
+
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .chapter h3 {
+
+            color: #0369a1;
+
+            margin-top: 32px;
+
+            margin-bottom: 10px;
+
+            font-size: 22px;
+        }
+
+
+        .chapter h4 {
+
+            color: #0f4c81;
+
+            margin-top: 20px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .chapter p {
+
+            margin-top: 8px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .chapter ul,
+        .chapter ol {
+
+            padding-left: 28px;
+        }
+
+
+        .chapter li {
+
+            margin-bottom: 7px;
+        }
+
+
+
+        /* ==================================================
+           CONTENT BOX
+        ================================================== */
+
+        .info-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fbff
+                );
+
+            border-left:
+                5px solid #1976d2;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .warning-box {
+
+            background: #fff7ed;
+
+            border-left:
+                5px solid #f97316;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .success-box {
+
+            background: #f0fdf4;
+
+            border-left:
+                5px solid #22c55e;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .summary {
+
+            background: #f0f9ff;
+
+            border-left:
+                5px solid #0ea5e9;
+
+            padding: 17px 20px;
+
+            border-radius: 8px;
+        }
+
+
+
+        /* ==================================================
+           STEP IMAGE
+        ================================================== */
+
+        .step-item {
+
+            margin: 30px auto 35px;
+
+            padding: 20px;
+
+            max-width: 760px;
+
+            background: #f8fbff;
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, .06);
+
+            text-align: center;
+        }
+
+
+        /* รูปเล็กลง */
+
+        .step-item img {
+
+            display: block;
+
+            width: auto;
+
+            max-width: 600px;
+
+            max-height: 350px;
+
+            height: auto;
+
+            margin: 0 auto;
+
+            border-radius: 10px;
+
+            border: 1px solid #cbd5e1;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, .12);
+
+            object-fit: contain;
+
+            background: white;
+        }
+        
+
+
+        /* STEP อยู่ด้านล่างของรูป */
+
+        .step-content {
+
+            margin-top: 18px;
+
+            padding-top: 15px;
+
+            border-top: 2px solid #dbeafe;
+
+            text-align: left;
+        }
+
+
+        .step-number {
+
+            display: inline-block;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1769aa,
+                    #1976d2
+                );
+
+            color: white;
+
+            padding: 5px 14px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .step-title {
+
+            margin: 0 0 7px;
+
+            color: #0f4c81;
+
+            font-size: 19px;
+
+            font-weight: bold;
+        }
+
+
+        .step-description {
+
+            margin: 0;
+
+            color: #475569;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+
+        .table-wrap {
+
+            overflow-x: auto;
+
+            margin: 20px 0;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+        }
+
+
+        th {
+
+            background: #1769aa;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+
+        td {
+
+            border:
+                1px solid #dbeafe;
+
+            padding: 12px;
+
+            vertical-align: top;
+        }
+
+
+        tr:nth-child(even) {
+
+            background: #f8fbff;
+        }
+
+
+
+        /* ==================================================
+           FLOW
+        ================================================== */
+
+        .flow {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin: 25px 0;
+        }
+
+
+        .flow-box {
+
+            background: #eff6ff;
+
+            border:
+                2px solid #60a5fa;
+
+            border-radius: 12px;
+
+            padding: 14px 18px;
+
+            text-align: center;
+
+            min-width: 145px;
+
+            font-weight: bold;
+
+            color: #0f4c81;
+        }
+
+
+        .flow-arrow {
+
+            font-size: 25px;
+
+            color: #1976d2;
+
+            font-weight: bold;
+        }
+
+
+
+        /* ==================================================
+           CODE
+        ================================================== */
+
+        .code-wrap {
+
+            position: relative;
+
+            background: #0f172a;
+
+            border-radius: 12px;
+
+            overflow: auto;
+
+            margin: 18px 0;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .12);
+        }
+
+
+        pre {
+
+            margin: 0;
+
+            padding: 24px;
+
+            padding-top: 52px;
+
+            color: #e2e8f0;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            white-space: pre;
+        }
+
+
+        .copy {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 10px;
+
+            border: 0;
+
+            background: #334155;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            z-index: 2;
+        }
+
+
+        .copy:hover {
+
+            background: #475569;
+        }
+
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 32px;
+
+            background: #0f4c81;
+
+            color: white;
+
+            margin-top: 20px;
+        }
+
+
+        footer h3 {
+
+            margin-top: 0;
+        }
+
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+
+                font-size: 27px;
+            }
+
+
+            header p {
+
+                font-size: 15px;
+            }
+
+
+            .chapter {
+
+                padding: 20px;
+            }
+
+
+            .chapter-head {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .chapter-head h2 {
+
+                font-size: 22px;
+            }
+
+
+            .chapter-nav {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .chapter-nav a {
+
+                font-size: 14px;
+            }
+
+
+            .flow {
+
+                flex-direction: column;
+            }
+
+
+            .flow-arrow {
+
+                transform: rotate(90deg);
+            }
+
+
+            .chapter h3 {
+
+                font-size: 20px;
+            }
+
+
+            pre {
+
+                font-size: 13px;
+
+                padding: 18px;
+
+                padding-top: 52px;
+            }
+
+
+            .table-wrap {
+
+                font-size: 14px;
+            }
+
+
+            /* รูปบนมือถือ */
+
+            .step-item {
+
+                padding: 14px;
+
+                margin-bottom: 25px;
+            }
+
+
+            .step-item img {
+
+                width: 100%;
+
+                max-width: 100%;
+
+                max-height: none;
+            }
+
+
+            .step-title {
+
+                font-size: 17px;
+            }
+
+
+            .step-description {
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <h1>
+        JAVA LEARNING GUIDE
+    </h1>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+        บทที่ 4 : การสร้างและเรียกใช้งาน Classes
+    </p>
+
+</header>
+
+
+
+<!-- ==================================================
+     TOP NAVIGATION
+================================================== -->
+
+
+<nav class="chapter-nav">
+
+    <!-- ไปบทที่ 4-->
+    <a href="chapter_03.html">
+        ← บทที่ 3
+    </a>
+
+    <a href="chapters.html">
+        📚 บทเรียนทั้งหมด
+    </a>
+
+    <!-- ไปบทที่ 6 -->
+    <a href="chapter_05.html">
+        บทที่ 5 →
+    </a>
+
+</nav>
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main>
+
+<section class="chapter">
+
+
+    <!-- ==================================================
+         TITLE
+    ================================================== -->
+
+    <div class="chapter-head">
+
+        <span>
+            บทที่ 4
+        </span>
+
+        <h2>
+          การสร้างและเรียกใช้งาน Classes
+        </h2>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         INTRO
+    ================================================== -->
+
+   <!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<p style="text-indent: 2em;">
+    การเขียนโปรแกรมภาษาจาวาเริ่มต้นจากการสร้าง
+    <b>Class</b> และเขียนคำสั่งต่าง ๆ
+    ตามโครงสร้างของภาษาจาวา
+    โดยผู้เรียนสามารถใช้โปรแกรมสำหรับเขียน Source Code
+    เช่น Visual Studio Code (VS Code)
+    ในการสร้าง แก้ไข และตรวจสอบโปรแกรม
+    การทำความเข้าใจโครงสร้างของโปรแกรมตั้งแต่เริ่มต้น
+    จะช่วยให้ผู้เรียนสามารถเขียนโปรแกรมได้อย่างเป็นระบบ
+    และสามารถพัฒนาโปรแกรมที่มีความซับซ้อนมากขึ้นในอนาคต
+</p>
+
+<p style="text-indent: 2em;">
+    โปรแกรมภาษาจาวาโดยทั่วไปจะประกอบด้วย Class
+    ซึ่งเป็นโครงสร้างสำคัญที่ใช้จัดเก็บข้อมูล
+    และคำสั่งต่าง ๆ ของโปรแกรม
+    ภายใน Class สามารถประกาศตัวแปร
+    สร้างเมธอด และเขียนคำสั่งสำหรับประมวลผลข้อมูลได้
+    โดยโปรแกรมที่สามารถเริ่มทำงานได้โดยตรง
+    มักจะมีเมธอด <b>main()</b>
+    ซึ่งทำหน้าที่เป็นจุดเริ่มต้นของการทำงาน
+</p>
+
+
+<!-- =====================================================
+     1. การเริ่มต้นเขียนโปรแกรมภาษาจาวา
+===================================================== -->
+
+<h3>
+     1. การเริ่มต้นเขียนโปรแกรมภาษาจาวา
+</h3>
+
+<div class="extra-content">
+
+    <p style="text-indent: 2em;">
+        โจทย์ :
+        เริ่มสร้าง Class ชื่อ Class
+        โดยแนะนำให้ขึ้นต้นด้วยตัวอักษรพิมพ์ใหญ่
+        ตัวอย่างเช่น
+        <b>Data1</b>
+        พิมพ์คำว่า <b>class</b>
+        ตามด้วยชื่อ Class
+        และใช้เครื่องหมาย
+        <b>{ }</b>
+        เพื่อกำหนดขอบเขตของ Class
+        เมื่อสร้าง Class แล้ว
+        ภายใน Class สามารถเรียกใช้คำสั่ง
+        สำหรับแสดงผลทางหน้าจอได้
+    </p>
+
+    <p style="text-indent: 2em;">
+        Class เปรียบเสมือนโครงสร้างหลักของโปรแกรม
+        ที่ใช้รวบรวมข้อมูลและพฤติกรรมที่เกี่ยวข้องกัน
+        การตั้งชื่อ Class ควรสื่อความหมายถึงหน้าที่
+        หรือสิ่งที่ Class นั้นทำงานเกี่ยวข้องด้วย
+        เพื่อช่วยให้ผู้เขียนโปรแกรมและผู้ที่มาศึกษาโค้ดภายหลัง
+        สามารถทำความเข้าใจโปรแกรมได้ง่ายขึ้น
+    </p>
+
+    <p style="text-indent: 2em;">
+        เครื่องหมาย <b>{ }</b> เรียกว่า Curly Braces
+        หรือวงเล็บปีกกา ใช้สำหรับกำหนดขอบเขตของ Class
+        และขอบเขตของเมธอดต่าง ๆ
+        คำสั่งที่อยู่ภายในวงเล็บปีกกาจะถือว่าอยู่ภายใต้ขอบเขตนั้น
+        ดังนั้นผู้เรียนควรตรวจสอบการเปิดและปิดวงเล็บ
+        ให้ครบถ้วนอยู่เสมอ
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     1.1 สร้าง Class
+===================================================== -->
+
+<h4>
+    1.1 สร้าง Class ชื่อ class
+</h4>
+
+<div class="code-wrap">
+
+    <button class="copy" onclick="copyCode(this)">
+        คัดลอก
+    </button>
+
+    <pre><code>class Data1 {
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step1_create_class.png"
+        alt="STEP 01"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+        <p class="step-description">
+           ขั้นตอนที่ 1 เริ่มสร้าง Class ชื่อ Data1
+           แนะนำให้ขึ้นต้นด้วยตัวอักษรพิมพ์ใหญ่
+           โดยพิมพ์คำว่า class ตามด้วยชื่อ Class
+           และใช้เครื่องหมาย { เพื่อกำหนดขอบเขตของ Class
+           จากนั้นปิด Class ด้วยเครื่องหมาย }
+           ภายใน Class สามารถเขียนคำสั่งต่าง ๆ
+           ที่ต้องการให้โปรแกรมทำงานได้
+        </p>
+
+        <p class="step-description">
+            การตั้งชื่อ Class ควรใช้ชื่อที่สื่อความหมาย
+            และควรหลีกเลี่ยงชื่อที่ทำให้เกิดความสับสน
+            เช่น ชื่อที่เป็นคำสงวนของภาษา Java
+            นอกจากนี้หาก Class มีชื่อว่า Data1
+            ไฟล์ Java ที่ประกาศเป็น public class
+            โดยทั่วไปควรมีชื่อไฟล์สอดคล้องกันเป็น Data1.java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     1.2 สร้าง main
+===================================================== -->
+
+<h4>
+    1.2 เปิด function main
+</h4>
+
+<div class="code-wrap">
+
+    <button class="copy" onclick="copyCode(this)">
+        คัดลอก
+    </button>
+
+    <pre><code>public static void main(String[] args) {
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step2_create_class.png"
+        alt="STEP 01"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+        <p class="step-description">
+          ขั้นตอนที่ 2 เปิด function main
+          โดยสามารถพิมพ์ main แล้วกดปุ่ม Tab
+          เพื่อยอมรับการสร้างโครงสร้าง main
+          จาก Extension ที่ติดตั้งไว้ใน Visual Studio Code
+        </p>
+
+        <p class="step-description">
+            เมธอด main เป็นจุดเริ่มต้นของโปรแกรม Java
+            เมื่อสั่งให้โปรแกรมทำงาน
+            Java Virtual Machine หรือ JVM
+            จะเริ่มประมวลผลคำสั่งที่อยู่ภายใน main()
+            ตามลำดับจากบนลงล่าง
+            ดังนั้นคำสั่งที่ต้องการให้ทำงานเมื่อเริ่มโปรแกรม
+            สามารถเขียนไว้ภายในเมธอดนี้ได้
+        </p>
+
+        <p class="step-description">
+            ส่วนประกอบของ
+            <b>public static void main(String[] args)</b>
+            มีหน้าที่แตกต่างกัน
+            โดย public ใช้กำหนดการเข้าถึงเมธอด
+            static ทำให้สามารถเรียกใช้เมธอดได้โดยไม่ต้องสร้าง Object
+            void หมายถึงเมธอดนี้ไม่มีค่าที่ส่งกลับ
+            และ String[] args ใช้รับข้อมูลที่ส่งเข้ามา
+            จาก Command Line
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     2. โครงสร้างภาษาจาวา
+===================================================== -->
+
+<h3>
+     2. โครงสร้างภาษาจาวา
+</h3>
+
+<p style="text-indent: 2em;">
+   ในภาษาจาวาจะใช้เมธอด print และ println
+   ในการแสดงผลทางจอภาพ
+   โดยเมธอดทั้งสองอยู่ภายใน Object ของ out
+   และ out อยู่ภายใน Class ของ System
+   รูปแบบการใช้งานเมธอดทั้งสองคือ
+</p>
+
+<p style="text-indent: 2em;">
+    การแสดงผลเป็นพื้นฐานสำคัญของการเขียนโปรแกรม
+    เพราะช่วยให้ผู้เขียนโปรแกรมสามารถตรวจสอบผลลัพธ์
+    จากการประมวลผลของโปรแกรมได้
+    เช่น ตรวจสอบค่าตัวแปร ตรวจสอบผลการคำนวณ
+    หรือแสดงข้อความเพื่อแจ้งข้อมูลให้กับผู้ใช้งาน
+</p>
+
+<div class="table-wrap">
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        คำสั่ง
+    </th>
+
+    <th>
+        หน้าที่
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>System.out.print(data);</b>
+    </td>
+
+    <td>
+        แสดงข้อความทางจอภาพ
+        โดยไม่มีการขึ้นบรรทัดใหม่
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>System.out.println(data);</b>
+    </td>
+
+    <td>
+        แสดงข้อความทางจอภาพ
+        และขึ้นบรรทัดใหม่
+    </td>
+
+</tr>
+
+</table>
+
+<p style="text-indent: 2em;">
+    หากต้องการแสดงข้อความหลายรายการ
+    ผู้เขียนโปรแกรมสามารถเลือกใช้ print หรือ println
+    ตามรูปแบบผลลัพธ์ที่ต้องการ
+    โดย print จะคงเคอร์เซอร์ไว้ที่บรรทัดเดิม
+    ส่วน println จะเลื่อนเคอร์เซอร์ไปยังบรรทัดถัดไป
+    หลังจากแสดงข้อมูลเสร็จ
+</p>
+
+</div>
+
+
+<!-- =====================================================
+     2.1 print
+===================================================== -->
+
+<h4>
+    2.1 คำสั่ง System.out.print()
+</h4>
+
+<p>
+    ใช้สำหรับแสดงข้อความทางจอภาพ
+    โดยหลังจากแสดงข้อความแล้ว
+    เคอร์เซอร์จะไม่ขึ้นบรรทัดใหม่
+    จึงเหมาะสำหรับการแสดงข้อมูล
+    ที่ต้องการให้อยู่ต่อเนื่องกันในบรรทัดเดียว
+</p>
+
+<p>
+    นอกจากข้อความแล้ว
+    print() ยังสามารถใช้แสดงค่าตัวแปร
+    ตัวเลข และผลลัพธ์จากนิพจน์ต่าง ๆ ได้
+    โดยข้อมูลที่ส่งเข้าไปภายในวงเล็บ
+    จะเป็นข้อมูลที่ต้องการให้โปรแกรมแสดงผล
+</p>
+
+<div class="code-wrap">
+
+<button class="copy" onclick="copyCode(this)">
+    คัดลอก
+</button>
+
+<pre><code>System.out.print("Hello ");
+System.out.print("Java");</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step3_create_class.png"
+        alt="STEP 01"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+        <p class="step-description">
+          สามารถพิมพ์ <b>sysout</b> แล้วกด Tab
+          เพื่อสร้างคำสั่ง System.out.println()
+          หรือเลือกใช้คำสั่ง System.out.print()
+          เมื่อต้องการให้ข้อความยังคงอยู่ในบรรทัดเดียวกัน
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     2.2 println
+===================================================== -->
+
+<h4>
+    2.2 คำสั่ง System.out.println()
+</h4>
+
+<p>
+    ใช้สำหรับแสดงข้อความทางจอภาพ
+    และเมื่อแสดงข้อความเสร็จแล้ว
+    เคอร์เซอร์จะเลื่อนไปยังบรรทัดใหม่
+    จึงเหมาะสำหรับการแสดงข้อมูล
+    ที่ต้องการจัดให้อยู่คนละบรรทัด
+</p>
+
+<p>
+    println() สามารถใช้แสดงข้อความ
+    ตัวเลข ค่าของตัวแปร
+    รวมถึงผลลัพธ์จากการคำนวณได้
+    โดยสามารถใช้เครื่องหมาย <b>+</b>
+    เพื่อเชื่อมข้อความกับค่าของตัวแปร
+    และแสดงผลออกมาในรูปแบบที่เข้าใจง่าย
+</p>
+
+<div class="step-item">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+    <img
+        src="images/chapter4/step4_create_class.png"
+        alt="ตัวอย่างคำสั่ง println"
+    >
+
+</div>
+
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step15_create_class.png"
+        alt="ตัวอย่างการแสดงผล"
+    >
+
+    <div class="step-content">
+
+      
+
+    </div>
+
+</div>
+
+<div class="step-item">
+<img
+    src="images/chapter4/step14_create_class.png"
+    alt="ผลลัพธ์โปรแกรม"
+>
+<div class="step-content">
+<span class="step-number">
+            ผลลัพธ์
+        </span>
+</div>
+</div>
+
+
+
+
+<div class="code-wrap">
+
+    <button class="copy" onclick="copyCode(this)">
+        คัดลอก
+    </button>
+
+    <pre><code>System.out.println("tsuwannee");
+System.out.println("ยินดีต้อนรับ");</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step6_create_class.png"
+        alt="STEP 06"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+        <p class="step-description">
+            ข้อสังเกต บรรทัดที่ 7 ใช้คำสั่งแสดงผล
+            โดยแสดงข้อมูลในรูปแบบข้อความ
+            ข้อความที่ต้องการแสดงผล
+            จะต้องอยู่ภายในเครื่องหมาย
+            <b>" "</b>
+            เช่น <b>"test"</b>
+            เพื่อให้ Java ทราบว่าข้อมูลดังกล่าวเป็น String
+        </p>
+
+    </div>
+
+</div>
+
+<div class="info-box">
+
+    <b>📌 ข้อสังเกต</b>
+
+    <br><br>
+
+    การแสดงข้อมูลแบบข้อความ
+    จะต้องเขียนข้อความไว้ภายในเครื่องหมาย
+    <b>" "</b>
+
+    <br><br>
+
+    ตัวอย่างเช่น
+
+    <b>"test"</b>
+
+    <br><br>
+
+    หากต้องการแสดงตัวเลขโดยตรง
+    เช่น <b>100</b>
+    สามารถเขียนโดยไม่ต้องใช้เครื่องหมายคำพูด
+    เพราะ Java จะมองว่าเป็นข้อมูลตัวเลข
+    แต่ถ้าเขียน <b>"100"</b>
+    Java จะมองว่าเป็นข้อมูลชนิด String
+
+</div>
+
+
+<!-- =====================================================
+     3. Escape Sequence
+===================================================== -->
+
+<h3>
+    🔤 3. Escape Sequence
+</h3>
+
+<p>
+    คำสั่ง <b>print</b>
+    และ
+    <b>println</b>
+    สามารถใช้
+    <b>Escape Sequence</b>
+    ในการแสดงผลได้
+    โดยใช้เครื่องหมาย
+    <b>\</b>
+    (Backslash)
+    นำหน้าด้วยอักขระควบคุมหนึ่งตัว
+</p>
+
+<p>
+    Escape Sequence มีประโยชน์ในการควบคุมรูปแบบ
+    ของข้อความที่แสดงบนหน้าจอ
+    โดยเฉพาะกรณีที่ต้องการขึ้นบรรทัดใหม่
+    จัดระยะห่างด้วย Tab
+    หรือแสดงเครื่องหมายพิเศษ
+    ที่มีความหมายเฉพาะในภาษา Java
+</p>
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        Escape Sequence
+    </th>
+
+    <th>
+        ความหมาย
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\n</b>
+    </td>
+
+    <td>
+        ขึ้นบรรทัดใหม่
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\t</b>
+    </td>
+
+    <td>
+        แท็บในแนวนอน
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\b</b>
+    </td>
+
+    <td>
+        ถอยหลัง 1 ช่อง
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\r</b>
+    </td>
+
+    <td>
+        เลื่อนเคอร์เซอร์ไปทางซ้ายสุด
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\\</b>
+    </td>
+
+    <td>
+        แสดงตัวอักษร Backslash
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\'</b>
+    </td>
+
+    <td>
+        แสดงตัวอักษร Single Quote
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>\"</b>
+    </td>
+
+    <td>
+        แสดงตัวอักษร Double Quote
+    </td>
+
+</tr>
+
+</table>
+
+<p>
+    การเลือกใช้ Escape Sequence
+    ควรเลือกให้เหมาะกับรูปแบบข้อมูล
+    เช่น หากต้องการแบ่งข้อความออกเป็นหลายบรรทัด
+    สามารถใช้ <b>\n</b>
+    หากต้องการจัดตำแหน่งข้อมูลให้เป็นระเบียบ
+    สามารถใช้ <b>\t</b>
+    และหากต้องการแสดงเครื่องหมายคำพูด
+    ภายในข้อความ สามารถใช้ <b>\"</b>
+</p>
+
+
+<h4>
+    3.1 ตัวอย่าง Escape Sequence
+</h4>
+
+<div class="code-wrap">
+
+<button class="copy" onclick="copyCode(this)">
+    คัดลอก
+</button>
+
+<pre><code>System.out.println("Java\nProgramming");
+System.out.println("Name\tScore");
+System.out.println("\"Java\"");</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+    <img
+         src="images/chapter4/step16_create_class.png"
+         alt="ตัวอย่าง Escape Sequence"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ผลลัพธ์
+        </span>
+
+        <img
+            src="images/chapter4/step17_create_class.png"
+            alt="ผลลัพธ์ Escape Sequence"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     4. การเขียนหมายเหตุ
+===================================================== -->
+
+<h3>
+    📝 4. การเขียนหมายเหตุภาษาจาวา
+</h3>
+
+<p>
+    การเขียนหมายเหตุในภาษาจาวา
+    มี 2 รูปแบบหลัก
+    คือ
+    <b>//</b>
+    และ
+    <b>/* ... */</b>
+</p>
+
+<p>
+    หมายเหตุ หรือ Comment
+    ใช้สำหรับอธิบายรายละเอียดของโปรแกรม
+    เช่น อธิบายว่าคำสั่งแต่ละส่วนทำหน้าที่อะไร
+    อธิบายตัวแปร หรือบันทึกข้อมูลที่ช่วยให้
+    ผู้เขียนโปรแกรมสามารถกลับมาทำความเข้าใจโค้ดได้ง่ายขึ้น
+    Comment จะไม่ถูกนำไปประมวลผลเป็นคำสั่งของโปรแกรม
+</p>
+
+<div class="table-wrap">
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        รูปแบบ
+    </th>
+
+    <th>
+        การใช้งาน
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>//</b>
+    </td>
+
+    <td>
+        หมายเหตุ 1 บรรทัด
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>/* ... */</b>
+    </td>
+
+    <td>
+        หมายเหตุหลายบรรทัด
+        หรือกำหนดช่วงข้อมูล
+    </td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<h4>
+    4.1 ตัวอย่างการเขียนหมายเหตุ
+</h4>
+
+<div class="example-wrap">
+
+    <div class="step-content">
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+    </div>
+
+    <div class="step-item">
+
+        <img
+            src="images/chapter4/step18_create_class.png"
+            alt="ตัวอย่างการเขียน Comment"
+        >
+
+        <div class="step-content"></div>
+
+    </div>
+
+    <img
+        src="images/chapter4/step19_create_class.png"
+        alt="ผลลัพธ์การเขียน Comment"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ผลลัพธ์
+        </span>
+
+    </div>
+
+</div>
+
+<p>
+    การเขียน Comment เป็นแนวทางสำคัญในการจัดระเบียบ Source Code
+    โดยเฉพาะโปรแกรมที่มีจำนวนบรรทัดมาก
+    เพราะช่วยให้ผู้พัฒนาเข้าใจวัตถุประสงค์ของคำสั่ง
+    และสามารถแก้ไขโปรแกรมในภายหลังได้สะดวก
+</p>
+
+
+<!-- =====================================================
+     5. Character / String
+===================================================== -->
+
+<h3>
+    📊 5. ชนิดของข้อมูล ตัวแปร และค่าคงที่
+</h3>
+
+<p>
+    ในการเขียนโปรแกรมจำเป็นต้องมีการจัดเก็บข้อมูล
+    เพื่อใช้ในการประมวลผล
+    เช่น ชื่อนักเรียน อายุ คะแนน เงินเดือน
+    หรือสถานะต่าง ๆ
+    ภาษาจาวาจึงกำหนดชนิดข้อมูล
+    เพื่อให้โปรแกรมทราบว่าข้อมูลแต่ละตัว
+    มีรูปแบบและลักษณะอย่างไร
+</p>
+
+<p>
+    การเลือกชนิดข้อมูลให้เหมาะสม
+    มีความสำคัญต่อการทำงานของโปรแกรม
+    เพราะช่วยให้สามารถจัดเก็บและประมวลผลข้อมูลได้ถูกต้อง
+    รวมถึงช่วยให้โปรแกรมมีโครงสร้างที่ชัดเจน
+    และสามารถดูแลรักษาได้ง่าย
+</p>
+
+
+<!-- =====================================================
+     5.1 Data Type
+===================================================== -->
+
+<h4>
+    5.1 ชนิดของข้อมูล (Data Type)
+</h4>
+
+<p>
+    ชนิดข้อมูลในภาษาจาวาแบ่งเป็น
+    2 ประเภทใหญ่ ๆ คือ
+    <b>Primitive Data Type</b>
+    และ
+    <b>Reference Data Type</b>
+    โดยทั้งสองประเภทมีลักษณะการจัดเก็บ
+    และการนำข้อมูลไปใช้งานแตกต่างกัน
+</p>
+
+
+<h4>
+    5.1.1 ชนิดข้อมูลแบบพื้นฐาน
+    (Primitive Data Type)
+</h4>
+
+<p>
+    หมายถึงชนิดข้อมูลพื้นฐานของภาษา Java
+    ใช้สำหรับเก็บค่าข้อมูลโดยตรง
+    โดยมีทั้งหมด 8 ชนิด ได้แก่
+    boolean, byte, short, int, long,
+    float, double และ char
+</p>
+
+<div class="table-wrap">
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        ชนิดข้อมูล
+    </th>
+
+    <th>
+        ขนาด (bit)
+    </th>
+
+    <th>
+        ค่าที่เก็บได้
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        boolean
+    </td>
+
+    <td>
+        JVM กำหนด
+    </td>
+
+    <td>
+        true หรือ false
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        byte
+    </td>
+
+    <td>
+        8
+    </td>
+
+    <td>
+        -128 ถึง 127
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        short
+    </td>
+
+    <td>
+        16
+    </td>
+
+    <td>
+        -32768 ถึง 32767
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        int
+    </td>
+
+    <td>
+        32
+    </td>
+
+    <td>
+        -2147483648 ถึง 2147483647
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        long
+    </td>
+
+    <td>
+        64
+    </td>
+
+    <td>
+        -9223372036854775808
+        ถึง
+        9223372036854775807
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        float
+    </td>
+
+    <td>
+        32
+    </td>
+
+    <td>
+        ประมาณ -3.4E38 ถึง 3.4E38
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        double
+    </td>
+
+    <td>
+        64
+    </td>
+
+    <td>
+        ประมาณ -1.7E308 ถึง 1.7E308
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        char
+    </td>
+
+    <td>
+        16
+    </td>
+
+    <td>
+        0 ถึง 65535
+    </td>
+
+</tr>
+
+</table>
+
+</div>
+
+<p>
+    ในการเลือกใช้งานชนิดข้อมูล
+    ควรพิจารณาจากลักษณะของข้อมูล
+    เช่น หากเป็นจำนวนเต็มทั่วไป
+    มักใช้ <b>int</b>
+    หากเป็นจำนวนที่มีทศนิยม
+    สามารถใช้ <b>double</b>
+    และหากเป็นค่าที่มีเพียงสองสถานะ
+    เช่น ใช่หรือไม่ใช่ สามารถใช้ <b>boolean</b>
+</p>
+
+
+<h4>
+    5.1.2 ชนิดข้อมูลแบบอ้างอิง
+    (Reference Data Type)
+</h4>
+
+<p>
+    ชนิดข้อมูลแบบอ้างอิงมีความแตกต่างกับชนิดข้อมูลพื้นฐาน
+    เนื่องจากตัวแปรประเภทนี้ใช้เก็บค่าที่เป็นการอ้างอิง
+    ไปยัง Object ที่อยู่ในหน่วยความจำ
+    ตัวอย่างเช่น String, Array, List, Set และ Stack
+</p>
+
+<p>
+    ข้อมูลประเภท Reference Data Type
+    มักเกี่ยวข้องกับ Object ที่สร้างขึ้นจาก Class
+    จึงสามารถมีคุณสมบัติและเมธอดต่าง ๆ
+    สำหรับนำข้อมูลไปใช้งาน
+    ตัวอย่างเช่น String
+    สามารถใช้เมธอดสำหรับตรวจสอบความยาวข้อความ
+    เปรียบเทียบข้อความ หรือจัดการข้อมูลข้อความได้
+</p>
+
+<div class="info-box">
+
+    <b>💡 การจัดเก็บข้อมูลแบบอ้างอิง</b>
+
+    <br><br>
+
+    <b>Execution Stack</b>
+    เก็บค่าอ้างอิงที่ชี้ไปยัง Heap Memory
+
+    <br><br>
+
+    <b>Heap Memory</b>
+    เก็บ Object
+    ที่สร้างขึ้นมาจาก Class
+
+    <br><br>
+
+    การเข้าใจแนวคิดเรื่อง Stack และ Heap
+    จะช่วยให้ผู้เรียนเข้าใจการทำงานของตัวแปร
+    และ Object ในภาษา Java ได้ดีขึ้น
+
+</div>
+
+
+<!-- =====================================================
+     5.2 Variable
+===================================================== -->
+
+<h4>
+    5.2 ตัวแปร (Variable)
+</h4>
+
+<p>
+    ตัวแปรคือชื่อที่ตั้งหรือนิยามขึ้นมา
+    เพื่อใช้สำหรับเก็บข้อมูล
+    สำหรับนำไปใช้ในโปรแกรม
+    โดยตัวแปรควรตั้งชื่อให้สอดคล้อง
+    กับงานที่กำลังทำ
+</p>
+
+<p>
+    ตัวแปรสามารถกำหนดค่าในตอนประกาศ
+    หรือกำหนดค่าภายหลังได้
+    และในระหว่างการทำงานของโปรแกรม
+    ค่าที่เก็บอยู่ในตัวแปรสามารถเปลี่ยนแปลงได้
+    หากตัวแปรนั้นไม่ได้ถูกกำหนดเป็นค่าคงที่ด้วย <b>final</b>
+</p>
+
+<p>
+    ตัวแปรแต่ละตัวจะมีทั้งชื่อ
+    ชนิดข้อมูล และค่า
+    โดยชนิดข้อมูลจะกำหนดว่าตัวแปรสามารถเก็บข้อมูลประเภทใด
+    ส่วนชื่อของตัวแปรจะใช้สำหรับอ้างถึงข้อมูลนั้น
+    ภายในขอบเขตที่ตัวแปรสามารถเข้าถึงได้
+</p>
+
+
+<h4>
+    5.2.1 ประเภทของตัวแปรพื้นฐาน
+</h4>
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        ประเภท
+    </th>
+
+    <th>
+        ชนิดข้อมูล
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        Character
+    </td>
+
+    <td>
+        char, String
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        Floating-Point
+    </td>
+
+    <td>
+        float, double
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        Integers
+    </td>
+
+    <td>
+        byte, short, int, long
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        Boolean
+    </td>
+
+    <td>
+        boolean
+    </td>
+
+</tr>
+
+</table>
+
+<p>
+    การเลือกประเภทตัวแปรควรสัมพันธ์กับข้อมูลที่ต้องการจัดเก็บ
+    เช่น คะแนน อายุ หรือจำนวนสินค้า
+    สามารถใช้ int ได้เมื่อข้อมูลเป็นจำนวนเต็ม
+    หากเป็นราคาหรือข้อมูลที่มีทศนิยม
+    อาจเลือกใช้ double
+    ส่วนข้อมูลที่เป็นสถานะ เช่น เปิดหรือปิด
+    สามารถใช้ boolean ได้
+</p>
+
+
+<!-- =====================================================
+     5.2.2 การตั้งชื่อ
+===================================================== -->
+
+<h4>
+    5.2.2 รูปแบบการตั้งชื่อ
+    (กรณีเขียนโปรแกรมด้วย Text Editor VS Code)
+</h4>
+
+<p>
+    การตั้งชื่อเป็นส่วนสำคัญของการเขียนโปรแกรม
+    เพราะชื่อที่ดีจะช่วยให้ผู้เขียนโปรแกรม
+    เข้าใจหน้าที่ของ Class ตัวแปร
+    และค่าคงที่ได้โดยไม่จำเป็นต้องอ่านคำสั่งทั้งหมด
+    ควรเลือกชื่อที่สื่อความหมาย
+    และใช้รูปแบบการตั้งชื่อให้สม่ำเสมอ
+</p>
+
+<ol>
+
+    <li>
+        ชื่อ Class
+        ควรกำหนดตัวอักษรแรกเป็นตัวพิมพ์ใหญ่
+        และหากชื่อประกอบด้วยหลายคำ
+        สามารถใช้ตัวพิมพ์ใหญ่ขึ้นต้นคำใหม่
+        เช่น <b>StudentData</b>
+    </li>
+
+    <li>
+        ชื่อตัวแปร
+        แนะนำให้ขึ้นต้นด้วยตัวพิมพ์เล็ก
+        และหากมีหลายคำสามารถใช้รูปแบบ
+        camelCase เช่น <b>studentName</b>
+        หรือ <b>totalScore</b>
+    </li>
+
+    <li>
+        ค่าคงที่
+        โดยทั่วไปนิยมใช้ตัวพิมพ์ใหญ่
+        และใช้เครื่องหมายขีดล่าง
+        เพื่อแบ่งคำ เช่น <b>MAX_SCORE</b>
+    </li>
+
+</ol>
+
+
+<h4>
+    5.2.3 รูปแบบการประกาศตัวแปร
+</h4>
+
+<p>
+    การประกาศตัวแปรในภาษา Java
+    สามารถเขียนได้ในรูปแบบ
+    ชนิดข้อมูล ตามด้วยชื่อตัวแปร
+    และสามารถกำหนดค่าเริ่มต้นได้ทันที
+</p>
+
+<div class="code-wrap">
+
+    <button class="copy" onclick="copyCode(this)">
+        คัดลอก
+    </button>
+
+    <pre><code>ชนิดข้อมูล ชื่อตัวแปร;
+
+ชนิดข้อมูล ชื่อตัวแปร = ค่าเริ่มต้น;</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+    <img
+        src="images/chapter4/step20_create_class.png"
+        alt="ตัวอย่างการประกาศตัวแปร"
+    >
+
+</div>
+
+
+<h4>
+    5.2.4 กฎการตั้งชื่อตัวแปร
+</h4>
+
+<p>
+    การตั้งชื่อตัวแปรต้องเป็นไปตามกฎของภาษา Java
+    เพื่อให้ Compiler สามารถตรวจสอบและแปลโปรแกรมได้อย่างถูกต้อง
+    นอกจากนี้ควรเลือกชื่อที่สื่อความหมาย
+    และหลีกเลี่ยงการใช้ชื่อสั้นจนไม่ทราบความหมาย
+</p>
+
+<ol>
+
+    <li>
+        ขึ้นต้นด้วยตัวอักษร A-Z หรือ a-z
+        หรือเครื่องหมาย _
+    </li>
+
+    <li>
+        ตัวอักษรถัดไปสามารถเป็นตัวอักษร
+        ตัวเลข หรือ _
+    </li>
+
+    <li>
+        ห้ามใช้คำสงวนของ Java
+        เป็นชื่อตัวแปร
+    </li>
+
+    <li>
+        ห้ามขึ้นต้นด้วยตัวเลข
+    </li>
+
+    <li>
+        Java แยกความแตกต่างระหว่างตัวพิมพ์เล็ก
+        และตัวพิมพ์ใหญ่
+        เช่น <b>score</b> และ <b>Score</b>
+        ถือเป็นชื่อคนละตัวกัน
+    </li>
+
+</ol>
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        ชนิดตัวแปร
+    </th>
+
+    <th>
+        ชื่อตัวแปร
+    </th>
+
+    <th>
+        เก็บค่า
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        String
+    </td>
+
+    <td>
+        name
+    </td>
+
+    <td>
+        ชื่อ
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        String
+    </td>
+
+    <td>
+        nameStudent
+    </td>
+
+    <td>
+        ชื่อนักเรียน
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        int
+    </td>
+
+    <td>
+        salary
+    </td>
+
+    <td>
+        เงินเดือน
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        int
+    </td>
+
+    <td>
+        score
+    </td>
+
+    <td>
+        คะแนน
+    </td>
+
+</tr>
+
+</table>
+
+
+<!-- =====================================================
+     5.2.6 Global / Local
+===================================================== -->
+
+<h4>
+    5.2.5 การใช้คำสั่งแสดงผลตัวแปร
+</h4>
+
+<p>
+    เช่น ต้องการเขียนโปรแกรม
+    กำหนดค่าคะแนนย่อยเรื่องตัวแปร
+    กำหนดชื่อตัวแปร <b>scoreVariable</b>
+    กำหนดค่าเท่ากับ 25
+    และกำหนดค่าคะแนนย่อยเรื่องการแสดงผลข้อมูล
+    โดยกำหนดชื่อตัวแปร <b>scoreDisplay</b>
+    กำหนดค่าเท่ากับ 20
+</p>
+
+<div class="code-wrap">
+
+<button class="copy" onclick="copyCode(this)">
+    คัดลอก
+</button>
+
+<pre><code>int scoreVariable = 25;
+int scoreDisplay = 20;
+
+System.out.println("คะแนนย่อยเรื่องตัวแปร = " + scoreVariable);
+System.out.println("คะแนนย่อยเรื่องการแสดงผลข้อมูล = " + scoreDisplay);</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step21_create_class.png"
+        alt="ตัวอย่างการแสดงผลตัวแปร"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<div class="tip">
+
+<p>
+   บรรทัดที่ 1 กำหนดชื่อตัวแปร
+   <b>scoreVariable</b>
+   และกำหนดค่าเท่ากับ 25
+</p>
+
+<p>
+   บรรทัดที่ 2 กำหนดชื่อตัวแปร
+   <b>scoreDisplay</b>
+   และกำหนดค่าเท่ากับ 20
+</p>
+
+<p>
+   คำสั่ง System.out.println()
+   ใช้สำหรับแสดงข้อมูลของตัวแปร
+   โดยสามารถใช้เครื่องหมาย <b>+</b>
+   เชื่อมข้อความกับค่าที่เก็บอยู่ในตัวแปร
+</p>
+
+<p>
+   การเชื่อมข้อความกับตัวแปรด้วยเครื่องหมาย +
+   เรียกว่า String Concatenation
+   ซึ่งช่วยให้สามารถแสดงข้อความอธิบาย
+   พร้อมกับค่าของตัวแปรในบรรทัดเดียวกันได้
+</p>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step22_create_class.png"
+        alt="ผลลัพธ์การแสดงตัวแปร"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ผลลัพธ์
+        </span>
+
+    </div>
+
+</div>
+
+<p>
+    ข้อสังเกต จากผลลัพธ์
+    หากแสดงเพียงตัวเลข เช่น 25 และ 20
+    ผู้ที่อ่านผลลัพธ์อาจไม่สามารถทราบได้ทันที
+    ว่าตัวเลขดังกล่าวเกี่ยวข้องกับข้อมูลอะไร
+    ดังนั้นควรเพิ่มข้อความอธิบาย
+    เพื่อให้ผลลัพธ์มีความหมายและเข้าใจได้ง่ายขึ้น
+</p>
+
+<p>
+    จากตัวอย่างสามารถเพิ่มข้อความ
+    เช่น คะแนนย่อยเรื่องตัวแปร
+    และคะแนนย่อยเรื่องการแสดงผลข้อมูล
+    โดยใช้เครื่องหมาย <b>+</b>
+    เชื่อมข้อความกับตัวแปร
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step23_create_class.png"
+        alt="ตัวอย่างการเชื่อมข้อความกับตัวแปร"
+    >
+
+    <div class="step-content">
+
+        <p class="step-description">
+            ระหว่างข้อความ String
+            กับค่าที่ต้องการแสดงผลจากตัวแปร
+            ให้ใช้เครื่องหมาย <b>+</b>
+            เพื่อเชื่อมข้อมูลเข้าด้วยกัน
+            ซึ่งเป็นรูปแบบสำคัญที่ใช้ในการแสดงผลข้อมูลใน Java
+        </p>
+
+    </div>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter4/step24_create_class.png"
+        alt="ผลลัพธ์การเชื่อมข้อความกับตัวแปร"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ผลลัพธ์
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     5.2.7 Global / Local
+===================================================== -->
+
+<h4>
+    5.2.7 ชนิดของตัวแปร
+</h4>
+
+<p>
+    ตัวแปรยังสามารถพิจารณาตามขอบเขตการใช้งาน
+    หรือ Scope ได้
+    โดยขอบเขตจะกำหนดว่าตัวแปรสามารถถูกเรียกใช้งาน
+    จากส่วนใดของโปรแกรมได้บ้าง
+    การเข้าใจ Scope มีความสำคัญ
+    เพราะช่วยป้องกันการเรียกใช้ตัวแปรผิดตำแหน่ง
+    และช่วยจัดโครงสร้างโปรแกรมให้เป็นระบบ
+</p>
+
+<table class="operator-table">
+
+<tr>
+
+    <th>
+        ประเภท
+    </th>
+
+    <th>
+        ความหมาย
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>Global Variable</b>
+    </td>
+
+    <td>
+        ตัวแปรที่ประกาศไว้นอกฟังก์ชัน
+        ซึ่งสามารถนำไปใช้งานในส่วนต่าง ๆ
+        ตามขอบเขตที่กำหนด
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        <b>Local Variable</b>
+    </td>
+
+    <td>
+        ตัวแปรที่ประกาศภายในฟังก์ชัน
+        และสามารถใช้งานภายในขอบเขต
+        ของฟังก์ชันหรือบล็อกนั้น
+    </td>
+
+</tr>
+
+</table>
+
+<p>
+    ในการเขียนโปรแกรมควรพิจารณาขอบเขตของตัวแปร
+    ให้เหมาะสมกับการใช้งาน
+    หากข้อมูลจำเป็นต้องใช้เฉพาะในเมธอดใดเมธอดหนึ่ง
+    ควรประกาศเป็น Local Variable
+    เพื่อให้ขอบเขตของข้อมูลชัดเจน
+    และลดโอกาสที่จะเกิดผลกระทบกับส่วนอื่นของโปรแกรม
+</p>
+
+
+<!-- =====================================================
+     5.3 Constant
+===================================================== -->
+
+<h4>
+    5.3 ค่าคงที่
+</h4>
+
+<p>
+    ค่าคงที่คือค่าที่กำหนดไว้
+    และไม่ต้องการให้มีการเปลี่ยนแปลง
+    ระหว่างการทำงานของโปรแกรม
+    ในภาษา Java สามารถใช้คำสั่ง <b>final</b>
+    เพื่อกำหนดตัวแปรให้ไม่สามารถกำหนดค่าใหม่ได้
+    หลังจากได้รับค่าแล้ว
+</p>
+
+<p>
+    ค่าคงที่เหมาะสำหรับข้อมูลที่มีค่าคงเดิม
+    เช่น จำนวนวันในหนึ่งสัปดาห์
+    ค่าคะแนนเต็ม หรือค่าที่ใช้เป็นขนาดของข้อมูล
+    การใช้ค่าคงที่ช่วยลดการเขียนค่าซ้ำ ๆ
+    และช่วยให้สามารถแก้ไขค่าที่ต้องการใช้ร่วมกัน
+    ได้ง่ายขึ้น
+</p>
+
+
+<h4>
+    5.3.1 รูปแบบการประกาศค่าคงที่
+</h4>
+
+<div class="code-wrap">
+
+<button class="copy" onclick="copyCode(this)">
+    คัดลอก
+</button>
+
+<pre><code>final ชนิดตัวแปร ชื่อตัวแปร;</code></pre>
+
+</div>
+
+
+<h4>
+    5.3.2 ตัวอย่างค่าคงที่
+</h4>
+
+<div class="code-wrap">
+
+<button class="copy" onclick="copyCode(this)">
+    คัดลอก
+</button>
+
+<pre><code>final int SIZE = 50;
+
+System.out.println(SIZE);</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง <b>SIZE</b>
+    เป็นค่าคงที่ชนิด int
+    และกำหนดค่าเริ่มต้นเป็น 50
+    เมื่อโปรแกรมนำ SIZE ไปใช้งาน
+    จะสามารถอ่านค่าดังกล่าวได้
+    แต่ไม่ควรกำหนดค่าใหม่ให้กับตัวแปรที่ประกาศด้วย final
+</p>
+
+<div class="warning-box">
+
+    <b>⚠️ ข้อควรจำ</b>
+
+    <br><br>
+
+    เมื่อกำหนดตัวแปรด้วยคำสั่ง
+    <b>final</b>
+    แล้ว ไม่สามารถกำหนดค่าใหม่ให้กับตัวแปรนั้นได้
+
+    <br><br>
+
+    การตั้งชื่อค่าคงที่โดยทั่วไปนิยมใช้
+    <b>ตัวพิมพ์ใหญ่</b>
+    และใช้เครื่องหมาย <b>_</b>
+    เพื่อแบ่งคำ เช่น
+    <b>MAX_SCORE</b>
+    หรือ
+    <b>DEFAULT_SIZE</b>
+
+</div>
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<h3>
+    📌 สรุปบทเรียน
+</h3>
+
+<div class="summary">
+
+    <p>
+        การเขียนโปรแกรมภาษาจาวาเริ่มต้นจากการสร้าง
+        <b>Class</b>
+        และกำหนดเมธอด
+        <b>main()</b>
+        เพื่อเป็นจุดเริ่มต้นการทำงานของโปรแกรม
+        โดยคำสั่งต่าง ๆ จะถูกเขียนอยู่ภายในขอบเขต
+        ของ Class และเมธอดที่เกี่ยวข้อง
+    </p>
+
+    <p>
+        การแสดงผลทางหน้าจอสามารถใช้
+        <b>System.out.print()</b>
+        และ
+        <b>System.out.println()</b>
+        โดย print() จะไม่ขึ้นบรรทัดใหม่
+        ส่วน println() จะเลื่อนไปยังบรรทัดใหม่
+        หลังจากแสดงข้อมูล
+    </p>
+
+    <p>
+        ผู้เรียนสามารถใช้
+        <b>Escape Sequence</b>
+        เพื่อควบคุมรูปแบบการแสดงผล
+        เช่น <b>\n</b> สำหรับขึ้นบรรทัดใหม่
+        และ <b>\t</b> สำหรับการเว้นระยะ Tab
+    </p>
+
+    <p>
+        การเขียนหมายเหตุหรือ Comment
+        สามารถใช้ <b>//</b>
+        สำหรับหมายเหตุหนึ่งบรรทัด
+        และ <b>/* ... */</b>
+        สำหรับหมายเหตุหลายบรรทัด
+        ซึ่งช่วยให้ Source Code อ่านง่าย
+        และสามารถดูแลรักษาได้สะดวก
+    </p>
+
+    <p>
+        ภาษาจาวามีชนิดข้อมูล
+        <b>Primitive Data Type</b>
+        และ
+        <b>Reference Data Type</b>
+        โดย Primitive Data Type
+        ประกอบด้วยข้อมูลพื้นฐาน 8 ชนิด
+        ส่วน Reference Data Type
+        ใช้สำหรับอ้างอิง Object และข้อมูลประเภทต่าง ๆ
+        เช่น String และ Array
+    </p>
+
+    <p>
+        ตัวแปรใช้สำหรับเก็บข้อมูลที่โปรแกรมต้องนำไปใช้งาน
+        และสามารถกำหนดค่าใหม่ได้ตามการทำงานของโปรแกรม
+        การตั้งชื่อตัวแปรควรสื่อความหมาย
+        และต้องปฏิบัติตามกฎการตั้งชื่อของภาษา Java
+    </p>
+
+    <p>
+        การแสดงค่าของตัวแปรร่วมกับข้อความ
+        สามารถใช้เครื่องหมาย <b>+</b>
+        เพื่อเชื่อม String กับค่าของตัวแปร
+        ทำให้ผลลัพธ์มีความชัดเจน
+        และช่วยให้ผู้ใช้งานเข้าใจข้อมูลที่แสดงได้ง่ายขึ้น
+    </p>
+
+    <p>
+        ตัวแปรมีขอบเขตการใช้งาน
+        ซึ่งสามารถพิจารณาได้จากตำแหน่งที่ประกาศตัวแปร
+        เช่น Local Variable
+        ที่ใช้งานภายในขอบเขตที่กำหนด
+        การกำหนด Scope อย่างเหมาะสม
+        ช่วยให้โปรแกรมมีโครงสร้างที่เป็นระเบียบ
+    </p>
+
+    <p>
+        ค่าคงที่สามารถกำหนดด้วยคำสั่ง
+        <b>final</b>
+        เพื่อป้องกันการกำหนดค่าใหม่
+        หลังจากได้รับค่าแล้ว
+        และโดยทั่วไปนิยมตั้งชื่อค่าคงที่
+        ด้วยตัวอักษรพิมพ์ใหญ่
+        เพื่อให้สามารถสังเกตได้ง่าย
+    </p>
+
+    <p>
+        ความรู้เกี่ยวกับ Class, main(),
+        การแสดงผล ชนิดข้อมูล ตัวแปร
+        ขอบเขตของตัวแปร และค่าคงที่
+        เป็นพื้นฐานสำคัญสำหรับการเขียนโปรแกรม Java
+        ผู้เรียนควรฝึกเขียนและทดลองแก้ไขค่าต่าง ๆ
+        เพื่อทำความเข้าใจการทำงานของโปรแกรม
+        และสามารถนำความรู้ไปประยุกต์ใช้
+        กับโปรแกรมที่มีความซับซ้อนมากขึ้นได้
+    </p>
+
+</div>
+
+
+
+    <!-- ==================================================
+         BOTTOM NAVIGATION
+    ================================================== -->
+
+    
+<nav class="chapter-nav">
+
+    <!-- ไปบทที่ 4 -->
+    <a href="chapter_03.html">
+        ← บทที่ 3
+    </a>
+
+    <!-- กลับหน้าหลัก -->
+    <a href="index.html">
+        🏠 กลับหน้าหลัก
+    </a>
+
+    <!-- ไปบทที่ 6 -->
+    <a href="chapter_05.html">
+        บทที่ 5 →
+    </a>
+
+</nav>
+
+
+</section>
+
+</main>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <h3>Java Learning Guide</h3>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+      บทที่ 4 :การสร้างและเรียกใช้งาน Classes
+
+
+    </p>
+
+    <p>
+        © 2026 Java Learning Guide
+    </p>
+
+</footer>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+    function copyCode(button) {
+
+        const code =
+            button
+                .parentElement
+                .querySelector("code");
+
+        if (!code) {
+            return;
+        }
+
+
+        const text =
+            code.innerText;
+
+
+        navigator.clipboard
+            .writeText(text)
+
+            .then(function () {
+
+                const oldText =
+                    button.innerText;
+
+                button.innerText =
+                    "คัดลอกแล้ว";
+
+
+                setTimeout(function () {
+
+                    button.innerText =
+                        oldText;
+
+                }, 1500);
+
+            })
+
+            .catch(function () {
+
+                alert(
+                    "ไม่สามารถคัดลอกโค้ดได้"
+                );
+
+            });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

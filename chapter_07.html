@@ -1,0 +1,2812 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>
+        บทที่ 7 Object-Oriented Programming (OOP) |
+        Java Learning Guide
+    </title>
+
+<style>
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        "Tahoma",
+        "Noto Sans Thai",
+        sans-serif;
+
+    background: #eef7ff;
+
+    color: #1f2937;
+
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   HEADER
+================================================== */
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f4c81,
+            #1976d2,
+            #42a5f5
+        );
+
+    color: white;
+
+    padding: 38px 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, .15);
+}
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 36px;
+
+    font-weight: bold;
+}
+
+header p {
+
+    margin: 8px 0 0;
+
+    font-size: 17px;
+
+    opacity: .95;
+}
+
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+.chapter-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    height: 70px;
+
+    margin: 0;
+
+    padding: 0 34px;
+
+    background: transparent;
+
+    pointer-events: none;
+}
+
+
+.chapter-nav a {
+
+    pointer-events: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 130px;
+
+    height: 58px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    border-radius:
+        0 0 12px 12px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, .10);
+
+    transition:
+        all .2s ease;
+}
+
+
+.chapter-nav a:nth-child(2) {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    min-width: 215px;
+
+    border-radius:
+        0 0 12px 12px;
+}
+
+
+.chapter-nav a:hover {
+
+    color: #0f4c81;
+
+    background: #f8fcff;
+
+    transform:
+        translateY(2px);
+}
+
+
+.chapter-nav a:nth-child(2):hover {
+
+    transform:
+        translateX(-50%)
+        translateY(2px);
+}
+
+
+/* ==================================================
+   MAIN
+================================================== */
+
+main {
+
+    width: 100%;
+
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding:
+        0 20px 30px;
+}
+
+
+/* ==================================================
+   CHAPTER
+================================================== */
+
+.chapter {
+
+    width: 100%;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 4px 18px
+        rgba(0, 0, 0, .07);
+
+    border:
+        1px solid #dbeafe;
+}
+
+
+/* ==================================================
+   CHAPTER HEAD
+================================================== */
+
+.chapter-head {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom:
+        2px solid #e0f2fe;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 28px;
+}
+
+
+.chapter-head span {
+
+    background: #1769aa;
+
+    color: white;
+
+    padding:
+        7px 16px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.chapter-head h2 {
+
+    margin: 0;
+
+    color: #0f4c81;
+
+    font-size: 28px;
+}
+
+
+/* ==================================================
+   CONTENT
+================================================== */
+
+.chapter h3 {
+
+    color: #0369a1;
+
+    margin-top: 32px;
+
+    margin-bottom: 10px;
+
+    font-size: 22px;
+}
+
+
+.chapter h4 {
+
+    color: #0f4c81;
+
+    margin-top: 20px;
+
+    margin-bottom: 6px;
+}
+
+
+.chapter p {
+
+    margin-top: 8px;
+
+    margin-bottom: 12px;
+}
+
+
+.chapter ul,
+.chapter ol {
+
+    padding-left: 28px;
+}
+
+
+.chapter li {
+
+    margin-bottom: 7px;
+}
+
+
+/* ==================================================
+   BOX
+================================================== */
+
+.info-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fbff
+        );
+
+    border-left:
+        5px solid #1976d2;
+
+    padding:
+        16px 20px;
+
+    border-radius: 9px;
+
+    margin: 18px 0;
+}
+
+
+.warning-box {
+
+    background: #fff7ed;
+
+    border-left:
+        5px solid #f97316;
+
+    padding:
+        16px 20px;
+
+    border-radius: 9px;
+
+    margin: 18px 0;
+}
+
+
+.success-box {
+
+    background: #f0fdf4;
+
+    border-left:
+        5px solid #22c55e;
+
+    padding:
+        16px 20px;
+
+    border-radius: 9px;
+
+    margin: 18px 0;
+}
+
+
+.summary {
+
+    background: #f0f9ff;
+
+    border-left:
+        5px solid #0ea5e9;
+
+    padding:
+        17px 20px;
+
+    border-radius: 8px;
+
+    margin-top: 15px;
+}
+
+
+/* ==================================================
+   LEARNING GOAL
+================================================== */
+
+.learning-goal {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #e0f2fe
+        );
+
+    border-left:
+        5px solid #1976d2;
+
+    padding:
+        16px 20px;
+
+    border-radius: 10px;
+
+    margin:
+        20px 0;
+
+    color: #0f4c81;
+}
+
+
+/* ==================================================
+   TIP
+================================================== */
+
+.tip {
+
+    background: #f8fafc;
+
+    border:
+        1px solid #dbeafe;
+
+    border-left:
+        5px solid #60a5fa;
+
+    padding:
+        16px 20px;
+
+    border-radius: 10px;
+
+    margin:
+        18px 0;
+
+    color: #475569;
+}
+
+
+/* ==================================================
+   STEP IMAGE
+================================================== */
+
+.step-item {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 760px;
+
+    margin:
+        30px auto 35px;
+
+    padding: 20px;
+
+    background: #f8fbff;
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, .06);
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+.step-item img {
+
+    display: block;
+
+    width: auto;
+
+    max-width: 100%;
+
+    height: auto;
+
+    margin:
+        0 auto;
+
+    border-radius: 10px;
+
+    border:
+        1px solid #cbd5e1;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, .12);
+
+    object-fit: contain;
+
+    background: white;
+}
+
+
+.step-content {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding-top: 15px;
+
+    border-top:
+        2px solid #dbeafe;
+
+    text-align: left;
+}
+
+
+.step-number {
+
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1769aa,
+            #1976d2
+        );
+
+    color: white;
+
+    padding:
+        5px 14px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+/* ==================================================
+   TABLE
+================================================== */
+
+.table-wrap {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    margin:
+        20px 0;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+
+th {
+
+    background: #1769aa;
+
+    color: white;
+
+    padding: 12px;
+
+    text-align: left;
+}
+
+
+td {
+
+    border:
+        1px solid #dbeafe;
+
+    padding: 12px;
+
+    vertical-align: top;
+}
+
+
+tr:nth-child(even) {
+
+    background: #f8fbff;
+}
+
+
+/* ==================================================
+   FLOW
+================================================== */
+
+.flow {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin:
+        25px 0;
+}
+
+
+.flow-box {
+
+    background: #eff6ff;
+
+    border:
+        2px solid #60a5fa;
+
+    border-radius: 12px;
+
+    padding:
+        14px 18px;
+
+    text-align: center;
+
+    min-width: 145px;
+
+    font-weight: bold;
+
+    color: #0f4c81;
+}
+
+
+.flow-arrow {
+
+    font-size: 25px;
+
+    color: #1976d2;
+
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   CODE
+================================================== */
+
+.code-wrap {
+
+    position: relative;
+
+    width: 100%;
+
+    background: #0f172a;
+
+    border-radius: 12px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    margin:
+        18px 0;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, .12);
+}
+
+
+pre {
+
+    margin: 0;
+
+    padding: 24px;
+
+    padding-top: 52px;
+
+    color: #e2e8f0;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    white-space: pre;
+
+    text-align: left;
+}
+
+
+pre code {
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+}
+
+
+/* ==================================================
+   COPY BUTTON
+================================================== */
+
+.copy {
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 10px;
+
+    border: 0;
+
+    background: #334155;
+
+    color: white;
+
+    padding:
+        8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+    font-family:
+        "Tahoma",
+        "Noto Sans Thai",
+        sans-serif;
+
+    font-size: 14px;
+
+    transition:
+        .2s ease;
+}
+
+
+.copy:hover {
+
+    background: #475569;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.copy:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* ==================================================
+   NEXT BOX
+================================================== */
+
+.next-box {
+
+    margin-top: 35px;
+
+    padding:
+        25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fbff
+        );
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+
+.next-box h3 {
+
+    margin-top: 0;
+}
+
+
+.next-button {
+
+    display: inline-block;
+
+    padding:
+        10px 20px;
+
+    background: #1769aa;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition:
+        .2s ease;
+}
+
+
+.next-button:hover {
+
+    background: #0f4c81;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+
+    text-align: center;
+
+    padding: 32px;
+
+    background: #0f4c81;
+
+    color: white;
+
+    margin-top: 20px;
+}
+
+
+footer h3 {
+
+    margin-top: 0;
+}
+
+
+footer p {
+
+    margin:
+        5px 0;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 800px) {
+
+    .chapter-nav {
+
+        height: auto;
+
+        padding:
+            0 10px;
+
+        gap: 8px;
+    }
+
+
+    .chapter-nav a {
+
+        min-width: 0;
+
+        flex: 1;
+
+        height: 52px;
+
+        padding:
+            0 8px;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        border-radius:
+            0 0 10px 10px;
+    }
+
+
+    .chapter-nav a:nth-child(2) {
+
+        position: static;
+
+        transform: none;
+
+        min-width: 0;
+    }
+
+
+    .chapter-nav a:hover {
+
+        transform:
+            translateY(2px);
+    }
+
+
+    .chapter-nav a:nth-child(2):hover {
+
+        transform:
+            translateY(2px);
+    }
+
+
+    main {
+
+        padding:
+            0 12px 25px;
+    }
+
+
+    .chapter {
+
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+
+
+    .chapter-head {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap: 10px;
+    }
+
+
+    .chapter-head h2 {
+
+        font-size: 22px;
+    }
+
+
+    .chapter h3 {
+
+        font-size: 20px;
+    }
+
+
+    .flow {
+
+        flex-direction:
+            column;
+    }
+
+
+    .flow-arrow {
+
+        transform:
+            rotate(90deg);
+    }
+
+
+    pre {
+
+        font-size: 13px;
+
+        padding:
+            18px;
+
+        padding-top: 52px;
+    }
+
+
+    .table-wrap {
+
+        font-size: 14px;
+    }
+
+
+    .step-item {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 14px;
+
+        margin:
+            25px auto;
+    }
+
+
+    .step-item img {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        height: auto;
+
+        margin:
+            0 auto;
+    }
+
+
+    .copy {
+
+        right: 7px;
+
+        top: 7px;
+
+        padding:
+            7px 10px;
+
+        font-size: 12px;
+    }
+
+
+    footer {
+
+        padding:
+            25px 15px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 480px) {
+
+    header {
+
+        padding:
+            28px 15px;
+    }
+
+
+    header h1 {
+
+        font-size: 25px;
+    }
+
+
+    header p {
+
+        font-size: 14px;
+    }
+
+
+    .chapter {
+
+        padding: 15px;
+    }
+
+
+    .chapter-head h2 {
+
+        font-size: 20px;
+    }
+
+
+    .chapter h3 {
+
+        font-size: 19px;
+    }
+
+
+    .chapter-nav a {
+
+        font-size: 12px;
+
+        padding:
+            0 5px;
+    }
+
+
+    .step-item {
+
+        padding: 10px;
+    }
+
+
+    .step-content {
+
+        margin-top: 12px;
+
+        padding-top: 12px;
+    }
+
+
+    .copy {
+
+        right: 7px;
+
+        top: 7px;
+
+        padding:
+            7px 10px;
+
+        font-size: 12px;
+    }
+
+
+    pre {
+
+        padding:
+            15px;
+
+        padding-top: 48px;
+
+        font-size: 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <h1>
+        📘 JAVA LEARNING GUIDE
+    </h1>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+        บทที่ 7 :
+        Object-Oriented Programming (OOP)
+    </p>
+
+</header>
+
+
+<!-- ==================================================
+     NAVIGATION TOP
+================================================== -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_06.html">
+        ← บทที่ 6
+    </a>
+
+    <a href="chapters.html">
+        📚 บทเรียนทั้งหมด
+    </a>
+
+    <a href="index.html">
+        หน้าหลัก
+    </a>
+
+</nav>
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main>
+
+<section class="chapter">
+
+
+<!-- ==================================================
+     TITLE
+================================================== -->
+
+<div class="chapter-head">
+
+    <span>
+        บทที่ 7
+    </span>
+
+    <h2>
+        Object-Oriented Programming (OOP)
+    </h2>
+
+</div>
+
+
+<!-- ==================================================
+     7.1
+================================================== -->
+
+<h3>
+    7.1 ความรู้เบื้องต้นเกี่ยวกับ
+    Object-Oriented Programming
+</h3>
+
+<p>
+    Object-Oriented Programming หรือ
+    <b>OOP</b> คือแนวคิดในการเขียนโปรแกรม
+    ที่มองข้อมูลและการทำงานเป็นวัตถุหรือ
+    <b>Object</b> โดยแต่ละ Object จะมีข้อมูล
+    และพฤติกรรมที่เกี่ยวข้องกันอยู่ภายใน
+</p>
+
+<p>
+    ภาษา Java เป็นภาษาที่สนับสนุนแนวคิด OOP
+    อย่างเต็มรูปแบบ ทำให้สามารถสร้างโปรแกรม
+    ที่มีโครงสร้างชัดเจน สามารถนำกลับมาใช้ใหม่
+    และง่ายต่อการดูแลรักษา
+</p>
+
+
+<div class="learning-goal">
+
+    <b>🎯 เป้าหมายการเรียนรู้</b>
+
+    <br><br>
+
+    เมื่อจบบทนี้ ผู้เรียนสามารถ
+
+    <ul>
+
+        <li>
+            อธิบายแนวคิดของ Object-Oriented
+            Programming ได้
+        </li>
+
+        <li>
+            อธิบายความแตกต่างระหว่าง Class
+            และ Object ได้
+        </li>
+
+        <li>
+            สร้าง Class ในภาษา Java ได้
+        </li>
+
+        <li>
+            สร้างและเรียกใช้งาน Object ได้
+        </li>
+
+        <li>
+            ใช้ Constructor สำหรับกำหนดค่าเริ่มต้น
+            ให้ Object ได้
+        </li>
+
+        <li>
+            ใช้ Encapsulation เพื่อควบคุม
+            การเข้าถึงข้อมูลได้
+        </li>
+
+        <li>
+            อธิบายแนวคิด Inheritance,
+            Polymorphism และ Abstraction ได้
+        </li>
+
+    </ul>
+
+</div>
+
+
+<!-- ==================================================
+     7.2
+================================================== -->
+
+<h3>
+    7.2 Class คืออะไร?
+</h3>
+
+<p>
+    <b>Class</b> คือโครงสร้างหรือแบบพิมพ์เขียว
+    ที่ใช้กำหนดคุณสมบัติและพฤติกรรมของ Object
+</p>
+
+<p>
+    ภายใน Class สามารถประกอบด้วยตัวแปร
+    ซึ่งเรียกว่า <b>Attributes</b> หรือคุณสมบัติ
+    และเมธอด ซึ่งใช้กำหนดการทำงานของ Object
+</p>
+
+
+<div class="info-box">
+
+    <b>📌 ตัวอย่างแนวคิด</b>
+
+    <br><br>
+
+    หากต้องการสร้างโปรแกรมสำหรับจัดการข้อมูลนักเรียน
+    สามารถสร้าง Class ชื่อ <b>Student</b>
+    เพื่อกำหนดข้อมูล เช่น ชื่อ อายุ และคะแนน
+    รวมถึงกำหนดเมธอดสำหรับแสดงข้อมูลนักเรียน
+
+</div>
+
+
+<h4>
+    โครงสร้างพื้นฐานของ Class
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    String name;
+    int age;
+
+    void showInfo() {
+
+        System.out.println("ชื่อ: " + name);
+        System.out.println("อายุ: " + age);
+
+    }
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Student student = new Student();
+
+        student.name = "สมชาย";
+        student.age = 20;
+
+        student.showInfo();
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+<div class="step-item">
+
+    <img
+        src="images/chapter7/OOP01.png"
+        alt="ตัวอย่าง Class และ Object">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+
+<p>
+    จากตัวอย่าง Class <b>Student</b>
+    มีตัวแปร <b>name</b> และ <b>age</b>
+    สำหรับเก็บข้อมูล และมีเมธอด
+    <b>showInfo()</b> สำหรับแสดงข้อมูล
+</p>
+
+
+<!-- ==================================================
+     7.3
+================================================== -->
+
+<h3>
+    7.3 Object คืออะไร?
+</h3>
+
+<p>
+    <b>Object</b> คือสิ่งที่ถูกสร้างขึ้นจาก Class
+    โดย Class เปรียบเสมือนแบบพิมพ์เขียว
+    ส่วน Object คือสิ่งที่สร้างขึ้นตามแบบพิมพ์เขียวนั้น
+</p>
+
+
+<div class="flow">
+
+    <div class="flow-box">
+        Class
+        <br>
+        แบบพิมพ์เขียว
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        Object
+        <br>
+        สิ่งที่สร้างขึ้น
+    </div>
+
+</div>
+
+
+<h4>
+    การสร้าง Object
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    String name;
+    int age;
+
+    void showInfo() {
+
+        System.out.println("ชื่อ: " + name);
+        System.out.println("อายุ: " + age);
+
+    }
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Student student1 = new Student();
+
+        student1.name = "สมชาย";
+        student1.age = 20;
+
+        student1.showInfo();
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+<p>
+    คำสั่ง <b>new Student()</b>
+    ใช้สร้าง Object จาก Class Student
+    และตัวแปร <b>student1</b>
+    ใช้สำหรับอ้างอิง Object ที่สร้างขึ้น
+</p>
+
+
+<div class="step-item">
+
+    <img
+        src="images/chapter7/OOP02.png"
+        alt="ตัวอย่างการสร้าง Object">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="success-box">
+
+    <b>✅ ผลลัพธ์ตัวอย่าง</b>
+
+    <br><br>
+
+    ชื่อ: สมชาย
+
+    <br>
+
+    อายุ: 20
+
+</div>
+
+
+<!-- ==================================================
+     7.4
+================================================== -->
+
+<h3>
+    7.4 Attributes หรือคุณสมบัติของ Object
+</h3>
+
+<p>
+    <b>Attribute</b> คือ ตัวแปรที่อยู่ภายใน Class
+    และใช้เก็บข้อมูลหรือสถานะของ Object
+</p>
+
+<p>
+    ตัวอย่างเช่น Class Student
+    อาจมี Attribute สำหรับเก็บชื่อ อายุ
+    และคะแนนของนักเรียน
+</p>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    String name;
+    int age;
+    double score;
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Student student1 = new Student();
+
+        student1.name = "สมชาย";
+        student1.age = 20;
+        student1.score = 85.5;
+
+        System.out.println("ชื่อ: " + student1.name);
+        System.out.println("อายุ: " + student1.age);
+        System.out.println("คะแนน: " + student1.score);
+
+    }
+
+}</code></pre>
+
+</div>
+
+
+<div class="step-item">
+
+    <img
+        src="images/chapter7/OOP03.png"
+        alt="ตัวอย่าง Attributes">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+
+    <th>
+        Attribute
+    </th>
+
+    <th>
+        ชนิดข้อมูล
+    </th>
+
+    <th>
+        หน้าที่
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        name
+    </td>
+
+    <td>
+        String
+    </td>
+
+    <td>
+        เก็บชื่อของนักเรียน
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        age
+    </td>
+
+    <td>
+        int
+    </td>
+
+    <td>
+        เก็บอายุ
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        score
+    </td>
+
+    <td>
+        double
+    </td>
+
+    <td>
+        เก็บคะแนน
+    </td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- ==================================================
+     7.5
+================================================== -->
+
+<h3>
+    7.5 Method หรือพฤติกรรมของ Object
+</h3>
+
+<p>
+    <b>Method</b> คือ ชุดคำสั่งที่กำหนดพฤติกรรม
+    หรือการทำงานของ Object
+</p>
+
+<p>
+    Method สามารถรับข้อมูลเข้ามาประมวลผล
+    และสามารถส่งค่าผลลัพธ์กลับไปได้
+    ขึ้นอยู่กับรูปแบบของ Method
+</p>
+
+
+<h4>
+    ตัวอย่าง Method
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Calculator {
+
+    int add(int a, int b) {
+
+        return a + b;
+
+    }
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Calculator calculator = new Calculator();
+
+        int result = calculator.add(10, 20);
+
+        System.out.println("ผลบวก: " + result);
+
+    }
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+<img src="images/chapter7/OOP04.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<p>
+    Method <b>add()</b> รับตัวเลขจำนวนเต็ม 2 ค่า
+    แล้วนำมาบวกกัน จากนั้นส่งผลลัพธ์กลับด้วยคำสั่ง
+    <b>return</b>
+</p>
+
+
+<!-- ==================================================
+     7.6
+================================================== -->
+
+<h3>
+    7.6 Constructor
+</h3>
+
+<p>
+    <b>Constructor</b> คือเมธอดพิเศษที่ใช้กำหนดค่าเริ่มต้น
+    ให้กับ Object ในขณะที่ Object ถูกสร้างขึ้น
+</p>
+
+<p>
+    Constructor จะมีชื่อเหมือนกับชื่อ Class
+    และไม่มีการระบุชนิดข้อมูลที่ส่งกลับ
+</p>
+
+
+<h4>
+    ตัวอย่าง Constructor
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    String name;
+    int age;
+
+    Student(String name, int age) {
+
+        this.name = name;
+        this.age = age;
+
+    }
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+<img src="images/chapter7/OOP05.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<h4>
+    การเรียกใช้ Constructor
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>Student student1 =
+    new Student("สมชาย", 20);</code></pre>
+
+</div>
+
+
+<div class="tip">
+
+    💡 Constructor จะถูกเรียกโดยอัตโนมัติ
+    เมื่อมีการสร้าง Object ด้วยคำสั่ง <b>new</b>
+
+</div>
+
+
+<!-- ==================================================
+     7.7
+================================================== -->
+
+<h3>
+    7.7 คำสั่ง this
+</h3>
+
+<p>
+    คำว่า <b>this</b> ใช้สำหรับอ้างอิงถึง Object
+    ปัจจุบันที่กำลังทำงานอยู่
+</p>
+
+<p>
+    มักพบการใช้ <b>this</b>
+    เมื่อชื่อ Parameter และชื่อ Attribute
+    มีชื่อเหมือนกัน
+</p>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    String name;
+
+    Student(String name) {
+
+        this.name = name;
+
+    }
+
+}
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Student student1 =
+            new Student("สมชาย");
+
+        System.out.println(
+            "ชื่อ: " + student1.name
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+<img src="images/chapter7/OOP06.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<p>
+    <b>this.name</b> หมายถึง Attribute
+    ของ Object ส่วน <b>name</b>
+    หมายถึง Parameter ที่ส่งเข้ามาใน Constructor
+</p>
+
+
+<!-- ==================================================
+     7.8
+================================================== -->
+
+<h3>
+    7.8 Encapsulation
+</h3>
+
+<p>
+    <b>Encapsulation</b> หรือการห่อหุ้มข้อมูล
+    เป็นแนวคิดที่ใช้ควบคุมการเข้าถึงข้อมูลภายใน Object
+    เพื่อป้องกันการแก้ไขข้อมูลโดยตรงจากภายนอก
+</p>
+
+<p>
+    ในภาษา Java มักใช้ <b>private</b>
+    เพื่อจำกัดการเข้าถึง Attribute
+    และใช้ Method เช่น <b>getter</b> และ <b>setter</b>
+    สำหรับเข้าถึงหรือแก้ไขข้อมูล
+</p>
+
+
+<h4>
+    ตัวอย่าง Encapsulation
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    private String name;
+
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
+
+    public String getName() {
+
+        return name;
+
+    }
+
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Student student1 = new Student();
+
+        student1.setName("สมชาย");
+
+        System.out.println("ชื่อนักเรียน: " + student1.getName());
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter7/OOP07.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<div class="info-box">
+
+    <b>📌 หลักการสำคัญ</b>
+
+    <br><br>
+
+    <b>private</b>
+    ใช้ป้องกันการเข้าถึงข้อมูลโดยตรง
+
+    <br>
+
+    <b>setName()</b>
+    ใช้กำหนดหรือแก้ไขข้อมูล
+
+    <br>
+
+    <b>getName()</b>
+    ใช้เรียกดูข้อมูล
+
+</div>
+
+
+<!-- ==================================================
+     7.9
+================================================== -->
+
+<h3>
+    7.9 Inheritance
+</h3>
+
+<p>
+    <b>Inheritance</b> หรือการสืบทอด
+    เป็นแนวคิดที่ทำให้ Class หนึ่งสามารถสืบทอด
+    Attribute และ Method จากอีก Class หนึ่งได้
+</p>
+
+<p>
+    Class ที่ถูกสืบทอดเรียกว่า <b>Superclass</b>
+    ส่วน Class ที่สืบทอดเรียกว่า <b>Subclass</b>
+</p>
+
+
+<h4>
+    ตัวอย่าง Inheritance
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Animal {
+
+    void eat() {
+
+        System.out.println("กำลังกินอาหาร");
+
+    }
+
+}
+
+
+class Dog extends Animal {
+
+    void bark() {
+
+        System.out.println("สุนัขกำลังเห่า");
+
+    }
+
+}
+
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Dog dog = new Dog();
+
+        dog.eat();
+
+        dog.bark();
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter7/OOP08.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<p>
+    Class <b>Dog</b> ใช้คำสั่ง <b>extends</b>
+    เพื่อสืบทอดความสามารถจาก Class <b>Animal</b>
+</p>
+
+
+<!-- ==================================================
+     7.10
+================================================== -->
+
+<h3>
+    7.10 Polymorphism
+</h3>
+
+<p>
+    <b>Polymorphism</b> หรือพหุรูป
+    เป็นแนวคิดที่ช่วยให้ Object
+    สามารถแสดงพฤติกรรมที่แตกต่างกันได้
+    แม้จะใช้ชื่อ Method เดียวกัน
+</p>
+
+
+<h4>
+    ตัวอย่างการ Override Method
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Animal {
+    void sound() {
+        System.out.println("สัตว์ส่งเสียง");
+    }
+}
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("โฮ่ง โฮ่ง");
+    }
+}
+public class Mainn {
+    public static void main(String[] args) {
+        Animal animal = new Animal();
+        animal.sound();
+        Dog dog = new Dog();
+        dog.sound();
+    }
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter7/OOP09.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<p>
+    Class <b>Dog</b> ทำการ Override Method
+    <b>sound()</b> ที่ได้รับมาจาก Class Animal
+    เพื่อให้มีการทำงานที่เหมาะสมกับ Dog
+</p>
+
+
+<!-- ==================================================
+     7.11
+================================================== -->
+
+<h3>
+    7.11 Abstraction
+</h3>
+
+<p>
+    <b>Abstraction</b> หรือการซ่อนรายละเอียด
+    เป็นแนวคิดที่เน้นเฉพาะสิ่งสำคัญ
+    และซ่อนรายละเอียดของการทำงานที่ไม่จำเป็น
+    จากผู้ใช้งาน
+</p>
+
+<p>
+    Java สามารถสร้าง Abstraction
+    ผ่าน <b>abstract class</b> และ <b>interface</b>
+</p>
+
+
+<h4>
+    ตัวอย่าง Abstract Class
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>abstract class Animal {
+
+    abstract void sound();
+
+}
+
+
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+
+        System.out.println("โฮ่ง โฮ่ง");
+
+    }
+
+}
+
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Dog dog = new Dog();
+
+        dog.sound();
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter7/OOP10.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<!-- ==================================================
+     7.12
+================================================== -->
+
+<h3>
+    7.12 Access Modifier
+</h3>
+
+<p>
+    Access Modifier คือ ตัวกำหนดระดับการเข้าถึง
+    Class, Attribute และ Method
+    ภายในโปรแกรม Java
+</p>
+
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+
+    <th>
+        Access Modifier
+    </th>
+
+    <th>
+        ความหมาย
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        public
+    </td>
+
+    <td>
+        สามารถเข้าถึงได้จากส่วนต่าง ๆ
+        ของโปรแกรมตามขอบเขตของ Java
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        private
+    </td>
+
+    <td>
+        เข้าถึงได้ภายใน Class เดียวกัน
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        protected
+    </td>
+
+    <td>
+        ใช้ควบคุมการเข้าถึงภายใน Class
+        และ Class ที่เกี่ยวข้องตามกฎของ Java
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        default
+    </td>
+
+    <td>
+        สามารถเข้าถึงได้ภายใน Package เดียวกัน
+    </td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- ==================================================
+     7.13
+================================================== -->
+
+<h3>
+    7.13 static
+</h3>
+
+<p>
+    คำว่า <b>static</b> ใช้กำหนดสมาชิกของ Class
+    ที่สามารถใช้งานร่วมกันได้โดยไม่จำเป็นต้องสร้าง
+    Object ใหม่สำหรับสมาชิกนั้น
+</p>
+
+
+<h4>
+    ตัวอย่าง static Variable
+</h4>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Counter {
+
+    static int count = 0;
+
+}</code></pre>
+
+</div>
+
+
+<!-- ==================================================
+     7.14
+================================================== -->
+
+<h3>
+    7.14 ตัวอย่างโปรแกรม OOP
+</h3>
+
+<p>
+    ตัวอย่างต่อไปนี้แสดงการสร้าง Class
+    การสร้าง Object การกำหนด Attribute
+    และการเรียกใช้งาน Method
+</p>
+
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>class Student {
+
+    String name;
+    int age;
+
+    Student(String name, int age) {
+
+        this.name = name;
+        this.age = age;
+
+    }
+
+    void showInfo() {
+
+        System.out.println("ชื่อ: " + name);
+        System.out.println("อายุ: " + age);
+
+    }
+
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Student student =
+            new Student("สมชาย", 20);
+
+        student.showInfo();
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter7/OOP11.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+
+<div class="success-box">
+
+    <b>✅ ผลลัพธ์</b>
+
+    <br><br>
+
+    ชื่อ: สมชาย
+
+    <br>
+
+    อายุ: 20
+
+</div>
+
+
+<!-- ==================================================
+     7.15
+================================================== -->
+
+<h3>
+    7.15 หลักการสำคัญของ OOP
+</h3>
+
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+
+    <th>
+        หลักการ
+    </th>
+
+    <th>
+        ความหมาย
+    </th>
+
+</tr>
+
+<tr>
+
+    <td>
+        Encapsulation
+    </td>
+
+    <td>
+        การห่อหุ้มและควบคุมการเข้าถึงข้อมูล
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        Inheritance
+    </td>
+
+    <td>
+        การสืบทอดคุณสมบัติและพฤติกรรม
+        จาก Class อื่น
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        Polymorphism
+    </td>
+
+    <td>
+        การที่ Method หรือ Object
+        สามารถมีรูปแบบการทำงานที่แตกต่างกันได้
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>
+        Abstraction
+    </td>
+
+    <td>
+        การซ่อนรายละเอียดที่ไม่จำเป็น
+        และแสดงเฉพาะส่วนสำคัญ
+    </td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- ==================================================
+     7.16
+================================================== -->
+
+<h3>
+    7.16 ข้อควรระวังในการเขียนโปรแกรมแบบ OOP
+</h3>
+
+
+<div class="warning-box">
+
+    <b>⚠️ ข้อควรระวัง</b>
+
+    <br><br>
+
+    1. ควรตั้งชื่อ Class ให้สื่อความหมาย
+
+    <br>
+
+    2. ควรตั้งชื่อ Attribute และ Method
+    ให้เข้าใจหน้าที่ของตัวแปรหรือเมธอด
+
+    <br>
+
+    3. ควรกำหนด Access Modifier
+    ให้เหมาะสมกับข้อมูล
+
+    <br>
+
+    4. ไม่ควรเปิดเผยข้อมูลภายใน Object
+    โดยไม่จำเป็น
+
+    <br>
+
+    5. ควรแบ่ง Class ตามหน้าที่
+    เพื่อให้โปรแกรมดูแลรักษาได้ง่าย
+
+</div>
+
+
+<!-- ==================================================
+     7.17
+================================================== -->
+
+<h3>
+    7.17 สรุปบทเรียน
+</h3>
+
+
+<div class="summary">
+
+    <p>
+        <b>OOP</b> คือแนวคิดการเขียนโปรแกรม
+        ที่จัดข้อมูลและพฤติกรรมให้อยู่ในรูปแบบ Object
+    </p>
+
+    <p>
+        <b>Class</b> คือแบบพิมพ์เขียว
+        สำหรับสร้าง Object
+    </p>
+
+    <p>
+        <b>Object</b> คือสิ่งที่สร้างขึ้นจาก Class
+    </p>
+
+    <p>
+        <b>Attribute</b> ใช้เก็บข้อมูลหรือสถานะ
+        ของ Object
+    </p>
+
+    <p>
+        <b>Method</b> ใช้กำหนดพฤติกรรม
+        หรือการทำงานของ Object
+    </p>
+
+    <p>
+        <b>Constructor</b> ใช้กำหนดค่าเริ่มต้น
+        ให้กับ Object
+    </p>
+
+    <p>
+        <b>Encapsulation</b> ใช้สำหรับห่อหุ้ม
+        และควบคุมการเข้าถึงข้อมูล
+    </p>
+
+    <p>
+        <b>Inheritance</b> ใช้สำหรับการสืบทอด
+        คุณสมบัติและพฤติกรรมจาก Class อื่น
+    </p>
+
+    <p>
+        <b>Polymorphism</b> ช่วยให้ Object
+        สามารถมีพฤติกรรมที่แตกต่างกันได้
+    </p>
+
+    <p>
+        <b>Abstraction</b> ใช้ซ่อนรายละเอียด
+        และแสดงเฉพาะส่วนสำคัญ
+    </p>
+
+</div>
+
+
+<!-- ==================================================
+     7.18
+================================================== -->
+
+<h3>
+    7.18 ☕ ความรู้เพิ่มเติม
+</h3>
+
+
+<div class="extra-content">
+
+    <h4>
+        🔹 OOP เหมาะกับโปรแกรมแบบใด?
+    </h4>
+
+    <p>
+        OOP เหมาะกับโปรแกรมที่มีข้อมูล
+        และการทำงานหลายส่วนที่เกี่ยวข้องกัน
+        เช่น ระบบร้านค้า ระบบจัดการนักเรียน
+        ระบบธนาคาร ระบบโรงพยาบาล
+        และโปรแกรม GUI
+    </p>
+
+
+    <h4>
+        🔹 Class และ Object ต่างกันอย่างไร?
+    </h4>
+
+    <p>
+        Class เปรียบเสมือนแบบพิมพ์เขียว
+        ส่วน Object คือสิ่งที่ถูกสร้างขึ้น
+        ตามแบบพิมพ์เขียวนั้น
+    </p>
+
+
+    <h4>
+        🔹 ทำไมต้องใช้ OOP?
+    </h4>
+
+    <p>
+        การใช้ OOP ช่วยให้สามารถแบ่งโปรแกรม
+        ออกเป็นส่วน ๆ ตามหน้าที่
+        ทำให้โครงสร้างโปรแกรมเป็นระบบ
+        และสามารถนำส่วนต่าง ๆ กลับมาใช้งานใหม่ได้
+    </p>
+
+</div>
+
+
+
+
+<!-- ==================================================
+     NAVIGATION BOTTOM
+================================================== -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_06.html">
+
+        ← บทที่ 6
+
+    </a>
+
+
+    <a href="chapters.html">
+
+        📚 บทเรียนทั้งหมด
+
+    </a>
+
+
+    <a
+        href="index.html">
+
+        หน้าหลัก →
+
+    </a>
+
+</nav>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <h3>
+        ☕ Java Learning Guide
+    </h3>
+
+    <p>
+        สื่อการเรียนการสอนการเขียนโปรแกรมภาษา Java
+    </p>
+
+    <p>
+        บทที่ 7 :
+        Object-Oriented Programming (OOP)
+    </p>
+
+    <p>
+        © 2026 Java Learning Guide
+    </p>
+
+</footer>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+/* ==================================================
+   COPY CODE
+================================================== */
+
+function copyCode(btn) {
+
+    const code =
+        btn.parentElement
+           .querySelector("code");
+
+    if (!code) {
+
+        return;
+
+    }
+
+    const text =
+        code.innerText;
+
+
+    navigator.clipboard
+        .writeText(text)
+
+        .then(function () {
+
+            const oldText =
+                btn.innerText;
+
+
+            btn.innerText =
+                "✓ คัดลอกแล้ว";
+
+
+            setTimeout(function () {
+
+                btn.innerText =
+                    oldText;
+
+            }, 1500);
+
+        })
+
+        .catch(function () {
+
+            alert(
+                "ไม่สามารถคัดลอกโค้ดได้"
+            );
+
+        });
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,8096 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        บทที่ 6 Arrays และการจัดการข้อมูลแบบ Array | Java Learning Guide
+    </title>
+
+
+<style>
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        "Tahoma",
+        "Noto Sans Thai",
+        sans-serif;
+
+    background: #eef7ff;
+
+    color: #1f2937;
+
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   HEADER
+================================================== */
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f4c81,
+            #1976d2,
+            #42a5f5
+        );
+
+    color: white;
+
+    padding: 38px 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, .15);
+}
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 36px;
+
+    font-weight: bold;
+}
+
+header p {
+
+    margin: 8px 0 0;
+
+    font-size: 17px;
+
+    opacity: .95;
+}
+
+
+/* ==================================================
+   CHAPTER NAVIGATION
+================================================== */
+
+.chapter-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    height: 70px;
+
+    margin: 0;
+
+    padding: 0 34px;
+
+    background: transparent;
+
+    pointer-events: none;
+}
+
+
+.chapter-nav a {
+
+    pointer-events: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 130px;
+
+    height: 58px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    border-radius:
+        0 0 12px 12px;
+
+    box-shadow:
+        0 4px 12px rgba(
+            0,
+            0,
+            0,
+            .10
+        );
+
+    transition:
+        all .2s ease;
+}
+
+
+.chapter-nav a:nth-child(2) {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    min-width: 215px;
+
+    border-radius:
+        0 0 12px 12px;
+}
+
+
+.chapter-nav a:hover {
+
+    color: #0f4c81;
+
+    background: #f8fcff;
+
+    transform:
+        translateY(2px);
+}
+
+
+.chapter-nav a:nth-child(2):hover {
+
+    transform:
+        translateX(-50%)
+        translateY(2px);
+}
+
+
+/* ==================================================
+   MAIN
+================================================== */
+
+main {
+
+    width: 100%;
+
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding:
+        0 20px 30px;
+}
+
+
+/* ==================================================
+   CHAPTER
+================================================== */
+
+.chapter {
+
+    width: 100%;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 4px 18px
+        rgba(
+            0,
+            0,
+            0,
+            .07
+        );
+
+    border:
+        1px solid #dbeafe;
+}
+
+
+/* ==================================================
+   CHAPTER HEAD
+================================================== */
+
+.chapter-head {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom:
+        2px solid #e0f2fe;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 28px;
+}
+
+
+.chapter-head span {
+
+    background: #1769aa;
+
+    color: white;
+
+    padding:
+        7px 16px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.chapter-head h2 {
+
+    margin: 0;
+
+    color: #0f4c81;
+
+    font-size: 28px;
+}
+
+
+/* ==================================================
+   CONTENT
+================================================== */
+
+.chapter h3 {
+
+    color: #0369a1;
+
+    margin-top: 32px;
+
+    margin-bottom: 10px;
+
+    font-size: 22px;
+}
+
+
+.chapter h4 {
+
+    color: #0f4c81;
+
+    margin-top: 20px;
+
+    margin-bottom: 6px;
+}
+
+
+.chapter p {
+
+    margin-top: 8px;
+
+    margin-bottom: 12px;
+}
+
+
+.chapter ul,
+.chapter ol {
+
+    padding-left: 28px;
+}
+
+
+.chapter li {
+
+    margin-bottom: 7px;
+}
+
+
+/* ==================================================
+   CONTENT BOX
+================================================== */
+
+.info-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fbff
+        );
+
+    border-left:
+        5px solid #1976d2;
+
+    padding:
+        16px 20px;
+
+    border-radius: 9px;
+
+    margin: 18px 0;
+}
+
+
+.warning-box {
+
+    background: #fff7ed;
+
+    border-left:
+        5px solid #f97316;
+
+    padding:
+        16px 20px;
+
+    border-radius: 9px;
+
+    margin: 18px 0;
+}
+
+
+.success-box {
+
+    background: #f0fdf4;
+
+    border-left:
+        5px solid #22c55e;
+
+    padding:
+        16px 20px;
+
+    border-radius: 9px;
+
+    margin: 18px 0;
+}
+
+
+.summary {
+
+    background: #f0f9ff;
+
+    border-left:
+        5px solid #0ea5e9;
+
+    padding:
+        17px 20px;
+
+    border-radius: 8px;
+
+    margin-top: 15px;
+}
+
+
+/* ==================================================
+   LEARNING GOAL
+================================================== */
+
+.learning-goal {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #e0f2fe
+        );
+
+    border-left:
+        5px solid #1976d2;
+
+    padding:
+        16px 20px;
+
+    border-radius: 10px;
+
+    margin:
+        20px 0;
+
+    color: #0f4c81;
+}
+
+
+/* ==================================================
+   TIP
+================================================== */
+
+.tip {
+
+    background: #f8fafc;
+
+    border:
+        1px solid #dbeafe;
+
+    border-left:
+        5px solid #60a5fa;
+
+    padding:
+        16px 20px;
+
+    border-radius: 10px;
+
+    margin:
+        18px 0;
+
+    color: #475569;
+}
+
+
+/* ==================================================
+   STEP IMAGE
+================================================== */
+
+.step-item {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 760px;
+
+    margin:
+        30px auto 35px;
+
+    padding: 20px;
+
+    background: #f8fbff;
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(
+            0,
+            0,
+            0,
+            .06
+        );
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+.step-item img {
+
+    display: block;
+
+    width: auto;
+
+    max-width: 100%;
+
+    height: auto;
+
+    margin:
+        0 auto;
+
+    border-radius: 10px;
+
+    border:
+        1px solid #cbd5e1;
+
+    box-shadow:
+        0 4px 12px
+        rgba(
+            0,
+            0,
+            0,
+            .12
+        );
+
+    object-fit: contain;
+
+    background: white;
+}
+
+
+/* ==================================================
+   STEP CONTENT
+================================================== */
+
+.step-content {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding-top: 15px;
+
+    border-top:
+        2px solid #dbeafe;
+
+    text-align: left;
+}
+
+
+.step-number {
+
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1769aa,
+            #1976d2
+        );
+
+    color: white;
+
+    padding:
+        5px 14px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+.step-title {
+
+    margin:
+        0 0 7px;
+
+    color: #0f4c81;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+
+.step-description {
+
+    margin: 0;
+
+    color: #475569;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   TABLE
+================================================== */
+
+.table-wrap {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    margin:
+        20px 0;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+
+th {
+
+    background: #1769aa;
+
+    color: white;
+
+    padding: 12px;
+
+    text-align: left;
+}
+
+
+td {
+
+    border:
+        1px solid #dbeafe;
+
+    padding: 12px;
+
+    vertical-align: top;
+}
+
+
+tr:nth-child(even) {
+
+    background: #f8fbff;
+}
+
+
+/* ==================================================
+   FLOW
+================================================== */
+
+.flow {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin:
+        25px 0;
+}
+
+
+.flow-box {
+
+    background: #eff6ff;
+
+    border:
+        2px solid #60a5fa;
+
+    border-radius: 12px;
+
+    padding:
+        14px 18px;
+
+    text-align: center;
+
+    min-width: 145px;
+
+    font-weight: bold;
+
+    color: #0f4c81;
+}
+
+
+.flow-arrow {
+
+    font-size: 25px;
+
+    color: #1976d2;
+
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   CODE
+================================================== */
+
+.code-wrap {
+
+    position: relative;
+
+    width: 100%;
+
+    background: #0f172a;
+
+    border-radius: 12px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    margin:
+        18px 0;
+
+    box-shadow:
+        0 5px 15px
+        rgba(
+            0,
+            0,
+            0,
+            .12
+        );
+}
+
+
+pre {
+
+    margin: 0;
+
+    padding:
+        24px;
+
+    padding-top: 52px;
+
+    color: #e2e8f0;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    white-space: pre;
+
+    text-align: left;
+}
+
+
+pre code {
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+}
+
+
+/* ==================================================
+   COPY BUTTON
+================================================== */
+
+.copy {
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 10px;
+
+    border: 0;
+
+    background: #334155;
+
+    color: white;
+
+    padding:
+        8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+    font-family:
+        "Tahoma",
+        "Noto Sans Thai",
+        sans-serif;
+
+    font-size: 14px;
+
+    transition:
+        .2s ease;
+}
+
+
+.copy:hover {
+
+    background: #475569;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.copy:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+.quiz {
+
+    background:
+        #f8fbff;
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 12px;
+
+    padding:
+        20px;
+
+    margin:
+        20px 0;
+}
+
+
+.quiz label {
+
+    display: block;
+
+    padding:
+        8px 0;
+
+    cursor: pointer;
+}
+
+
+.quiz input[type="radio"] {
+
+    margin-right: 8px;
+
+    cursor: pointer;
+}
+
+
+.quiz button {
+
+    margin-top: 12px;
+
+    padding:
+        9px 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #1769aa;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+}
+
+
+.quiz button:hover {
+
+    background: #0f4c81;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.result {
+
+    display: inline-block;
+
+    margin-left: 12px;
+
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   NEXT BOX
+================================================== */
+
+.next-box {
+
+    margin-top: 35px;
+
+    padding:
+        25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fbff
+        );
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+
+.next-box h3 {
+
+    margin-top: 0;
+}
+
+
+.next-button {
+
+    display: inline-block;
+
+    padding:
+        10px 20px;
+
+    background: #1769aa;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition:
+        .2s ease;
+}
+
+
+.next-button:hover {
+
+    background: #0f4c81;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+
+    text-align: center;
+
+    padding: 32px;
+
+    background: #0f4c81;
+
+    color: white;
+
+    margin-top: 20px;
+}
+
+
+footer h3 {
+
+    margin-top: 0;
+}
+
+
+footer p {
+
+    margin:
+        5px 0;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 800px) {
+
+    .chapter-nav {
+
+        height: auto;
+
+        padding:
+            0 10px;
+
+        gap: 8px;
+    }
+
+
+    .chapter-nav a {
+
+        min-width: 0;
+
+        flex: 1;
+
+        height: 52px;
+
+        padding:
+            0 8px;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        border-radius:
+            0 0 10px 10px;
+    }
+
+
+    .chapter-nav a:nth-child(2) {
+
+        position: static;
+
+        transform: none;
+
+        min-width: 0;
+    }
+
+
+    .chapter-nav a:hover {
+
+        transform:
+            translateY(2px);
+    }
+
+
+    .chapter-nav a:nth-child(2):hover {
+
+        transform:
+            translateY(2px);
+    }
+
+
+    main {
+
+        padding:
+            0 12px 25px;
+    }
+
+
+    .chapter {
+
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+
+
+    .chapter-head {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap: 10px;
+    }
+
+
+    .chapter-head h2 {
+
+        font-size: 22px;
+    }
+
+
+    .chapter h3 {
+
+        font-size: 20px;
+    }
+
+
+    .flow {
+
+        flex-direction:
+            column;
+    }
+
+
+    .flow-arrow {
+
+        transform:
+            rotate(90deg);
+    }
+
+
+    pre {
+
+        font-size: 13px;
+
+        padding:
+            18px;
+
+        padding-top: 52px;
+    }
+
+
+    .table-wrap {
+
+        font-size: 14px;
+    }
+
+
+    .step-item {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 14px;
+
+        margin:
+            25px auto;
+    }
+
+
+    .step-item img {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        height: auto;
+
+        margin:
+            0 auto;
+    }
+
+
+    .step-title {
+
+        font-size: 17px;
+    }
+
+
+    .step-description {
+
+        font-size: 14px;
+    }
+
+
+    .result {
+
+        display: block;
+
+        margin:
+            12px 0 0;
+    }
+
+
+    footer {
+
+        padding:
+            25px 15px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 480px) {
+
+    header {
+
+        padding:
+            28px 15px;
+    }
+
+
+    header h1 {
+
+        font-size: 25px;
+    }
+
+
+    header p {
+
+        font-size: 14px;
+    }
+
+
+    .chapter {
+
+        padding: 15px;
+    }
+
+
+    .chapter-head h2 {
+
+        font-size: 20px;
+    }
+
+
+    .chapter h3 {
+
+        font-size: 19px;
+    }
+
+
+    .chapter-nav a {
+
+        font-size: 12px;
+
+        padding:
+            0 5px;
+    }
+
+
+    .step-item {
+
+        padding: 10px;
+    }
+
+
+    .step-content {
+
+        margin-top: 12px;
+
+        padding-top: 12px;
+    }
+
+
+    .copy {
+
+        right: 7px;
+
+        top: 7px;
+
+        padding:
+            7px 10px;
+
+        font-size: 12px;
+    }
+
+
+    pre {
+
+        padding:
+            15px;
+
+        padding-top: 48px;
+
+        font-size: 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <h1>
+        📘 JAVA LEARNING GUIDE
+    </h1>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+        บทที่ 6 : Arrays และการจัดการข้อมูลแบบ Array
+    </p>
+
+</header>
+
+
+
+<!-- ==================================================
+     TOP NAVIGATION
+================================================== -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_05.html">
+        ← บทที่ 5
+    </a>
+
+    <a href="chapters.html">
+        📚 บทเรียนทั้งหมด
+    </a>
+
+    <a href="chapter_07.html">
+        บทที่ 7 →
+    </a>
+
+</nav>
+
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main>
+
+<section
+    class="chapter"
+    id="chapter-6"
+>
+
+
+    <!-- ==================================================
+         6.1
+    ================================================== -->
+<div class="chapter-head">
+
+    <span>
+        บทที่ 6
+    </span>
+
+    <h2>
+        Arrays และการจัดการข้อมูลแบบ Array
+    </h2>
+
+</div>
+
+
+<!-- ==================================================
+     6.1
+================================================== -->
+
+<h3>
+    6.1 ความหมายของ Array
+</h3>
+
+<p>
+    Array หรืออาร์เรย์ คือ โครงสร้างข้อมูลที่ใช้สำหรับเก็บข้อมูลหลายค่า
+    ที่มีชนิดข้อมูลเดียวกันไว้ภายใต้ชื่อตัวแปรเดียว
+    การใช้ Array ช่วยลดจำนวนตัวแปรที่ต้องประกาศแยกกัน
+    และทำให้สามารถจัดการข้อมูลจำนวนมากได้สะดวกมากขึ้น
+</p>
+
+<p>
+    ข้อมูลแต่ละค่าภายใน Array จะถูกจัดเก็บตามลำดับ
+    และสามารถเข้าถึงข้อมูลแต่ละตำแหน่งได้ด้วย
+    <strong>Index</strong> ซึ่งเริ่มต้นจาก <strong>0</strong>
+    เช่น ข้อมูลตัวแรกจะอยู่ที่ Index 0 และข้อมูลตัวถัดไปจะอยู่ที่ Index 1
+</p>
+
+<p>
+    ในภาษา Java Array จะมีขนาดที่กำหนดไว้ตั้งแต่ตอนสร้าง
+    และสมาชิกภายใน Array จะต้องเป็นชนิดข้อมูลเดียวกัน
+    เช่น int[] ใช้สำหรับเก็บจำนวนเต็มหลายค่า
+    หรือ String[] ใช้สำหรับเก็บข้อความหลายค่า
+</p>
+
+<p>
+    ตัวอย่างเช่น หากต้องการเก็บคะแนน
+    ของนักเรียน 5 คน
+    เราสามารถใช้ Array ชื่อ
+    <b>scores</b>
+    แทนการสร้างตัวแปร
+    <b>score1</b>,
+    <b>score2</b>,
+    <b>score3</b>,
+    <b>score4</b>
+    และ
+    <b>score5</b>
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 แนวคิดสำคัญ
+    </b>
+
+    <br><br>
+
+    Array สามารถมองได้เหมือน
+    "กล่องหลายช่องที่ใช้ชื่อเดียวกัน"
+    แต่ละช่องจะมีตำแหน่งหรือ
+    <b>Index</b>
+    สำหรับเข้าถึงข้อมูล
+
+</div>
+
+<div class="learning-goal">
+
+    <b>🎯 จุดประสงค์การเรียนรู้</b>
+
+    <ul>
+
+        <li>
+            อธิบายความหมายของ Array ได้
+        </li>
+
+        <li>
+            อธิบายการทำงานของ Index ได้
+        </li>
+
+        <li>
+            สามารถประกาศและสร้าง Array ได้
+        </li>
+
+        <li>
+            สามารถกำหนดค่าเริ่มต้นให้ Array ได้
+        </li>
+
+        <li>
+            สามารถเข้าถึงและแก้ไขข้อมูลใน Array ได้
+        </li>
+
+        <li>
+            สามารถใช้ Loop ร่วมกับ Array ได้
+        </li>
+
+        <li>
+            สามารถคำนวณข้อมูลภายใน Array ได้
+        </li>
+
+        <li>
+            สามารถใช้งาน Array ชนิด String ได้
+        </li>
+
+        <li>
+            เข้าใจ Array 2 มิติในระดับพื้นฐาน
+        </li>
+
+    </ul>
+
+</div>
+
+
+<!-- ==================================================
+     6.2
+================================================== -->
+<h3>
+    6.2 โครงสร้างของ Array
+</h3>
+
+<p>
+    Array ในภาษา Java จะเก็บข้อมูลหลายค่าไว้ในตัวแปรเดียว
+    โดยข้อมูลแต่ละค่าจะมีตำแหน่งที่เรียกว่า <b>Index</b>
+    สำหรับใช้ระบุตำแหน่งและเข้าถึงข้อมูลภายใน Array
+</p>
+
+<p>
+    ข้อมูลภายใน Array จะถูกจัดเก็บตามลำดับ
+    โดยแต่ละข้อมูลจะมีตำแหน่งของตัวเอง
+    ทำให้โปรแกรมสามารถเลือกเข้าถึงข้อมูล
+    ที่ต้องการได้อย่างชัดเจน
+    การเข้าถึงข้อมูลจะใช้ชื่อของ Array
+    ตามด้วย Index ที่อยู่ภายในเครื่องหมาย
+    <b>[ ]</b>
+</p>
+
+<p>
+    Index จะเริ่มต้นที่ <b>0</b> ไม่ใช่ 1
+    ดังนั้นข้อมูลตัวแรกจะอยู่ที่ Index 0
+    ข้อมูลตัวที่สองอยู่ที่ Index 1
+    และเพิ่มขึ้นตามลำดับ
+    ตัวอย่างเช่น หาก Array มีข้อมูล 5 ค่า
+    ตำแหน่งของข้อมูลจะเริ่มตั้งแต่ Index 0
+    ไปจนถึง Index 4
+</p>
+
+<p>
+    การที่ Index เริ่มต้นจาก 0
+    เป็นหลักการสำคัญของ Array ในภาษา Java
+    ผู้เขียนโปรแกรมจึงควรทำความเข้าใจเรื่อง Index
+    ให้ถูกต้อง เพราะหากระบุตำแหน่งผิด
+    อาจทำให้โปรแกรมเกิดข้อผิดพลาด
+    ขณะทำงานได้
+</p>
+
+<p>
+    จำนวนสมาชิกของ Array เรียกว่า
+    <b>ขนาดของ Array</b> หรือสามารถตรวจสอบได้ด้วย
+    คุณสมบัติ <b>length</b>
+    ซึ่งจะบอกจำนวนสมาชิกทั้งหมดที่ Array สามารถเก็บได้
+    อย่างไรก็ตาม ค่า <b>length</b>
+    ไม่ใช่ Index สุดท้าย
+    เนื่องจาก Index เริ่มต้นที่ 0
+    ดังนั้น Index สุดท้ายจึงมีค่าเท่ากับ
+    <b>length - 1</b>
+</p>
+
+<p>
+    ตัวอย่างเช่น หากสร้าง Array
+    ที่มีจำนวนสมาชิกทั้งหมด 5 ค่า
+    ค่า <b>length</b> จะเท่ากับ 5
+    แต่ Index ที่สามารถเข้าถึงได้จะอยู่ระหว่าง
+    <b>0 ถึง 4</b>
+    โดย Index 0 เป็นตำแหน่งแรก
+    และ Index 4 เป็นตำแหน่งสุดท้าย
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        Index 0<br>
+        ข้อมูลตัวที่ 1
+    </div>
+
+    <div class="flow-box">
+        Index 1<br>
+        ข้อมูลตัวที่ 2
+    </div>
+
+    <div class="flow-box">
+        Index 2<br>
+        ข้อมูลตัวที่ 3
+    </div>
+
+    <div class="flow-box">
+        Index 3<br>
+        ข้อมูลตัวที่ 4
+    </div>
+
+    <div class="flow-box">
+        Index 4<br>
+        ข้อมูลตัวที่ 5
+    </div>
+
+</div>
+
+<p>
+    จากตัวอย่างข้างต้น หาก Array ชื่อ
+    <b>numbers</b>
+    มีข้อมูลจำนวน 5 ค่า
+    เราสามารถเข้าถึงข้อมูลแต่ละตำแหน่งได้ เช่น
+    <b>numbers[0]</b>
+    สำหรับข้อมูลตัวแรก
+    <b>numbers[1]</b>
+    สำหรับข้อมูลตัวที่สอง
+    และสามารถเข้าถึงข้อมูลตัวสุดท้ายด้วย
+    <b>numbers[4]</b>
+</p>
+
+<p>
+    Index ไม่ได้ใช้สำหรับการอ่านข้อมูลเพียงอย่างเดียว
+    แต่ยังสามารถใช้ในการเปลี่ยนแปลงค่าของข้อมูล
+    ที่อยู่ภายใน Array ได้อีกด้วย
+    โดยระบุ Index ของตำแหน่งที่ต้องการ
+    แล้วกำหนดค่าใหม่ให้กับตำแหน่งนั้น
+</p>
+
+<p>
+    ตัวอย่างเช่น หากต้องการเปลี่ยนข้อมูล
+    ในตำแหน่ง Index 2
+    โปรแกรมสามารถระบุ
+    <b>numbers[2]</b>
+    แล้วกำหนดค่าใหม่ได้
+    โดยจำนวนสมาชิกของ Array จะยังคงเท่าเดิม
+    เปลี่ยนเฉพาะค่าของข้อมูลในตำแหน่งนั้น
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ เรื่อง Index
+    </b>
+
+    <br><br>
+
+    สมาชิกตัวที่ 1 → Index 0
+    <br>
+    สมาชิกตัวที่ 2 → Index 1
+    <br>
+    สมาชิกตัวที่ 3 → Index 2
+    <br>
+    สมาชิกตัวที่ 4 → Index 3
+    <br>
+    สมาชิกตัวที่ 5 → Index 4
+
+</div>
+
+<p>
+    การเข้าใจโครงสร้างของ Index
+    มีความสำคัญอย่างมากเมื่อทำงานร่วมกับ
+    <b>for Loop</b>
+    เนื่องจากตัวแปรที่ใช้ควบคุม Loop
+    สามารถทำหน้าที่เป็น Index
+    เพื่อเข้าถึงข้อมูลแต่ละตำแหน่งของ Array
+    ได้ทีละค่า
+</p>
+
+<p>
+    ตัวอย่างเช่น หาก Array มีสมาชิก 5 ค่า
+    โปรแกรมสามารถใช้ตัวแปร <b>i</b>
+    เริ่มต้นจาก 0
+    แล้วเพิ่มค่าทีละ 1
+    เพื่อเข้าถึงข้อมูลตั้งแต่
+    Index 0, 1, 2, 3 และ 4
+    โดยใช้เงื่อนไข
+    <b>i &lt; numbers.length</b>
+</p>
+
+<p>
+    วิธีการนี้ช่วยให้สามารถจัดการข้อมูลจำนวนมาก
+    ได้อย่างเป็นระบบ
+    โดยไม่จำเป็นต้องเขียนคำสั่งแยกสำหรับข้อมูล
+    แต่ละตำแหน่ง
+    และยังสามารถนำไปประยุกต์ใช้กับการค้นหา
+    การคำนวณ และการแสดงผลข้อมูลภายใน Array ได้
+</p>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรระวังเกี่ยวกับ Index
+    </b>
+
+    <br><br>
+
+    หาก Array มีสมาชิก 5 ค่า
+    จะสามารถใช้ Index ได้ตั้งแต่
+    <b>0 ถึง 4</b>
+    เท่านั้น
+
+    <br><br>
+
+    ไม่สามารถเข้าถึง Index 5 ได้
+    เพราะ Index 5 อยู่นอกขอบเขตของ Array
+    ซึ่งอาจทำให้โปรแกรมเกิดข้อผิดพลาด
+    <b>ArrayIndexOutOfBoundsException</b>
+
+    <br><br>
+
+    ดังนั้นควรตรวจสอบจำนวนสมาชิกของ Array
+    และกำหนดเงื่อนไขการเข้าถึง Index
+    ให้ถูกต้องเสมอ
+
+</div>
+
+<p>
+    สรุปได้ว่า Array ประกอบด้วย
+    ชื่อของ Array ข้อมูลที่จัดเก็บ
+    และตำแหน่ง Index ของข้อมูลแต่ละค่า
+    โดย Index จะเริ่มต้นจาก 0
+    และเพิ่มขึ้นทีละ 1 ตามลำดับ
+    การเข้าถึงข้อมูลจะใช้รูปแบบ
+    <b>ชื่อArray[Index]</b>
+</p>
+
+<p>
+    เมื่อเข้าใจเรื่อง Index แล้ว
+    จะสามารถนำความรู้ไปใช้ในการประกาศ Array
+    การเข้าถึงข้อมูล การแก้ไขข้อมูล
+    การใช้ <b>length</b>
+    รวมถึงการใช้ <b>Loop</b>
+    เพื่อประมวลผลข้อมูลหลายค่า
+    ได้อย่างถูกต้องและมีประสิทธิภาพ
+</p>
+<div class="flow">
+
+    <div class="flow-box">
+        Index 0<br>
+        ข้อมูลที่ 1
+    </div>
+
+    <div class="flow-box">
+        Index 1<br>
+        ข้อมูลที่ 2
+    </div>
+
+    <div class="flow-box">
+        Index 2<br>
+        ข้อมูลที่ 3
+    </div>
+
+    <div class="flow-box">
+        Index 3<br>
+        ข้อมูลที่ 4
+    </div>
+
+</div>
+
+<p>
+    Array จะมีจำนวนสมาชิกหรือ <b>ขนาด (Length)</b> ที่กำหนดไว้
+    และสามารถใช้ Index เพื่อเข้าถึงหรือเปลี่ยนแปลงข้อมูลในแต่ละตำแหน่งได้
+</p>
+
+<p>
+    ตัวอย่างเช่น Array ที่มีข้อมูล 4 ค่า
+    จะมีตำแหน่งตั้งแต่ Index 0 จนถึง Index 3
+    เนื่องจาก Index สุดท้ายจะเท่ากับ
+    <b>จำนวนสมาชิก - 1</b>
+</p>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรจำ
+    </b>
+
+    <br><br>
+
+    ถ้า Array มีจำนวนสมาชิก 4 ค่า
+    Index จะมีค่าตั้งแต่
+    <b>0 ถึง 3</b>
+
+    <br><br>
+
+    ดังนั้น Index สุดท้ายจะเท่ากับ
+    <b>จำนวนสมาชิก - 1</b>
+
+</div>
+
+<!-- ==================================================
+     6.3
+================================================== -->
+<h3>
+    6.3 การประกาศ Array
+</h3>
+<p>
+    การประกาศ Array สามารถเขียนได้หลายรูปแบบ
+    โดยรูปแบบพื้นฐานคือการกำหนดชนิดข้อมูล
+    ตามด้วยเครื่องหมาย <b>[]</b>
+    และชื่อ Array
+    การประกาศในลักษณะนี้เป็นการกำหนดให้ตัวแปร
+    สามารถใช้สำหรับอ้างอิงข้อมูลประเภท Array ได้
+</p>
+
+<p>
+    การประกาศ Array เป็นการบอกโปรแกรมว่า
+    ต้องการสร้างตัวแปรสำหรับเก็บข้อมูลหลายค่า
+    โดยข้อมูลภายใน Array จะต้องเป็นชนิดข้อมูลเดียวกัน
+    เช่น <b>int</b> สำหรับจำนวนเต็ม
+    <b>double</b> สำหรับตัวเลขทศนิยม
+    <b>char</b> สำหรับตัวอักษร
+    หรือ <b>String</b> สำหรับข้อความ
+</p>
+
+<p>
+    เครื่องหมาย <b>[]</b> ที่อยู่หลังชนิดข้อมูล
+    เป็นส่วนที่ใช้ระบุว่าตัวแปรดังกล่าวเป็น Array
+    เช่น <b>int[]</b> หมายถึง Array
+    ที่สามารถเก็บข้อมูลชนิดจำนวนเต็ม
+    ส่วน <b>String[]</b> หมายถึง Array
+    ที่ใช้สำหรับเก็บข้อมูลประเภทข้อความ
+</p>
+
+<p>
+    ชื่อของ Array สามารถตั้งได้ตามกฎการตั้งชื่อตัวแปร
+    ของภาษา Java
+    โดยควรตั้งชื่อให้สื่อความหมายถึงข้อมูล
+    ที่ต้องการจัดเก็บ
+    เช่น <b>numbers</b> สำหรับเก็บตัวเลข
+    <b>scores</b> สำหรับเก็บคะแนน
+    <b>names</b> สำหรับเก็บรายชื่อ
+    และ <b>prices</b> สำหรับเก็บราคาสินค้า
+</p>
+
+<p>
+    การประกาศ Array เพียงอย่างเดียว
+    ยังไม่ได้กำหนดจำนวนสมาชิกของ Array
+    และยังไม่ได้สร้างพื้นที่สำหรับจัดเก็บข้อมูล
+    เนื่องจากขั้นตอนการประกาศเป็นเพียงการกำหนดชนิด
+    และชื่อของตัวแปรเท่านั้น
+    หากต้องการนำ Array ไปใช้งานจริง
+    จะต้องสร้าง Array และกำหนดขนาด
+    หรือกำหนดค่าเริ่มต้นให้กับ Array ต่อไป
+</p>
+
+<p>
+    ตัวอย่างเช่น การเขียน
+    <b>int[] numbers;</b>
+    เป็นเพียงการประกาศตัวแปรชื่อ
+    <b>numbers</b>
+    ให้เป็น Array ชนิด <b>int</b>
+    ซึ่งสามารถใช้สำหรับเก็บข้อมูลจำนวนเต็มหลายค่าได้
+    แต่ในขั้นตอนนี้ยังไม่มีการกำหนดว่า
+    Array จะมีสมาชิกจำนวนกี่ตัว
+</p>
+
+<p>
+    การประกาศ Array สามารถเขียนเครื่องหมาย
+    <b>[]</b>
+    ไว้หลังชนิดข้อมูลได้
+    เช่น <b>int[] numbers;</b>
+    ซึ่งเป็นรูปแบบที่นิยมใช้และอ่านง่าย
+    นอกจากนี้ Java ยังอนุญาตให้เขียน
+    <b>int numbers[];</b>
+    ได้เช่นกัน
+    โดยทั้งสองรูปแบบหมายถึง Array ชนิดเดียวกัน
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>int[] numbers;
+
+int numbers[];</code></pre>
+
+</div>
+
+<p>
+    แม้ว่าทั้งสองรูปแบบจะสามารถใช้งานได้เหมือนกัน
+    แต่โดยทั่วไปมักนิยมเขียนเครื่องหมาย
+    <b>[]</b>
+    ติดกับชนิดข้อมูล
+    เช่น <b>int[] numbers;</b>
+    เพราะช่วยให้เห็นได้อย่างชัดเจนว่า
+    ตัวแปรที่ประกาศเป็น Array
+    และทำให้รูปแบบของโค้ดอ่านง่ายขึ้น
+</p>
+
+<p>
+    นอกจากชนิดข้อมูล <b>int</b>
+    แล้ว Java ยังสามารถประกาศ Array
+    สำหรับข้อมูลชนิดอื่นได้อีกหลายชนิด
+    เช่น <b>double</b>, <b>float</b>,
+    <b>char</b>, <b>boolean</b>
+    และ <b>String</b>
+    โดยชนิดข้อมูลที่กำหนดไว้
+    จะเป็นตัวกำหนดว่าข้อมูลประเภทใด
+    สามารถนำมาเก็บใน Array ได้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>int[] numbers;
+
+double[] prices;
+
+char[] letters;
+
+boolean[] status;
+
+String[] names;</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    <b>numbers</b>
+    สามารถใช้เก็บข้อมูลชนิดจำนวนเต็ม
+    <b>prices</b>
+    สามารถใช้เก็บข้อมูลตัวเลขทศนิยม
+    <b>letters</b>
+    สามารถใช้เก็บตัวอักษร
+    <b>status</b>
+    สามารถใช้เก็บค่าจริงหรือเท็จ
+    และ <b>names</b>
+    สามารถใช้เก็บข้อความหรือชื่อบุคคลได้
+</p>
+
+<p>
+    การเลือกชนิดข้อมูลให้เหมาะสม
+    เป็นสิ่งสำคัญในการออกแบบ Array
+    เพราะสมาชิกภายใน Array
+    จะต้องเป็นชนิดข้อมูลที่สอดคล้องกับ
+    ชนิดข้อมูลที่ประกาศไว้
+    เช่น หากประกาศเป็น <b>int[]</b>
+    สมาชิกของ Array จะต้องเป็นข้อมูลจำนวนเต็ม
+</p>
+
+<p>
+    ในทางกลับกัน หากประกาศเป็น
+    <b>String[]</b>
+    สมาชิกภายใน Array
+    จะใช้สำหรับจัดเก็บข้อความ
+    เช่น ชื่อนักเรียน ชื่อสินค้า
+    ชื่อจังหวัด หรือข้อมูลข้อความอื่น ๆ
+    ที่ต้องการจัดเก็บไว้หลายรายการ
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>ชนิดข้อมูล</b>
+    → กำหนดประเภทของข้อมูล
+
+    <br>
+
+    <b>[]</b>
+    → ระบุว่าเป็น Array
+
+    <br>
+
+    <b>ชื่อ Array</b>
+    → ชื่อที่ใช้สำหรับอ้างอิง Array
+
+    <br><br>
+
+    ตัวอย่าง
+
+    <br>
+
+    <b>int[] scores;</b>
+
+    <br><br>
+
+    int = ชนิดข้อมูลจำนวนเต็ม
+
+    <br>
+
+    [] = ระบุว่าเป็น Array
+
+    <br>
+
+    scores = ชื่อ Array
+
+</div>
+
+<p>
+    เมื่อประกาศ Array แล้ว
+    ขั้นตอนต่อไปคือการสร้าง Array
+    เพื่อกำหนดพื้นที่สำหรับจัดเก็บข้อมูล
+    โดยสามารถใช้คำสั่ง <b>new</b>
+    พร้อมกับระบุชนิดข้อมูล
+    และจำนวนสมาชิกที่ต้องการ
+</p>
+
+<p>
+    ตัวอย่างเช่น
+    <b>int[] numbers = new int[5];</b>
+    เป็นการประกาศและสร้าง Array
+    ชื่อ <b>numbers</b>
+    ที่สามารถจัดเก็บข้อมูลชนิด <b>int</b>
+    ได้จำนวน 5 ค่า
+    โดย Index จะเริ่มต้นตั้งแต่ 0
+    และสิ้นสุดที่ Index 4
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>int[] numbers = new int[5];</code></pre>
+
+</div>
+
+<p>
+    อีกวิธีหนึ่งคือสามารถประกาศ Array
+    พร้อมกำหนดค่าเริ่มต้นได้ทันที
+    โดยใช้เครื่องหมายปีกกา
+    <b>{ }</b>
+    ภายในจะระบุข้อมูลแต่ละค่าที่ต้องการจัดเก็บ
+    และโปรแกรมจะกำหนดขนาดของ Array
+    ตามจำนวนข้อมูลที่ระบุไว้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>int[] numbers = {
+    10, 20, 30, 40, 50
+};</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง Array
+    <b>numbers</b>
+    มีข้อมูลทั้งหมด 5 ค่า
+    ดังนั้น Array จะมีขนาดเท่ากับ 5
+    และสามารถเข้าถึงข้อมูลได้ตั้งแต่
+    Index 0 ถึง Index 4
+</p>
+
+<p>
+    การประกาศ Array ที่ถูกต้อง
+    จึงควรพิจารณาทั้งชนิดข้อมูล
+    ชื่อของ Array
+    และรูปแบบการสร้าง Array
+    ให้เหมาะสมกับข้อมูลที่ต้องการจัดเก็บ
+    เพื่อให้สามารถนำ Array ไปใช้กับคำสั่งอื่น ๆ
+    เช่น การเข้าถึงข้อมูล การแก้ไขข้อมูล
+    และการใช้ Loop ได้อย่างถูกต้อง
+</p>
+
+<div class="step-item">
+
+    <img src="images/chapter6/ary01.png">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    ตัวอย่างการประกาศ Array แต่ละชนิด
+</h4>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>
+                    การประกาศ
+                </th>
+
+                <th>
+                    ชนิดข้อมูล
+                </th>
+
+                <th>
+                    การใช้งาน
+                </th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    int[] numbers;
+                </td>
+
+                <td>
+                    int
+                </td>
+
+                <td>
+                    เก็บจำนวนเต็ม
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    double[] prices;
+                </td>
+
+                <td>
+                    double
+                </td>
+
+                <td>
+                    เก็บตัวเลขทศนิยม
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    String[] names;
+                </td>
+
+                <td>
+                    String
+                </td>
+
+                <td>
+                    เก็บข้อความ
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    char[] letters;
+                </td>
+
+                <td>
+                    char
+                </td>
+
+                <td>
+                    เก็บตัวอักษร
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    boolean[] status;
+                </td>
+
+                <td>
+                    boolean
+                </td>
+
+                <td>
+                    เก็บค่า true หรือ false
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="success-box">
+
+    <b>
+        ✅ สรุปการประกาศ Array
+    </b>
+
+    <br><br>
+
+    การประกาศ Array
+    คือการกำหนดตัวแปรให้สามารถอ้างอิง
+    ข้อมูลหลายค่าในรูปแบบ Array ได้
+
+    <br><br>
+
+    รูปแบบพื้นฐานคือ
+
+    <br><br>
+
+    <b>
+        ชนิดข้อมูล[] ชื่อArray;
+    </b>
+
+    <br><br>
+
+    ตัวอย่างเช่น
+
+    <b>
+        int[] numbers;
+    </b>
+
+    <br><br>
+
+    โดย <b>int</b> คือชนิดข้อมูล
+    <b>[]</b> ระบุว่าเป็น Array
+    และ <b>numbers</b> คือชื่อของ Array
+
+    <br><br>
+
+    การประกาศเพียงอย่างเดียว
+    ยังไม่ได้กำหนดจำนวนสมาชิก
+    หากต้องการใช้งาน Array
+    จะต้องสร้าง Array
+    หรือกำหนดค่าเริ่มต้นให้กับ Array ต่อไป
+
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers;
+String[] names;</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง <b>numbers</b> สามารถใช้เก็บข้อมูลชนิดจำนวนเต็ม
+    ส่วน <b>names</b> ใช้เก็บข้อมูลชนิดข้อความ
+    อย่างไรก็ตาม การประกาศเพียงอย่างเดียว
+    ยังไม่ได้กำหนดจำนวนสมาชิกหรือสร้างพื้นที่สำหรับเก็บข้อมูล
+</p>
+
+<div class="warning-box">
+
+    <b>💡 ข้อควรรู้</b>
+
+    <br><br>
+
+    การประกาศ Array คือการกำหนดว่า
+    ตัวแปรนั้นจะใช้เก็บข้อมูลชนิดใด
+    ส่วนการกำหนดขนาดและสร้าง Array
+    จะทำในขั้นตอนการสร้าง Array
+
+</div>
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>int[] numbers;</code></pre>
+
+</div>
+
+<p>
+    ตัวอย่างด้านบนเป็นการประกาศตัวแปร
+    Array ชื่อ <b>numbers</b>
+    ซึ่งสามารถใช้เก็บข้อมูลชนิด
+    <b>int</b> ได้หลายค่า
+</p>
+<div class="step-item">
+<img src="images/chapter6/ary01.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<h4>
+    รูปแบบการประกาศ Array
+</h4>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    รูปแบบ
+                </th>
+
+                <th>
+                    ความหมาย
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    int[] numbers;
+                </td>
+
+                <td>
+                    ประกาศ Array ชนิด int
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    double[] prices;
+                </td>
+
+                <td>
+                    ประกาศ Array ชนิด double
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    String[] names;
+                </td>
+
+                <td>
+                    ประกาศ Array ชนิด String
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    boolean[] status;
+                </td>
+
+                <td>
+                    ประกาศ Array ชนิด boolean
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<!-- ==================================================
+     6.4
+================================================== -->
+<h3>
+    6.4 การสร้าง Array ด้วย new
+</h3>
+<p>
+    หลังจากประกาศ Array แล้ว
+    ขั้นตอนต่อไปคือการสร้าง Array
+    เพื่อจองพื้นที่สำหรับจัดเก็บข้อมูล
+    โดยในภาษา Java สามารถใช้คำสั่ง
+    <b>new</b>
+    ในการสร้าง Array ได้
+</p>
+
+<p>
+    คำสั่ง <b>new</b> มีหน้าที่สร้างพื้นที่
+    ในหน่วยความจำสำหรับจัดเก็บสมาชิกของ Array
+    ทำให้โปรแกรมสามารถเตรียมตำแหน่งสำหรับ
+    เก็บข้อมูลตามจำนวนที่ผู้เขียนโปรแกรมกำหนดไว้
+</p>
+
+<p>
+    ในขั้นตอนการสร้าง Array
+    ผู้เขียนโปรแกรมจะต้องระบุ
+    <b>ชนิดข้อมูล</b>
+    และ
+    <b>จำนวนสมาชิก</b>
+    ที่ต้องการจัดเก็บภายใน Array
+    เช่น หากต้องการเก็บข้อมูลจำนวนเต็ม 5 ค่า
+    สามารถสร้าง Array ชนิด <b>int</b>
+    ที่มีขนาด 5 สมาชิกได้
+</p>
+
+<p>
+    จำนวนที่อยู่ภายในเครื่องหมาย
+    <b>[ ]</b>
+    จะเป็นตัวกำหนดขนาดของ Array
+    หรือจำนวนสมาชิกที่สามารถจัดเก็บได้
+    เมื่อสร้าง Array แล้ว
+    ขนาดของ Array จะถูกกำหนดไว้
+    และไม่สามารถเพิ่มหรือลดจำนวนสมาชิก
+    โดยตรงได้
+</p>
+
+<p>
+    ตัวอย่างเช่น
+    <b>new int[5]</b>
+    หมายถึงการสร้างพื้นที่สำหรับ
+    Array ชนิด <b>int</b>
+    จำนวน 5 ตำแหน่ง
+    โดยตำแหน่งต่าง ๆ จะถูกระบุด้วย
+    <b>Index</b>
+    ซึ่งเริ่มต้นจาก 0
+</p>
+
+<p>
+    ดังนั้น Array ที่มีขนาด 5 สมาชิก
+    จะมี Index ตั้งแต่
+    <b>0, 1, 2, 3 และ 4</b>
+    โดย Index 0 เป็นตำแหน่งแรก
+    และ Index 4 เป็นตำแหน่งสุดท้าย
+</p>
+
+<p>
+    เมื่อสร้าง Array ด้วยคำสั่ง <b>new</b> แล้ว
+    สามารถกำหนดข้อมูลให้กับแต่ละตำแหน่ง
+    ภายหลังได้ โดยใช้ชื่อ Array
+    ร่วมกับ Index ที่ต้องการ
+    เช่น <b>numbers[0]</b>
+    หมายถึงสมาชิกตำแหน่งแรกของ Array
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 แนวคิดสำคัญ
+    </b>
+
+    <br><br>
+
+    คำสั่ง <b>new</b>
+    ใช้สำหรับสร้าง Array และจองพื้นที่
+    สำหรับจัดเก็บข้อมูล
+
+    <br><br>
+
+    ตัวเลขภายใน <b>[ ]</b>
+    คือจำนวนสมาชิกที่ Array สามารถเก็บได้
+
+    <br><br>
+
+    ส่วน <b>Index</b>
+    ใช้สำหรับระบุตำแหน่งของข้อมูล
+    โดย Index จะเริ่มต้นที่ <b>0</b>
+
+</div>
+<p>
+    คำสั่ง <b>new</b> จะใช้สำหรับสร้างพื้นที่
+    ในหน่วยความจำสำหรับเก็บสมาชิกของ Array
+    โดยผู้เขียนโปรแกรมจะต้องระบุชนิดข้อมูล
+    และจำนวนสมาชิกที่ต้องการจัดเก็บ
+</p>
+
+<p>
+    รูปแบบพื้นฐานของการสร้าง Array
+    ด้วยคำสั่ง <b>new</b>
+    สามารถเขียนได้ดังนี้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>ชนิดข้อมูล[] ชื่อArray = new ชนิดข้อมูล[จำนวนสมาชิก];</code></pre>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น
+    หากต้องการสร้าง Array ชนิด <b>int</b>
+    สำหรับเก็บข้อมูลจำนวนเต็มจำนวน 5 ค่า
+    สามารถเขียนคำสั่งได้ดังนี้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = new int[5];</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง Array ชื่อ <b>numbers</b>
+    สามารถเก็บข้อมูลชนิดจำนวนเต็มได้ทั้งหมด
+    <b>5 ค่า</b>
+    โดยมีตำแหน่ง Index ตั้งแต่
+    <b>0 ถึง 4</b>
+</p>
+
+<p>
+    เนื่องจาก Index ของ Array ในภาษา Java
+    เริ่มต้นที่ 0
+    ดังนั้นเมื่อมีสมาชิกจำนวน 5 ค่า
+    ตำแหน่งที่สามารถใช้งานได้จะเป็น
+    <b>0, 1, 2, 3 และ 4</b>
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary02.png"
+        alt="ตัวอย่างการสร้าง Array ด้วย new"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<p>
+    ในคำสั่ง
+    <b>int[] numbers = new int[5];</b>
+    สามารถแบ่งความหมายของแต่ละส่วนได้ดังนี้
+</p>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    ส่วนประกอบ
+                </th>
+
+                <th>
+                    ความหมาย
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    <b>int</b>
+                </td>
+
+                <td>
+                    กำหนดให้ Array เก็บข้อมูลชนิดจำนวนเต็ม
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>[]</b>
+                </td>
+
+                <td>
+                    แสดงว่าตัวแปรเป็น Array
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>numbers</b>
+                </td>
+
+                <td>
+                    ชื่อของ Array
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>new</b>
+                </td>
+
+                <td>
+                    ใช้สำหรับสร้าง Array และจองพื้นที่จัดเก็บข้อมูล
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>int[5]</b>
+                </td>
+
+                <td>
+                    สร้าง Array ชนิด int ที่มีสมาชิกจำนวน 5 ตำแหน่ง
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<p>
+    เลข <b>5</b> ที่อยู่ภายในวงเล็บเหลี่ยม
+    หมายถึงจำนวนสมาชิกที่ Array
+    สามารถรองรับได้
+    ไม่ใช่หมายเลข Index
+</p>
+
+<p>
+    ดังนั้น
+    <b>new int[5]</b>
+    หมายถึงการสร้าง Array
+    ที่สามารถจัดเก็บข้อมูลชนิด <b>int</b>
+    ได้จำนวน 5 ค่า
+</p>
+
+<p>
+    เมื่อสร้าง Array แล้ว
+    โปรแกรมจะจัดเตรียมพื้นที่สำหรับสมาชิก
+    ตามจำนวนที่กำหนดไว้
+    และแต่ละตำแหน่งจะสามารถเข้าถึงได้
+    โดยใช้ Index
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        new int[5]
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        Index 0
+    </div>
+
+    <div class="flow-box">
+        Index 1
+    </div>
+
+    <div class="flow-box">
+        Index 2
+    </div>
+
+    <div class="flow-box">
+        Index 3
+    </div>
+
+    <div class="flow-box">
+        Index 4
+    </div>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น หากต้องการกำหนดค่า
+    ให้กับ Array หลังจากสร้างแล้ว
+    สามารถกำหนดค่าลงในแต่ละ Index
+    ได้โดยตรง
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = new int[5];
+
+numbers[0] = 10;
+numbers[1] = 20;
+numbers[2] = 30;
+numbers[3] = 40;
+numbers[4] = 50;</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    <b>numbers[0]</b>
+    จะเก็บค่า 10
+    ส่วน <b>numbers[1]</b>
+    จะเก็บค่า 20
+    และสามารถกำหนดค่าให้กับตำแหน่งอื่น ๆ
+    ได้จนถึง Index 4
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary02.png"
+        alt="การกำหนดข้อมูลให้ Array หลังจากสร้างด้วย new"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    ตัวอย่างการสร้าง Array ชนิดข้อมูลต่าง ๆ
+</h4>
+
+<p>
+    การใช้คำสั่ง <b>new</b>
+    ไม่ได้จำกัดเฉพาะ Array ชนิด <b>int</b>
+    เท่านั้น แต่สามารถใช้สร้าง Array
+    ที่มีชนิดข้อมูลอื่น ๆ ได้เช่นกัน
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = new int[5];
+
+double[] prices = new double[3];
+
+String[] names = new String[4];
+
+boolean[] status = new boolean[2];</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้แต่ละ Array
+    จะมีชนิดข้อมูลและจำนวนสมาชิกแตกต่างกัน
+    ตามที่กำหนดไว้ตอนสร้าง
+</p>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    คำสั่ง
+                </th>
+
+                <th>
+                    ชนิดข้อมูล
+                </th>
+
+                <th>
+                    จำนวนสมาชิก
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    int[] numbers = new int[5];
+                </td>
+
+                <td>
+                    int
+                </td>
+
+                <td>
+                    5
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    double[] prices = new double[3];
+                </td>
+
+                <td>
+                    double
+                </td>
+
+                <td>
+                    3
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    String[] names = new String[4];
+                </td>
+
+                <td>
+                    String
+                </td>
+
+                <td>
+                    4
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    boolean[] status = new boolean[2];
+                </td>
+
+                <td>
+                    boolean
+                </td>
+
+                <td>
+                    2
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<h4>
+    ค่าเริ่มต้นของสมาชิกใน Array
+</h4>
+
+<p>
+    เมื่อสร้าง Array ด้วยคำสั่ง <b>new</b>
+    แต่ยังไม่ได้กำหนดค่าให้สมาชิกแต่ละตำแหน่ง
+    Java จะกำหนดค่าเริ่มต้นให้โดยอัตโนมัติ
+    ตามชนิดข้อมูลของ Array
+</p>
+
+<p>
+    สำหรับ Array ชนิดตัวเลข เช่น
+    <b>int</b>
+    และ <b>double</b>
+    สมาชิกจะมีค่าเริ่มต้นเป็น
+    <b>0</b>
+    หรือค่าที่เทียบเท่ากับศูนย์ของชนิดข้อมูลนั้น
+</p>
+
+<p>
+    ส่วน Array ชนิด <b>boolean</b>
+    จะมีค่าเริ่มต้นเป็น
+    <b>false</b>
+    และ Array ชนิดอ้างอิง เช่น
+    <b>String</b>
+    จะมีค่าเริ่มต้นเป็น
+    <b>null</b>
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 หมายเหตุ
+    </b>
+
+    <br><br>
+
+    เมื่อสร้าง Array ด้วย
+    <b>new int[5]</b>
+    สมาชิกทุกตำแหน่งจะมีค่าเริ่มต้นเป็น
+    <b>0</b>
+
+    <br><br>
+
+    Index ที่สามารถใช้งานได้คือ
+    <b>0 ถึง 4</b>
+
+    <br><br>
+
+    หากยังไม่ได้กำหนดค่าใหม่
+    โปรแกรมจะยังคงใช้ค่าเริ่มต้น
+    ที่ Java กำหนดให้
+
+</div>
+
+<h4>
+    ตัวอย่างการตรวจสอบค่าเริ่มต้น
+</h4>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = new int[5];
+
+        System.out.println(numbers[0]);
+        System.out.println(numbers[1]);
+        System.out.println(numbers[2]);
+        System.out.println(numbers[3]);
+        System.out.println(numbers[4]);
+
+    }
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary02.png"
+        alt="ผลลัพธ์ของ Array ที่สร้างด้วย new"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<p>
+    ผลลัพธ์ของโปรแกรมจะเป็น
+    <b>0</b>
+    ทุกตำแหน่ง
+    เนื่องจาก Array ชนิด <b>int</b>
+    ยังไม่ได้รับการกำหนดค่าใหม่
+</p>
+
+<div class="code-wrap">
+
+    <pre><code>0
+0
+0
+0
+0</code></pre>
+
+</div>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรระวัง
+    </b>
+
+    <br><br>
+
+    หากสร้าง Array จำนวน 5 สมาชิก
+    จะไม่สามารถเข้าถึง Index 5 ได้
+
+    <br><br>
+
+    ตัวอย่างที่ถูกต้องคือ
+
+    <b>numbers[0]</b> ถึง
+    <b>numbers[4]</b>
+
+    <br><br>
+
+    หากพยายามใช้
+    <b>numbers[5]</b>
+    โปรแกรมจะเกิดข้อผิดพลาด
+    เนื่องจากไม่มีตำแหน่ง Index ดังกล่าว
+
+</div>
+
+<h4>
+    สรุปการสร้าง Array ด้วย new
+</h4>
+
+<p>
+    การสร้าง Array ด้วยคำสั่ง <b>new</b>
+    เป็นการกำหนดพื้นที่สำหรับจัดเก็บข้อมูล
+    โดยต้องระบุชนิดข้อมูลและจำนวนสมาชิก
+    ที่ต้องการใช้งานตั้งแต่ตอนสร้าง
+</p>
+
+<p>
+    ตัวอย่าง
+    <b>new int[5]</b>
+    หมายถึงการสร้าง Array
+    ชนิด <b>int</b>
+    ที่สามารถเก็บข้อมูลได้จำนวน 5 ค่า
+    และมี Index ตั้งแต่ 0 ถึง 4
+</p>
+
+<div class="success-box">
+
+    <b>
+        ✅ หลักการสำคัญ
+    </b>
+
+    <br><br>
+
+    รูปแบบการสร้าง Array คือ
+
+    <br><br>
+
+    <b>
+        ชนิดข้อมูล[] ชื่อArray =
+        new ชนิดข้อมูล[จำนวนสมาชิก];
+    </b>
+
+    <br><br>
+
+    ตัวอย่าง
+
+    <br><br>
+
+    <b>
+        int[] numbers = new int[5];
+    </b>
+
+    <br><br>
+
+    หมายถึงสร้าง Array ชื่อ
+    <b>numbers</b>
+    สำหรับเก็บข้อมูลชนิด
+    <b>int</b>
+    จำนวน 5 สมาชิก
+
+    <br><br>
+
+    Index ที่ใช้งานได้คือ
+    <b>0 ถึง 4</b>
+
+</div>
+
+
+<!-- ==================================================
+     6.5
+================================================== -->
+
+<h3>
+    6.5 การกำหนดค่าเริ่มต้นให้ Array
+</h3>
+
+<p>
+    เราสามารถกำหนดข้อมูลให้ Array
+    ตั้งแต่ตอนประกาศได้
+    โดยใช้เครื่องหมาย
+    <b>{ }</b>
+    เพื่อระบุค่าที่ต้องการจัดเก็บ
+</p>
+
+<p>
+    วิธีนี้ช่วยให้สามารถสร้าง Array
+    พร้อมกับกำหนดข้อมูลเริ่มต้นได้ในคำสั่งเดียว
+    โดยไม่จำเป็นต้องใช้คำสั่ง <b>new</b>
+    และกำหนดค่าให้แต่ละ Index แยกกัน
+</p>
+
+<p>
+    ค่าที่อยู่ภายในเครื่องหมาย
+    <b>{ }</b>
+    จะถูกจัดเก็บลงใน Array
+    ตามลำดับที่กำหนด
+    โดยข้อมูลตัวแรกจะถูกเก็บไว้ที่
+    <b>Index 0</b>
+    ข้อมูลตัวที่สองจะอยู่ที่
+    <b>Index 1</b>
+    และเพิ่มขึ้นตามลำดับ
+</p>
+
+<p>
+    จำนวนข้อมูลที่กำหนดไว้ภายใน
+    <b>{ }</b>
+    จะเป็นตัวกำหนดจำนวนสมาชิก
+    หรือขนาดของ Array โดยอัตโนมัติ
+    ดังนั้นผู้เขียนโปรแกรมไม่จำเป็นต้อง
+    ระบุจำนวนสมาชิกแยกอีกครั้ง
+</p>
+
+<p>
+    ตัวอย่างเช่น หากกำหนดข้อมูลจำนวน
+    5 ค่าใน Array
+    โปรแกรมจะสร้าง Array
+    ที่มีสมาชิกจำนวน 5 ตำแหน่ง
+    และสามารถเข้าถึงข้อมูลได้ตั้งแต่
+    <b>Index 0 ถึง Index 4</b>
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    <b>numbers</b>
+    เป็นชื่อของ Array
+    และข้อมูลที่อยู่ภายใน
+    <b>{10, 20, 30, 40, 50}</b>
+    จะถูกจัดเก็บตามลำดับ
+    โดยแต่ละค่าจะมี Index
+    สำหรับใช้เข้าถึงข้อมูล
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        Index 0<br>
+        10
+    </div>
+
+    <div class="flow-box">
+        Index 1<br>
+        20
+    </div>
+
+    <div class="flow-box">
+        Index 2<br>
+        30
+    </div>
+
+    <div class="flow-box">
+        Index 3<br>
+        40
+    </div>
+
+    <div class="flow-box">
+        Index 4<br>
+        50
+    </div>
+
+</div>
+
+<p>
+    สามารถเข้าถึงข้อมูลแต่ละตำแหน่ง
+    ได้โดยใช้ชื่อ Array ตามด้วย Index
+    ภายในเครื่องหมาย
+    <b>[ ]</b>
+    เช่น
+    <b>numbers[0]</b>
+    จะได้ค่า 10
+    และ
+    <b>numbers[3]</b>
+    จะได้ค่า 40
+</p>
+
+<p>
+    การกำหนดค่าเริ่มต้นในลักษณะนี้
+    เหมาะสำหรับกรณีที่ทราบข้อมูล
+    ที่ต้องการจัดเก็บอยู่แล้ว
+    เช่น คะแนนของนักเรียน
+    ราคาสินค้า
+    จำนวนสินค้า
+    หรือข้อมูลตัวเลขอื่น ๆ
+    ที่ต้องการนำมาใช้งานภายในโปรแกรม
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    เครื่องหมาย <b>{ }</b>
+    ใช้สำหรับกำหนดข้อมูลเริ่มต้น
+    ให้กับ Array
+
+    <br><br>
+
+    ข้อมูลตัวแรก
+    → <b>Index 0</b>
+
+    <br>
+
+    ข้อมูลตัวที่สอง
+    → <b>Index 1</b>
+
+    <br>
+
+    ข้อมูลตัวถัดไป
+    → เพิ่ม Index ขึ้นทีละ 1
+
+    <br><br>
+
+    จำนวนข้อมูลภายใน <b>{ }</b>
+    จะเป็นตัวกำหนดจำนวนสมาชิก
+    ของ Array โดยอัตโนมัติ
+
+</div>
+
+<p>
+    นอกจากนี้ Array ที่กำหนดค่าเริ่มต้นแล้ว
+    ยังสามารถนำไปใช้งานร่วมกับ
+    <b>for Loop</b>
+    หรือ
+    <b>Enhanced for Loop</b>
+    เพื่ออ่านข้อมูลทุกตำแหน่งได้
+    ทำให้เหมาะสำหรับการจัดการข้อมูล
+    หลายรายการภายในโปรแกรม
+</p>
+
+<p>
+    จำนวนข้อมูลที่อยู่ภายใน
+    <b>{ }</b>
+    จะเป็นตัวกำหนดขนาดของ Array
+    โดยอัตโนมัติ และข้อมูลแต่ละค่าจะถูกจัดเก็บ
+    ตามลำดับของ Index ที่เริ่มต้นจาก 0
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง Array <b>numbers</b>
+    มีข้อมูลทั้งหมด 5 ค่า
+    จึงมี Index ตั้งแต่ <b>0 ถึง 4</b>
+</p>
+<div class="step-item">
+<img 
+src="images/chapter6/ary03.png"
+>
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>int[] numbers = {10, 20, 30, 40, 50};</code></pre>
+
+</div>
+
+<p>
+    Array <b>numbers</b>
+    จะมีข้อมูลทั้งหมด 5 ค่า
+    โดยแต่ละค่าจะถูกจัดเก็บตาม Index
+</p>
+<div class="step-item">
+<img 
+src="images/chapter6/ary03.png"
+>
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Index
+                </th>
+
+                <th>
+                    ค่า
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>0</td>
+                <td>10</td>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>20</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>30</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>40</td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>50</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<!-- ==================================================
+     6.6
+================================================== -->
+
+<h3>
+    6.6 การเข้าถึงข้อมูลใน Array
+</h3>
+
+<p>
+    การเข้าถึงข้อมูลใน Array
+    สามารถทำได้โดยระบุชื่อ Array
+    และ Index ที่ต้องการภายใน
+    เครื่องหมาย <b>[ ]</b>
+</p>
+
+<p>
+    Index ทำหน้าที่ระบุตำแหน่งของข้อมูล
+    ที่อยู่ภายใน Array
+    โดย Index ของ Array ในภาษา Java
+    จะเริ่มต้นจาก <b>0</b>
+    ดังนั้นสมาชิกตัวแรกจะอยู่ที่ Index 0
+    สมาชิกตัวที่สองจะอยู่ที่ Index 1
+    และเพิ่มขึ้นตามลำดับ
+</p>
+
+<p>
+    รูปแบบการเข้าถึงข้อมูลใน Array
+    สามารถเขียนได้ดังนี้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>ชื่อArray[Index]</code></pre>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น หากมี Array ชื่อ
+    <b>numbers</b>
+    ที่เก็บข้อมูลจำนวนเต็ม
+    สามารถระบุ Index เพื่ออ่านข้อมูล
+    แต่ละตำแหน่งได้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+System.out.println(numbers[0]);
+System.out.println(numbers[2]);
+System.out.println(numbers[4]);</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    <b>numbers[0]</b>
+    หมายถึงข้อมูลที่อยู่ในตำแหน่งแรก
+    ซึ่งมีค่าเท่ากับ <b>10</b>
+    ส่วน <b>numbers[2]</b>
+    หมายถึงข้อมูลตำแหน่งที่สาม
+    ซึ่งมีค่าเท่ากับ <b>30</b>
+</p>
+
+<p>
+    สำหรับ <b>numbers[4]</b>
+    หมายถึงข้อมูลตำแหน่งที่ห้า
+    ซึ่งมีค่าเท่ากับ <b>50</b>
+    เนื่องจาก Array เริ่มนับ Index
+    จาก 0 ไม่ใช่ 1
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary04.png"
+        alt="ตัวอย่างการเข้าถึงข้อมูลใน Array"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    ตัวอย่างตำแหน่งของข้อมูลใน Array
+</h4>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Index</th>
+                <th>คำสั่ง</th>
+                <th>ค่าที่ได้</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>0</td>
+                <td><b>numbers[0]</b></td>
+                <td>10</td>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td><b>numbers[1]</b></td>
+                <td>20</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td><b>numbers[2]</b></td>
+                <td>30</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td><b>numbers[3]</b></td>
+                <td>40</td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td><b>numbers[4]</b></td>
+                <td>50</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<p>
+    การเข้าถึงข้อมูลใน Array
+    สามารถนำค่าที่ได้ไปใช้งานต่อได้
+    เช่น นำไปแสดงผลทางหน้าจอ
+    นำไปคำนวณทางคณิตศาสตร์
+    หรือเก็บไว้ในตัวแปรอื่น
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30};
+
+int value = numbers[1];
+
+System.out.println(value);</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    โปรแกรมจะนำข้อมูลจาก
+    <b>numbers[1]</b>
+    ซึ่งมีค่าเท่ากับ <b>20</b>
+    ไปเก็บไว้ในตัวแปร
+    <b>value</b>
+    จากนั้นจึงแสดงค่าของตัวแปรออกทางหน้าจอ
+</p>
+
+<h4>
+    การนำข้อมูลใน Array ไปคำนวณ
+</h4>
+
+<p>
+    ข้อมูลที่เข้าถึงจาก Array
+    สามารถนำไปใช้ในการคำนวณได้เหมือนกับ
+    ตัวแปรทั่วไป
+    เช่น การบวก ลบ คูณ หรือหาร
+    ทั้งนี้ต้องคำนึงถึงชนิดข้อมูล
+    ของสมาชิกใน Array
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30};
+
+int result = numbers[0] + numbers[1];
+
+System.out.println(result);</code></pre>
+
+</div>
+
+<p>
+    โปรแกรมจะนำค่า
+    <b>numbers[0]</b>
+    ซึ่งเท่ากับ 10
+    มาบวกกับ
+    <b>numbers[1]</b>
+    ซึ่งเท่ากับ 20
+    ทำให้ผลลัพธ์ที่ได้คือ <b>30</b>
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>ชื่อArray[0]</b>
+    = ข้อมูลตัวแรก
+
+    <br>
+
+    <b>ชื่อArray[1]</b>
+    = ข้อมูลตัวที่สอง
+
+    <br>
+
+    <b>ชื่อArray[2]</b>
+    = ข้อมูลตัวที่สาม
+
+    <br><br>
+
+    Index เริ่มต้นที่ <b>0</b>
+    และ Index สุดท้ายคือ
+    <b>length - 1</b>
+
+</div>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรระวัง
+    </b>
+
+    <br><br>
+
+    ต้องระบุ Index ที่มีอยู่จริง
+    ภายใน Array เท่านั้น
+
+    <br><br>
+
+    หาก Array มีสมาชิก 5 ค่า
+    สามารถเข้าถึงได้ตั้งแต่
+    <b>Index 0 ถึง Index 4</b>
+
+    <br><br>
+
+    หากพยายามเข้าถึง
+    <b>numbers[5]</b>
+    จะเกิดข้อผิดพลาด
+    เนื่องจากไม่มี Index 5
+    อยู่ใน Array
+</div>
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {10, 20, 30, 40, 50};
+
+        System.out.println(numbers[0]);
+        System.out.println(numbers[2]);
+        System.out.println(numbers[4]);
+
+    }
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+    <img src="images/chapter6/ary04.png">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+   
+
+</div>
+
+<p>
+    ผลลัพธ์ที่ได้คือ
+</p>
+
+<div class="code-wrap">
+
+<pre><code>10
+30
+50</code></pre>
+
+</div>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>numbers[0]</b>
+    หมายถึงข้อมูลตัวแรก
+
+    <br>
+
+    <b>numbers[1]</b>
+    หมายถึงข้อมูลตัวที่สอง
+
+    <br>
+
+    <b>numbers[2]</b>
+    หมายถึงข้อมูลตัวที่สาม
+
+</div>
+
+
+<!-- ==================================================
+     6.7
+================================================== -->
+
+<h3>
+    6.7 การเปลี่ยนแปลงข้อมูลใน Array
+</h3>
+
+<p>
+    ข้อมูลภายใน Array สามารถแก้ไขได้
+    โดยระบุ Index ที่ต้องการ
+    แล้วกำหนดค่าใหม่ให้กับตำแหน่งนั้น
+</p>
+
+<p>
+    การแก้ไขข้อมูลใน Array
+    เป็นการเปลี่ยนค่าของสมาชิกที่มีอยู่เดิม
+    โดยไม่จำเป็นต้องสร้าง Array ใหม่
+    วิธีการทำงานคือระบุชื่อ Array
+    ตามด้วย Index ที่ต้องการแก้ไข
+    จากนั้นใช้เครื่องหมาย <b>=</b>
+    เพื่อกำหนดค่าใหม่ให้กับสมาชิก
+</p>
+
+<p>
+    รูปแบบการแก้ไขข้อมูลใน Array
+    สามารถเขียนได้ดังนี้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>ชื่อArray[Index] = ค่าใหม่;</code></pre>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น มี Array ชื่อ
+    <b>numbers</b>
+    ที่เก็บข้อมูลจำนวนเต็ม
+    จำนวน 3 ค่า ได้แก่
+    10, 20 และ 30
+    หากต้องการเปลี่ยนค่าที่ Index 1
+    สามารถกำหนดค่าใหม่ให้กับ
+    <b>numbers[1]</b>
+    ได้โดยตรง
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30};
+
+numbers[1] = 99;</code></pre>
+
+</div>
+
+<p>
+    ก่อนการแก้ไข
+    <b>numbers[1]</b>
+    มีค่าเท่ากับ <b>20</b>
+    เมื่อโปรแกรมทำงานตามคำสั่ง
+    <b>numbers[1] = 99;</b>
+    ค่า 20 จะถูกแทนที่ด้วยค่า 99
+    ทำให้ข้อมูลใน Array เปลี่ยนเป็น
+    10, 99 และ 30
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary05.png"
+        alt="ตัวอย่างการแก้ไขข้อมูลใน Array"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    หลักการทำงานของการแก้ไขข้อมูล
+</h4>
+
+<p>
+    การแก้ไขข้อมูลใน Array
+    จะทำงานกับสมาชิกที่อยู่ในตำแหน่ง
+    Index ที่ระบุเท่านั้น
+    สมาชิกในตำแหน่งอื่นจะไม่ถูกเปลี่ยนแปลง
+    หากไม่มีคำสั่งให้แก้ไข
+</p>
+
+<p>
+    ตัวอย่างเช่น Array
+    <b>numbers</b>
+    มีข้อมูล 5 ค่า
+    และต้องการเปลี่ยนเฉพาะข้อมูล
+    ที่ Index 2
+    โปรแกรมจะเปลี่ยนเฉพาะสมาชิก
+    ในตำแหน่งดังกล่าว
+    ส่วน Index 0, 1, 3 และ 4
+    จะยังคงมีค่าเดิม
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+numbers[2] = 100;</code></pre>
+
+</div>
+
+<p>
+    หลังจากคำสั่งทำงาน
+    Array จะมีข้อมูลเป็น
+    <b>10, 20, 100, 40, 50</b>
+    เนื่องจากค่าที่ Index 2
+    ซึ่งเดิมเป็น 30
+    ถูกเปลี่ยนเป็น 100
+</p>
+
+<h4>
+    การแก้ไขข้อมูลตาม Index
+</h4>
+
+<p>
+    เนื่องจาก Index ของ Array
+    เริ่มต้นที่ 0
+    จึงต้องระบุตำแหน่งให้ถูกต้อง
+    ก่อนแก้ไขข้อมูล
+    เช่น หากต้องการแก้ไขข้อมูลตัวแรก
+    ต้องใช้ Index 0
+    หากต้องการแก้ไขข้อมูลตัวที่สอง
+    ต้องใช้ Index 1
+</p>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Index</th>
+                <th>ข้อมูลเดิม</th>
+                <th>คำสั่งแก้ไข</th>
+                <th>ข้อมูลใหม่</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>0</td>
+                <td>10</td>
+                <td>numbers[0] = 100;</td>
+                <td>100</td>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>20</td>
+                <td>numbers[1] = 200;</td>
+                <td>200</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>30</td>
+                <td>numbers[2] = 300;</td>
+                <td>300</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<p>
+    จากตัวอย่างจะเห็นว่า
+    การระบุ Index เป็นส่วนสำคัญ
+    ของการแก้ไขข้อมูล
+    เพราะ Index จะเป็นตัวบอกว่า
+    ต้องการเปลี่ยนสมาชิกในตำแหน่งใด
+    ของ Array
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>Array</b>
+    = ชื่อกลุ่มข้อมูล
+
+    <br>
+
+    <b>Index</b>
+    = ตำแหน่งของข้อมูล
+
+    <br>
+
+    <b>=</b>
+    = การกำหนดค่าใหม่
+
+    <br><br>
+
+    ดังนั้น
+
+    <br><br>
+
+    <b>numbers[2] = 100;</b>
+
+    <br><br>
+
+    หมายถึง
+    นำค่า <b>100</b>
+    ไปแทนที่ข้อมูลเดิม
+    ที่อยู่ใน Index 2
+</div>
+
+<h4>
+    การแก้ไขข้อมูลหลายตำแหน่ง
+</h4>
+
+<p>
+    หากต้องการแก้ไขข้อมูลมากกว่าหนึ่งตำแหน่ง
+    สามารถเขียนคำสั่งกำหนดค่าใหม่
+    ให้กับแต่ละ Index ได้
+    โดยแต่ละคำสั่งจะทำการเปลี่ยนแปลง
+    ข้อมูลในตำแหน่งที่ระบุ
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+numbers[0] = 100;
+numbers[2] = 300;
+numbers[4] = 500;</code></pre>
+
+</div>
+
+<p>
+    หลังจากทำงานตามคำสั่ง
+    ข้อมูลใน Array จะเปลี่ยนเป็น
+    <b>100, 20, 300, 40, 500</b>
+    โดย Index 0, 2 และ 4
+    ถูกกำหนดค่าใหม่
+    ส่วน Index 1 และ 3
+    ยังคงเป็นค่าเดิม
+</p>
+
+<h4>
+    การแก้ไขข้อมูลโดยใช้ตัวแปร
+</h4>
+
+<p>
+    ค่าใหม่ที่นำมากำหนดให้กับสมาชิก
+    ของ Array ไม่จำเป็นต้องเขียนเป็นค่าคงที่
+    โดยตรงเสมอไป
+    แต่สามารถนำค่าที่เก็บอยู่ในตัวแปร
+    มากำหนดให้กับสมาชิกของ Array ได้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30};
+
+int newValue = 99;
+
+numbers[1] = newValue;
+
+System.out.println(numbers[1]);</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    ตัวแปร <b>newValue</b>
+    มีค่าเท่ากับ 99
+    จากนั้นนำค่าของตัวแปรดังกล่าว
+    ไปกำหนดให้กับ
+    <b>numbers[1]</b>
+    ทำให้สมาชิกที่ Index 1
+    มีค่าเป็น 99
+</p>
+
+<h4>
+    การนำข้อมูลเดิมมาคำนวณแล้วแก้ไข
+</h4>
+
+<p>
+    นอกจากการกำหนดค่าคงที่ใหม่แล้ว
+    ยังสามารถนำค่าที่อยู่ใน Array
+    มาคำนวณก่อน แล้วนำผลลัพธ์
+    กลับไปเก็บไว้ใน Index เดิมได้
+    เช่น การเพิ่มค่า การลดค่า
+    หรือการคูณข้อมูลด้วยค่าที่กำหนด
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30};
+
+numbers[0] = numbers[0] + 5;
+numbers[1] = numbers[1] * 2;
+
+System.out.println(numbers[0]);
+System.out.println(numbers[1]);</code></pre>
+
+</div>
+
+<p>
+    ในคำสั่ง
+    <b>numbers[0] = numbers[0] + 5;</b>
+    โปรแกรมจะนำค่าเดิมของ
+    <b>numbers[0]</b>
+    มาบวก 5 แล้วนำผลลัพธ์
+    กลับไปเก็บไว้ที่ Index 0
+</p>
+
+<p>
+    ส่วนคำสั่ง
+    <b>numbers[1] = numbers[1] * 2;</b>
+    จะนำค่าที่อยู่ใน Index 1
+    มาคูณด้วย 2
+    แล้วบันทึกผลลัพธ์กลับไปยัง
+    Index เดิม
+</p>
+
+<h4>
+    การแก้ไขข้อมูล String ใน Array
+</h4>
+
+<p>
+    การแก้ไขข้อมูลไม่ได้จำกัดเฉพาะ
+    Array ชนิดตัวเลขเท่านั้น
+    แต่สามารถใช้กับ Array ชนิด
+    <b>String</b>
+    ได้เช่นกัน
+    โดยสามารถเปลี่ยนข้อความ
+    ในตำแหน่งที่ต้องการได้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>String[] names = {
+    "สมชาย",
+    "สมหญิง",
+    "มานะ"
+};
+
+names[1] = "มาลี";
+
+System.out.println(names[1]);</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    ข้อมูลที่ Index 1
+    เดิมคือ <b>"สมหญิง"</b>
+    จะถูกเปลี่ยนเป็น
+    <b>"มาลี"</b>
+    โดยสมาชิกในตำแหน่งอื่น
+    ยังคงเป็นข้อมูลเดิม
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary05.png"
+        alt="การแก้ไขข้อมูล String ใน Array"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    การแก้ไขข้อมูลด้วย for Loop
+</h4>
+
+<p>
+    หากต้องการแก้ไขข้อมูลหลายสมาชิก
+    ที่มีรูปแบบเดียวกัน
+    สามารถใช้ <b>for Loop</b>
+    เพื่อเข้าถึงสมาชิกแต่ละตำแหน่ง
+    และกำหนดค่าใหม่ได้
+</p>
+
+<p>
+    ตัวแปรที่ใช้ควบคุม Loop
+    สามารถทำหน้าที่เป็น Index
+    ทำให้โปรแกรมสามารถแก้ไขข้อมูล
+    ตั้งแต่ตำแหน่งแรก
+    ไปจนถึงตำแหน่งสุดท้าย
+    ได้โดยไม่ต้องเขียนคำสั่งซ้ำหลายครั้ง
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    numbers[i] = numbers[i] + 10;
+
+}</code></pre>
+
+</div>
+
+<p>
+    โปรแกรมจะเริ่มทำงานที่ Index 0
+    และวนไปยัง Index ถัดไป
+    จนครบทุกสมาชิก
+    โดยแต่ละรอบจะนำข้อมูลเดิม
+    มาบวกเพิ่ม 10
+    แล้วนำผลลัพธ์กลับไปเก็บ
+    ในตำแหน่งเดิม
+</p>
+
+<p>
+    จากข้อมูลเดิม
+    <b>10, 20, 30, 40, 50</b>
+    หลังจากทำงานเสร็จ
+    จะกลายเป็น
+    <b>20, 30, 40, 50, 60</b>
+</p>
+
+<h4>
+    การแก้ไขข้อมูลตามเงื่อนไข
+</h4>
+
+<p>
+    สามารถใช้คำสั่ง <b>if</b>
+    ร่วมกับ Array เพื่อเลือกแก้ไข
+    เฉพาะข้อมูลที่ตรงตามเงื่อนไข
+    ได้ เช่น ต้องการเพิ่มคะแนน
+    ให้เฉพาะคะแนนที่มีค่าน้อยกว่า 50
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] scores = {40, 70, 50, 80, 30};
+
+for (int i = 0; i &lt; scores.length; i++) {
+
+    if (scores[i] &lt; 50) {
+        scores[i] = scores[i] + 10;
+    }
+
+}</code></pre>
+
+</div>
+
+<p>
+    โปรแกรมจะตรวจสอบคะแนน
+    ทีละตำแหน่ง
+    หากคะแนนน้อยกว่า 50
+    โปรแกรมจะเพิ่มคะแนนให้ 10 คะแนน
+    แต่ถ้าคะแนนมากกว่าหรือเท่ากับ 50
+    จะไม่มีการเปลี่ยนแปลงข้อมูล
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 การประยุกต์ใช้
+    </b>
+
+    <br><br>
+
+    แนวคิดนี้สามารถนำไปใช้กับ
+    โปรแกรมจริงได้หลายรูปแบบ
+    เช่น
+
+    <br><br>
+
+    • ปรับคะแนนของนักเรียน
+
+    <br>
+
+    • เพิ่มราคาสินค้า
+
+    <br>
+
+    • ปรับจำนวนสินค้าในคลัง
+
+    <br>
+
+    • เปลี่ยนสถานะของข้อมูล
+
+    <br>
+
+    • แก้ไขข้อมูลสมาชิก
+
+</div>
+
+<h4>
+    Array มีขนาดคงที่
+</h4>
+
+<p>
+    สิ่งสำคัญที่ควรเข้าใจคือ
+    การแก้ไขข้อมูลใน Array
+    ไม่ได้เป็นการเพิ่มสมาชิกใหม่
+    และไม่ได้ทำให้ขนาดของ Array เปลี่ยนแปลง
+</p>
+
+<p>
+    ตัวอย่างเช่น Array มีขนาด 5
+    จะมี Index ตั้งแต่ 0 ถึง 4
+    แม้จะเปลี่ยนค่าของสมาชิก
+    ทุกตำแหน่งแล้ว
+    Array ก็ยังคงมีสมาชิกจำนวน 5 ค่า
+    เช่นเดิม
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+numbers[0] = 100;
+numbers[1] = 200;
+numbers[2] = 300;
+numbers[3] = 400;
+numbers[4] = 500;
+
+System.out.println(numbers.length);</code></pre>
+
+</div>
+
+<p>
+    ผลลัพธ์ของ
+    <b>numbers.length</b>
+    ยังคงเป็น <b>5</b>
+    เพราะการแก้ไขข้อมูล
+    ไม่ได้เปลี่ยนจำนวนสมาชิก
+    ของ Array
+</p>
+
+<h4>
+    ข้อควรระวังเรื่อง Index
+</h4>
+
+<p>
+    ก่อนแก้ไขข้อมูลควรตรวจสอบว่า
+    Index ที่ต้องการใช้งาน
+    อยู่ในช่วงของ Array
+    หาก Array มีสมาชิกจำนวน 5 ค่า
+    Index ที่สามารถใช้งานได้คือ
+    0, 1, 2, 3 และ 4
+</p>
+
+<p>
+    หากพยายามเข้าถึง Index ที่ไม่มีอยู่
+    โปรแกรมจะเกิดข้อผิดพลาด
+    ที่เรียกว่า
+    <b>ArrayIndexOutOfBoundsException</b>
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+numbers[5] = 99;</code></pre>
+
+</div>
+
+<p>
+    ตัวอย่างนี้ไม่สามารถทำงานได้
+    เนื่องจาก Array มีสมาชิก 5 ค่า
+    จึงมี Index สูงสุดเพียง 4
+    ดังนั้นการใช้
+    <b>numbers[5]</b>
+    จึงเป็นการอ้างอิงตำแหน่ง
+    ที่ไม่มีอยู่ใน Array
+</p>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรระวัง
+    </b>
+
+    <br><br>
+
+    หาก Array มีสมาชิกจำนวน
+    <b>length</b> ค่า
+
+    <br><br>
+
+    Index ที่ถูกต้องคือ
+
+    <br>
+
+    <b>0 ถึง length - 1</b>
+
+    <br><br>
+
+    ดังนั้นไม่ควรใช้ Index
+    ที่มีค่ามากกว่าหรือเท่ากับ
+    <b>length</b>
+
+</div>
+
+<h4>
+    การตรวจสอบข้อมูลหลังจากแก้ไข
+</h4>
+
+<p>
+    หลังจากแก้ไขข้อมูลแล้ว
+    สามารถใช้คำสั่ง
+    <b>System.out.println()</b>
+    เพื่อตรวจสอบค่าที่อยู่ใน Index
+    หรือใช้ Loop เพื่อแสดงข้อมูล
+    ทั้งหมดภายใน Array
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30};
+
+numbers[1] = 99;
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    System.out.println(
+        "Index " + i +
+        " = " + numbers[i]
+    );
+
+}</code></pre>
+
+</div>
+
+<p>
+    วิธีนี้เหมาะสำหรับการตรวจสอบว่า
+    โปรแกรมได้เปลี่ยนข้อมูล
+    ในตำแหน่งที่ต้องการจริงหรือไม่
+    และช่วยให้เห็นความสัมพันธ์ระหว่าง
+    <b>Index</b>
+    กับค่าที่จัดเก็บอยู่ภายใน Array
+</p>
+
+<div class="success-box">
+
+    <b>
+        ✅ สรุปการเปลี่ยนแปลงข้อมูลใน Array
+    </b>
+
+    <br><br>
+
+    การแก้ไขข้อมูลใน Array
+    สามารถทำได้โดยระบุชื่อ Array
+    และ Index ที่ต้องการ
+    แล้วกำหนดค่าใหม่ด้วยเครื่องหมาย
+    <b>=</b>
+
+    <br><br>
+
+    รูปแบบคือ
+
+    <br><br>
+
+    <b>
+        ชื่อArray[Index] = ค่าใหม่;
+    </b>
+
+    <br><br>
+
+    การแก้ไขจะเปลี่ยนเฉพาะสมาชิก
+    ในตำแหน่งที่ระบุ
+    ไม่ส่งผลต่อสมาชิกตำแหน่งอื่น
+    และไม่ทำให้จำนวนสมาชิกของ Array
+    เพิ่มขึ้นหรือลดลง
+
+    <br><br>
+
+    นอกจากนี้ยังสามารถใช้
+    <b>ตัวแปร</b>,
+    <b>การคำนวณ</b>,
+    <b>if</b>
+    และ
+    <b>for Loop</b>
+    ร่วมกับการแก้ไขข้อมูล
+    เพื่อสร้างโปรแกรมที่สามารถ
+    ประมวลผลข้อมูลหลายรายการ
+    ได้อย่างมีประสิทธิภาพ
+
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {10, 20, 30};
+
+        System.out.println(numbers[1]);
+
+        numbers[1] = 99;
+
+        System.out.println(numbers[1]);
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary05.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    <b>numbers[1]</b>
+    เดิมมีค่าเท่ากับ
+    <b>20</b>
+    และถูกเปลี่ยนเป็น
+    <b>99</b>
+</p>
+
+<div class="success-box">
+
+    <b>
+        ✅ หลักการสำคัญ
+    </b>
+
+    <br><br>
+
+    สามารถแก้ไขสมาชิกของ Array
+    ได้โดยใช้รูปแบบ
+
+    <br><br>
+
+    <b>ชื่อArray[Index] = ค่าใหม่;</b>
+
+</div>
+
+
+<!-- ==================================================
+     6.8
+================================================== -->
+
+<h3>
+    6.8 การใช้ length ตรวจสอบจำนวนสมาชิก
+</h3>
+
+<p>
+    Array ในภาษา Java มีคุณสมบัติ
+    <b>length</b>
+    สำหรับตรวจสอบจำนวนสมาชิก
+    ที่อยู่ภายใน Array
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {10, 20, 30, 40, 50};
+
+        System.out.println(
+            "จำนวนสมาชิก = " + numbers.length
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary06.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="info-box">
+
+    <b>
+        💡 ผลลัพธ์
+    </b>
+
+    <br><br>
+
+    จำนวนสมาชิก = 5
+
+    <br><br>
+
+    <b>length</b>
+    ใช้สำหรับตรวจสอบจำนวนสมาชิก
+    แต่ Index สุดท้ายจะเป็น
+    <b>length - 1</b>
+
+</div>
+
+
+<!-- ==================================================
+     6.9
+================================================== -->
+
+<h3>
+    6.9 การใช้ for Loop กับ Array
+</h3>
+<p>
+    การใช้ Array มักทำงานร่วมกับ
+    <b>for loop</b>
+    เพื่อวนอ่านข้อมูลทีละตำแหน่ง
+    เนื่องจาก Array สามารถเก็บข้อมูลได้หลายค่า
+    การใช้ Loop จึงช่วยลดการเขียนคำสั่งซ้ำ ๆ
+    และทำให้สามารถจัดการข้อมูลจำนวนมาก
+    ได้อย่างเป็นระบบ
+</p>
+
+<p>
+    ในการใช้ <b>for loop</b> กับ Array
+    ตัวแปรที่ใช้ควบคุม Loop
+    มักทำหน้าที่เป็น <b>Index</b>
+    ของ Array โดยเริ่มต้นจากค่า
+    <b>0</b> และเพิ่มค่าขึ้นทีละ 1
+    จนกว่าจะครบจำนวนสมาชิกที่มีอยู่ใน Array
+</p>
+
+<p>
+    ตัวอย่างเช่น หาก Array มีข้อมูล 5 ค่า
+    Index ที่สามารถใช้งานได้คือ
+    <b>0, 1, 2, 3 และ 4</b>
+    ดังนั้น Loop จะต้องทำงานทั้งหมด 5 รอบ
+    เพื่อเข้าถึงข้อมูลทุกตำแหน่ง
+</p>
+
+<p>
+    โดยทั่วไปสามารถใช้คุณสมบัติ
+    <b>length</b>
+    ของ Array เพื่อกำหนดเงื่อนไขของ Loop
+    แทนการกำหนดจำนวนรอบด้วยตัวเลขโดยตรง
+    วิธีนี้ช่วยให้โปรแกรมสามารถทำงานกับ Array
+    ที่มีจำนวนสมาชิกแตกต่างกันได้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    System.out.println(numbers[i]);
+
+}</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง ตัวแปร <b>i</b>
+    ใช้สำหรับเก็บค่า Index
+    ของ Array โดยเริ่มต้นที่
+    <b>0</b>
+    และจะเพิ่มขึ้นทีละ 1
+    จากคำสั่ง <b>i++</b>
+</p>
+
+<p>
+    ในแต่ละรอบของ Loop
+    โปรแกรมจะนำค่า <b>i</b>
+    ไปใช้เป็น Index
+    เพื่อเข้าถึงข้อมูลภายใน Array
+    ผ่านรูปแบบ
+    <b>numbers[i]</b>
+</p>
+
+<p>
+    เมื่อ <b>i = 0</b>
+    โปรแกรมจะเข้าถึง
+    <b>numbers[0]</b>
+    ซึ่งเป็นข้อมูลตัวแรก
+    จากนั้นเมื่อ <b>i = 1</b>
+    โปรแกรมจะเข้าถึง
+    <b>numbers[1]</b>
+    และทำงานต่อไปเรื่อย ๆ
+    จนถึงตำแหน่งสุดท้าย
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary07.png"
+        alt="ตัวอย่างการใช้ for Loop กับ Array"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    ส่วนประกอบของ for loop ที่ใช้กับ Array
+</h4>
+
+<p>
+    คำสั่ง <b>for loop</b>
+    ที่ใช้ร่วมกับ Array
+    ประกอบด้วยส่วนสำคัญ 3 ส่วน
+    ได้แก่ การกำหนดค่าเริ่มต้น
+    การตรวจสอบเงื่อนไข
+    และการเพิ่มค่าของตัวแปร Loop
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>for (int i = 0; i &lt; numbers.length; i++) {
+
+    System.out.println(numbers[i]);
+
+}</code></pre>
+
+</div>
+
+<p>
+    ส่วนแรกคือ
+    <b>int i = 0</b>
+    ใช้กำหนดค่าเริ่มต้นของตัวแปร
+    <b>i</b>
+    ให้เป็น 0
+    เนื่องจาก Index ของ Array
+    เริ่มต้นจาก 0
+</p>
+
+<p>
+    ส่วนที่สองคือ
+    <b>i &lt; numbers.length</b>
+    ใช้ตรวจสอบว่า
+    ตัวแปร <b>i</b>
+    ยังอยู่ในช่วงของ Index
+    ที่สามารถเข้าถึงได้หรือไม่
+    โดย <b>length</b>
+    จะบอกจำนวนสมาชิกทั้งหมด
+    ของ Array
+</p>
+
+<p>
+    ส่วนที่สามคือ
+    <b>i++</b>
+    ใช้เพิ่มค่าของตัวแปร
+    <b>i</b>
+    ขึ้นทีละ 1
+    เพื่อให้ Loop สามารถเลื่อนไปยัง
+    Index ถัดไปของ Array
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>int i = 0</b>
+    → เริ่มต้นที่ Index 0
+
+    <br><br>
+
+    <b>i &lt; numbers.length</b>
+    → ทำงานตราบใดที่ Index ยังไม่เกินขนาด Array
+
+    <br><br>
+
+    <b>i++</b>
+    → เลื่อนไปยัง Index ถัดไป
+
+</div>
+
+<h4>
+    ลำดับการทำงานของ for loop กับ Array
+</h4>
+
+<p>
+    เมื่อโปรแกรมทำงาน
+    จะเริ่มจากการกำหนดค่าให้ตัวแปร
+    <b>i</b>
+    เป็น 0
+    จากนั้นตรวจสอบเงื่อนไข
+    หากเงื่อนไขเป็นจริง
+    โปรแกรมจะทำคำสั่งภายใน Loop
+    แล้วจึงเพิ่มค่า <b>i</b>
+    ก่อนกลับไปตรวจสอบเงื่อนไขอีกครั้ง
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        i = 0
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        ตรวจสอบเงื่อนไข
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        numbers[i]
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        i++
+    </div>
+
+</div>
+
+<p>
+    กระบวนการดังกล่าวจะทำซ้ำจนกว่า
+    เงื่อนไข
+    <b>i &lt; numbers.length</b>
+    จะเป็นเท็จ
+    จากนั้นโปรแกรมจะออกจาก Loop
+    และทำงานต่อจากคำสั่งหลัง Loop
+</p>
+
+<h4>
+    การแสดงข้อมูลทุกตัวใน Array
+</h4>
+
+<p>
+    ประโยชน์ที่สำคัญของการใช้
+    <b>for loop</b>
+    กับ Array คือ
+    สามารถนำข้อมูลทุกสมาชิก
+    มาแสดงผลได้โดยไม่ต้องเขียน
+    <b>System.out.println()</b>
+    แยกสำหรับแต่ละ Index
+</p>
+
+<p>
+    หากมีข้อมูลจำนวนมาก
+    การใช้ Loop จะช่วยลดจำนวนคำสั่ง
+    ทำให้โค้ดสั้นลง
+    อ่านง่ายขึ้น
+    และสามารถปรับเปลี่ยนขนาดของ Array
+    ได้สะดวกมากขึ้น
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] scores = {80, 75, 90, 85, 70};
+
+for (int i = 0; i &lt; scores.length; i++) {
+
+    System.out.println(
+        "คะแนนคนที่ " + (i + 1) +
+        " = " + scores[i]
+    );
+
+}</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    โปรแกรมสามารถแสดงคะแนนของนักเรียน
+    ทุกคนได้โดยใช้ Loop เพียงชุดเดียว
+    โดย <b>scores[i]</b>
+    จะเปลี่ยนตำแหน่งไปตามค่า
+    ของตัวแปร <b>i</b>
+</p>
+
+<h4>
+    การใช้ for loop เพื่อคำนวณข้อมูลใน Array
+</h4>
+
+<p>
+    นอกจากการนำข้อมูลมาแสดงผลแล้ว
+    <b>for loop</b>
+    ยังสามารถใช้ประมวลผลข้อมูล
+    ภายใน Array ได้
+    เช่น การหาผลรวม
+    การนับจำนวนข้อมูล
+    การค้นหาค่า
+    หรือการตรวจสอบข้อมูลตามเงื่อนไข
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+int sum = 0;
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    sum += numbers[i];
+
+}
+
+System.out.println("ผลรวม = " + sum);</code></pre>
+
+</div>
+
+<p>
+    โปรแกรมจะอ่านข้อมูลจาก Array
+    ทีละตำแหน่ง
+    แล้วนำค่าที่อ่านได้
+    มาบวกสะสมไว้ในตัวแปร
+    <b>sum</b>
+    จนกว่าจะอ่านข้อมูลครบทุกสมาชิก
+</p>
+
+<div class="success-box">
+
+    <b>
+        ✅ ข้อดีของการใช้ for loop กับ Array
+    </b>
+
+    <ul>
+
+        <li>
+            สามารถอ่านข้อมูลทุกตำแหน่งได้อย่างเป็นระบบ
+        </li>
+
+        <li>
+            ลดการเขียนคำสั่งซ้ำ ๆ
+        </li>
+
+        <li>
+            สามารถทำงานกับ Array ที่มีจำนวนสมาชิกหลายค่าได้
+        </li>
+
+        <li>
+            สามารถนำข้อมูลไปคำนวณหรือประมวลผลได้
+        </li>
+
+        <li>
+            สามารถใช้ Index เพื่อเข้าถึงตำแหน่งที่ต้องการได้
+        </li>
+
+        <li>
+            สามารถใช้ร่วมกับคำสั่ง if
+            เพื่อค้นหาหรือตรวจสอบข้อมูลได้
+        </li>
+
+    </ul>
+
+</div>
+
+<h4>
+    การใช้ for loop ร่วมกับ if
+</h4>
+
+<p>
+    เราสามารถใช้ <b>for loop</b>
+    ร่วมกับคำสั่ง <b>if</b>
+    เพื่อค้นหาข้อมูลที่ตรงตามเงื่อนไข
+    ภายใน Array ได้
+    เช่น การตรวจสอบว่ามีคะแนนใด
+    มากกว่าหรือเท่ากับ 80 หรือไม่
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] scores = {60, 75, 85, 90, 70};
+
+for (int i = 0; i &lt; scores.length; i++) {
+
+    if (scores[i] &gt;= 80) {
+
+        System.out.println(
+            "คะแนนที่ผ่านเกณฑ์ = " + scores[i]
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้ Loop จะตรวจสอบคะแนน
+    ทุกตำแหน่งใน Array
+    และคำสั่ง <b>if</b>
+    จะตรวจสอบว่าคะแนนมีค่ามากกว่าหรือเท่ากับ
+    <b>80</b> หรือไม่
+    หากตรงตามเงื่อนไข
+    โปรแกรมจะแสดงคะแนนนั้นออกมา
+</p>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรระวัง
+    </b>
+
+    <br><br>
+
+    ในการใช้ <b>for loop</b>
+    กับ Array ควรตรวจสอบเงื่อนไข
+    ให้ถูกต้อง โดยทั่วไปควรใช้
+
+    <br><br>
+
+    <b>
+        i &lt; array.length
+    </b>
+
+    <br><br>
+
+    ไม่ควรใช้
+
+    <br><br>
+
+    <b>
+        i &lt;= array.length
+    </b>
+
+    เพราะ Index สุดท้ายของ Array
+    จะมีค่าเท่ากับ
+    <b>length - 1</b>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น หาก Array มีสมาชิก
+    จำนวน 5 ค่า
+    ค่า <b>length</b> จะเท่ากับ 5
+    แต่ Index สุดท้ายคือ 4
+    ดังนั้นเงื่อนไข
+    <b>i &lt; 5</b>
+    จะทำให้ Loop ทำงานที่
+    Index 0 ถึง 4 ได้อย่างถูกต้อง
+</p>
+
+<div class="tip">
+
+    <b>
+        💡 จุดสำคัญที่ควรจำ
+    </b>
+
+    <br><br>
+
+    เมื่อใช้ <b>for loop</b> กับ Array
+    ตัวแปร Loop มักใช้เป็น Index
+
+    <br><br>
+
+    <b>i = 0</b>
+    → เริ่มจากสมาชิกตัวแรก
+
+    <br>
+
+    <b>i++</b>
+    → เลื่อนไปยังสมาชิกถัดไป
+
+    <br>
+
+    <b>i &lt; array.length</b>
+    → ทำงานจนถึงสมาชิกตัวสุดท้าย
+
+    <br><br>
+
+    รูปแบบนี้เป็นรูปแบบสำคัญ
+    ที่ควรจดจำเมื่อต้องการวนอ่าน
+    หรือประมวลผลข้อมูลใน Array
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {10, 20, 30, 40, 50};
+
+        for (int i = 0; i < numbers.length; i++) {
+
+            System.out.println(numbers[i]);
+
+        }
+
+    }
+
+}</code></pre>
+
+</div>
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary07.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<p>
+    ตัวแปร <b>i</b>
+    จะทำหน้าที่เป็น Index
+    โดยเริ่มจาก 0 และเพิ่มขึ้นทีละ 1
+    จนถึงตำแหน่งสุดท้ายของ Array
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        i = 0
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        numbers[0]
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        i++
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        ตรวจสอบสมาชิกถัดไป
+    </div>
+
+</div>
+
+<div class="tip">
+
+    <b>
+        💡 จุดสำคัญ
+    </b>
+
+    <br><br>
+
+    การใช้
+    <b>i < numbers.length</b>
+    ช่วยให้ Loop ทำงานตามจำนวนสมาชิก
+    ของ Array โดยไม่ต้องกำหนดจำนวนเอง
+
+</div>
+
+
+<!-- ==================================================
+     6.10
+================================================== -->
+
+<h3>
+    6.10 การใช้ Enhanced for Loop
+</h3>
+
+<p>
+    Java มีรูปแบบ
+    <b>Enhanced for Loop</b>
+    หรือบางครั้งเรียกว่า
+    <b>for-each</b>
+    ซึ่งเป็นรูปแบบของ Loop
+    ที่ออกแบบมาเพื่อช่วยในการอ่านข้อมูล
+    จาก Array หรือโครงสร้างข้อมูลที่สามารถวนซ้ำได้
+    โดยไม่จำเป็นต้องจัดการค่า
+    <b>Index</b> ด้วยตนเอง
+</p>
+
+<p>
+    Enhanced for Loop เหมาะสำหรับกรณีที่ต้องการ
+    อ่านข้อมูลสมาชิกทุกตัวภายใน Array
+    ตามลำดับตั้งแต่สมาชิกตัวแรก
+    ไปจนถึงสมาชิกตัวสุดท้าย
+    โดยโปรแกรมจะนำข้อมูลแต่ละตัว
+    มาเก็บไว้ในตัวแปรที่กำหนด
+    แล้วนำไปใช้งานภายใน Loop
+</p>
+
+<p>
+    แตกต่างจาก <b>for Loop</b> แบบปกติ
+    ที่ผู้เขียนโปรแกรมต้องสร้างตัวแปร
+    สำหรับเก็บ Index เช่น <b>i</b>
+    และต้องเขียนเงื่อนไข
+    เพื่อควบคุมตำแหน่งของข้อมูล
+    แต่ Enhanced for Loop
+    จะช่วยจัดการการเลื่อนไปยังสมาชิกถัดไป
+    ให้โดยอัตโนมัติ
+</p>
+
+<h4>
+    รูปแบบการเขียน Enhanced for Loop
+</h4>
+
+<p>
+    รูปแบบพื้นฐานของ
+    Enhanced for Loop
+    สามารถเขียนได้ดังนี้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>for (ชนิดข้อมูล ตัวแปร : Array) {
+
+    // คำสั่งที่ต้องการ
+
+}</code></pre>
+
+</div>
+
+<p>
+    ส่วนประกอบของคำสั่งประกอบด้วย
+    <b>ชนิดข้อมูล</b>
+    ซึ่งต้องสอดคล้องกับชนิดข้อมูล
+    ของสมาชิกใน Array
+    ตามด้วยชื่อตัวแปร
+    สำหรับรับข้อมูลแต่ละสมาชิก
+    และเครื่องหมาย <b>:</b>
+    ซึ่งหมายถึงการวนอ่านข้อมูล
+    จาก Array ที่ระบุ
+</p>
+
+<p>
+    ในแต่ละรอบของ Loop
+    ตัวแปรที่กำหนดไว้จะได้รับค่า
+    ของสมาชิกแต่ละตัวใน Array
+    ตามลำดับ
+    โดยเริ่มจากสมาชิกตัวแรก
+    และทำงานต่อไปจนกว่าจะอ่านข้อมูล
+    ครบทุกสมาชิก
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+for (int number : numbers) {
+
+    System.out.println(number);
+
+}</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    <b>numbers</b>
+    เป็น Array ชนิด <b>int</b>
+    ที่มีข้อมูลทั้งหมด 5 ค่า
+    ส่วนตัวแปร <b>number</b>
+    จะทำหน้าที่รับค่าของสมาชิก
+    ใน Array ทีละตัว
+</p>
+
+<p>
+    ในรอบแรก
+    ตัวแปร <b>number</b>
+    จะได้รับค่า <b>10</b>
+    ซึ่งเป็นสมาชิกตัวแรก
+    จากนั้นในรอบที่สองจะได้รับค่า
+    <b>20</b>
+    และทำงานต่อไปตามลำดับ
+    จนถึงค่า <b>50</b>
+    ซึ่งเป็นสมาชิกตัวสุดท้าย
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary08.png"
+        alt="ตัวอย่างการใช้ Enhanced for Loop"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    ลำดับการทำงานของ Enhanced for Loop
+</h4>
+
+<p>
+    การทำงานของ Enhanced for Loop
+    จะเริ่มจากสมาชิกตัวแรกของ Array
+    จากนั้นนำค่าของสมาชิกนั้น
+    มาเก็บไว้ในตัวแปรที่กำหนด
+    แล้วจึงทำคำสั่งภายใน Loop
+    เมื่อทำงานเสร็จ
+    โปรแกรมจะเลื่อนไปยังสมาชิกตัวถัดไป
+    โดยอัตโนมัติ
+</p>
+
+<p>
+    กระบวนการนี้จะทำซ้ำไปเรื่อย ๆ
+    จนกว่าจะอ่านข้อมูลใน Array
+    ครบทุกสมาชิก
+    เมื่อไม่มีสมาชิกเหลือให้ประมวลผล
+    โปรแกรมจะออกจาก Loop
+    และทำงานต่อจากคำสั่งหลัง Loop
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        สมาชิกตัวแรก
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        เก็บในตัวแปร
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        ทำคำสั่ง
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        สมาชิกถัดไป
+    </div>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น หากมี Array
+    <b>{10, 20, 30}</b>
+    Enhanced for Loop
+    จะนำข้อมูลมาใช้งานตามลำดับ
+    คือ <b>10 → 20 → 30</b>
+    โดยผู้เขียนโปรแกรมไม่จำเป็นต้องระบุ
+    <b>numbers[0]</b>,
+    <b>numbers[1]</b>
+    และ <b>numbers[2]</b>
+    ด้วยตนเอง
+</p>
+
+<h4>
+    การใช้ Enhanced for Loop แสดงข้อมูล
+</h4>
+
+<p>
+    การใช้งานที่พบได้บ่อยที่สุดคือ
+    การวนอ่านข้อมูลทุกตัว
+    แล้วนำข้อมูลมาแสดงผล
+    ซึ่งเหมาะกับ Array ที่ต้องการ
+    แสดงข้อมูลทั้งหมดโดยไม่จำเป็นต้องรู้
+    ตำแหน่ง Index ของแต่ละสมาชิก
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>String[] names = {
+    "สมชาย",
+    "สมหญิง",
+    "มานะ",
+    "มาลี"
+};
+
+for (String name : names) {
+
+    System.out.println(name);
+
+}</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    Array <b>names</b>
+    ใช้เก็บข้อมูลชนิด <b>String</b>
+    ดังนั้นตัวแปร <b>name</b>
+    ภายใน Enhanced for Loop
+    จึงต้องเป็นชนิด <b>String</b>
+    เพื่อรับค่าข้อความจาก Array
+</p>
+
+<p>
+    โปรแกรมจะอ่านชื่อทีละชื่อ
+    และนำชื่อที่อ่านได้
+    ไปใช้งานภายใน Loop
+    จนครบทั้ง 4 รายการ
+</p>
+
+<h4>
+    การใช้ Enhanced for Loop กับข้อมูลตัวเลข
+</h4>
+
+<p>
+    Enhanced for Loop
+    สามารถใช้กับ Array ชนิดตัวเลข
+    เช่น <b>int</b>,
+    <b>double</b>
+    และชนิดข้อมูลอื่น ๆ
+    ได้เช่นเดียวกัน
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>double[] prices = {
+    25.50,
+    30.00,
+    45.75,
+    50.00
+};
+
+for (double price : prices) {
+
+    System.out.println(
+        "ราคา = " + price
+    );
+
+}</code></pre>
+
+</div>
+
+<p>
+    ตัวแปร <b>price</b>
+    จะรับค่าราคาทีละค่า
+    จาก Array <b>prices</b>
+    ทำให้สามารถนำราคาแต่ละรายการ
+    ไปแสดงผลหรือประมวลผลต่อได้
+</p>
+
+<h4>
+    การใช้ Enhanced for Loop เพื่อหาผลรวม
+</h4>
+
+<p>
+    Enhanced for Loop
+    ไม่ได้ใช้เฉพาะการแสดงข้อมูลเท่านั้น
+    แต่ยังสามารถใช้ในการคำนวณ
+    ข้อมูลสมาชิกภายใน Array ได้
+    เช่น การหาผลรวมของคะแนน
+    หรือผลรวมของราคาสินค้า
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] scores = {
+    80, 75, 90, 85, 70
+};
+
+int sum = 0;
+
+for (int score : scores) {
+
+    sum += score;
+
+}
+
+System.out.println(
+    "ผลรวม = " + sum
+);</code></pre>
+
+</div>
+
+<p>
+    ในแต่ละรอบ
+    ตัวแปร <b>score</b>
+    จะได้รับคะแนนจาก Array
+    แล้วนำไปบวกกับตัวแปร
+    <b>sum</b>
+    ซึ่งใช้สำหรับเก็บผลรวม
+    เมื่อ Loop ทำงานครบทุกสมาชิก
+    ตัวแปร <b>sum</b>
+    จะมีผลรวมของข้อมูลทั้งหมด
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 แนวคิดสำคัญ
+    </b>
+
+    <br><br>
+
+    Enhanced for Loop
+    เหมาะสำหรับการ
+    <b>อ่านข้อมูลทุกสมาชิก</b>
+    ใน Array ตามลำดับ
+
+    <br><br>
+
+    โปรแกรมจะนำสมาชิกแต่ละตัว
+    มาเก็บไว้ในตัวแปรที่กำหนด
+    และเปลี่ยนเป็นสมาชิกถัดไป
+    โดยอัตโนมัติ
+
+    <br><br>
+
+    จึงไม่จำเป็นต้องเขียน
+    <b>Index</b>
+    หรือกำหนด
+    <b>length</b>
+    ด้วยตนเอง
+
+</div>
+
+<h4>
+    เปรียบเทียบ for Loop กับ Enhanced for Loop
+</h4>
+
+<p>
+    การวนอ่านข้อมูลจาก Array
+    สามารถทำได้ทั้ง
+    <b>for Loop</b>
+    แบบปกติและ
+    <b>Enhanced for Loop</b>
+    แต่รูปแบบการใช้งานมีความแตกต่างกัน
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+// for Loop แบบปกติ
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    System.out.println(numbers[i]);
+
+}
+
+// Enhanced for Loop
+for (int number : numbers) {
+
+    System.out.println(number);
+
+}</code></pre>
+
+</div>
+
+<p>
+    <b>for Loop แบบปกติ</b>
+    จะมีตัวแปร <b>i</b>
+    สำหรับควบคุม Index
+    ทำให้สามารถทราบได้ว่า
+    ข้อมูลที่กำลังทำงานอยู่
+    อยู่ที่ตำแหน่งใดของ Array
+</p>
+
+<p>
+    ส่วน <b>Enhanced for Loop</b>
+    จะเน้นการอ่านค่าของสมาชิก
+    โดยตรงและไม่จำเป็นต้องจัดการ
+    Index ด้วยตนเอง
+    จึงทำให้โค้ดมีความกระชับ
+    และอ่านได้ง่ายกว่าในกรณี
+    ที่ต้องการอ่านข้อมูลทุกตัว
+</p>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>หัวข้อ</th>
+                <th>for Loop</th>
+                <th>Enhanced for Loop</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>การใช้ Index</td>
+                <td>สามารถใช้ Index ได้โดยตรง</td>
+                <td>ไม่ต้องจัดการ Index โดยตรง</td>
+            </tr>
+
+            <tr>
+                <td>ความสั้นของโค้ด</td>
+                <td>เขียนมากกว่า</td>
+                <td>เขียนสั้นกว่า</td>
+            </tr>
+
+            <tr>
+                <td>การอ่านข้อมูลทุกตัว</td>
+                <td>ทำได้</td>
+                <td>เหมาะสมมาก</td>
+            </tr>
+
+            <tr>
+                <td>การเข้าถึงตำแหน่งเฉพาะ</td>
+                <td>เหมาะสม</td>
+                <td>ไม่เหมาะเท่า for ปกติ</td>
+            </tr>
+
+            <tr>
+                <td>การควบคุม Index</td>
+                <td>ควบคุมได้</td>
+                <td>ไม่จำเป็นต้องควบคุมเอง</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<h4>
+    ข้อดีของ Enhanced for Loop
+</h4>
+
+<p>
+    Enhanced for Loop
+    ช่วยลดความซับซ้อนของโค้ด
+    โดยเฉพาะโปรแกรมที่ต้องการ
+    อ่านข้อมูลทุกสมาชิกใน Array
+    เนื่องจากไม่ต้องสร้างตัวแปร
+    สำหรับควบคุม Index
+    และไม่ต้องเขียนเงื่อนไข
+    เปรียบเทียบกับ
+    <b>length</b>
+    ด้วยตนเอง
+</p>
+
+<div class="success-box">
+
+    <b>
+        ✅ ข้อดีของ Enhanced for Loop
+    </b>
+
+    <ul>
+
+        <li>
+            เขียนโค้ดได้สั้นและอ่านง่าย
+        </li>
+
+        <li>
+            ไม่จำเป็นต้องจัดการ Index ด้วยตนเอง
+        </li>
+
+        <li>
+            เหมาะสำหรับการอ่านข้อมูลทุกสมาชิก
+        </li>
+
+        <li>
+            ลดโอกาสเกิดข้อผิดพลาด
+            จากการกำหนด Index ผิด
+        </li>
+
+        <li>
+            สามารถใช้กับ Array
+            ที่มีข้อมูลจำนวนมากได้สะดวก
+        </li>
+
+        <li>
+            สามารถนำข้อมูลแต่ละสมาชิก
+            ไปคำนวณหรือประมวลผลต่อได้
+        </li>
+
+    </ul>
+
+</div>
+
+<h4>
+    ข้อจำกัดของ Enhanced for Loop
+</h4>
+
+<p>
+    แม้ Enhanced for Loop
+    จะใช้งานได้ง่ายและสะดวก
+    แต่ก็มีข้อจำกัดบางประการ
+    โดยเฉพาะกรณีที่โปรแกรม
+    จำเป็นต้องทราบ Index
+    ของข้อมูลแต่ละตำแหน่ง
+</p>
+
+<p>
+    หากต้องการเข้าถึงข้อมูลเฉพาะตำแหน่ง
+    เช่น ต้องการอ่านข้อมูลที่
+    <b>Index 2</b>
+    หรือจำเป็นต้องใช้ Index
+    ในการคำนวณบางอย่าง
+    การใช้ <b>for Loop</b>
+    แบบปกติจะเหมาะสมกว่า
+</p>
+
+<p>
+    ดังนั้นการเลือกใช้ Loop
+    ควรพิจารณาจากลักษณะของงาน
+    หากต้องการเพียงอ่านข้อมูล
+    ทุกตัวตามลำดับ
+    สามารถเลือกใช้ Enhanced for Loop
+    เพื่อให้โค้ดกระชับและเข้าใจง่าย
+</p>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรจำ
+    </b>
+
+    <br><br>
+
+    Enhanced for Loop
+    ไม่ได้มีตัวแปร Index
+    ให้ใช้งานโดยตรงเหมือน
+    <b>for Loop</b> แบบปกติ
+
+    <br><br>
+
+    หากงานจำเป็นต้องรู้ว่า
+    ข้อมูลอยู่ที่ Index ใด
+    หรือจำเป็นต้องควบคุมตำแหน่ง
+    ของสมาชิกด้วยตนเอง
+    ควรเลือกใช้
+    <b>for Loop แบบปกติ</b>
+
+</div>
+
+<h4>
+    การเลือกใช้ Loop ให้เหมาะสม
+</h4>
+
+<p>
+    การเลือกใช้ Loop
+    ควรขึ้นอยู่กับวัตถุประสงค์
+    ของโปรแกรม
+    หากต้องการแสดงข้อมูลทั้งหมด
+    หรืออ่านข้อมูลทุกตัวใน Array
+    Enhanced for Loop
+    เป็นตัวเลือกที่เหมาะสม
+    เนื่องจากเขียนง่ายและไม่ต้อง
+    จัดการ Index
+</p>
+
+<p>
+    แต่ถ้าต้องการเข้าถึงสมาชิก
+    ตามตำแหน่งที่กำหนด
+    ต้องการเปลี่ยนค่าข้อมูล
+    ตาม Index
+    หรือต้องการควบคุมการเพิ่ม
+    หรือลดค่าของ Index
+    ควรเลือกใช้
+    <b>for Loop แบบปกติ</b>
+</p>
+
+<div class="tip">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>for Loop</b>
+    → เหมาะเมื่อจำเป็นต้องใช้
+    Index หรือควบคุมตำแหน่งข้อมูล
+
+    <br><br>
+
+    <b>Enhanced for Loop</b>
+    → เหมาะเมื่อเพียงต้องการ
+    อ่านข้อมูลทุกตัวใน Array
+
+</div>
+
+<p>
+    โดยสรุป Enhanced for Loop
+    เป็นรูปแบบการวนซ้ำที่ช่วยให้
+    การอ่านข้อมูลจาก Array
+    ทำได้ง่ายและเป็นระเบียบมากขึ้น
+    โดยโปรแกรมจะนำสมาชิก
+    แต่ละตัวมาเก็บไว้ในตัวแปร
+    ตามลำดับโดยอัตโนมัติ
+</p>
+
+<p>
+    การเข้าใจ Enhanced for Loop
+    จะช่วยให้สามารถเขียนโปรแกรม
+    ที่ทำงานกับข้อมูลจำนวนมาก
+    ได้สะดวกขึ้น และยังเป็นพื้นฐานสำคัญ
+    สำหรับการทำงานกับโครงสร้างข้อมูล
+    อื่น ๆ ในภาษา Java
+    ที่สามารถวนอ่านสมาชิก
+    ได้ในลักษณะเดียวกัน
+</p>
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {10, 20, 30, 40, 50};
+
+        for (int number : numbers) {
+
+            System.out.println(number);
+
+        }
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary08.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="success-box">
+
+    <b>
+        ✅ ข้อดีของ Enhanced for Loop
+    </b>
+
+    <ul>
+
+        <li>
+            เขียนโค้ดสั้นกว่า for แบบปกติ
+        </li>
+
+        <li>
+            เหมาะสำหรับการอ่านข้อมูลทุกตัว
+        </li>
+
+        <li>
+            ไม่จำเป็นต้องจัดการ Index ด้วยตนเอง
+        </li>
+
+    </ul>
+
+</div>
+
+<p>
+    รูปแบบพื้นฐานคือ
+</p>
+
+<div class="code-wrap">
+
+<pre><code>for (ชนิดข้อมูล ตัวแปร : Array) {
+
+    // คำสั่งที่ต้องการ
+
+}</code></pre>
+
+</div>
+
+
+<!-- ==================================================
+     6.11
+================================================== -->
+
+<h3>
+    6.11 การหาผลรวมของข้อมูลใน Array
+</h3>
+<p>
+    Array สามารถนำมาใช้กับการคำนวณข้อมูล
+    ได้หลากหลายรูปแบบ เช่น
+    การหาผลรวมคะแนน
+    ผลรวมยอดขาย
+    ผลรวมจำนวนสินค้า
+    หรือผลรวมของข้อมูลตัวเลขต่าง ๆ
+    ที่จัดเก็บอยู่ภายใน Array
+</p>
+
+<p>
+    เนื่องจาก Array สามารถเก็บข้อมูลตัวเลข
+    ได้หลายค่าไว้ภายใต้ชื่อเดียวกัน
+    เราจึงสามารถใช้ Loop
+    เพื่ออ่านข้อมูลทีละสมาชิก
+    แล้วนำค่าของแต่ละสมาชิก
+    มาคำนวณร่วมกันได้
+</p>
+
+<p>
+    การหาผลรวมของข้อมูลใน Array
+    เป็นตัวอย่างสำคัญของการนำ
+    <b>Array</b>
+    มาทำงานร่วมกับ
+    <b>Loop</b>
+    โดยโปรแกรมจะอ่านข้อมูล
+    จากสมาชิกตัวแรก
+    ไปจนถึงสมาชิกตัวสุดท้าย
+    และนำค่าทั้งหมดมาบวกสะสมกัน
+</p>
+
+<h4>
+    แนวคิดการหาผลรวม
+</h4>
+
+<p>
+    หลักการพื้นฐานของการหาผลรวม
+    คือการสร้างตัวแปรขึ้นมา
+    สำหรับเก็บค่าผลรวม
+    โดยกำหนดค่าเริ่มต้นเป็น
+    <b>0</b>
+    จากนั้นใช้ Loop
+    วนอ่านข้อมูลแต่ละตัว
+    แล้วนำข้อมูลที่อ่านได้
+    มาบวกเพิ่มเข้าไปในตัวแปรผลรวม
+</p>
+
+<p>
+    ตัวแปรที่ใช้เก็บผลรวม
+    มักตั้งชื่อว่า
+    <b>sum</b>
+    เพื่อให้สื่อความหมายว่า
+    เป็นตัวแปรที่ใช้สำหรับเก็บ
+    ผลรวมของข้อมูล
+</p>
+
+<div class="flow">
+
+    <div class="flow-box">
+        sum = 0
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        อ่านข้อมูล
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        นำมาบวกกับ sum
+    </div>
+
+    <div class="flow-arrow">
+        →
+    </div>
+
+    <div class="flow-box">
+        ได้ผลรวม
+    </div>
+
+</div>
+
+<p>
+    ตัวอย่างเช่น หากมีข้อมูล
+    <b>10, 20, 30, 40 และ 50</b>
+    โปรแกรมจะนำข้อมูลแต่ละค่ามาบวกกัน
+    จนได้ผลรวมเท่ากับ
+    <b>150</b>
+</p>
+
+<h4>
+    การสร้างตัวแปรสำหรับเก็บผลรวม
+</h4>
+
+<p>
+    ก่อนเริ่มคำนวณ
+    ควรสร้างตัวแปรสำหรับเก็บผลรวม
+    และกำหนดค่าเริ่มต้นเป็น
+    <b>0</b>
+    เพราะยังไม่มีข้อมูลใด
+    ถูกนำมาคำนวณ
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int sum = 0;</code></pre>
+
+</div>
+
+<p>
+    คำสั่งนี้สร้างตัวแปรชื่อ
+    <b>sum</b>
+    ชนิด <b>int</b>
+    และกำหนดค่าเริ่มต้นเป็น
+    <b>0</b>
+    จากนั้นสามารถนำตัวแปรนี้
+    ไปใช้เก็บผลรวมของข้อมูล
+    ใน Array ได้
+</p>
+
+<h4>
+    การใช้ for Loop หาผลรวม
+</h4>
+
+<p>
+    เมื่อต้องการนำข้อมูลทุกตัว
+    ใน Array มาคำนวณ
+    สามารถใช้
+    <b>for Loop</b>
+    เพื่อวนเข้าถึงสมาชิก
+    แต่ละตำแหน่งของ Array
+    แล้วนำค่าที่ได้
+    มาบวกกับตัวแปร
+    <b>sum</b>
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+int sum = 0;
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    sum += numbers[i];
+
+}
+
+System.out.println(
+    "ผลรวม = " + sum
+);</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    Array ชื่อ <b>numbers</b>
+    มีข้อมูลจำนวน 5 ค่า
+    จากนั้นสร้างตัวแปร
+    <b>sum</b>
+    เพื่อใช้เก็บผลรวม
+    และกำหนดค่าเริ่มต้นเป็น
+    <b>0</b>
+</p>
+
+<p>
+    คำสั่ง
+    <b>sum += numbers[i];</b>
+    เป็นการนำค่าของสมาชิก
+    ที่อยู่ในตำแหน่งปัจจุบัน
+    มาบวกเพิ่มให้กับ
+    <b>sum</b>
+</p>
+
+<p>
+    คำสั่ง
+    <b>sum += numbers[i];</b>
+    สามารถเขียนในรูปแบบเต็มได้ว่า
+    <b>sum = sum + numbers[i];</b>
+    ซึ่งมีความหมายเหมือนกัน
+    เพียงแต่รูปแบบ
+    <b>+=</b>
+    ช่วยให้เขียนคำสั่งได้สั้นลง
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    <b>sum = 0;</b>
+    → กำหนดค่าเริ่มต้นของผลรวม
+
+    <br><br>
+
+    <b>sum += numbers[i];</b>
+    → นำข้อมูลแต่ละตัวมาบวกสะสม
+
+    <br><br>
+
+    <b>System.out.println(sum);</b>
+    → แสดงผลรวมที่คำนวณได้
+
+</div>
+
+<h4>
+    ลำดับการคำนวณผลรวม
+</h4>
+
+<p>
+    หาก Array มีข้อมูล
+    <b>{10, 20, 30, 40, 50}</b>
+    การทำงานของโปรแกรม
+    สามารถอธิบายเป็นลำดับได้ดังนี้
+</p>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>รอบ</th>
+                <th>Index</th>
+                <th>ข้อมูล</th>
+                <th>ค่า sum หลังคำนวณ</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>เริ่มต้น</td>
+                <td>-</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+
+            <tr>
+                <td>รอบที่ 1</td>
+                <td>0</td>
+                <td>10</td>
+                <td>10</td>
+            </tr>
+
+            <tr>
+                <td>รอบที่ 2</td>
+                <td>1</td>
+                <td>20</td>
+                <td>30</td>
+            </tr>
+
+            <tr>
+                <td>รอบที่ 3</td>
+                <td>2</td>
+                <td>30</td>
+                <td>60</td>
+            </tr>
+
+            <tr>
+                <td>รอบที่ 4</td>
+                <td>3</td>
+                <td>40</td>
+                <td>100</td>
+            </tr>
+
+            <tr>
+                <td>รอบที่ 5</td>
+                <td>4</td>
+                <td>50</td>
+                <td>150</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<p>
+    จากตารางจะเห็นได้ว่า
+    ตัวแปร <b>sum</b>
+    จะเก็บค่าผลรวมสะสม
+    และจะเปลี่ยนแปลงในแต่ละรอบ
+    จนกระทั่งอ่านข้อมูล
+    ใน Array ครบทุกตำแหน่ง
+</p>
+
+<h4>
+    การหาผลรวมด้วย Enhanced for Loop
+</h4>
+
+<p>
+    นอกจากการใช้
+    <b>for Loop</b>
+    แบบปกติแล้ว
+    เรายังสามารถใช้
+    <b>Enhanced for Loop</b>
+    เพื่อหาผลรวมได้
+    โดยวิธีนี้ไม่จำเป็นต้อง
+    ใช้ตัวแปร Index
+    เนื่องจากโปรแกรมจะนำสมาชิก
+    แต่ละตัวมาให้โดยอัตโนมัติ
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+
+int sum = 0;
+
+for (int number : numbers) {
+
+    sum += number;
+
+}
+
+System.out.println(
+    "ผลรวม = " + sum
+);</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    ตัวแปร <b>number</b>
+    จะรับค่าของสมาชิก
+    ใน Array ทีละตัว
+    จากนั้นนำค่าดังกล่าว
+    มาบวกสะสมในตัวแปร
+    <b>sum</b>
+</p>
+
+<p>
+    การใช้ Enhanced for Loop
+    เหมาะกับกรณีที่ต้องการ
+    อ่านข้อมูลทุกตัว
+    และนำข้อมูลทั้งหมด
+    มาคำนวณโดยไม่จำเป็นต้องทราบ
+    Index ของสมาชิกแต่ละตัว
+</p>
+
+<div class="step-item">
+
+    <img
+        src="images/chapter6/ary09.png"
+        alt="ตัวอย่างการหาผลรวมข้อมูลใน Array"
+    >
+
+    <div class="step-content">
+
+        <span class="step-number">
+            ตัวอย่าง
+        </span>
+
+    </div>
+
+</div>
+
+<h4>
+    การหาผลรวมคะแนนนักเรียน
+</h4>
+
+<p>
+    การหาผลรวมของ Array
+    สามารถนำไปประยุกต์ใช้กับ
+    ระบบคะแนนนักเรียนได้
+    เช่น การเก็บคะแนนของนักเรียน
+    หลายคนไว้ใน Array
+    แล้วนำคะแนนทั้งหมด
+    มาคำนวณหาผลรวม
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] scores = {
+    80, 75, 90, 85, 70
+};
+
+int sum = 0;
+
+for (int score : scores) {
+
+    sum += score;
+
+}
+
+System.out.println(
+    "ผลรวมคะแนน = " + sum
+);</code></pre>
+
+</div>
+
+<p>
+    จากตัวอย่าง
+    Array <b>scores</b>
+    ใช้เก็บคะแนนของนักเรียน
+    จำนวน 5 ค่า
+    โปรแกรมจะอ่านคะแนน
+    ทีละค่าแล้วนำมาบวกสะสม
+    ในตัวแปร <b>sum</b>
+</p>
+
+<p>
+    เมื่อนำคะแนน
+    <b>80 + 75 + 90 + 85 + 70</b>
+    มารวมกัน
+    จะได้ผลรวมคะแนนเท่ากับ
+    <b>400</b>
+</p>
+
+<h4>
+    การหาผลรวมยอดขาย
+</h4>
+
+<p>
+    แนวคิดเดียวกันสามารถนำไปใช้
+    ในระบบร้านค้าได้
+    เช่น เก็บยอดขายสินค้า
+    แต่ละรายการไว้ใน Array
+    แล้วนำข้อมูลทั้งหมด
+    มาคำนวณหายอดขายรวม
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>double[] sales = {
+    120.50,
+    250.00,
+    180.75,
+    300.00
+};
+
+double total = 0;
+
+for (double sale : sales) {
+
+    total += sale;
+
+}
+
+System.out.println(
+    "ยอดขายรวม = " + total
+);</code></pre>
+
+</div>
+
+<p>
+    ในตัวอย่างนี้ใช้ชนิดข้อมูล
+    <b>double</b>
+    เนื่องจากยอดขายอาจมีค่า
+    เป็นทศนิยม
+    และใช้ตัวแปร
+    <b>total</b>
+    สำหรับเก็บยอดขายสะสม
+</p>
+
+<h4>
+    การหาผลรวมโดยใช้ Index
+</h4>
+
+<p>
+    หากต้องการทราบตำแหน่งของข้อมูล
+    ขณะที่กำลังคำนวณ
+    สามารถใช้ <b>for Loop</b>
+    แบบปกติได้
+    เพราะตัวแปร Loop
+    สามารถนำมาใช้เป็น Index
+    ของ Array ได้โดยตรง
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>int[] numbers = {5, 10, 15, 20};
+
+int sum = 0;
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    System.out.println(
+        "Index " + i +
+        " = " + numbers[i]
+    );
+
+    sum += numbers[i];
+
+}
+
+System.out.println(
+    "ผลรวม = " + sum
+);</code></pre>
+
+</div>
+
+<p>
+    วิธีนี้เหมาะสำหรับกรณีที่
+    ต้องการใช้ทั้งข้อมูล
+    และตำแหน่ง Index
+    ไปพร้อมกัน
+    เช่น การแสดงหมายเลขรายการ
+    หรือการอ้างอิงข้อมูล
+    ตามตำแหน่งใน Array
+</p>
+
+<h4>
+    การหาผลรวมด้วยข้อมูลที่ผู้ใช้ป้อน
+</h4>
+
+<p>
+    Array สามารถทำงานร่วมกับ
+    <b>Scanner</b>
+    เพื่อรับข้อมูลจากผู้ใช้
+    แล้วนำข้อมูลที่รับเข้ามา
+    มาหาผลรวมได้
+    ซึ่งเป็นรูปแบบที่สามารถ
+    นำไปประยุกต์ใช้กับโปรแกรมจริง
+    ได้หลายประเภท
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+    <pre><code>import java.util.Scanner;
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        int[] numbers = new int[3];
+
+        int sum = 0;
+
+        for (int i = 0; i &lt; numbers.length; i++) {
+
+            System.out.print(
+                "กรอกตัวเลขที่ " + (i + 1) + ": "
+            );
+
+            numbers[i] = input.nextInt();
+
+            sum += numbers[i];
+
+        }
+
+        System.out.println(
+            "ผลรวม = " + sum
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+
+<p>
+    โปรแกรมจะสร้าง Array
+    สำหรับเก็บตัวเลขจำนวน 3 ค่า
+    จากนั้นใช้ <b>for Loop</b>
+    รับข้อมูลจากผู้ใช้ทีละค่า
+    และเก็บข้อมูลลงใน Array
+    ตามตำแหน่ง Index
+</p>
+
+<p>
+    หลังจากรับข้อมูลแต่ละค่าแล้ว
+    โปรแกรมจะนำค่าดังกล่าว
+    มาบวกเพิ่มให้กับตัวแปร
+    <b>sum</b>
+    ทำให้เมื่อรับข้อมูลครบ
+    ก็จะได้ผลรวมของข้อมูลทั้งหมด
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 แนวคิดการนำไปประยุกต์ใช้
+    </b>
+
+    <br><br>
+
+    การหาผลรวมจาก Array
+    สามารถนำไปใช้กับงานต่าง ๆ เช่น
+
+    <br><br>
+
+    • ผลรวมคะแนนของนักเรียน
+
+    <br>
+
+    • ผลรวมราคาสินค้า
+
+    <br>
+
+    • ยอดขายสินค้ารวม
+
+    <br>
+
+    • จำนวนสินค้าที่ขายได้
+
+    <br>
+
+    • ผลรวมค่าใช้จ่าย
+
+    <br>
+
+    • ผลรวมข้อมูลตัวเลขจากผู้ใช้
+
+</div>
+
+<h4>
+    ข้อควรระวังในการหาผลรวม
+</h4>
+
+<p>
+    ในการหาผลรวมควรกำหนด
+    ค่าเริ่มต้นของตัวแปร
+    <b>sum</b>
+    ให้เหมาะสม
+    โดยทั่วไปหากเป็นการบวกข้อมูล
+    ควรเริ่มต้นด้วยค่า
+    <b>0</b>
+    เพื่อให้สามารถสะสมค่าต่าง ๆ
+    ได้อย่างถูกต้อง
+</p>
+
+<p>
+    นอกจากนี้ควรเลือกชนิดข้อมูล
+    ให้เหมาะสมกับข้อมูลที่นำมาคำนวณ
+    หากข้อมูลเป็นจำนวนเต็ม
+    สามารถใช้ <b>int</b>
+    ได้
+    แต่หากข้อมูลอาจมีทศนิยม
+    ควรพิจารณาใช้
+    <b>double</b>
+    เพื่อรองรับค่าทศนิยม
+</p>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ ข้อควรจำ
+    </b>
+
+    <br><br>
+
+    หากต้องการหาผลรวมของข้อมูล
+    ควรตรวจสอบว่า
+    ตัวแปรที่ใช้เก็บผลรวม
+    มีชนิดข้อมูลเหมาะสมกับข้อมูล
+    ใน Array
+
+    <br><br>
+
+    ตัวอย่างเช่น
+
+    <br><br>
+
+    <b>
+        int sum = 0;
+    </b>
+
+    <br>
+
+    เหมาะกับข้อมูลจำนวนเต็ม
+
+    <br><br>
+
+    ส่วนข้อมูลที่เป็นทศนิยม
+    สามารถใช้
+
+    <br><br>
+
+    <b>
+        double sum = 0;
+    </b>
+
+</div>
+
+<div class="success-box">
+
+    <b>
+        ✅ สรุปแนวคิดการหาผลรวม
+    </b>
+
+    <br><br>
+
+    1. สร้าง Array เพื่อเก็บข้อมูล
+
+    <br><br>
+
+    2. สร้างตัวแปรสำหรับเก็บผลรวม
+
+    <br><br>
+
+    3. กำหนดค่าเริ่มต้นของผลรวมเป็น
+    <b>0</b>
+
+    <br><br>
+
+    4. ใช้ <b>for Loop</b>
+    หรือ <b>Enhanced for Loop</b>
+    เพื่ออ่านข้อมูลทีละตัว
+
+    <br><br>
+
+    5. นำข้อมูลแต่ละตัว
+    มาบวกสะสมในตัวแปรผลรวม
+
+    <br><br>
+
+    6. เมื่ออ่านข้อมูลครบทุกสมาชิก
+    จึงนำผลรวมมาแสดงผล
+
+</div>
+
+<p>
+    การหาผลรวมเป็นพื้นฐานสำคัญ
+    ของการประมวลผลข้อมูลใน Array
+    เพราะแนวคิดการสะสมค่า
+    สามารถนำไปต่อยอดกับการคำนวณอื่น ๆ
+    เช่น การหาค่าเฉลี่ย
+    การหาค่าสูงสุด
+    การหาค่าต่ำสุด
+    การนับจำนวนข้อมูล
+    และการตรวจสอบข้อมูลตามเงื่อนไข
+    ซึ่งจะช่วยให้สามารถนำ Array
+    ไปประยุกต์ใช้ในการพัฒนาโปรแกรม
+    ที่มีข้อมูลจำนวนมากได้อย่างมีประสิทธิภาพ
+</p>
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] scores = {80, 75, 90, 85, 70};
+
+        int sum = 0;
+
+        for (int score : scores) {
+
+            sum += score;
+
+        }
+
+        System.out.println(
+            "ผลรวม = " + sum
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary09.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<p>
+    โปรแกรมจะนำคะแนนแต่ละตัว
+    มาบวกสะสมไว้ในตัวแปร
+    <b>sum</b>
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 แนวคิดการทำงาน
+    </b>
+
+    <br><br>
+
+    เริ่มต้น
+    <b>sum = 0</b>
+
+    <br>
+
+    จากนั้นนำข้อมูลแต่ละตัว
+    มาบวกเพิ่มใน
+    <b>sum</b>
+    จนอ่านข้อมูลครบทุกตัว
+
+</div>
+
+
+<!-- ==================================================
+     6.12
+================================================== -->
+
+<h3>
+    6.12 การหาค่าเฉลี่ยจาก Array
+</h3>
+
+<p>
+    เมื่อต้องการหาค่าเฉลี่ย
+    สามารถนำผลรวมของข้อมูล
+    หารด้วยจำนวนสมาชิกของ Array
+    โดยใช้ <b>length</b>
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] scores = {80, 75, 90, 85, 70};
+
+        int sum = 0;
+
+        for (int score : scores) {
+
+            sum += score;
+
+        }
+
+        double average =
+            (double) sum / scores.length;
+
+        System.out.println(
+            "ผลรวม = " + sum
+        );
+
+        System.out.println(
+            "ค่าเฉลี่ย = " + average
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary10.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="tip">
+
+    <b>
+        💡 เทคนิค
+    </b>
+
+    <br><br>
+
+    การใช้
+    <b>(double)</b>
+    ก่อนการหารช่วยให้ผลลัพธ์
+    สามารถแสดงเป็นเลขทศนิยมได้
+
+</div>
+
+
+<!-- ==================================================
+     6.13
+================================================== -->
+
+<h3>
+    6.13 การหาค่าสูงสุดและค่าต่ำสุด
+</h3>
+
+<p>
+    Array สามารถนำมาใช้ค้นหาค่าสูงสุด
+    และค่าต่ำสุดได้
+    โดยเปรียบเทียบข้อมูลทีละตัว
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {25, 10, 45, 30, 15};
+
+        int max = numbers[0];
+        int min = numbers[0];
+
+        for (int number : numbers) {
+
+            if (number > max) {
+                max = number;
+            }
+
+            if (number < min) {
+                min = number;
+            }
+
+        }
+
+        System.out.println(
+            "ค่าสูงสุด = " + max
+        );
+
+        System.out.println(
+            "ค่าต่ำสุด = " + min
+        );
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary11.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าว
+</span>
+</div>
+</div>
+
+<p>
+    โปรแกรมเริ่มต้นด้วยการกำหนดข้อมูล
+    ตัวแรกของ Array ให้เป็นทั้ง
+    ค่าสูงสุดและค่าต่ำสุด
+    จากนั้นจึงนำข้อมูลตัวอื่น
+    มาเปรียบเทียบทีละตัว
+</p>
+
+<div class="success-box">
+
+    <b>
+        ✅ หลักการ
+    </b>
+
+    <br><br>
+
+    ถ้าข้อมูลใหม่มากกว่า
+    <b>max</b>
+    ให้เปลี่ยนค่า max
+
+    <br>
+
+    ถ้าข้อมูลใหม่น้อยกว่า
+    <b>min</b>
+    ให้เปลี่ยนค่า min
+
+</div>
+
+
+<!-- ==================================================
+     6.14
+================================================== -->
+
+<h3>
+    6.14 Array ชนิด String
+</h3>
+
+<p>
+    Array ไม่ได้ใช้เฉพาะกับตัวเลขเท่านั้น
+    แต่สามารถใช้เก็บข้อความชนิด
+    <b>String</b>
+    ได้ด้วย
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        String[] names = {
+            "สมชาย",
+            "สมหญิง",
+            "มานะ",
+            "มาลี"
+        };
+
+        for (String name : names) {
+
+            System.out.println(name);
+
+        }
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary12.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<p>
+    ในตัวอย่างนี้
+    <b>names</b>
+    เป็น Array ที่ใช้เก็บชื่อหลายชื่อ
+    และสามารถใช้ Enhanced for Loop
+    เพื่อแสดงชื่อทั้งหมดได้
+</p>
+
+<div class="info-box">
+
+    <b>
+        💡 ตัวอย่างการนำไปใช้
+    </b>
+
+    <br><br>
+
+    Array ชนิด String สามารถนำไปใช้เก็บ
+    รายชื่อนักเรียน ชื่อสินค้า
+    ชื่อจังหวัด หรือข้อมูลข้อความอื่น ๆ
+
+</div>
+
+
+<!-- ==================================================
+     6.15
+================================================== -->
+
+<h3>
+    6.15 การรับข้อมูลเข้าสู่ Array
+</h3>
+
+<p>
+    Array สามารถใช้ร่วมกับ
+    <b>Scanner</b>
+    เพื่อรับข้อมูลจากผู้ใช้
+    แล้วนำข้อมูลไปจัดเก็บในแต่ละ Index
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>import java.util.Scanner;
+
+public class Mainn {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        int[] scores = new int[3];
+
+        for (int i = 0; i < scores.length; i++) {
+
+            System.out.print(
+                "กรอกคะแนนคนที่ " + (i + 1) + ": "
+            );
+
+            scores[i] = input.nextInt();
+
+        }
+
+        System.out.println("คะแนนที่กรอก:");
+
+        for (int score : scores) {
+
+            System.out.println(score);
+
+        }
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary13.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+
+</div>
+
+<p>
+    โปรแกรมสร้าง Array ชื่อ
+    <b>scores</b>
+    สำหรับเก็บคะแนน 3 ค่า
+    จากนั้นใช้ <b>for Loop</b>
+    รับข้อมูลจากผู้ใช้ทีละค่า
+    และเก็บข้อมูลลงใน Index
+    ของ Array
+</p>
+
+<div class="tip">
+
+    <b>
+        💡 จุดที่ควรสังเกต
+    </b>
+
+    <br><br>
+
+    <b>scores[i]</b>
+    ใช้สำหรับเก็บค่าที่ผู้ใช้ป้อน
+    ลงในตำแหน่งของ Array
+    ตามค่า Index ของตัวแปร
+    <b>i</b>
+
+</div>
+
+
+<!-- ==================================================
+     6.16
+================================================== -->
+
+<h3>
+    6.16 Array หลายมิติ
+</h3>
+
+<p>
+    Array หลายมิติ
+    (Multidimensional Array)
+    คือ Array ที่มี Array ซ้อนอยู่ภายใน
+    โดยรูปแบบที่พบได้บ่อยคือ
+    <b>Array 2 มิติ</b>
+</p>
+
+<p>
+    Array 2 มิติสามารถมองได้เหมือน
+    ตารางที่ประกอบด้วย
+    แถว (Row)
+    และคอลัมน์ (Column)
+</p>
+
+
+<div class="flow">
+
+    <div class="flow-box">
+        แถว
+    </div>
+
+    <div class="flow-arrow">
+        +
+    </div>
+
+    <div class="flow-box">
+        คอลัมน์
+    </div>
+
+    <div class="flow-arrow">
+        =
+    </div>
+
+    <div class="flow-box">
+        Array 2 มิติ
+    </div>
+
+</div>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[][] numbers = {
+            {10, 20, 30},
+            {40, 50, 60}
+        };
+
+        System.out.println(numbers[0][0]);
+        System.out.println(numbers[1][2]);
+
+    }
+
+}</code></pre>
+
+</div>
+
+<p>
+    การเข้าถึงข้อมูลใน Array 2 มิติ
+    จะใช้ Index 2 ตำแหน่ง
+    โดยตำแหน่งแรกหมายถึงแถว
+    และตำแหน่งที่สองหมายถึงคอลัมน์
+</p>
+<div class="step-item">
+<img src="images/chapter6/ary14.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th></th>
+
+                <th>Column 0</th>
+                <th>Column 1</th>
+                <th>Column 2</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    <b>Row 0</b>
+                </td>
+
+                <td>10</td>
+                <td>20</td>
+                <td>30</td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>Row 1</b>
+                </td>
+
+                <td>40</td>
+                <td>50</td>
+                <td>60</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="info-box">
+
+    <b>
+        💡 ตัวอย่างการอ่านตำแหน่ง
+    </b>
+
+    <br><br>
+
+    <b>numbers[0][0]</b>
+    = 10
+
+    <br>
+
+    <b>numbers[0][2]</b>
+    = 30
+
+    <br>
+
+    <b>numbers[1][1]</b>
+    = 50
+
+</div>
+
+
+<!-- ==================================================
+     6.17
+================================================== -->
+
+<h3>
+    6.17 การใช้ Loop กับ Array 2 มิติ
+</h3>
+
+<p>
+    การแสดงข้อมูลทั้งหมดใน Array 2 มิติ
+    สามารถใช้ for Loop ซ้อนกันได้
+    โดย Loop ด้านนอกใช้จัดการแถว
+    และ Loop ด้านในใช้จัดการคอลัมน์
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        int[][] numbers = {
+            {10, 20, 30},
+            {40, 50, 60}
+        };
+
+        for (int i = 0; i < numbers.length; i++) {
+
+            for (int j = 0;
+                 j < numbers[i].length;
+                 j++) {
+
+                System.out.print(
+                    numbers[i][j] + " "
+                );
+
+            }
+
+            System.out.println();
+
+        }
+
+    }
+
+}</code></pre>
+
+</div>
+<div class="step-item">
+<img src="images/chapter6/ary15.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<div class="success-box">
+
+    <b>
+        ✅ จำง่าย ๆ
+    </b>
+
+    <br><br>
+
+    Loop ตัวแรก
+    =
+    จัดการแถว
+
+    <br>
+
+    Loop ตัวที่สอง
+    =
+    จัดการคอลัมน์
+
+</div>
+
+
+<!-- ==================================================
+     6.18
+================================================== -->
+
+<h3>
+    6.18 ตัวอย่างการประยุกต์ใช้ Array
+</h3>
+
+<p>
+    Array สามารถนำไปประยุกต์ใช้กับ
+    โปรแกรมที่ต้องจัดการข้อมูลหลายค่า
+    เช่น ระบบคะแนนนักเรียน
+    รายการสินค้า ราคาสินค้า
+    จำนวนสินค้า หรือข้อมูลยอดขาย
+</p>
+
+<h4>
+    ตัวอย่าง : โปรแกรมคำนวณคะแนนนักเรียน
+</h4>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)"
+    >
+        คัดลอก
+    </button>
+
+<pre><code>public class Mainn {
+
+    public static void main(String[] args) {
+
+        String[] names = {
+            "สมชาย",
+            "สมหญิง",
+            "มานะ",
+            "มาลี"
+        };
+
+        int[] scores = {
+            80,
+            75,
+            90,
+            85
+        };
+
+        for (int i = 0; i < names.length; i++) {
+
+            System.out.println(
+                names[i] +
+                " ได้คะแนน " +
+                scores[i]
+            );
+
+        }
+
+    }
+
+}</code></pre>
+
+</div>
+
+<div class="step-item">
+<img src="images/chapter6/ary16.png">
+<div class="step-content">
+<span class="step-number">
+ตัวอย่าง
+</span>
+</div>
+</div>
+
+<p>
+    ตัวอย่างนี้ใช้ Array 2 ชุด
+    โดย Array <b>names</b>
+    ใช้เก็บชื่อ
+    และ Array <b>scores</b>
+    ใช้เก็บคะแนน
+    ข้อมูลที่มี Index เดียวกัน
+    จะถูกนำมาใช้งานคู่กัน
+</p>
+
+<div class="tip">
+
+    <b>
+        💡 แนวคิดการประยุกต์ใช้
+    </b>
+
+    <br><br>
+
+    หาก
+    <b>names[0]</b>
+    คือ "สมชาย"
+
+    <br>
+
+    ข้อมูล
+    <b>scores[0]</b>
+    จึงเป็นคะแนนของสมชาย
+
+    <br><br>
+
+    การใช้ Index เดียวกัน
+    ทำให้สามารถเชื่อมโยงข้อมูล
+    จาก Array หลายชุดได้
+
+</div>
+
+
+<!-- ==================================================
+     6.19
+================================================== -->
+
+<h3>
+    6.19 ข้อควรระวังและสรุปการใช้ Array
+</h3>
+
+<div class="warning-box">
+
+    <b>
+        ⚠️ 1. Index เริ่มต้นที่ 0
+    </b>
+
+    <br>
+
+    ข้อมูลตัวแรกของ Array
+    อยู่ที่ Index 0
+    ไม่ใช่ Index 1
+
+    <br><br>
+
+    <b>
+        ⚠️ 2. ห้ามเข้าถึง Index ที่ไม่มีอยู่
+    </b>
+
+    <br>
+
+    หาก Array มี 5 สมาชิก
+    Index ที่สามารถใช้งานได้คือ
+    0 ถึง 4
+
+    <br><br>
+
+    <b>
+        ⚠️ 3. Array มีขนาดคงที่
+    </b>
+
+    <br>
+
+    เมื่อสร้าง Array แล้ว
+    จำนวนสมาชิกจะไม่สามารถเพิ่มหรือลด
+    ได้โดยตรง
+
+    <br><br>
+
+    <b>
+        ⚠️ 4. ชนิดข้อมูลต้องสอดคล้องกัน
+    </b>
+
+    <br>
+
+    Array ชนิด int
+    ไม่สามารถนำ String
+    มาเก็บเป็นสมาชิกโดยตรงได้
+
+</div>
+
+<h4>
+    เปรียบเทียบตัวแปรทั่วไปกับ Array
+</h4>
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    ตัวแปรทั่วไป
+                </th>
+
+                <th>
+                    Array
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    เก็บข้อมูลหนึ่งค่า
+                </td>
+
+                <td>
+                    เก็บข้อมูลหลายค่า
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    ใช้ชื่อตัวแปรแยกกัน
+                </td>
+
+                <td>
+                    ใช้ชื่อ Array เดียว
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    ไม่มี Index
+                </td>
+
+                <td>
+                    มี Index สำหรับเข้าถึงข้อมูล
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    เหมาะกับข้อมูลจำนวนน้อย
+                </td>
+
+                <td>
+                    เหมาะกับข้อมูลหลายรายการ
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    จัดการข้อมูลจำนวนมากได้ยาก
+                </td>
+
+                <td>
+                    สามารถใช้ Loop
+                    จัดการข้อมูลได้
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="success-box">
+
+    <b>
+        🎯 สรุปบทที่ 6
+    </b>
+
+    <br><br>
+
+    Array คือโครงสร้างข้อมูลที่ใช้สำหรับ
+    เก็บข้อมูลหลายค่าไว้ภายใต้ชื่อเดียวกัน
+
+    <br><br>
+
+    สิ่งสำคัญที่ควรจำคือ
+    <b>Index ของ Array เริ่มต้นที่ 0</b>
+    และ Index สุดท้ายคือ
+    <b>length - 1</b>
+
+    <br><br>
+
+    การประกาศ Array สามารถใช้รูปแบบ
+    <b>int[] numbers;</b>
+    และสามารถสร้างพื้นที่ด้วย
+    <b>new</b>
+
+    <br><br>
+
+    การเข้าถึงข้อมูลใช้
+    <b>ชื่อArray[Index]</b>
+    และสามารถแก้ไขข้อมูลได้โดยกำหนดค่าใหม่
+    ให้กับ Index ที่ต้องการ
+
+    <br><br>
+
+    Array มักทำงานร่วมกับ
+    <b>for Loop</b>
+    และ
+    <b>Enhanced for Loop</b>
+    เพื่ออ่านหรือประมวลผลข้อมูลหลายค่า
+
+    <br><br>
+
+    นอกจากนี้ Array ยังสามารถใช้ในการ
+    คำนวณผลรวม ค่าเฉลี่ย ค่าสูงสุด
+    และค่าต่ำสุด รวมถึงสามารถสร้าง
+    <b>Array 2 มิติ</b>
+    สำหรับจัดเก็บข้อมูลในรูปแบบตารางได้
+
+</div>
+       
+
+
+    <!-- ==================================================
+         6.21
+    ================================================== -->
+
+    <h3>
+        6.21 สรุปบทเรียน
+    </h3>
+
+
+    <p class="summary">
+
+        Array เป็นโครงสร้างข้อมูลพื้นฐานที่สำคัญ
+        ในภาษา Java
+        ใช้สำหรับเก็บข้อมูลหลายค่า
+        ที่มีชนิดข้อมูลเดียวกัน
+        ภายใต้ชื่อตัวแปรเดียว
+
+        <br><br>
+
+        สิ่งสำคัญที่ต้องเข้าใจคือ
+        <b>Index</b>
+        ของ Array จะเริ่มต้นที่
+        <b>0</b>
+        และตำแหน่งสุดท้ายจะเท่ากับ
+        <b>length - 1</b>
+
+        <br><br>
+
+        การจัดการข้อมูลใน Array
+        สามารถทำได้โดยการเข้าถึงข้อมูล
+        การแก้ไขค่า
+        การใช้
+        <b>length</b>
+        และการใช้
+        <b>for Loop</b>
+        หรือ
+        <b>Enhanced for Loop</b>
+
+        <br><br>
+
+        Array ยังสามารถนำไปประยุกต์ใช้
+        กับการคำนวณผลรวม
+        ค่าเฉลี่ย
+        ค่าสูงสุด
+        ค่าต่ำสุด
+        และการจัดการข้อมูลในรูปแบบต่าง ๆ
+
+        <br><br>
+
+        นอกจากนี้ Java ยังรองรับ
+        <b>Array หลายมิติ</b>
+        ซึ่งเหมาะสำหรับข้อมูลที่มีลักษณะ
+        เป็นตารางหรือมีหลายแถวหลายคอลัมน์
+
+    </p>
+
+
+    <div class="success-box">
+
+        <b>
+            🎯 สิ่งที่ควรรู้หลังเรียนจบ
+        </b>
+
+        <ul>
+
+            <li>
+                อธิบายความหมายของ Array ได้
+            </li>
+
+            <li>
+                เข้าใจการทำงานของ Index
+            </li>
+
+            <li>
+                สามารถประกาศ Array ได้
+            </li>
+
+            <li>
+                สามารถกำหนดค่าเริ่มต้นให้ Array ได้
+            </li>
+
+            <li>
+                สามารถเข้าถึงข้อมูลใน Array ได้
+            </li>
+
+            <li>
+                สามารถแก้ไขข้อมูลใน Array ได้
+            </li>
+
+            <li>
+                สามารถใช้ length ได้
+            </li>
+
+            <li>
+                สามารถใช้ for Loop กับ Array ได้
+            </li>
+
+            <li>
+                สามารถใช้ Enhanced for Loop ได้
+            </li>
+
+            <li>
+                สามารถหาผลรวมและค่าเฉลี่ยจาก Array ได้
+            </li>
+
+            <li>
+                สามารถหาค่าสูงสุดและค่าต่ำสุดได้
+            </li>
+
+            <li>
+                เข้าใจ Array 2 มิติในระดับพื้นฐาน
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+
+<!-- ==================================================
+     BOTTOM NAVIGATION
+================================================== -->
+
+<nav class="chapter-nav">
+
+    <a href="chapter_05.html">
+        ← บทที่ 5
+    </a>
+
+
+    <a href="index.html">
+        🏠 หน้าหลัก
+    </a>
+
+
+    <a href="chapter_07.html">
+        บทที่ 7 →
+    </a>
+
+</nav>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <h3>
+        ☕ Java Learning Guide
+    </h3>
+
+
+    <p>
+        สื่อการเรียนการสอนการเขียนโปรแกรมภาษา Java
+    </p>
+
+
+    <p>
+        บทที่ 6 : Arrays และการจัดการข้อมูลแบบ Array
+    </p>
+
+
+    <p>
+        © 2026 Java Learning Guide
+    </p>
+
+</footer>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+/* =========================
+   COPY CODE
+========================= */
+
+function copyCode(button) {
+
+    const code =
+        button.parentElement
+        .querySelector("code")
+        .innerText;
+
+
+    navigator.clipboard
+        .writeText(code)
+        .then(() => {
+
+            const oldText =
+                button.innerText;
+
+
+            button.innerText =
+                "คัดลอกแล้ว ✓";
+
+
+            setTimeout(() => {
+
+                button.innerText =
+                    oldText;
+
+            }, 1200);
+
+        })
+        .catch(() => {
+
+            alert(
+                "ไม่สามารถคัดลอกโค้ดได้"
+            );
+
+        });
+
+}
+
+
+
+/* =========================
+   QUIZ
+========================= */
+
+function checkQuiz(button, answer) {
+
+    const quiz =
+        button.parentElement;
+
+
+    const selected =
+        quiz.querySelector(
+            'input[type="radio"]:checked'
+        );
+
+
+    const result =
+        quiz.querySelector(".result");
+
+
+    if (!selected) {
+
+        result.textContent =
+            "กรุณาเลือกคำตอบ";
+
+        result.style.color =
+            "#d97706";
+
+        return;
+    }
+
+
+    if (
+        Number(selected.value) === answer
+    ) {
+
+        result.textContent =
+            "✅ ถูกต้อง!";
+
+        result.style.color =
+            "#16a34a";
+
+    } else {
+
+        result.textContent =
+            "❌ ยังไม่ถูก ลองทบทวนบทนี้อีกครั้ง";
+
+        result.style.color =
+            "#dc2626";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

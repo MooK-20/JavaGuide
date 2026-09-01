@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Java Learning Guide
+</title>
+
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    background: #f4f7fb;
+
+    color: #263238;
+
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    backdrop-filter: blur(10px);
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    padding: 12px 5%;
+}
+
+.nav-content {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+}
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    color: #1565c0;
+}
+
+.logo-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e3f2fd;
+
+    border-radius: 9px;
+
+    font-size: 21px;
+}
+
+.nav-menu {
+
+    display: flex;
+
+    gap: 25px;
+
+    list-style: none;
+}
+
+.nav-menu a {
+
+    color: #455a64;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.nav-menu a:hover {
+
+    color: #1565c0;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d47a1,
+            #1976d2,
+            #42a5f5
+        );
+
+    color: white;
+
+    padding: 55px 20px;
+
+    text-align: center;
+}
+
+.hero-content {
+
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.hero-badge {
+
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+
+    font-size:
+        clamp(34px, 5vw, 52px);
+
+    line-height: 1.2;
+
+    margin-bottom: 12px;
+}
+
+.hero h1 span {
+
+    color: #ffeb3b;
+}
+
+.hero p {
+
+    max-width: 680px;
+
+    margin: auto;
+
+    font-size: 16px;
+
+    opacity: 0.95;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+    width: 92%;
+
+    max-width: 1000px;
+
+    margin: auto;
+}
+
+
+/* =========================
+   CHAPTER SECTION
+========================= */
+
+.chapter-section {
+
+    padding: 55px 0;
+}
+
+.section-header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.section-label {
+
+    display: inline-block;
+
+    color: #1565c0;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    margin-bottom: 6px;
+}
+
+.section-header h2 {
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+.section-header p {
+
+    color: #78909c;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+.filter-box {
+
+    background: white;
+
+    border:
+        1px solid #e3eaf0;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.05);
+}
+
+.filter-search {
+
+    position: relative;
+
+    max-width: 650px;
+
+    margin:
+        0 auto 17px;
+}
+
+.filter-search input {
+
+    width: 100%;
+
+    height: 48px;
+
+    border:
+        1px solid #d9e2ec;
+
+    border-radius: 10px;
+
+    padding:
+        0
+        15px
+        0
+        45px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    color: #263238;
+
+    background: #f8fafc;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.filter-search input:focus {
+
+    background: white;
+
+    border-color: #1976d2;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(25,118,210,0.10);
+}
+
+.search-icon {
+
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size: 17px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   FILTER BUTTONS
+========================= */
+
+.filter-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 7px;
+}
+
+.filter-btn {
+
+    border:
+        1px solid #dce5ec;
+
+    background: #f5f8fb;
+
+    color: #455a64;
+
+    padding:
+        7px 13px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.filter-btn:hover {
+
+    border-color: #90caf9;
+
+    color: #1565c0;
+
+    background: #eaf4ff;
+}
+
+.filter-btn.active {
+
+    background: #1976d2;
+
+    color: white;
+
+    border-color: #1976d2;
+
+    box-shadow:
+        0 3px 9px
+        rgba(25,118,210,0.20);
+}
+
+.filter-result {
+
+    text-align: center;
+
+    margin-top: 14px;
+
+    color: #78909c;
+
+    font-size: 13px;
+}
+
+.filter-result strong {
+
+    color: #1976d2;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   CHAPTER LIST
+========================= */
+
+.chapter-list {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+
+/* =========================
+   CHAPTER CARD
+========================= */
+
+.chapter-card {
+
+    width: 100%;
+
+    height: 300px;
+
+    display: grid;
+
+    grid-template-columns:
+        42% 58%;
+
+    background: white;
+
+    border:
+        1px solid #e3eaf0;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.06);
+
+    transition: 0.25s ease;
+}
+
+.chapter-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color: #90caf9;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.10);
+}
+
+.chapter-card.hidden {
+
+    display: none;
+}
+
+
+/* =========================
+   CODE PREVIEW
+========================= */
+
+.chapter-preview {
+
+    height: 300px;
+
+    min-width: 0;
+
+    background: #0d1117;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.code-header {
+
+    height: 40px;
+
+    flex-shrink: 0;
+
+    background: #161b22;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 13px;
+
+    border-bottom:
+        1px solid #30363d;
+}
+
+.code-dots {
+
+    display: flex;
+
+    gap: 6px;
+}
+
+.code-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    display: block;
+}
+
+.dot-red {
+
+    background: #ff5f56;
+}
+
+.dot-yellow {
+
+    background: #ffbd2e;
+}
+
+.dot-green {
+
+    background: #27c93f;
+}
+
+.code-title {
+
+    color: #8b949e;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+    margin-left: 12px;
+}
+
+.code-body {
+
+    padding: 15px;
+
+    overflow: auto;
+
+    flex: 1;
+}
+
+.code-body pre {
+
+    margin: 0;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    color: #c9d1d9;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================
+   CODE COLOR
+========================= */
+
+.keyword {
+
+    color: #ff7b72;
+}
+
+.class-name {
+
+    color: #ffa657;
+}
+
+.string {
+
+    color: #a5d6ff;
+}
+
+.number {
+
+    color: #79c0ff;
+}
+
+
+/* =========================
+   CHAPTER CONTENT
+========================= */
+
+.chapter-content {
+
+    height: 300px;
+
+    padding: 22px 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-width: 0;
+}
+
+.chapter-number {
+
+    display: inline-block;
+
+    width: fit-content;
+
+    color: #1976d2;
+
+    background: #e3f2fd;
+
+    padding:
+        4px 10px;
+
+    border-radius: 18px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.chapter-content h3 {
+
+    font-size: 20px;
+
+    line-height: 1.4;
+
+    color: #1565c0;
+
+    margin-bottom: 8px;
+}
+
+.chapter-content p {
+
+    color: #607d8b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   TOPICS
+========================= */
+
+.chapter-topics {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 14px;
+}
+
+.chapter-topic {
+
+    padding:
+        4px 8px;
+
+    background: #f4f7fb;
+
+    border:
+        1px solid #e0e7ed;
+
+    border-radius: 5px;
+
+    color: #455a64;
+
+    font-size: 10px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.chapter-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: fit-content;
+
+    padding:
+        8px 14px;
+
+    background: #1976d2;
+
+    color: white;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.chapter-button:hover {
+
+    background: #0d47a1;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================
+   NO RESULT
+========================= */
+
+.no-result {
+
+    display: none;
+
+    text-align: center;
+
+    background: white;
+
+    border:
+        1px solid #e3eaf0;
+
+    border-radius: 15px;
+
+    padding:
+        45px 20px;
+
+    color: #78909c;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.05);
+}
+
+.no-result.show {
+
+    display: block;
+}
+
+.no-result-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 8px;
+}
+
+.no-result h3 {
+
+    color: #455a64;
+
+    margin-bottom: 5px;
+}
+
+.no-result p {
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    background: #172027;
+
+    color: #cfd8dc;
+
+    padding:
+        30px 20px;
+
+    text-align: center;
+
+    margin-top: 20px;
+}
+
+footer h3 {
+
+    color: white;
+
+    margin-bottom: 6px;
+
+    font-size: 18px;
+}
+
+footer p {
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:800px) {
+
+    .chapter-card {
+
+        height: auto;
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            230px auto;
+    }
+
+    .chapter-preview {
+
+        height: 230px;
+    }
+
+    .chapter-content {
+
+        height: auto;
+
+        min-height: 230px;
+
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+    .nav-menu {
+
+        display: none;
+    }
+
+    .navbar {
+
+        padding:
+            10px 4%;
+    }
+
+    .hero {
+
+        padding:
+            45px 18px;
+    }
+
+    .hero h1 {
+
+        font-size: 36px;
+    }
+
+    .hero p {
+
+        font-size: 14px;
+    }
+
+    .chapter-section {
+
+        padding:
+            40px 0;
+    }
+
+    .section-header h2 {
+
+        font-size: 25px;
+    }
+
+    .filter-box {
+
+        padding: 15px;
+    }
+
+    .filter-btn {
+
+        font-size: 11px;
+
+        padding:
+            7px 9px;
+    }
+
+    .chapter-card {
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            220px auto;
+    }
+
+    .chapter-preview {
+
+        height: 220px;
+    }
+
+    .code-body pre {
+
+        font-size: 10px;
+
+        line-height: 1.5;
+    }
+
+    .chapter-content {
+
+        min-height: 240px;
+
+        padding: 18px;
+    }
+
+    .chapter-content h3 {
+
+        font-size: 18px;
+    }
+
+    .chapter-content p {
+
+        font-size: 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="nav-content">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+                ☕
+            </div>
+
+            <span>
+                Java Learning Guide
+            </span>
+
+        </a>
+
+
+        <ul class="nav-menu">
+
+            <li>
+                <a href="index.html">
+                    หน้าหลัก
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapters">
+                    บทเรียน
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            📚 JAVA LESSONS
+        </div>
+
+        <h1>
+            บทเรียน
+            <span>Java</span>
+        </h1>
+
+        <p>
+            หลักสูตร Java สำหรับผู้เริ่มต้น
+            7 บท เน้นพื้นฐาน ตัวอย่างโค้ด
+            และการนำความรู้ไปสร้างโปรแกรม
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CHAPTERS
+========================= -->
+
+<section
+    class="chapter-section"
+    id="chapters"
+>
+
+<div class="container">
+
+
+    <div class="section-header">
+
+        <span class="section-label">
+            JAVA COURSE
+        </span>
+
+        <h2>
+            📖 เลือกบทเรียนที่ต้องการ
+        </h2>
+
+        <p>
+            ค้นหาและกรองบทเรียนได้ทันที
+            พร้อมตัวอย่างโค้ดประกอบทุกบท
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         FILTER
+    ========================= -->
+
+    <div class="filter-box">
+
+        <div class="filter-search">
+
+            <span class="search-icon">
+                🔎
+            </span>
+
+            <input
+                type="text"
+                id="chapterSearch"
+                placeholder="ค้นหาบทเรียน เช่น Java, Array, OOP..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="filter-buttons">
+
+            <button
+                class="filter-btn active"
+                data-filter="all"
+            >
+                📚 ทั้งหมด
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="basic"
+            >
+                🌱 พื้นฐาน
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="control"
+            >
+                🔢 การควบคุม
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="oop"
+            >
+                🧩 OOP
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="project"
+            >
+                🚀 Project
+            </button>
+
+        </div>
+
+
+        <div class="filter-result">
+
+            พบทั้งหมด
+
+            <strong id="resultCount">
+                7
+            </strong>
+
+            บทเรียน
+
+        </div>
+
+    </div>
+
+
+
+<!-- =========================
+     CHAPTER LIST
+========================= -->
+
+<div class="chapter-list">
+
+
+
+<!-- ==================================================
+     หน่วยที่ 1
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="basic"
+    data-title="หน่วยที่ 1 ความรู้เบื้องต้นภาษา Java Java Programming Basic"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                HelloJava.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">public class</span> HelloJava {
+
+    <span class="keyword">public static void</span> main(
+        String[] args
+    ) {
+
+        System.out.println(
+            <span class="string">"Hello, Java!"</span>
+        );
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 01
+        </span>
+
+        <h3>
+            ความรู้เบื้องต้นภาษา Java
+        </h3>
+
+        <p>
+            ทำความรู้จักภาษา Java
+            แนวคิดพื้นฐาน และความสำคัญ
+            ของการเขียนโปรแกรมด้วย Java
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                Java
+            </span>
+
+            <span class="chapter-topic">
+                Programming
+            </span>
+
+            <span class="chapter-topic">
+                Basic
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_01.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+
+<!-- ==================================================
+     หน่วยที่ 2
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="basic"
+    data-title="หน่วยที่ 2 การติดตั้งเครื่องมือ Java JDK IDE Setup"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                Setup.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">public class</span> Setup {
+
+    <span class="keyword">public static void</span> main(
+        String[] args
+    ) {
+
+        System.out.println(
+            <span class="string">"Java Ready!"</span>
+        );
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 02
+        </span>
+
+        <h3>
+            การติดตั้งเครื่องมือ
+        </h3>
+
+        <p>
+            เรียนรู้การติดตั้ง JDK
+            การเลือกใช้ IDE และการเตรียม
+            เครื่องมือสำหรับเขียนโปรแกรม Java
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                JDK
+            </span>
+
+            <span class="chapter-topic">
+                IDE
+            </span>
+
+            <span class="chapter-topic">
+                Setup
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_02.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+
+<!-- ==================================================
+     หน่วยที่ 3
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="basic"
+    data-title="หน่วยที่ 3 ลำดับขั้นตอนการพัฒนาโปรแกรม Java Class printf Scanner"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                InputOutput.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> InputOutput {
+
+    <span class="keyword">public static void</span> main(
+        String[] args
+    ) {
+
+        Scanner sc =
+            <span class="keyword">new</span> Scanner(System.in);
+
+        System.out.printf(
+            <span class="string">"ชื่อ: "</span>
+        );
+
+        String name =
+            sc.nextLine();
+
+        System.out.println(name);
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 03
+        </span>
+
+        <h3>
+            ลำดับขั้นตอนการพัฒนาโปรแกรมด้วยภาษา Java
+        </h3>
+
+        <p>
+            เรียนรู้ขั้นตอนการพัฒนาโปรแกรม
+            การใช้งาน Class รวมถึงการใช้
+            printf และ Scanner รับข้อมูล
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                Class
+            </span>
+
+            <span class="chapter-topic">
+                printf
+            </span>
+
+            <span class="chapter-topic">
+                Scanner
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_03.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+
+<!-- ==================================================
+     หน่วยที่ 4
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="oop"
+    data-title="หน่วยที่ 4 การสร้างและเรียกใช้งาน Classes Class Object Encapsulation"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                Student.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">class</span> Student {
+
+    <span class="keyword">private</span> String name;
+
+    <span class="keyword">public void</span> setName(
+        String name
+    ) {
+
+        <span class="keyword">this</span>.name = name;
+
+    }
+
+    <span class="keyword">public</span> String getName() {
+
+        <span class="keyword">return</span> name;
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 04
+        </span>
+
+        <h3>
+            การสร้างและเรียกใช้งาน Classes
+        </h3>
+
+        <p>
+            เรียนรู้การสร้าง Class
+            การสร้าง Object และการกำหนด
+            คุณสมบัติของ Class
+            รวมถึงแนวคิด Encapsulation
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                Class
+            </span>
+
+            <span class="chapter-topic">
+                Object
+            </span>
+
+            <span class="chapter-topic">
+                Encapsulation
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_04.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+
+<!-- ==================================================
+     หน่วยที่ 5
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="basic"
+    data-title="หน่วยที่ 5 การสร้างและใช้งาน Methods Method Parameter Return"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                Calculator.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">class</span> Calculator {
+
+    <span class="keyword">int</span> add(
+        <span class="keyword">int</span> a,
+        <span class="keyword">int</span> b
+    ) {
+
+        <span class="keyword">return</span> a + b;
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 05
+        </span>
+
+        <h3>
+            การสร้างและใช้งาน Methods
+        </h3>
+
+        <p>
+            เรียนรู้การสร้าง Method
+            การส่งค่า Parameter
+            การคืนค่าด้วย return
+            และการเรียกใช้งาน Method
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                Method
+            </span>
+
+            <span class="chapter-topic">
+                Parameter
+            </span>
+
+            <span class="chapter-topic">
+                Return
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_05.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+
+<!-- ==================================================
+     หน่วยที่ 6
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="basic"
+    data-title="หน่วยที่ 6 Arrays การจัดการข้อมูลแบบ Array Index"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                Array.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">public class</span> Array {
+
+    <span class="keyword">public static void</span> main(
+        String[] args
+    ) {
+
+        <span class="keyword">int</span>[] numbers = {
+            <span class="number">10</span>,
+            <span class="number">20</span>,
+            <span class="number">30</span>
+        };
+
+        System.out.println(
+            numbers[<span class="number">0</span>]
+        );
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 06
+        </span>
+
+        <h3>
+            Arrays และการจัดการข้อมูลแบบ Array
+        </h3>
+
+        <p>
+            เรียนรู้การสร้าง Array
+            การกำหนดค่า การเข้าถึงข้อมูล
+            ด้วย Index และการแก้ไขข้อมูล
+            ภายใน Array
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                Array
+            </span>
+
+            <span class="chapter-topic">
+                Index
+            </span>
+
+            <span class="chapter-topic">
+                Data
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_06.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+
+<!-- ==================================================
+     หน่วยที่ 7
+================================================== -->
+
+<article
+    class="chapter-card"
+    data-category="oop"
+    data-title="หน่วยที่ 7 Object-Oriented Programming OOP Encapsulation Inheritance Polymorphism Abstraction"
+>
+
+    <div class="chapter-preview">
+
+        <div class="code-header">
+
+            <div class="code-dots">
+
+                <span class="code-dot dot-red"></span>
+
+                <span class="code-dot dot-yellow"></span>
+
+                <span class="code-dot dot-green"></span>
+
+            </div>
+
+            <span class="code-title">
+                Animal.java
+            </span>
+
+        </div>
+
+
+        <div class="code-body">
+
+<pre><span class="keyword">abstract class</span> Animal {
+
+    <span class="keyword">abstract void</span> sound();
+
+}
+
+
+<span class="keyword">class</span> Dog
+    <span class="keyword">extends</span> Animal {
+
+    <span class="keyword">void</span> sound() {
+
+        System.out.println(
+            <span class="string">"โฮ่ง โฮ่ง"</span>
+        );
+
+    }
+
+}</pre>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chapter-content">
+
+        <span class="chapter-number">
+            หน่วยที่ 07
+        </span>
+
+        <h3>
+            Object-Oriented Programming (OOP)
+        </h3>
+
+        <p>
+            เรียนรู้แนวคิดการเขียนโปรแกรม
+            เชิงวัตถุด้วยภาษา Java
+            ได้แก่ Encapsulation, Inheritance,
+            Polymorphism และ Abstraction
+        </p>
+
+        <div class="chapter-topics">
+
+            <span class="chapter-topic">
+                OOP
+            </span>
+
+            <span class="chapter-topic">
+                Encapsulation
+            </span>
+
+            <span class="chapter-topic">
+                Inheritance
+            </span>
+
+            <span class="chapter-topic">
+                Polymorphism
+            </span>
+
+            <span class="chapter-topic">
+                Abstraction
+            </span>
+
+        </div>
+
+        <a
+            href="chapter_07.html"
+            class="chapter-button"
+        >
+            เริ่มบทเรียน →
+        </a>
+
+    </div>
+
+</article>
+
+
+</div>
+
+
+
+<!-- =========================
+     NO RESULT
+========================= -->
+
+<div
+    class="no-result"
+    id="noResult"
+>
+
+    <div class="no-result-icon">
+        🔍
+    </div>
+
+    <h3>
+        ไม่พบบทเรียน
+    </h3>
+
+    <p>
+        ลองค้นหาด้วยคำอื่น
+        หรือเลือกหมวดหมู่ใหม่
+    </p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        Java Learning Guide
+    </h3>
+
+    <p>
+        สื่อการเรียนรู้ภาษา Java
+        สำหรับผู้เริ่มต้น • 7 บทเรียน
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT FILTER
+========================= -->
+
+<script>
+
+const cards =
+    [
+        ...document.querySelectorAll(
+            ".chapter-card"
+        )
+    ];
+
+
+const buttons =
+    [
+        ...document.querySelectorAll(
+            ".filter-btn"
+        )
+    ];
+
+
+const search =
+    document.getElementById(
+        "chapterSearch"
+    );
+
+
+const count =
+    document.getElementById(
+        "resultCount"
+    );
+
+
+const noResult =
+    document.getElementById(
+        "noResult"
+    );
+
+
+let currentFilter = "all";
+
+
+function filterLessons() {
+
+    const keyword =
+        search.value
+        .trim()
+        .toLowerCase();
+
+
+    let visible = 0;
+
+
+    cards.forEach(card => {
+
+        const category =
+            card.dataset.category;
+
+
+        const title =
+            card.dataset.title
+            .toLowerCase();
+
+
+        const matchCategory =
+            currentFilter === "all"
+            ||
+            category === currentFilter;
+
+
+        const matchSearch =
+            keyword === ""
+            ||
+            title.includes(keyword);
+
+
+        if (
+            matchCategory
+            &&
+            matchSearch
+        ) {
+
+            card.classList.remove(
+                "hidden"
+            );
+
+            visible++;
+
+        } else {
+
+            card.classList.add(
+                "hidden"
+            );
+
+        }
+
+    });
+
+
+    count.textContent =
+        visible;
+
+
+    if (visible === 0) {
+
+        noResult.classList.add(
+            "show"
+        );
+
+    } else {
+
+        noResult.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   FILTER BUTTON
+========================= */
+
+buttons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            buttons.forEach(btn => {
+
+                btn.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            currentFilter =
+                button.dataset.filter;
+
+
+            filterLessons();
+
+        }
+    );
+
+});
+
+
+/* =========================
+   SEARCH
+========================= */
+
+search.addEventListener(
+    "input",
+    filterLessons
+);
+
+
+/* =========================
+   START
+========================= */
+
+filterLessons();
+
+</script>
+
+
+</body>
+
+</html>

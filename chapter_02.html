@@ -1,0 +1,2686 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>บทที่ 2 | ขั้นตอนการติดตั้งเครื่องมือ</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family:
+                "Tahoma",
+                "Noto Sans Thai",
+                sans-serif;
+
+            background: #eef7ff;
+
+            color: #1f2937;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81,
+                    #1976d2,
+                    #42a5f5
+                );
+
+            color: white;
+
+            padding: 38px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, .15);
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 36px;
+        }
+
+
+        header p {
+
+            margin: 8px 0 0;
+
+            font-size: 17px;
+
+            opacity: .95;
+        }
+
+
+
+        /* ==================================================
+           NAVIGATION
+        ================================================== */
+/* =========================
+   TOP CHAPTER NAVIGATION
+========================= */
+
+.chapter-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0 34px;
+
+    height: 70px;
+
+    background: transparent;
+
+    pointer-events: none;
+}
+
+/* ปุ่มทั้งหมด */
+.chapter-nav a {
+    pointer-events: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 130px;
+    height: 58px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 0 0 12px 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.10);
+
+    transition:
+        0.2s ease;
+}
+
+/* ปุ่มกลาง */
+.chapter-nav a:nth-child(2) {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 215px;
+
+    border-radius: 0 0 12px 12px;
+}
+
+/* Hover */
+.chapter-nav a:hover {
+    color: #0f4c81;
+
+    background: #f8fcff;
+
+    transform:
+        translateY(2px);
+}
+
+/* Hover ปุ่มกลาง */
+.chapter-nav a:nth-child(2):hover {
+    transform:
+        translateX(-50%)
+        translateY(2px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .chapter-nav {
+        height: auto;
+
+        padding: 0 10px;
+
+        gap: 8px;
+    }
+
+    .chapter-nav a {
+        min-width: 0;
+
+        flex: 1;
+
+        height: 52px;
+
+        padding: 0 8px;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        border-radius: 0 0 10px 10px;
+    }
+
+    .chapter-nav a:nth-child(2) {
+        position: static;
+
+        transform: none;
+
+        min-width: 0;
+    }
+
+    .chapter-nav a:hover {
+        transform: translateY(2px);
+    }
+
+    .chapter-nav a:nth-child(2):hover {
+        transform: translateY(2px);
+    }
+
+}
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        main {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 0 20px 30px;
+        }
+
+
+
+        /* ==================================================
+           CHAPTER
+        ================================================== */
+
+        .chapter {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, .07);
+
+            border: 1px solid #dbeafe;
+        }
+
+
+
+        /* ==================================================
+           CHAPTER HEAD
+        ================================================== */
+
+        .chapter-head {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            border-bottom:
+                2px solid #e0f2fe;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .chapter-head span {
+
+            background: #1769aa;
+
+            color: white;
+
+            padding: 7px 16px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        .chapter-head h2 {
+
+            margin: 0;
+
+            color: #0f4c81;
+
+            font-size: 28px;
+        }
+
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .chapter h3 {
+
+            color: #0369a1;
+
+            margin-top: 32px;
+
+            margin-bottom: 10px;
+
+            font-size: 22px;
+        }
+
+
+        .chapter h4 {
+
+            color: #0f4c81;
+
+            margin-top: 20px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .chapter p {
+
+            margin-top: 8px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .chapter ul,
+        .chapter ol {
+
+            padding-left: 28px;
+        }
+
+
+        .chapter li {
+
+            margin-bottom: 7px;
+        }
+
+
+
+        /* ==================================================
+           CONTENT BOX
+        ================================================== */
+
+        .info-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fbff
+                );
+
+            border-left:
+                5px solid #1976d2;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .warning-box {
+
+            background: #fff7ed;
+
+            border-left:
+                5px solid #f97316;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .success-box {
+
+            background: #f0fdf4;
+
+            border-left:
+                5px solid #22c55e;
+
+            padding: 16px 20px;
+
+            border-radius: 9px;
+
+            margin: 18px 0;
+        }
+
+
+        .summary {
+
+            background: #f0f9ff;
+
+            border-left:
+                5px solid #0ea5e9;
+
+            padding: 17px 20px;
+
+            border-radius: 8px;
+        }
+
+
+
+        /* ==================================================
+           STEP IMAGE
+        ================================================== */
+
+        .step-item {
+
+            margin: 30px auto 35px;
+
+            padding: 20px;
+
+            max-width: 760px;
+
+            background: #f8fbff;
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, .06);
+
+            text-align: center;
+        }
+
+
+        /* รูปเล็กลง */
+
+        .step-item img {
+
+            display: block;
+
+            width: auto;
+
+            max-width: 500px;
+
+            max-height: 230px;
+
+            height: auto;
+
+            margin: 0 auto;
+
+            border-radius: 10px;
+
+            border: 1px solid #cbd5e1;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, .12);
+
+            object-fit: contain;
+
+            background: white;
+        }
+
+
+        /* STEP อยู่ด้านล่างของรูป */
+
+        .step-content {
+
+            margin-top: 18px;
+
+            padding-top: 15px;
+
+            border-top: 2px solid #dbeafe;
+
+            text-align: left;
+        }
+
+
+        .step-number {
+
+            display: inline-block;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1769aa,
+                    #1976d2
+                );
+
+            color: white;
+
+            padding: 5px 14px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .step-title {
+
+            margin: 0 0 7px;
+
+            color: #0f4c81;
+
+            font-size: 19px;
+
+            font-weight: bold;
+        }
+
+
+        .step-description {
+
+            margin: 0;
+
+            color: #475569;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+
+        .table-wrap {
+
+            overflow-x: auto;
+
+            margin: 20px 0;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+        }
+
+
+        th {
+
+            background: #1769aa;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+
+        td {
+
+            border:
+                1px solid #dbeafe;
+
+            padding: 12px;
+
+            vertical-align: top;
+        }
+
+
+        tr:nth-child(even) {
+
+            background: #f8fbff;
+        }
+
+
+
+        /* ==================================================
+           FLOW
+        ================================================== */
+
+        .flow {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin: 25px 0;
+        }
+
+
+        .flow-box {
+
+            background: #eff6ff;
+
+            border:
+                2px solid #60a5fa;
+
+            border-radius: 12px;
+
+            padding: 14px 18px;
+
+            text-align: center;
+
+            min-width: 145px;
+
+            font-weight: bold;
+
+            color: #0f4c81;
+        }
+
+
+        .flow-arrow {
+
+            font-size: 25px;
+
+            color: #1976d2;
+
+            font-weight: bold;
+        }
+
+
+
+        /* ==================================================
+           CODE
+        ================================================== */
+
+        .code-wrap {
+
+            position: relative;
+
+            background: #0f172a;
+
+            border-radius: 12px;
+
+            overflow: auto;
+
+            margin: 18px 0;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .12);
+        }
+
+
+        pre {
+
+            margin: 0;
+
+            padding: 24px;
+
+            padding-top: 52px;
+
+            color: #e2e8f0;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            white-space: pre;
+        }
+
+
+        .copy {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 10px;
+
+            border: 0;
+
+            background: #334155;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            z-index: 2;
+        }
+
+
+        .copy:hover {
+
+            background: #475569;
+        }
+
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 32px;
+
+            background: #0f4c81;
+
+            color: white;
+
+            margin-top: 20px;
+        }
+
+
+        footer h3 {
+
+            margin-top: 0;
+        }
+
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+
+                font-size: 27px;
+            }
+
+
+            header p {
+
+                font-size: 15px;
+            }
+
+
+            .chapter {
+
+                padding: 20px;
+            }
+
+
+            .chapter-head {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .chapter-head h2 {
+
+                font-size: 22px;
+            }
+
+
+            .chapter-nav {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .chapter-nav a {
+
+                font-size: 14px;
+            }
+
+
+            .flow {
+
+                flex-direction: column;
+            }
+
+
+            .flow-arrow {
+
+                transform: rotate(90deg);
+            }
+
+
+            .chapter h3 {
+
+                font-size: 20px;
+            }
+
+
+            pre {
+
+                font-size: 13px;
+
+                padding: 18px;
+
+                padding-top: 52px;
+            }
+
+
+            .table-wrap {
+
+                font-size: 14px;
+            }
+
+
+            /* รูปบนมือถือ */
+
+            .step-item {
+
+                padding: 14px;
+
+                margin-bottom: 25px;
+            }
+
+
+            .step-item img {
+
+                width: 100%;
+
+                max-width: 100%;
+
+                max-height: none;
+            }
+
+
+            .step-title {
+
+                font-size: 17px;
+            }
+
+
+            .step-description {
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <h1>
+        JAVA LEARNING GUIDE
+    </h1>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+        บทที่ 2 : ขั้นตอนการติดตั้งเครื่องมือ
+    </p>
+
+</header>
+
+
+
+<!-- ==================================================
+     TOP NAVIGATION
+================================================== -->
+
+
+<nav class="chapter-nav">
+
+    <!-- ไปบทที่ 4-->
+    <a href="chapter_01.html">
+        ← บทที่ 1
+    </a>
+
+    <a href="chapters.html">
+        📚 บทเรียนทั้งหมด
+    </a>
+
+    <!-- ไปบทที่ 6 -->
+    <a href="chapter_03.html">
+        บทที่ 3 →
+    </a>
+
+</nav>
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main>
+
+<section class="chapter">
+
+
+    <!-- ==================================================
+         TITLE
+    ================================================== -->
+
+    <div class="chapter-head">
+
+        <span>
+            บทที่ 2
+        </span>
+
+        <h2>
+            ขั้นตอนการติดตั้งเครื่องมือ
+        </h2>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         INTRO
+    ================================================== -->
+
+    <h3>
+        บทนำ
+    </h3>
+
+    <p>
+        ก่อนเริ่มเขียนโปรแกรมภาษา Java
+        ผู้เรียนจำเป็นต้องติดตั้งเครื่องมือ
+        สำหรับการพัฒนาโปรแกรมให้พร้อมใช้งาน
+        เนื่องจากคอมพิวเตอร์ทั่วไปยังไม่สามารถ
+        Compile และ Run โปรแกรม Java
+        ได้โดยตรงหากไม่มีเครื่องมือที่เหมาะสม
+    </p>
+
+    <p>
+    เครื่องมือพื้นฐานที่สำคัญสำหรับการพัฒนาโปรแกรม Java
+    คือ <b>JDK (Java Development Kit)</b>
+    ซึ่งเป็นชุดเครื่องมือที่ช่วยในการเขียน
+    Compile และทดสอบโปรแกรม Java
+    โดยภายใน JDK จะมีเครื่องมือสำคัญ เช่น
+    <b>javac</b> สำหรับ Compile ไฟล์ Java
+    และ <b>java</b> สำหรับเรียกใช้งานโปรแกรมที่ Compile แล้ว
+</p>
+
+    <p>
+        นอกจาก JDK แล้ว ผู้เรียนควรมีโปรแกรม
+        สำหรับเขียน Source Code เช่น
+        Text Editor หรือ IDE เพื่อช่วยให้การเขียน
+        และตรวจสอบโปรแกรมทำได้สะดวกมากขึ้น
+    </p>
+
+
+    <div class="info-box">
+
+        <b>แนวคิดสำคัญ</b>
+
+        <br><br>
+
+        การเริ่มต้นพัฒนาโปรแกรม Java
+        สามารถสรุปเป็นลำดับได้ดังนี้
+
+        <br><br>
+
+        <b>
+            ติดตั้ง JDK
+            →
+            ตรวจสอบ JDK
+            →
+            ติดตั้งโปรแกรมเขียนโค้ด
+            →
+            สร้างไฟล์ Java
+            →
+            Compile
+            →
+            Run
+        </b>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         เครื่องมือ
+    ================================================== -->
+
+    <h3>
+        เครื่องมือที่ใช้สำหรับพัฒนา Java
+    </h3>
+
+    <p>
+        การเขียนโปรแกรม Java จำเป็นต้องมีเครื่องมือ
+        ที่ช่วยในการสร้างและประมวลผลโปรแกรม
+        โดยเครื่องมือแต่ละชนิดมีหน้าที่แตกต่างกัน
+    </p>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <tr>
+
+                <th>
+                    เครื่องมือ
+                </th>
+
+                <th>
+                    หน้าที่
+                </th>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    JDK
+                </td>
+
+                <td>
+                    ชุดเครื่องมือสำหรับพัฒนาโปรแกรม Java
+                    ประกอบด้วย Compiler และเครื่องมือ
+                    ที่จำเป็นสำหรับการพัฒนา Java
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    Java Compiler
+                </td>
+
+                <td>
+                    ใช้แปลง Source Code ที่เขียนด้วยภาษา Java
+                    ให้เป็น Java Bytecode
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    JVM
+                </td>
+
+                <td>
+                    ทำหน้าที่ประมวลผล Java Bytecode
+                    เพื่อให้โปรแกรม Java สามารถทำงานได้
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    Text Editor
+                </td>
+
+                <td>
+                    ใช้สำหรับสร้างและแก้ไขไฟล์ Source Code
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    IDE
+                </td>
+
+                <td>
+                    โปรแกรมที่รวมเครื่องมือสำหรับเขียน
+                    Compile และ Debug โปรแกรมไว้ในที่เดียว
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         JDK
+    ================================================== -->
+
+   <h3>
+    JDK คืออะไร
+</h3>
+
+<p>
+    <b>JDK (Java Development Kit)</b>
+    คือชุดเครื่องมือสำหรับการพัฒนาโปรแกรมภาษา Java
+    ที่ใช้สำหรับเขียน พัฒนา Compile และทดสอบโปรแกรม
+    โดย JDK ถือเป็นเครื่องมือพื้นฐานที่จำเป็นสำหรับผู้ที่ต้องการ
+    เริ่มต้นพัฒนาโปรแกรมด้วยภาษา Java
+</p>
+
+<p>
+    ภายใน JDK มีเครื่องมือหลายประเภทที่ช่วยสนับสนุนกระบวนการ
+    พัฒนาโปรแกรม ตั้งแต่การสร้าง Source Code การตรวจสอบโค้ด
+    การ Compile ไปจนถึงการเรียกใช้งานโปรแกรมที่เขียนขึ้น
+    โดยเครื่องมือที่สำคัญ ได้แก่ <b>javac</b> และ <b>java</b>
+</p>
+
+<p>
+    คำสั่ง <b>javac</b> เป็น Java Compiler
+    ทำหน้าที่แปลงไฟล์ Source Code ที่มีนามสกุล
+    <b>.java</b> ให้เป็น Bytecode ซึ่งโดยทั่วไปจะมีนามสกุล
+    <b>.class</b> เพื่อให้ Java Runtime สามารถนำไปประมวลผลได้
+</p>
+
+<p>
+    ส่วนคำสั่ง <b>java</b> ใช้สำหรับเรียกใช้งานโปรแกรม Java
+    หลังจากที่ Source Code ผ่านกระบวนการ Compile แล้ว
+    โดย Java จะทำงานผ่าน Java Virtual Machine หรือ JVM
+    ซึ่งช่วยให้โปรแกรม Java สามารถทำงานบนระบบปฏิบัติการ
+    ที่รองรับ Java ได้
+</p>
+
+<p>
+    สำหรับผู้เริ่มต้นเขียนโปรแกรม Java
+    การติดตั้ง JDK ถือเป็นขั้นตอนสำคัญก่อนเริ่มเขียนโปรแกรม
+    เนื่องจากหากไม่มี JDK จะไม่สามารถใช้เครื่องมือ
+    สำหรับ Compile Source Code ด้วยคำสั่ง <b>javac</b>
+    ได้ตามปกติ
+</p>
+
+<p>
+    นอกจากการ Compile และ Run โปรแกรมแล้ว
+    JDK ยังมีเครื่องมืออื่น ๆ ที่ช่วยในการพัฒนาและตรวจสอบโปรแกรม
+    ทำให้นักพัฒนาสามารถสร้างโปรแกรม Java ได้อย่างเป็นระบบ
+    และสามารถตรวจสอบปัญหาที่เกิดขึ้นระหว่างการพัฒนาได้
+</p>
+
+<p>
+    กระบวนการทำงานพื้นฐานของ Java สามารถอธิบายได้ว่า
+    ผู้เขียนโปรแกรมจะเริ่มจากการสร้าง Source Code
+    ซึ่งจัดเก็บไว้ในไฟล์ <b>.java</b>
+    จากนั้นใช้ Compiler ในการแปลง Source Code
+    ให้เป็น Bytecode และจึงเรียกใช้งาน Bytecode
+    ผ่าน Java Runtime และ JVM
+</p>
+
+<div class="info-box">
+
+    <b>
+        JDK ประกอบด้วยเครื่องมือสำคัญ
+    </b>
+
+    <br><br>
+
+    <b>Java Compiler (javac)</b>
+    ใช้สำหรับ Compile Source Code
+    จากไฟล์ .java ให้เป็น Bytecode
+
+    <br><br>
+
+    <b>Java Launcher (java)</b>
+    ใช้สำหรับเรียกใช้งานโปรแกรม Java
+    ที่ผ่านการ Compile แล้ว
+
+    <br><br>
+
+    <b>Java Runtime Environment</b>
+    เป็นสภาพแวดล้อมที่ใช้สำหรับการทำงานของโปรแกรม Java
+
+    <br><br>
+
+    <b>Java Virtual Machine (JVM)</b>
+    ทำหน้าที่ประมวลผล Bytecode
+    และเป็นส่วนสำคัญที่ช่วยให้ Java สามารถทำงาน
+    บนระบบปฏิบัติการที่แตกต่างกันได้
+
+    <br><br>
+
+    <b>Development Tools</b>
+    เป็นเครื่องมือที่ช่วยในการพัฒนา ตรวจสอบ
+    และจัดการโปรแกรม Java
+
+</div>
+
+
+<!-- ==================================================
+     STEP 01 - 12
+================================================== -->
+
+<h3>
+    ขั้นตอนการติดตั้ง JDK
+</h3>
+
+<p>
+    การติดตั้ง JDK เป็นขั้นตอนแรกในการเตรียมสภาพแวดล้อม
+    สำหรับการพัฒนาโปรแกรม Java โดยผู้เรียนควรติดตั้ง JDK
+    ให้เรียบร้อยก่อนเริ่มเขียนและ Compile โปรแกรม
+</p>
+
+<p>
+    ขั้นตอนการติดตั้งอาจมีรายละเอียดแตกต่างกันเล็กน้อย
+    ตามระบบปฏิบัติการและเวอร์ชันของ JDK ที่เลือกใช้
+    ดังนั้นควรอ่านข้อมูลในแต่ละหน้าต่างอย่างละเอียด
+    และตรวจสอบตัวเลือกต่าง ๆ ก่อนดำเนินการต่อ
+</p>
+
+<p>
+    ภาพด้านล่างแสดงลำดับขั้นตอนการติดตั้ง
+    และการเตรียม Java ตามลำดับ
+    ผู้เรียนสามารถศึกษาภาพประกอบแต่ละขั้นตอน
+    เพื่อทำความเข้าใจลำดับการติดตั้งได้
+</p>
+
+
+<!-- STEP 01 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-01.png"
+        alt="STEP 01">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 01
+        </span>
+
+        <h4 class="step-title">
+            เริ่มต้นการเตรียมเครื่องมือ
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบหน้าจอและเริ่มต้นขั้นตอน
+            สำหรับการเตรียมเครื่องมือที่จำเป็น
+            ก่อนเริ่มพัฒนาโปรแกรม Java
+            โดยควรตรวจสอบให้แน่ใจว่าเครื่องคอมพิวเตอร์
+            พร้อมสำหรับการติดตั้ง JDK
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 02 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-02.png"
+        alt="STEP 02">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 02
+        </span>
+
+        <h4 class="step-title">
+            ดำเนินการตามขั้นตอนการติดตั้ง
+        </h4>
+
+        <p class="step-description">
+            กรอกข้อมูลตามขั้นตอน
+            และตรวจสอบรายละเอียดต่าง ๆ
+            ที่โปรแกรมติดตั้งแสดงขึ้นมา
+            เพื่อให้การติดตั้ง JDK
+            ดำเนินไปอย่างถูกต้อง
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 03 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-03.png"
+        alt="STEP 03">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 03
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบตัวเลือกการติดตั้ง
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบรายละเอียดและตัวเลือก
+            ที่ปรากฏในหน้าต่างติดตั้ง
+            ก่อนดำเนินการต่อ
+            โดยควรอ่านข้อมูลแต่ละรายการ
+            เพื่อให้เข้าใจว่าระบบกำลังติดตั้งส่วนใด
+            ลงในเครื่องคอมพิวเตอร์
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 04 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-04.png"
+        alt="STEP 04">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 04
+        </span>
+
+        <h4 class="step-title">
+            ยืนยันการตั้งค่าการติดตั้ง
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบการตั้งค่าที่กำหนดไว้
+            แล้วดำเนินการติดตั้งต่อไป
+            ขั้นตอนนี้ควรตรวจสอบตำแหน่ง
+            และรายละเอียดการติดตั้งให้เหมาะสม
+            ก่อนยืนยันการทำงาน
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 05 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-05.png"
+        alt="STEP 05">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 05
+        </span>
+
+        <h4 class="step-title">
+            เข้าสู่ขั้นตอนการติดตั้ง
+        </h4>
+
+        <p class="step-description">
+            ระบบเข้าสู่ขั้นตอนการติดตั้ง
+            ให้รอการทำงานของโปรแกรม
+            จนกว่าจะดำเนินการเสร็จ
+            และเลือก Product ตามขั้นตอน
+            ที่ปรากฏบนหน้าจอ
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 06 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-06.png"
+        alt="STEP 06">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 06
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบหน้าต่างการตั้งค่า
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบรายละเอียดที่ปรากฏ
+            และดำเนินการตามขั้นตอนที่ระบบกำหนด
+            หากมีตัวเลือกเพิ่มเติมควรตรวจสอบ
+            ให้เรียบร้อยก่อนดำเนินการในขั้นตอนถัดไป
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 07 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-07.png"
+        alt="STEP 07">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 07
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบการตั้งค่าเพิ่มเติม
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบรายการตั้งค่าที่แสดง
+            และเลือกค่าที่เหมาะสมกับการติดตั้ง
+            โดยควรตรวจสอบรายละเอียดของแต่ละรายการ
+            เพื่อป้องกันการตั้งค่าที่ไม่ตรงกับสภาพแวดล้อม
+            ของเครื่องคอมพิวเตอร์
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 08 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-08.png"
+        alt="STEP 08">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 08
+        </span>
+
+        <h4 class="step-title">
+            ดำเนินการตั้งค่าระบบ
+        </h4>
+
+        <p class="step-description">
+            ดำเนินการตั้งค่าตามหน้าต่าง
+            ที่ปรากฏบนหน้าจอ
+            เพื่อเตรียม Java ให้พร้อมใช้งาน
+            หลังจากกำหนดค่าต่าง ๆ แล้ว
+            ให้ตรวจสอบข้อมูลอีกครั้งก่อนดำเนินการต่อ
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 09 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-09.png"
+        alt="STEP 09">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 09
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบค่าที่เกี่ยวข้องกับ Java
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบรายการที่เกี่ยวข้องกับ
+            การติดตั้งและการตั้งค่าของ Java
+            ให้เรียบร้อย โดยเฉพาะข้อมูล
+            ที่เกี่ยวข้องกับตำแหน่งการติดตั้ง
+            เพื่อให้สามารถเรียกใช้งาน Java
+            จากระบบได้อย่างถูกต้อง
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 10 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-10.png"
+        alt="STEP 10">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 10
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบการตั้งค่าระบบ
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบข้อมูลที่ระบบแสดง
+            และดำเนินการต่อเมื่อค่าต่าง ๆ
+            พร้อมใช้งาน การตรวจสอบในขั้นตอนนี้
+            ช่วยลดปัญหาที่อาจเกิดขึ้น
+            หลังจากติดตั้งโปรแกรมเสร็จ
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 11 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-11.png"
+        alt="STEP 11">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 11
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบการติดตั้ง
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบผลจากขั้นตอนก่อนหน้า
+            เพื่อให้แน่ใจว่าการติดตั้ง
+            ดำเนินการอย่างถูกต้อง
+            และไม่มีข้อผิดพลาดที่ทำให้
+            ไม่สามารถใช้งาน Java ได้
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 12 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-12.png"
+        alt="STEP 12">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 12
+        </span>
+
+        <h4 class="step-title">
+            สิ้นสุดขั้นตอนการติดตั้ง
+        </h4>
+
+        <p class="step-description">
+            เมื่อระบบดำเนินการติดตั้งเสร็จเรียบร้อย
+            ให้ตรวจสอบว่าการติดตั้งเสร็จสมบูรณ์
+            จากนั้น Click ปุ่ม Close
+            เพื่อปิดหน้าต่างการติดตั้ง
+            และเข้าสู่ขั้นตอนการตรวจสอบ Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     ตรวจสอบ JAVA
+================================================== -->
+
+<h3>
+    การตรวจสอบการติดตั้ง Java
+</h3>
+
+<p>
+    หลังจากติดตั้ง JDK แล้ว
+    ผู้เรียนควรตรวจสอบการติดตั้ง
+    ผ่าน Command Prompt บน Windows
+    เพื่อยืนยันว่าระบบสามารถเรียกใช้คำสั่ง Java
+    ได้อย่างถูกต้อง
+</p>
+
+<p>
+    การตรวจสอบสามารถทำได้โดยใช้คำสั่ง
+    <b>java -version</b> และ <b>javac -version</b>
+    ซึ่งเป็นคำสั่งพื้นฐานที่ใช้ตรวจสอบ
+    เวอร์ชันของ Java และ Java Compiler
+    ที่สามารถเรียกใช้งานผ่านระบบได้
+</p>
+
+<div class="code-wrap">
+
+    <button
+        class="copy"
+        onclick="copyCode(this)">
+
+        คัดลอก
+
+    </button>
+
+    <pre><code>java -version
+javac -version</code></pre>
+
+</div>
+
+
+<!-- STEP 13 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-13.png"
+        alt="STEP 13">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 13
+        </span>
+
+        <h4 class="step-title">
+            เปิด Command Prompt
+        </h4>
+
+        <p class="step-description">
+            เปิด Command Prompt บน Windows
+            เพื่อใช้ตรวจสอบการติดตั้ง Java
+            และดำเนินการตามคำสั่งต่าง ๆ
+            โดยขั้นตอนนี้เป็นการเตรียมพื้นที่
+            สำหรับตรวจสอบการทำงานของ Java
+            ผ่าน Command Line
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 14 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-14.png"
+        alt="STEP 14">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 14
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบ Java Version
+        </h4>
+
+        <p class="step-description">
+            พิมพ์คำสั่ง <b>java -version</b>
+            แล้วกด Enter เพื่อดูเวอร์ชัน
+            ของ Java ที่ติดตั้งอยู่ในเครื่อง
+            หากระบบสามารถแสดงข้อมูลเวอร์ชัน
+            แสดงว่าสามารถเรียกใช้คำสั่ง Java
+            ผ่าน Command Prompt ได้
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 15 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-15.png"
+        alt="STEP 15">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 15
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบผลการติดตั้ง Java
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบผลลัพธ์ที่ระบบแสดง
+            หากมีข้อมูลเวอร์ชันของ Java
+            แสดงว่าสามารถเรียกใช้ Java ได้
+            และสามารถเตรียมเข้าสู่ขั้นตอน
+            การเขียนและ Compile โปรแกรม Java
+            ต่อไป
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     ENVIRONMENT VARIABLE
+================================================== -->
+
+<h3>
+    การตั้งค่า Environment Variable
+</h3>
+
+<p>
+    ในระบบ Windows จำเป็นต้องตรวจสอบ
+    Environment Variable และ PATH
+    เพื่อให้สามารถเรียกใช้คำสั่ง Java
+    จาก Command Prompt ได้อย่างสะดวก
+</p>
+
+<p>
+    ตัวแปร PATH มีหน้าที่ช่วยให้ระบบปฏิบัติการ
+    สามารถค้นหาโปรแกรมหรือคำสั่งที่ต้องการ
+    จากตำแหน่งที่กำหนดไว้ได้
+    ดังนั้นการตั้งค่า PATH ที่ถูกต้อง
+    จึงมีความสำคัญต่อการเรียกใช้คำสั่ง
+    <b>java</b> และ <b>javac</b>
+</p>
+
+
+<!-- STEP 16 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-16.png"
+        alt="STEP 16">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 16
+        </span>
+
+        <h4 class="step-title">
+            เปิดหน้าต่าง Environment Variables
+        </h4>
+
+        <p class="step-description">
+            ที่แท็ป Advanced คลิกปุ่ม
+            Environment Variables…
+            เพื่อเข้าสู่หน้าต่างสำหรับจัดการ
+            ตัวแปรสภาพแวดล้อมของระบบ
+            ซึ่งเป็นส่วนที่ใช้กำหนดค่าที่เกี่ยวข้อง
+            กับการทำงานของโปรแกรม
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 17 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-17.png"
+        alt="STEP 17">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 17
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบตัวแปรของระบบ
+        </h4>
+
+        <p class="step-description">
+            ให้ไปเลือกส่วน
+            System Variables
+            ซึ่งเป็นส่วนที่ใช้จัดการตัวแปร
+            ที่เกี่ยวข้องกับระบบ Windows
+            และสามารถใช้ตรวจสอบค่าที่จำเป็น
+            สำหรับการเรียกใช้งาน Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 18 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-18.png"
+        alt="STEP 18">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 18
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบค่า PATH
+        </h4>
+
+        <p class="step-description">
+            Double Click เพื่อกำหนดตั้งค่า
+            (Set Path) และตรวจสอบว่ามีส่วนของ
+            Java Path หรือไม่
+            หากไม่มีตำแหน่งที่เกี่ยวข้องกับ Java
+            อาจทำให้ Command Prompt
+            ไม่สามารถค้นหาคำสั่ง Java ได้
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 19 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-19.png"
+        alt="STEP 19">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 19
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบรายการ PATH
+        </h4>
+
+        <p class="step-description">
+            จากตัวอย่าง จะมี javapath เรียบร้อย
+            ไม่ต้องติดตั้งเพิ่ม หากไม่มี
+            ให้ตรวจสอบตำแหน่งไฟล์ Java
+            ที่ติดตั้งอยู่ในเครื่อง
+            โดยสามารถเข้าไปที่
+            Program Files / Common Files / Oracle / Java
+            และตรวจสอบตำแหน่งของไฟล์ Java
+            เพื่อนำตำแหน่งไปใช้ในการกำหนด PATH
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 20 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-20.png"
+        alt="STEP 20">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 20
+        </span>
+
+        <h4 class="step-title">
+            เพิ่มหรือปรับค่าที่จำเป็น
+        </h4>
+
+        <p class="step-description">
+            กดปุ่ม <b>Ctrl + C</b> เพื่อคัดลอก
+            ตำแหน่งที่ต้องการนำไปใช้ในการตั้งค่า
+            โดยควรตรวจสอบให้แน่ใจว่าตำแหน่ง
+            ที่คัดลอกเป็นตำแหน่งของ Java
+            ที่ถูกต้องก่อนนำไปกำหนดใน PATH
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 21 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-21.png"
+        alt="STEP 21">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 21
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบค่าที่กำหนด
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบรายการและตำแหน่ง
+            ที่กำหนดไว้ให้เรียบร้อย
+            ก่อนปิดหน้าต่างการตั้งค่า
+            เพื่อให้แน่ใจว่า PATH
+            มีข้อมูลที่เกี่ยวข้องกับ Java
+            และไม่มีการกำหนดค่าผิดตำแหน่ง
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 22 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-22.png"
+        alt="STEP 22">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 22
+        </span>
+
+        <h4 class="step-title">
+            ยืนยันการตั้งค่า
+        </h4>
+
+        <p class="step-description">
+            กดปุ่ม New จากนั้นกด
+            <b>Ctrl + V</b> เพื่อวางตำแหน่ง
+            ที่คัดลอกไว้ แล้วกด OK
+            เพื่อยืนยันการตั้งค่า
+            จากนั้นปิดหน้าต่างที่เกี่ยวข้อง
+            จนเสร็จสิ้นกระบวนการ
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     VISUAL STUDIO CODE
+================================================== -->
+
+<h3>
+    การเตรียมโปรแกรมสำหรับเขียน Java
+</h3>
+
+<p>
+    หลังจากติดตั้ง JDK และตรวจสอบการทำงานของ Java
+    เรียบร้อยแล้ว ขั้นตอนต่อไปคือการเตรียมโปรแกรม
+    สำหรับเขียน Source Code
+    ในที่นี้ใช้ Visual Studio Code หรือ VSC
+    เป็นโปรแกรมสำหรับสร้าง แก้ไข และจัดการไฟล์
+    Source Code ของ Java
+</p>
+
+<p>
+    Visual Studio Code ช่วยให้ผู้เรียนสามารถจัดการ
+    ไฟล์และโฟลเดอร์ของโปรเจกต์ได้ง่าย
+    รวมถึงสามารถติดตั้ง Extensions
+    เพื่อเพิ่มความสามารถในการเขียนโปรแกรม Java
+    เช่น การช่วยตรวจสอบโค้ด
+    การแสดงข้อผิดพลาด และการช่วย Run โปรแกรม
+</p>
+
+<p>
+    หลังจากนั้นให้ไปติดตั้ง VSC
+    ในที่นี้ได้ติดตั้งไว้เรียบร้อย
+    เพื่อใช้ในการเรียนในรายวิชา
+    การพัฒนาเว็บและการเขียนโปรแกรม
+    โดยผู้เรียนสามารถใช้โปรแกรมดังกล่าว
+    เป็นเครื่องมือหลักสำหรับสร้างไฟล์ Java
+    ในบทเรียนต่อไป
+</p>
+
+
+<!-- STEP 23 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-23.png"
+        alt="STEP 23">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 23
+        </span>
+
+        <h4 class="step-title">
+            เปิด Visual Studio Code
+        </h4>
+
+        <p class="step-description">
+            เปิดโปรแกรม Visual Studio Code
+            เพื่อเตรียมสร้างและแก้ไขไฟล์
+            Source Code ของ Java
+            โดยโปรแกรมจะทำหน้าที่เป็นพื้นที่
+            สำหรับเขียนและจัดการไฟล์ของโปรเจกต์
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 24 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-24.png"
+        alt="STEP 24">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 24
+        </span>
+
+        <h4 class="step-title">
+            ขั้นตอนการสร้าง Folder
+        </h4>
+
+        <p class="step-description">
+            ไปคลิกเมนู
+            File → Add Folder to Workspace …
+            เพื่อเพิ่มโฟลเดอร์สำหรับจัดเก็บไฟล์
+            และใช้เป็นพื้นที่ทำงานของโปรเจกต์
+            Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 25 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-25.png"
+        alt="STEP 25">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 25
+        </span>
+
+        <h4 class="step-title">
+            สร้างหรือเปิดโฟลเดอร์โปรเจกต์
+        </h4>
+
+        <p class="step-description">
+            สร้างหรือเปิดโฟลเดอร์สำหรับจัดเก็บ
+            Source Code ของโปรแกรม Java
+            โดยสามารถสร้าง Folder
+            เพื่อใช้เก็บไฟล์ Java
+            ในตำแหน่งใดก็ได้ที่ผู้เรียนสามารถเข้าถึงได้สะดวก
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 26 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-26.png"
+        alt="STEP 26">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 26
+        </span>
+
+        <h4 class="step-title">
+            เลือกโฟลเดอร์สำหรับโปรเจกต์
+        </h4>
+
+        <p class="step-description">
+            เลือกตำแหน่งโฟลเดอร์ที่ต้องการ
+            ใช้เป็นพื้นที่สำหรับเก็บไฟล์ Java
+            โดยควรเลือก Folder ที่สามารถ
+            จดจำตำแหน่งได้ง่าย
+            และสะดวกต่อการเปิดใช้งานในครั้งต่อไป
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 27 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-27.png"
+        alt="STEP 27">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 27
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบโฟลเดอร์โปรเจกต์
+        </h4>
+
+        <p class="step-description">
+            จากตัวอย่าง ทำการสร้าง Folder
+            เก็บไฟล์ไว้ที่ Drive D
+            Folder ชื่อ <b>Data_Java65it1</b>
+            เพื่อใช้เป็นพื้นที่จัดเก็บ Source Code
+            และไฟล์ที่เกี่ยวข้องกับการเรียน Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 28 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-28.png"
+        alt="STEP 28">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 28
+        </span>
+
+        <h4 class="step-title">
+            เตรียมสร้างไฟล์ Java
+        </h4>
+
+        <p class="step-description">
+            เตรียมพื้นที่สำหรับสร้างไฟล์
+            Source Code ที่มีนามสกุล
+            <b>.java</b>
+            โดยไฟล์ Java จะเป็นพื้นที่สำหรับ
+            เขียนคำสั่งและโครงสร้างของโปรแกรม
+            ที่จะนำไป Compile และ Run ต่อไป
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 29 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-29.png"
+        alt="STEP 29">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 29
+        </span>
+
+        <h4 class="step-title">
+            ขั้นตอนการติดตั้ง Extensions
+            เพื่อรองรับการเขียนโปรแกรมด้วยภาษา Java
+        </h4>
+
+        <p class="step-description">
+            ติดตั้ง Extensions ที่จำเป็น
+            เพื่อให้ Visual Studio Code
+            สามารถรองรับการเขียนโปรแกรม
+            ด้วยภาษา Java ได้อย่างเหมาะสม
+            Extensions ช่วยเพิ่มความสามารถ
+            เช่น การตรวจสอบ Syntax
+            การแสดงข้อผิดพลาด
+            และการช่วยจัดการโปรแกรม Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 30 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-30.png"
+        alt="STEP 30">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 30
+        </span>
+
+        <h4 class="step-title">
+            เปิดไฟล์ Java
+        </h4>
+
+        <p class="step-description">
+            คลิก Explore → Untitled Workspace
+            จากนั้นเลือก Folder ที่สร้างไว้
+            ตัวอย่างคือ <b>Data_Java64it1</b>
+            เพื่อเปิดโฟลเดอร์ใน Visual Studio Code
+            และเตรียมสร้างไฟล์ Java
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 31 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-31.png"
+        alt="STEP 31">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 31
+        </span>
+
+        <h4 class="step-title">
+            สร้างไฟล์สำหรับเขียนโปรแกรม
+        </h4>
+
+        <p class="step-description">
+            คลิกขวาที่โฟลเดอร์
+            เพื่อสร้างไฟล์ใหม่
+            โดยไฟล์ที่สร้างสำหรับภาษา Java
+            ควรมีนามสกุล <b>.java</b>
+            เพื่อให้โปรแกรมสามารถตรวจสอบ
+            และจัดการไฟล์ในรูปแบบ Java ได้
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 32 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-32.png"
+        alt="STEP 32">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 32
+        </span>
+
+        <h4 class="step-title">
+            ตั้งชื่อไฟล์
+        </h4>
+
+        <p class="step-description">
+            ตั้งชื่อไฟล์ตามที่ต้องการ
+            และตรวจสอบนามสกุลของไฟล์
+            ให้เป็น <b>.java</b>
+            จากนั้นกดปุ่ม Enter
+            เพื่อยืนยันชื่อไฟล์
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 33 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-33.png"
+        alt="STEP 33">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 33
+        </span>
+
+        <h4 class="step-title">
+            ตั้งชื่อ class
+        </h4>
+
+        <p class="step-description">
+            การสร้างไฟล์ใหม่จะเป็นการสร้างพื้นที่
+            สำหรับเขียนโปรแกรม Java
+            โดยชื่อ class ที่ประกาศในกรณีของ
+            <b>public class</b>
+            ควรสอดคล้องกับชื่อไฟล์ Java
+            ตัวอย่างเช่น หากไฟล์ชื่อ
+            <b>Test1.java</b>
+            สามารถประกาศ class เป็น
+            <b>Test1</b> ได้
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 34 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-34.png"
+        alt="STEP 34">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 34
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบชื่อ class
+        </h4>
+
+        <p class="step-description">
+            ชื่อ class คือ <b>test1</b>
+            ซึ่งเป็นส่วนหนึ่งของโครงสร้างภาษา Java
+            ชื่อ class ควรตั้งให้สื่อความหมาย
+            และควรตรวจสอบการใช้ตัวพิมพ์เล็ก
+            และตัวพิมพ์ใหญ่ให้ถูกต้อง
+            เนื่องจาก Java แยกตัวพิมพ์เล็ก
+            และตัวพิมพ์ใหญ่ออกจากกัน
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 35 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-35.png"
+        alt="STEP 35">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 35
+        </span>
+
+        <h4 class="step-title">
+            สร้าง function main
+        </h4>
+
+        <p class="step-description">
+            สร้างเมธอด <b>main()</b>
+            ซึ่งเป็นจุดเริ่มต้นการทำงานของโปรแกรม Java
+            เมื่อเรียกใช้งานโปรแกรม
+            ระบบจะเริ่มต้นการทำงานจากเมธอดนี้
+            โดยรูปแบบพื้นฐานคือ
+            <b>public static void main(String[] args)</b>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STEP 36 -->
+
+<div class="step-item">
+
+    <img
+        src="images/chapter_02/step-36.png"
+        alt="STEP 36">
+
+    <div class="step-content">
+
+        <span class="step-number">
+            STEP 36
+        </span>
+
+        <h4 class="step-title">
+            ตรวจสอบผลการทำงาน
+        </h4>
+
+        <p class="step-description">
+            ตรวจสอบผลลัพธ์หลังจากดำเนินการ
+            และเตรียมเข้าสู่ขั้นตอนการ Run
+            โปรแกรม Java
+            หากโครงสร้างโปรแกรมถูกต้อง
+            สามารถดำเนินการ Compile
+            และเรียกใช้งานโปรแกรมได้
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     SUMMARY
+================================================== -->
+
+<h3>
+    สรุปบทเรียน
+</h3>
+
+<div class="summary">
+
+    <p>
+        การพัฒนาโปรแกรม Java จำเป็นต้องเตรียม
+        เครื่องมือและสภาพแวดล้อมให้พร้อมก่อนเริ่มเขียนโปรแกรม
+        โดย <b>JDK (Java Development Kit)</b>
+        เป็นเครื่องมือสำคัญสำหรับการพัฒนา Java
+        เนื่องจากภายในมีเครื่องมือสำหรับ
+        Compile และจัดการโปรแกรม Java
+    </p>
+
+    <p>
+        หลังจากติดตั้ง JDK แล้ว
+        ควรตรวจสอบการทำงานของ Java
+        ผ่าน Command Prompt
+        ด้วยคำสั่ง <b>java -version</b>
+        และ <b>javac -version</b>
+        เพื่อยืนยันว่าระบบสามารถเรียกใช้
+        Java และ Java Compiler ได้
+    </p>
+
+    <p>
+        หากระบบไม่สามารถเรียกใช้คำสั่ง
+        <b>java</b> หรือ <b>javac</b>
+        อาจต้องตรวจสอบการตั้งค่า
+        Environment Variable และ PATH
+        เพื่อให้ระบบสามารถค้นหาตำแหน่ง
+        ของโปรแกรม Java ได้
+    </p>
+
+    <p>
+        จากนั้นจึงเตรียมโปรแกรมสำหรับเขียน Source Code
+        เช่น Visual Studio Code
+        และสร้างโฟลเดอร์สำหรับจัดเก็บไฟล์
+        เพื่อให้สามารถจัดการโปรเจกต์
+        และไฟล์ Java ได้อย่างเป็นระบบ
+    </p>
+
+    <p>
+        Source Code ของ Java จะถูกจัดเก็บ
+        ในไฟล์ที่มีนามสกุล <b>.java</b>
+        เช่น <b>Main.java</b>
+        จากนั้นสามารถใช้คำสั่ง
+        <b>javac Main.java</b>
+        เพื่อ Compile Source Code
+        ให้เป็น Bytecode
+    </p>
+
+    <p>
+        เมื่อต้องการ Run โปรแกรม
+        ให้ใช้คำสั่ง <b>java Main</b>
+        เพื่อเรียกใช้งานโปรแกรม
+        โดย Java จะเริ่มต้นการทำงาน
+        จากเมธอด <b>main()</b>
+    </p>
+
+    <p>
+        ดังนั้นลำดับพื้นฐานของการพัฒนาโปรแกรม Java
+        คือ การติดตั้ง JDK
+        การตรวจสอบ Java
+        การตั้งค่า PATH หากจำเป็น
+        การเตรียมโปรแกรมสำหรับเขียนโค้ด
+        การสร้างไฟล์ .java
+        การเขียน Source Code
+        การ Compile
+        และการ Run โปรแกรม
+    </p>
+
+</div>
+
+
+    <!-- ==================================================
+         BOTTOM NAVIGATION
+    ================================================== -->
+
+    
+<nav class="chapter-nav">
+
+    <!-- ไปบทที่ 4 -->
+    <a href="chapter_01.html">
+        ← บทที่ 1
+    </a>
+
+    <!-- กลับหน้าหลัก -->
+    <a href="index.html">
+        🏠 กลับหน้าหลัก
+    </a>
+
+    <!-- ไปบทที่ 6 -->
+    <a href="chapter_03.html">
+        บทที่ 3 →
+    </a>
+
+</nav>
+
+
+</section>
+
+</main>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <h3>Java Learning Guide</h3>
+
+    <p>
+        สื่อการเรียนการสอนภาษา Java
+    </p>
+
+    <p>
+      บทที่ 2 : ขั้นตอนการติดตั้งเครื่องมือ
+
+
+    </p>
+
+    <p>
+        © 2026 Java Learning Guide
+    </p>
+
+</footer>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+    function copyCode(button) {
+
+        const code =
+            button
+                .parentElement
+                .querySelector("code");
+
+        if (!code) {
+            return;
+        }
+
+
+        const text =
+            code.innerText;
+
+
+        navigator.clipboard
+            .writeText(text)
+
+            .then(function () {
+
+                const oldText =
+                    button.innerText;
+
+                button.innerText =
+                    "คัดลอกแล้ว";
+
+
+                setTimeout(function () {
+
+                    button.innerText =
+                        oldText;
+
+                }, 1500);
+
+            })
+
+            .catch(function () {
+
+                alert(
+                    "ไม่สามารถคัดลอกโค้ดได้"
+                );
+
+            });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
